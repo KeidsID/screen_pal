@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+      - edited
+
+jobs:
+  test-with-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Flutter SDK
+        uses: flutter-actions/setup-flutter@v2
+        with:
+          channel: stable
+          version: 3.0.2
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: test with coverage
+        run: flutter test --coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
