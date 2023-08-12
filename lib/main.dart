@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:screen_pal/common/constants.dart';
 
 import 'interfaces/themes/espresso_and_crema_theme.dart';
 
@@ -12,12 +13,19 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: appName,
       theme: EspressoAndCremaTheme.light,
       darkTheme: EspressoAndCremaTheme.dark,
       themeMode: ThemeMode.system,
-      home: const Scaffold(
-        body: Center(child: Text('Hello World!')),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(appName),
+        ),
+        body: const Center(child: Text('Hello World!')),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
