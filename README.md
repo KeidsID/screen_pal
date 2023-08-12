@@ -1,6 +1,9 @@
 <h1 align="center"><b>
   Screen Pal
 </b></h1>
+
+[![codecov](https://codecov.io/gh/KeidsID/flutter_movie_app/branch/main/graph/badge.svg?token=G20RM8PYOH)](https://codecov.io/gh/KeidsID/flutter_movie_app)
+
 <h3 align="center"><b>
   Discover Your Next Favorite Movie or TV Shows from Your Pals
 </b></h3>
