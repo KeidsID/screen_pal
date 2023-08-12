@@ -1,4 +1,7 @@
+# Secrets
 *.env
+*.g.dart
+
 coverage/
 
 # Miscellaneous

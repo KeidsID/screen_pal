@@ -1,4 +1,6 @@
-class Movie {
+import 'package:equatable/equatable.dart';
+
+class Movie extends Equatable {
   final bool adult;
   final int id;
   final String originalTitle;
@@ -22,4 +24,20 @@ class Movie {
     required this.voteAverage,
     required this.voteCount,
   });
+
+  @override
+  List<Object> get props {
+    return [
+      adult,
+      id,
+      originalTitle,
+      overview,
+      popularity,
+      posterPath,
+      releaseDate,
+      title,
+      voteAverage,
+      voteCount,
+    ];
+  }
 }
