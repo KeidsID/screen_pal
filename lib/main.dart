@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:screen_pal/common/constants.dart';
 
+import 'common/constants.dart';
 import 'interfaces/themes/espresso_and_crema_theme.dart';
+import 'service_locator/locator.dart' as service;
 
 void main() {
+  service.init();
+
   runApp(const MainApp());
 }
 
