@@ -1,6 +1,6 @@
 # Secrets
 *.env
-*.g.dart
+env.g.dart
 
 coverage/
 

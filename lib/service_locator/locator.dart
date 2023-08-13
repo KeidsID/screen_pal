@@ -4,7 +4,8 @@ import 'registry/registry.dart';
 
 final locator = GetIt.instance;
 
-void init() {
+Future<void> init() async {
   registerRepo();
   registerUseCases();
+  await registerServices();
 }
