@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/interfaces/providers/app_theme_mode_provider.dart';
+import 'package:screen_pal/interfaces/pages/settings_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,18 +12,15 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text(appName),
         actions: [
-          Consumer(builder: (context, ref, child) {
-            final themeMode = ref.watch(appThemeModeProvider);
-            final themeModeNotifier = ref.read(appThemeModeProvider.notifier);
-
-            return DropdownButton<ThemeMode>(
-              items: ThemeMode.values
-                  .map((e) => DropdownMenuItem(value: e, child: Text(e.name)))
-                  .toList(),
-              value: themeMode,
-              onChanged: (value) => themeModeNotifier.updateMode(value!),
-            );
-          }),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+            icon: const Icon(Icons.settings),
+          )
         ],
       ),
       body: const Center(child: Text('Hello World!')),
