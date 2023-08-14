@@ -1,4 +1,4 @@
-import '../entities/movie.dart';
+import 'package:screen_pal/core/entities/movie.dart';
 
 abstract class MovieRepo {
   Future<List<Movie>> getNowPlayingMovies();

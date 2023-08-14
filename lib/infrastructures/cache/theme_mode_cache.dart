@@ -6,7 +6,7 @@ class ThemeModeCache {
 
   const ThemeModeCache(SharedPreferences preferences) : _pref = preferences;
 
-  static const _key = 'app.theme-mode';
+  static const _key = 'app.theme_mode';
   static const _modes = ThemeMode.values;
 
   Future<bool> setThemeMode(ThemeMode themeMode) {

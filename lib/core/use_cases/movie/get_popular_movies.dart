@@ -1,5 +1,5 @@
-import '../../entities/movie.dart';
-import '../../repo/movie_repo.dart';
+import 'package:screen_pal/core/entities/movie.dart';
+import 'package:screen_pal/core/repo/movie_repo.dart';
 
 class GetPopularMovies {
   final MovieRepo movieRepo;
