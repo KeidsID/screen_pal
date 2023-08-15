@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:screen_pal/interfaces/widgets/theme_mode_dropdown_button.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -14,7 +15,10 @@ class SettingsPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(
+        leading: BackButton(onPressed: () => context.go('/movies')),
+        title: const Text('Settings'),
+      ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         itemCount: items.length,
