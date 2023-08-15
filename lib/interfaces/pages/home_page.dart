@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/pages/settings_page.dart';
@@ -13,12 +14,7 @@ class HomePage extends StatelessWidget {
         title: const Text(appName),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const SettingsPage()),
-              );
-            },
+            onPressed: () => context.go('/settings'),
             icon: const Icon(Icons.settings),
           )
         ],
