@@ -1,4 +1,4 @@
-import 'package:screen_pal/infrastructures/api/models/movie_list_payload.dart';
+import 'package:screen_pal/infrastructures/api/models/movie_list_res_body.dart';
 
 const dummyRawMovieListResBody = '''{
   "dates": {
