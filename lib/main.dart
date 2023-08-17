@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screen_pal/interfaces/router/router.dart';
 
 import 'common/constants.dart';
 import 'interfaces/providers/app_theme_mode_provider.dart';
+import 'interfaces/router/router.dart';
 import 'interfaces/themes/espresso_and_crema_theme.dart';
 import 'service_locator/locator.dart' as service;
 
@@ -23,7 +23,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       routerConfig: router,
       debugShowCheckedModeBanner: false,
-      title: appName,
+      title: kAppName,
       theme: EspressoAndCremaTheme.light,
       darkTheme: EspressoAndCremaTheme.dark,
       themeMode: ref.watch(appThemeModeProvider),

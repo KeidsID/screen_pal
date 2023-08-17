@@ -5,14 +5,12 @@ import 'dart:convert';
 import 'package:screen_pal/core/entities/movie.dart';
 
 class MovieListResBody {
-  final Dates dates;
   final int page;
   final List<RawMovie> results;
   final int totalPages;
   final int totalResults;
 
   MovieListResBody({
-    required this.dates,
     required this.page,
     required this.results,
     required this.totalPages,
@@ -25,32 +23,12 @@ class MovieListResBody {
 
   factory MovieListResBody.fromMap(Map<String, dynamic> json) {
     return MovieListResBody(
-      dates: Dates.fromMap(json["dates"]),
       page: json["page"],
       results: List<RawMovie>.from(json["results"].map((x) {
         return RawMovie.fromMap(x);
       })),
       totalPages: json["total_pages"],
       totalResults: json["total_results"],
-    );
-  }
-}
-
-class Dates {
-  final DateTime maximum;
-  final DateTime minimum;
-
-  Dates({
-    required this.maximum,
-    required this.minimum,
-  });
-
-  factory Dates.fromJson(String str) => Dates.fromMap(json.decode(str));
-
-  factory Dates.fromMap(Map<String, dynamic> json) {
-    return Dates(
-      maximum: DateTime.parse(json["maximum"]),
-      minimum: DateTime.parse(json["minimum"]),
     );
   }
 }

@@ -9,3 +9,5 @@ final tmdbDio = Dio(BaseOptions(
   baseUrl: 'https://api.themoviedb.org/3',
   headers: {"Authorization": "Bearer ${Env.tmdbAccKey}"},
 ));
+
+const tmdbImageBaseUrl = 'https://image.tmdb.org/t/p/original';

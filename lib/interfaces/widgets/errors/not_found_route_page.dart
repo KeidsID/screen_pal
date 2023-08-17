@@ -15,10 +15,10 @@ class NotFoundRoutePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('404', style: theme.textTheme.headlineLarge),
+          Text('404', style: theme.textTheme.displayMedium),
           Text('Not Found', style: theme.textTheme.headlineSmall),
           const Divider(),
-          Text('The requested URL "$routePath" was not found on this server.'),
+          Text('No resource found on "$routePath" path.'),
           const SizedBox(height: 16.0),
           FilledButton(
             onPressed: () => context.go('/'),

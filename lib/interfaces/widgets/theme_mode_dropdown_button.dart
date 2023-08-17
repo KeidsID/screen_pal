@@ -13,8 +13,7 @@ class ThemeModeDropdownButton extends ConsumerWidget {
 
     return DropdownButton<ThemeMode>(
       items: ThemeMode.values.map((e) {
-        final filteredName =
-            e.name == ThemeMode.system.name ? 'system default' : e.name;
+        final filteredName = e.name == 'system' ? 'system default' : e.name;
         final icons = {
           'system': Icons.color_lens_outlined,
           'light': Icons.light_mode_outlined,
