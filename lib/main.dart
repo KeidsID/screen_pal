@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -27,6 +28,12 @@ class MainApp extends ConsumerWidget {
       theme: EspressoAndCremaTheme.light,
       darkTheme: EspressoAndCremaTheme.dark,
       themeMode: ref.watch(appThemeModeProvider),
+      scrollBehavior: ScrollConfiguration.of(context).copyWith(
+        dragDevices: {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+        },
+      ),
     );
   }
 }
