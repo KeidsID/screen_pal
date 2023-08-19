@@ -90,6 +90,7 @@ class RawMovie {
   Movie toEntity() {
     return Movie(
       adult: adult,
+      backdropPath: backdropPath,
       originalTitle: originalTitle,
       id: id,
       overview: overview,

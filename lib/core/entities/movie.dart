@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class Movie extends Equatable {
   final bool adult;
+  final String backdropPath;
   final int id;
   final String originalTitle;
   final String overview;
@@ -14,6 +15,7 @@ class Movie extends Equatable {
 
   const Movie({
     required this.adult,
+    required this.backdropPath,
     required this.id,
     required this.originalTitle,
     required this.overview,
@@ -29,6 +31,7 @@ class Movie extends Equatable {
   List<Object> get props {
     return [
       adult,
+      backdropPath,
       id,
       originalTitle,
       overview,
