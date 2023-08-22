@@ -8,14 +8,16 @@ import 'package:go_router/go_router.dart';
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/movie/movie_list_providers.dart';
+import 'package:screen_pal/interfaces/router/navigate_paths.dart';
 import 'package:screen_pal/interfaces/widgets/card/movie_card.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/errors/dio_exception_page.dart';
 
 part 'mobile_layout.dart';
+part 'web_layout.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class MoviesHomePage extends StatelessWidget {
+  const MoviesHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +26,7 @@ class HomePage extends StatelessWidget {
 }
 
 void _navigateToMovieDetail(BuildContext context, int movieId) {
-  context.go('/movies/movie-$movieId');
+  context.go(NavigatePaths.moviesDetail(movieId));
 }
 
 Widget _providerErrorHandler(Object err, StackTrace stackTrace) {
