@@ -1,4 +1,4 @@
-part of 'home_page.dart';
+part of 'movies_home_page.dart';
 
 class _MobileLayout extends StatelessWidget {
   const _MobileLayout();
@@ -68,15 +68,6 @@ class _MobileLayout extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        color: theme.colorScheme.background.darken(4),
-        height: kToolbarHeight,
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.go('/settings'),
-        child: const Icon(Icons.settings),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
