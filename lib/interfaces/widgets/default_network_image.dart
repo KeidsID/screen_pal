@@ -21,7 +21,7 @@ class DefaultNetworkImage extends StatelessWidget {
         child: CircularProgressIndicator(),
       ),
       errorWidget: (_, __, ___) => const Center(
-        child: Text('Can\'t load image'),
+        child: Text('Can\'t load image without network connection'),
       ),
     );
   }
