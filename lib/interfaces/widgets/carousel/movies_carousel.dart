@@ -6,14 +6,23 @@ import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/router/navigate_paths.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 const _thinDeviceH = 600.0;
 const _wideDeviceH = 800.0;
 
-class MoviesCarousel extends StatelessWidget {
+class MoviesCarousel extends StatefulWidget {
   const MoviesCarousel({super.key, required this.movies});
 
   final List<Movie> movies;
+
+  @override
+  State<MoviesCarousel> createState() => _MoviesCarouselState();
+}
+
+class _MoviesCarouselState extends State<MoviesCarousel> {
+  int currentIndex = 0;
+  final controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +37,7 @@ class MoviesCarousel extends StatelessWidget {
     const minH = _thinDeviceH * takenH;
     const maxH = _wideDeviceH * takenH;
 
-    final height = deviceH < _thinDeviceH
+    final carouselHeight = deviceH < _thinDeviceH
         ? minH
         : deviceH >= _wideDeviceH
             ? maxH
@@ -36,24 +45,47 @@ class MoviesCarousel extends StatelessWidget {
 
     return Padding(
       padding: EdgeInsets.only(top: isThin ? 0.0 : 16.0),
-      child: CarouselSlider.builder(
-        options: CarouselOptions(
-          height: height,
-          enlargeCenterPage: isThin ? false : true,
-          enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-          viewportFraction: isThin ? 1 : 0.95,
-          autoPlay: true,
-          autoPlayInterval: const Duration(seconds: 6),
-          autoPlayAnimationDuration: const Duration(seconds: 2),
-        ),
-        itemCount: movies.length,
-        itemBuilder: (context, index, realIndex) {
-          final movie = movies[index];
+      child: Column(
+        children: [
+          CarouselSlider.builder(
+            carouselController: controller,
+            options: CarouselOptions(
+              height: carouselHeight,
+              enlargeCenterPage: isThin ? false : true,
+              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+              viewportFraction: isThin ? 1 : 0.95,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 6),
+              autoPlayAnimationDuration: const Duration(seconds: 2),
+              onPageChanged: (index, _) => setState(() => currentIndex = index),
+            ),
+            itemCount: widget.movies.length,
+            itemBuilder: (context, index, realIndex) {
+              final movie = widget.movies[index];
 
-          if (!isThin) return _WideLayout(movie: movie);
+              if (!isThin) return _WideLayout(movie: movie);
 
-          return _ThinLayout(movie: movie);
-        },
+              return _ThinLayout(movie: movie);
+            },
+          ),
+          const SizedBox(height: 16.0),
+          Builder(builder: (context) {
+            final colorScheme = Theme.of(context).colorScheme;
+
+            return AnimatedSmoothIndicator(
+              activeIndex: currentIndex,
+              count: widget.movies.length,
+              duration: const Duration(milliseconds: 500),
+              effect: WormEffect(
+                dotWidth: 12.0,
+                dotHeight: 12.0,
+                dotColor: colorScheme.primaryContainer,
+                activeDotColor: colorScheme.onPrimaryContainer,
+              ),
+              onDotClicked: (index) => controller.jumpToPage(index),
+            );
+          }),
+        ],
       ),
     );
   }
@@ -162,11 +194,11 @@ class _WideLayout extends StatelessWidget {
 
                       final maxLines = deviceH >= _wideDeviceH
                           ? 16
-                          : deviceH >= 750.0
+                          : deviceH >= _wideDeviceH - 50.0
                               ? 14
                               : deviceH >= 700.0
                                   ? 12
-                                  : deviceH >= 650.0
+                                  : deviceH >= _thinDeviceH + 50.0
                                       ? 10
                                       : 8;
 
