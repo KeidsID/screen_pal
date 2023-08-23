@@ -10,4 +10,12 @@ final tmdbDio = Dio(BaseOptions(
   headers: {"Authorization": "Bearer ${Env.tmdbAccKey}"},
 ));
 
+/// Use to load an image based on the path given by the API.
+///
+/// Example:
+/// ```dart
+/// const pathFromApi = '/netflix.jpg';
+///
+/// Image.network('$tmdbImageBaseUrl$pathFromApi');
+/// ```
 const tmdbImageBaseUrl = 'https://image.tmdb.org/t/p/original';

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:screen_pal/interfaces/widgets/theme_mode_dropdown_button.dart';
 
 class SettingsPage extends StatelessWidget {

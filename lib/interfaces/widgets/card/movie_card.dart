@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
+import 'package:screen_pal/interfaces/router/navigate_paths.dart';
 import 'package:screen_pal/interfaces/widgets/card/ink_well_card.dart';
 
 class MovieCard extends StatefulWidget {
   const MovieCard({
     Key? key,
     required this.movie,
-    this.onTap,
   }) : super(key: key);
 
   final Movie movie;
-  final VoidCallback? onTap;
 
   @override
   State<MovieCard> createState() => _MovieCardState();
@@ -30,7 +30,7 @@ class _MovieCardState extends State<MovieCard> {
     final textTheme = theme.textTheme;
 
     return InkWellCard(
-      onTap: widget.onTap,
+      onTap: () => context.go(NavigatePaths.moviesDetail(movie.id)),
       onHover: (isHovered) => setState(() => isCardHovered = isHovered),
       // onLongPress: ,
       child: Stack(
