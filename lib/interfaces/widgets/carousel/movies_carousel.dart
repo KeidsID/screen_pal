@@ -12,7 +12,15 @@ const _thinDeviceH = 600.0;
 const _wideDeviceH = 800.0;
 
 class MoviesCarousel extends StatefulWidget {
-  const MoviesCarousel({super.key, required this.movies});
+  /// Create a Carousel widget that displays basic information of the movies
+  /// provided.
+  ///
+  /// Max number of movies are 10. To make sure the indicator not overflow
+  /// from the screen.
+  const MoviesCarousel({
+    super.key,
+    required this.movies,
+  }) : assert(movies.length <= 10);
 
   final List<Movie> movies;
 
@@ -63,9 +71,9 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
             itemBuilder: (context, index, realIndex) {
               final movie = widget.movies[index];
 
-              if (!isThin) return _WideLayout(movie: movie);
+              if (!isThin) return _WideDeviceLayout(movie: movie);
 
-              return _ThinLayout(movie: movie);
+              return _ThinDeviceLayout(movie: movie);
             },
           ),
           const SizedBox(height: 16.0),
@@ -77,8 +85,6 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
               count: widget.movies.length,
               duration: const Duration(milliseconds: 500),
               effect: WormEffect(
-                dotWidth: 12.0,
-                dotHeight: 12.0,
                 dotColor: colorScheme.primaryContainer,
                 activeDotColor: colorScheme.onPrimaryContainer,
               ),
@@ -95,8 +101,34 @@ VoidCallback _navigateToDetailPage(BuildContext context, int movieId) {
   return () => context.go(NavigatePaths.moviesDetail(movieId));
 }
 
-class _ThinLayout extends StatelessWidget {
-  const _ThinLayout({
+/// Creating a faded Image widget
+///
+/// [begin] is the starting point where the image becomes transparent.
+///
+/// [end] is the end point where the image does not fade.
+Widget _fadeShadedImage(
+  String path, {
+  AlignmentGeometry begin = Alignment.centerLeft,
+  AlignmentGeometry end = Alignment.centerRight,
+}) {
+  return ShaderMask(
+    shaderCallback: (rect) {
+      return LinearGradient(
+        begin: begin,
+        end: end,
+        colors: const [Colors.transparent, Colors.black87, Colors.black],
+      ).createShader(rect);
+    },
+    blendMode: BlendMode.dstIn,
+    child: DefaultNetworkImage(
+      imageUrl: '$tmdbImageBaseUrl$path',
+      fit: BoxFit.cover,
+    ),
+  );
+}
+
+class _ThinDeviceLayout extends StatelessWidget {
+  const _ThinDeviceLayout({
     Key? key,
     required this.movie,
   }) : super(key: key);
@@ -114,22 +146,10 @@ class _ThinLayout extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         fit: StackFit.expand,
         children: [
-          DefaultNetworkImage(
-            imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
-            fit: BoxFit.cover,
-          ),
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  theme.scaffoldBackgroundColor,
-                  theme.scaffoldBackgroundColor.withOpacity(0.1),
-                  Colors.transparent
-                ],
-                begin: Alignment.bottomCenter,
-                end: Alignment.topCenter,
-              ),
-            ),
+          _fadeShadedImage(
+            movie.backdropPath,
+            begin: Alignment.bottomCenter,
+            end: Alignment.topCenter,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -140,10 +160,14 @@ class _ThinLayout extends StatelessWidget {
                   movie.title,
                   style: textTheme.headlineLarge,
                   textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  [movie.releaseDate.year, '${movie.voteAverage * 10}%']
-                      .join(' • '),
+                  [
+                    movie.releaseDate.year,
+                    '${movie.voteAverage * 10}%',
+                  ].join(' • '),
                 )
               ],
             ),
@@ -154,8 +178,8 @@ class _ThinLayout extends StatelessWidget {
   }
 }
 
-class _WideLayout extends StatelessWidget {
-  const _WideLayout({
+class _WideDeviceLayout extends StatelessWidget {
+  const _WideDeviceLayout({
     Key? key,
     required this.movie,
   }) : super(key: key);
@@ -213,29 +237,10 @@ class _WideLayout extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
-              child: SizedBox(
-                width: 600,
-                child: SizedBox.expand(
-                  child: ShaderMask(
-                    shaderCallback: (rect) {
-                      return const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Colors.transparent,
-                          Colors.black87,
-                          Colors.black,
-                        ],
-                      ).createShader(rect);
-                    },
-                    blendMode: BlendMode.dstIn,
-                    child: DefaultNetworkImage(
-                      imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+            SizedBox(
+              width: 600,
+              child: SizedBox.expand(
+                child: _fadeShadedImage(movie.backdropPath),
               ),
             ),
           ],
