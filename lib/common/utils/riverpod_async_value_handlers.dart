@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:screen_pal/interfaces/widgets/errors/dio_exception_page.dart';
 
 abstract class RiverpodAsyncValueHandlers {
-  static Widget error(Object err, StackTrace stackTrace) {
-    if (err is! DioException) {
-      debugPrint('$err');
+  static Widget error(Object error, StackTrace stackTrace) {
+    if (error is! DioException) {
+      debugPrint('$error');
 
-      return Center(child: Text('$err'));
+      return Center(child: Text('$error'));
     }
 
-    return DioExceptionPage(exception: err);
+    return DioExceptionPage(exception: error);
   }
 
   static Widget loading() => const Center(child: CircularProgressIndicator());

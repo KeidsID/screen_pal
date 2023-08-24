@@ -57,8 +57,17 @@ class MoviesHomePage extends StatelessWidget {
                   final popularMovies = ref.watch(popularMoviesProvider);
 
                   return popularMovies.when(
-                    error: RiverpodAsyncValueHandlers.error,
-                    loading: RiverpodAsyncValueHandlers.loading,
+                    error: (error, stackTrace) => SizedBox(
+                      height: 200.0,
+                      child: RiverpodAsyncValueHandlers.error(
+                        error,
+                        stackTrace,
+                      ),
+                    ),
+                    loading: () => SizedBox(
+                      height: 200.0,
+                      child: RiverpodAsyncValueHandlers.loading(),
+                    ),
                     data: (movies) {
                       final filteredMovies = (movies.length <= 10)
                           ? movies
