@@ -59,7 +59,13 @@ class MoviesHomePage extends StatelessWidget {
                   return popularMovies.when(
                     error: RiverpodAsyncValueHandlers.error,
                     loading: RiverpodAsyncValueHandlers.loading,
-                    data: (movies) => MoviesCarousel(movies: movies),
+                    data: (movies) {
+                      final filteredMovies = (movies.length <= 10)
+                          ? movies
+                          : movies.sublist(0, 10);
+
+                      return MoviesCarousel(movies: filteredMovies);
+                    },
                   );
                 },
               ),
