@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/constants.dart';
 import 'interfaces/providers/app_theme_mode_provider.dart';
 import 'interfaces/router/router.dart';
+import 'interfaces/router/url_strategy/url_strategy.dart'
+    show usePathUrlStrategy;
 import 'interfaces/themes/espresso_and_crema_theme.dart';
 import 'service_locator/locator.dart' as service;
 
@@ -12,6 +14,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await service.init();
+
+  usePathUrlStrategy();
 
   runApp(const ProviderScope(child: MainApp()));
 }
