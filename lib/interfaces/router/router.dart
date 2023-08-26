@@ -4,17 +4,16 @@ import 'package:go_router/go_router.dart';
 import 'package:screen_pal/interfaces/pages/home_layout.dart';
 import 'package:screen_pal/interfaces/pages/movies/movies_home_page.dart';
 import 'package:screen_pal/interfaces/pages/settings_page.dart';
-import 'package:screen_pal/interfaces/router/navigate_paths.dart';
 import 'package:screen_pal/interfaces/widgets/errors/not_found_route_page.dart';
 
 final router = GoRouter(
-  initialLocation: NavigatePaths.movies,
+  initialLocation: '/movies',
   routerNeglect: true,
   errorBuilder: (_, state) => NotFoundRoutePage(routePath: state.uri.path),
   redirect: (context, state) {
     final currentRoute = state.uri.path;
 
-    if (currentRoute == '/') return NavigatePaths.movies;
+    if (currentRoute == '/') return '/movies';
 
     return null;
   },

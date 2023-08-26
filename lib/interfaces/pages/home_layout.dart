@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:screen_pal/interfaces/router/navigate_paths.dart';
+import 'package:screen_pal/interfaces/router/app_navigator.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({
@@ -38,9 +38,8 @@ final _navs = [
 ];
 
 ValueChanged<int> _onNavBarItemTap(BuildContext context) {
-  return (value) => value == 0
-      ? context.go(NavigatePaths.movies)
-      : context.go(NavigatePaths.series);
+  return (value) =>
+      value == 0 ? AppNavigator.movies(context) : AppNavigator.series(context);
 }
 
 int _currentNavIndex(BuildContext context) {
@@ -77,7 +76,7 @@ class _ThinDeviceLayout extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: theme.bottomNavigationBarTheme.backgroundColor,
         tooltip: 'Settings',
-        onPressed: () => context.go(NavigatePaths.settings),
+        onPressed: () => AppNavigator.settings(context),
         child: const Icon(Icons.settings),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -116,7 +115,7 @@ class _WideDeviceLayout extends StatelessWidget {
                   children: [
                     IconButton(
                       tooltip: 'Settings',
-                      onPressed: () => context.go(NavigatePaths.settings),
+                      onPressed: () => AppNavigator.settings(context),
                       icon: const Icon(Icons.settings),
                     ),
                   ],
