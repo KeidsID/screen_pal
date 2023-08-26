@@ -197,6 +197,7 @@ class _WideDeviceLayout extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
+              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.all(24.0).copyWith(right: 40.0),
                 child: Column(
@@ -227,7 +228,7 @@ class _WideDeviceLayout extends StatelessWidget {
                                       : 8;
 
                       return Text(
-                        movie.overview,
+                        movie.overview * 5,
                         textAlign: TextAlign.justify,
                         maxLines: maxLines,
                         overflow: TextOverflow.ellipsis,
@@ -237,8 +238,8 @@ class _WideDeviceLayout extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              width: 600,
+            Expanded(
+              flex: 6,
               child: SizedBox.expand(
                 child: _fadeShadedImage(movie.backdropPath),
               ),
