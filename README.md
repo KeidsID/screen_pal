@@ -32,3 +32,32 @@ Powered by <a href="https://www.themoviedb.org"> <img
     width="80px"
     height="10px"
   /> </a>.
+
+## Dev Note
+
+If you want to create your app, here are the requirements.
+
+### Requirements
+
+- `.env` file
+
+  ```env
+  IS_USE_PATH_URL_STRATEGY=bool
+  TMDB_ACC_TOKEN=<your own tmdb acc token>
+  ```
+
+  - `IS_USE_PATH_URL_STRATEGY` details
+
+    What is the `path URL strategy`? So web routing in Flutter by default will
+    be preceded by a hash (#), so the URL will be like this:
+    `your-domain.com/#/path`. So if we use the `path URL strategy`, then the URL
+    will be without a hash like a web in general.
+
+    Why does this env exist? Because some hosting services do not have the
+    "rewrite and redirect" configuration (Github Pages, AWS S3, etc.). So "path
+    URL strategy" only works on Flutter (App navigation works, even updating the
+    URL), but not on the host server (can't navigate on browser nav bar).
+
+    Refs:
+
+    - [PathUrlStrategy needs better docs (expected server behavior)](https://github.com/flutter/flutter/issues/89763)
