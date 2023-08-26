@@ -7,9 +7,9 @@ abstract class Env {
   @EnviedField(
     varName: 'IS_USE_PATH_URL_STRATEGY',
     obfuscate: false,
-    defaultValue: 'true',
+    defaultValue: true,
   )
-  static final isUsePathUrlStrategy = bool.parse(_Env.isUsePathUrlStrategy);
+  static const bool isUsePathUrlStrategy = _Env.isUsePathUrlStrategy;
 
   @EnviedField(varName: 'TMDB_ACC_TOKEN')
   static final String tmdbAccKey = _Env.tmdbAccKey;
