@@ -1,10 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
-import 'package:screen_pal/interfaces/router/navigate_paths.dart';
+import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -98,7 +97,7 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
 }
 
 VoidCallback _navigateToDetailPage(BuildContext context, int movieId) {
-  return () => context.go(NavigatePaths.moviesDetail(movieId));
+  return () => AppNavigator.moviesDetail(context, movieId);
 }
 
 /// Creating a faded Image widget
