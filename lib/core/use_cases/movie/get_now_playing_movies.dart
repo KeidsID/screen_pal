@@ -1,8 +1,8 @@
 import 'package:screen_pal/core/entities/movie.dart';
-import 'package:screen_pal/core/repo/movie_repo.dart';
+import 'package:screen_pal/core/repo/movies_repo.dart';
 
 class GetNowPlayingMovies {
-  final MovieRepo movieRepo;
+  final MoviesRepo movieRepo;
 
   GetNowPlayingMovies({required this.movieRepo});
 

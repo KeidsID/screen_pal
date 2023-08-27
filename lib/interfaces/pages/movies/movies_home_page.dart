@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/common/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/core/entities/movie.dart';
-import 'package:screen_pal/interfaces/providers/movie/movie_list_providers.dart';
+import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/widgets/card/movie_card.dart';
 import 'package:screen_pal/interfaces/widgets/carousel/movies_carousel.dart';
 

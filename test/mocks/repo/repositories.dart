@@ -1,7 +1,7 @@
 import 'package:mockito/annotations.dart';
-import 'package:screen_pal/core/repo/movie_repo.dart';
+import 'package:screen_pal/core/repo/movies_repo.dart';
 
 @GenerateMocks([
-  MovieRepo,
+  MoviesRepo,
 ])
 void main() {}
