@@ -2,18 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:screen_pal/infrastructures/repo/movie_repo_impl.dart';
+import 'package:screen_pal/infrastructures/repo/movies_repo_impl.dart';
 
 import '../../dummy/dummy_movie_list_res_body.dart';
 import '../../mocks/services/services.mocks.dart';
 
 void main() {
-  late MovieRepoImpl testRepoImpl;
+  late MoviesRepoImpl testRepoImpl;
   late MockDio mockDio;
 
   setUp(() {
     mockDio = MockDio();
-    testRepoImpl = MovieRepoImpl(mockDio);
+    testRepoImpl = MoviesRepoImpl(mockDio);
   });
 
   final expectedMovies = dummyMovieListResBody.results.map((e) {

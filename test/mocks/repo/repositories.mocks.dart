@@ -7,7 +7,7 @@ import 'dart:async' as _i3;
 
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:screen_pal/core/entities/movie.dart' as _i4;
-import 'package:screen_pal/core/repo/movie_repo.dart' as _i2;
+import 'package:screen_pal/core/repo/movies_repo.dart' as _i2;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -23,7 +23,7 @@ import 'package:screen_pal/core/repo/movie_repo.dart' as _i2;
 /// A class which mocks [MovieRepo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieRepo extends _i1.Mock implements _i2.MovieRepo {
+class MockMovieRepo extends _i1.Mock implements _i2.MoviesRepo {
   MockMovieRepo() {
     _i1.throwOnMissingStub(this);
   }

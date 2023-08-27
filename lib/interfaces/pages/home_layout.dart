@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 
+const _navBarKey = Key('navigation-bar');
+
 class HomeLayout extends StatelessWidget {
   const HomeLayout({
     Key? key,
@@ -38,8 +40,9 @@ final _navs = [
 ];
 
 ValueChanged<int> _onNavBarItemTap(BuildContext context) {
-  return (value) =>
-      value == 0 ? AppNavigator.movies(context) : AppNavigator.series(context);
+  return (value) {
+    value == 0 ? AppNavigator.movies(context) : AppNavigator.series(context);
+  };
 }
 
 int _currentNavIndex(BuildContext context) {
@@ -63,6 +66,7 @@ class _ThinDeviceLayout extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: BottomNavigationBar(
+        key: _navBarKey,
         showUnselectedLabels: false,
         onTap: _onNavBarItemTap(context),
         currentIndex: _currentNavIndex(context),
@@ -98,6 +102,7 @@ class _WideDeviceLayout extends StatelessWidget {
       child: Row(
         children: [
           NavigationRail(
+            key: _navBarKey,
             labelType: NavigationRailLabelType.selected,
             onDestinationSelected: _onNavBarItemTap(context),
             selectedIndex: _currentNavIndex(context),

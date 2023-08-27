@@ -10,7 +10,7 @@ final router = GoRouter(
   initialLocation: '/movies',
   routerNeglect: true,
   errorBuilder: (_, state) => NotFoundRoutePage(routePath: state.uri.path),
-  redirect: (context, state) {
+  redirect: (_, state) {
     final currentRoute = state.uri.path;
 
     if (currentRoute == '/') return '/movies';
@@ -39,7 +39,7 @@ final router = GoRouter(
     ),
     GoRoute(
       path: '/settings',
-      builder: (context, state) => const SettingsPage(),
+      builder: (_, __) => const SettingsPage(),
     ),
   ],
 );
