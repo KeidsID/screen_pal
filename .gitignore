@@ -22,7 +22,7 @@ migrate_working_dir/
 *.iws
 .idea/
 
-#.vscode/
+.vscode/
 
 # Flutter/Dart/Pub related
 **/doc/api/
