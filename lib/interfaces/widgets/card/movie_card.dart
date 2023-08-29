@@ -1,10 +1,10 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/card/ink_well_card.dart';
+import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 
 class MovieCard extends StatefulWidget {
   const MovieCard({
@@ -35,15 +35,9 @@ class _MovieCardState extends State<MovieCard> {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          CachedNetworkImage(
+          DefaultNetworkImage(
             imageUrl: '$tmdbImageBaseUrl${movie.posterPath}',
             fit: BoxFit.cover,
-            placeholder: (_, __) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            errorWidget: (_, __, ___) => const Center(
-              child: Text('Can\'t load image'),
-            ),
           ),
           movie.adult
               ? const Banner(

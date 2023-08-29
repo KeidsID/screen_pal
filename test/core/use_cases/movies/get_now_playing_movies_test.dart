@@ -3,26 +3,26 @@ import 'package:mockito/mockito.dart';
 
 import 'package:screen_pal/core/use_cases/movie/get_now_playing_movies.dart';
 
-import '../../../mocks/repo/repositories.mocks.dart';
+import '../../../helpers/mocks/repo/repositories.mocks.dart';
 
 void main() {
   late GetNowPlayingMovies testUsecase;
-  late MockMovieRepo mockMovieRepo;
+  late MockMoviesRepo mockMoviesRepo;
 
   setUp(() {
-    mockMovieRepo = MockMovieRepo();
-    testUsecase = GetNowPlayingMovies(movieRepo: mockMovieRepo);
+    mockMoviesRepo = MockMoviesRepo();
+    testUsecase = GetNowPlayingMovies(moviesRepo: mockMoviesRepo);
   });
 
   test(
     'GetNowPlayingMovie use case should orchestrating get now playing movies action correctly',
     () async {
-      when(mockMovieRepo.getNowPlayingMovies()).thenAnswer((_) async => []);
+      when(mockMoviesRepo.getNowPlayingMovies()).thenAnswer((_) async => []);
 
       final movies = await testUsecase.execute();
 
       expect(movies, []);
-      verify(mockMovieRepo.getNowPlayingMovies()).called(1);
+      verify(mockMoviesRepo.getNowPlayingMovies()).called(1);
     },
   );
 }

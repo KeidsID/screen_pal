@@ -45,6 +45,7 @@ dev_dependencies:
   riverpod_generator: ^2.2.4
   custom_lint: ^0.4.0
   riverpod_lint: ^1.4.0
+  network_image_mock: ^2.1.1
 
 flutter:
   uses-material-design: true

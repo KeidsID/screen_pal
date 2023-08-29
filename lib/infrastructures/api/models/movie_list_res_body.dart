@@ -24,9 +24,9 @@ class MovieListResBody {
   factory MovieListResBody.fromMap(Map<String, dynamic> json) {
     return MovieListResBody(
       page: json["page"],
-      results: List<RawMovie>.from(json["results"].map((x) {
-        return RawMovie.fromMap(x);
-      })),
+      results: List<RawMovie>.from(
+        (json["results"] as List).map((x) => RawMovie.fromMap(x)),
+      ),
       totalPages: json["total_pages"],
       totalResults: json["total_results"],
     );
@@ -65,8 +65,6 @@ class RawMovie {
     required this.voteAverage,
     required this.voteCount,
   });
-
-  factory RawMovie.fromJson(String str) => RawMovie.fromMap(json.decode(str));
 
   factory RawMovie.fromMap(Map<String, dynamic> json) {
     return RawMovie(

@@ -7,8 +7,10 @@ import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-const _thinDeviceH = 600.0;
-const _wideDeviceH = 800.0;
+const _contentContainer = Key('content-container');
+const _imageKey = Key('image-widget');
+const _movieDetailKey = Key('detail-column');
+const _movieOverview = Key('movie-overview');
 
 class MoviesCarousel extends StatefulWidget {
   /// Create a Carousel widget that displays basic information of the movies
@@ -19,17 +21,43 @@ class MoviesCarousel extends StatefulWidget {
   const MoviesCarousel({
     super.key,
     required this.movies,
+    this.enableInfiniteScroll = true,
+    this.autoPlay = false,
+    this.autoPlayInterval = const Duration(seconds: 4),
+    this.autoPlayAnimationDuration = const Duration(milliseconds: 800),
   }) : assert(movies.length <= 10);
 
   final List<Movie> movies;
 
+  /// Determines if carousel should loop infinitely or be limited to item length.
+  ///
+  /// Defaults to true, i.e. infinite loop.
+  final bool enableInfiniteScroll;
+
+  /// Enables auto play, sliding one page at a time.
+  ///
+  /// Use [autoPlayInterval] to determent the frequency of slides. Defaults to false.
+  final bool autoPlay;
+
+  /// Sets Duration to determent the frequency of slides when
+  ///
+  /// [autoPlay] is set to true.
+  /// Defaults to 4 seconds.
+  final Duration autoPlayInterval;
+
+  /// The animation duration between two transitioning pages while in auto playback.
+  ///
+  /// Defaults to 800 ms.
+  final Duration autoPlayAnimationDuration;
+
   @override
-  State<MoviesCarousel> createState() => _MoviesCarouselState();
+  State<MoviesCarousel> createState() => MoviesCarouselState();
 }
 
-class _MoviesCarouselState extends State<MoviesCarousel> {
+class MoviesCarouselState extends State<MoviesCarousel> {
+  /// Carousel current index
   int currentIndex = 0;
-  final controller = CarouselController();
+  final _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +69,12 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
 
     const takenH = 0.65; // percentage taken
 
-    const minH = _thinDeviceH * takenH;
-    const maxH = _wideDeviceH * takenH;
+    const minH = 600.0 * takenH;
+    const maxH = 800.0 * takenH;
 
-    final carouselHeight = deviceH < _thinDeviceH
+    final carouselHeight = deviceH < 600.0
         ? minH
-        : deviceH >= _wideDeviceH
+        : deviceH >= 800.0
             ? maxH
             : deviceH * takenH;
 
@@ -55,22 +83,25 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
       child: Column(
         children: [
           CarouselSlider.builder(
-            carouselController: controller,
+            carouselController: _controller,
             options: CarouselOptions(
+              enableInfiniteScroll: widget.enableInfiniteScroll,
               height: carouselHeight,
               enlargeCenterPage: isThin ? false : true,
               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
               viewportFraction: isThin ? 1 : 0.95,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 6),
-              autoPlayAnimationDuration: const Duration(seconds: 2),
+              autoPlay: widget.autoPlay,
+              autoPlayInterval: widget.autoPlayInterval,
+              autoPlayAnimationDuration: widget.autoPlayAnimationDuration,
               onPageChanged: (index, _) => setState(() => currentIndex = index),
             ),
             itemCount: widget.movies.length,
             itemBuilder: (context, index, realIndex) {
               final movie = widget.movies[index];
 
-              if (!isThin) return _WideDeviceLayout(movie: movie);
+              if (!isThin) {
+                return _WideDeviceLayout(movie: movie);
+              }
 
               return _ThinDeviceLayout(movie: movie);
             },
@@ -87,7 +118,7 @@ class _MoviesCarouselState extends State<MoviesCarousel> {
                 dotColor: colorScheme.primaryContainer,
                 activeDotColor: colorScheme.onPrimaryContainer,
               ),
-              onDotClicked: (index) => controller.jumpToPage(index),
+              onDotClicked: (index) => _controller.jumpToPage(index),
             );
           }),
         ],
@@ -100,7 +131,7 @@ VoidCallback _navigateToDetailPage(BuildContext context, int movieId) {
   return () => AppNavigator.moviesDetail(context, movieId);
 }
 
-/// Creating a faded Image widget
+/// Create a faded Image widget
 ///
 /// [begin] is the starting point where the image becomes transparent.
 ///
@@ -120,6 +151,7 @@ Widget _fadeShadedImage(
     },
     blendMode: BlendMode.dstIn,
     child: DefaultNetworkImage(
+      key: _imageKey,
       imageUrl: '$tmdbImageBaseUrl$path',
       fit: BoxFit.cover,
     ),
@@ -142,6 +174,7 @@ class _ThinDeviceLayout extends StatelessWidget {
     return InkWell(
       onTap: _navigateToDetailPage(context, movie.id),
       child: Stack(
+        key: _contentContainer,
         alignment: Alignment.bottomCenter,
         fit: StackFit.expand,
         children: [
@@ -153,6 +186,7 @@ class _ThinDeviceLayout extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              key: _movieDetailKey,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
@@ -191,6 +225,7 @@ class _WideDeviceLayout extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return Card(
+      key: _contentContainer,
       child: InkWell(
         onTap: _navigateToDetailPage(context, movie.id),
         child: Row(
@@ -200,6 +235,7 @@ class _WideDeviceLayout extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24.0).copyWith(right: 40.0),
                 child: Column(
+                  key: _movieDetailKey,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -216,18 +252,19 @@ class _WideDeviceLayout extends StatelessWidget {
                     Builder(builder: (context) {
                       final deviceH = MediaQuery.of(context).size.height;
 
-                      final maxLines = deviceH >= _wideDeviceH
+                      final maxLines = deviceH >= 800.0
                           ? 16
-                          : deviceH >= _wideDeviceH - 50.0
+                          : deviceH >= 750.0
                               ? 14
                               : deviceH >= 700.0
                                   ? 12
-                                  : deviceH >= _thinDeviceH + 50.0
+                                  : deviceH >= 650.0
                                       ? 10
                                       : 8;
 
                       return Text(
                         movie.overview * 5,
+                        key: _movieOverview,
                         textAlign: TextAlign.justify,
                         maxLines: maxLines,
                         overflow: TextOverflow.ellipsis,

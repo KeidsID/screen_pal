@@ -2,9 +2,9 @@ import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
 
 class GetNowPlayingMovies {
-  final MoviesRepo movieRepo;
+  final MoviesRepo moviesRepo;
 
-  GetNowPlayingMovies({required this.movieRepo});
+  GetNowPlayingMovies({required this.moviesRepo});
 
-  Future<List<Movie>> execute() => movieRepo.getNowPlayingMovies();
+  Future<List<Movie>> execute() => moviesRepo.getNowPlayingMovies();
 }

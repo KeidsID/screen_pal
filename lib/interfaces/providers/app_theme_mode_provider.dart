@@ -6,7 +6,7 @@ import 'package:screen_pal/service_locator/locator.dart';
 
 part 'app_theme_mode_provider.g.dart';
 
-@riverpod
+@Riverpod(dependencies: [])
 class AppThemeMode extends _$AppThemeMode {
   static final _cache = locator<ThemeModeCache>();
 

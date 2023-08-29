@@ -6,7 +6,7 @@ part of 'app_theme_mode_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$appThemeModeHash() => r'00ed55cd0a3be7f0ad6b5f54056ee2891266d071';
+String _$appThemeModeHash() => r'1c58c64580aaad3d56b6395e62b109f07fea9394';
 
 /// See also [AppThemeMode].
 @ProviderFor(AppThemeMode)
@@ -16,8 +16,8 @@ final appThemeModeProvider =
   name: r'appThemeModeProvider',
   debugGetCreateSourceHash:
       const bool.fromEnvironment('dart.vm.product') ? null : _$appThemeModeHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
+  dependencies: const <ProviderOrFamily>[],
+  allTransitiveDependencies: const <ProviderOrFamily>{},
 );
 
 typedef _$AppThemeMode = AutoDisposeNotifier<ThemeMode>;

@@ -73,7 +73,12 @@ class MoviesHomePage extends StatelessWidget {
                           ? movies
                           : movies.sublist(0, 10);
 
-                      return MoviesCarousel(movies: filteredMovies);
+                      return MoviesCarousel(
+                        movies: filteredMovies,
+                        autoPlay: true,
+                        autoPlayInterval: const Duration(seconds: 6),
+                        autoPlayAnimationDuration: const Duration(seconds: 2),
+                      );
                     },
                   );
                 },
