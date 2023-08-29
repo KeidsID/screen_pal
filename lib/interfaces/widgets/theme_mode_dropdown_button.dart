@@ -12,6 +12,8 @@ class ThemeModeDropdownButton extends ConsumerWidget {
     final themeModeNotifier = ref.read(appThemeModeProvider.notifier);
 
     return DropdownButton<ThemeMode>(
+      value: themeMode,
+      onChanged: (value) => themeModeNotifier.updateMode(value!),
       items: ThemeMode.values.map((e) {
         final filteredName = e.name == 'system' ? 'system default' : e.name;
         final icons = {
@@ -21,6 +23,7 @@ class ThemeModeDropdownButton extends ConsumerWidget {
         };
 
         return DropdownMenuItem(
+          key: Key('item-${e.name}'),
           value: e,
           child: Row(
             children: [
@@ -31,8 +34,6 @@ class ThemeModeDropdownButton extends ConsumerWidget {
           ),
         );
       }).toList(),
-      value: themeMode,
-      onChanged: (value) => themeModeNotifier.updateMode(value!),
     );
   }
 }

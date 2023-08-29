@@ -6,15 +6,15 @@ import '../../locator.dart';
 
 void registerUseCases() {
   locator.registerLazySingleton(() {
-    return GetNowPlayingMovies(movieRepo: locator());
+    return GetNowPlayingMovies(moviesRepo: locator());
   });
   locator.registerLazySingleton(() {
-    return GetPopularMovies(movieRepo: locator());
+    return GetPopularMovies(moviesRepo: locator());
   });
   locator.registerLazySingleton(() {
-    return GetTopRatedMovies(movieRepo: locator());
+    return GetTopRatedMovies(moviesRepo: locator());
   });
   locator.registerLazySingleton(() {
-    return GetUpcomingMovies(movieRepo: locator());
+    return GetUpcomingMovies(moviesRepo: locator());
   });
 }
