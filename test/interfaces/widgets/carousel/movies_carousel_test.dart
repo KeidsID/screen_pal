@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
-
 import 'package:screen_pal/interfaces/widgets/carousel/movies_carousel.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
