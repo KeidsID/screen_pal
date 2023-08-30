@@ -1,5 +1,3 @@
-// coverage:ignore-file
-
 import 'package:get_it/get_it.dart';
 
 import 'registry/registry.dart';
