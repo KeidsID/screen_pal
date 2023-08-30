@@ -2,7 +2,6 @@
   Screen Pal
 </b></h1>
 
-[![CI](https://github.com/KeidsID/screen_pal/actions/workflows/ci.yml/badge.svg)](https://github.com/KeidsID/screen_pal/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/github/KeidsID/screen_pal/graph/badge.svg?token=G20RM8PYOH)](https://codecov.io/github/KeidsID/screen_pal)
 [![CD Web](https://github.com/KeidsID/screen_pal/actions/workflows/cd-web.yml/badge.svg)](https://github.com/KeidsID/screen_pal/actions/workflows/cd-web.yml)
 
