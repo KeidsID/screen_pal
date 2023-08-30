@@ -30,7 +30,7 @@ jobs:
 
       - name: Test with min 80% coverage
         run: |
-          dart pub global activate dlvov
+          dart pub global activate dlcov
           dlcov --lcov-gen="flutter test --coverage" -c 80
 
       - name: Upload coverage to artifact
