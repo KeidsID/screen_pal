@@ -1,0 +1,23 @@
+name: CI - Upload coverage to codecov
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download coverage
+        uses: actions/download-artifact@v3
+        with:
+          name: test-coverage
+          path: ./coverage
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/lcov.info

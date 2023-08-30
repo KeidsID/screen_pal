@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:envied/envied.dart';
 
 part 'env.g.dart';

@@ -1,6 +1,6 @@
-# Secrets
+# Secrets and generated files
 *.env
-env.g.dart
+*.g.dart
 
 coverage/
 
