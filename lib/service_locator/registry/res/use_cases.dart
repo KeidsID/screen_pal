@@ -1,8 +1,4 @@
-import '../../../core/use_cases/movie/get_now_playing_movies.dart';
-import '../../../core/use_cases/movie/get_popular_movies.dart';
-import '../../../core/use_cases/movie/get_top_rated_movies.dart';
-import '../../../core/use_cases/movie/get_upcoming_movies.dart';
-import '../../locator.dart';
+part of '../registry.dart';
 
 void registerUseCases() {
   locator.registerLazySingleton(() {
