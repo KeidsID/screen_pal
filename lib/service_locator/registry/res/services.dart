@@ -1,7 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../infrastructures/cache/theme_mode_cache.dart';
-import '../../locator.dart';
+part of '../registry.dart';
 
 Future<void> registerServices() async {
   final preferences = await SharedPreferences.getInstance();

@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:dio/dio.dart';
 
 import 'package:screen_pal/common/envs/env.dart';

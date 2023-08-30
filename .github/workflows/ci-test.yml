@@ -1,0 +1,40 @@
+name: CI - Test Coverage
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+      - edited
+
+jobs:
+  test-with-coverage:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: "3.x"
+
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Generate env and riverpod
+        run: |
+          echo "${{ secrets.DOT_ENV_FILE }}" > .env
+          dart run build_runner build --delete-conflicting-outputs
+
+      - name: Test with min 80% coverage
+        run: |
+          dart pub global activate dlvov
+          dlcov --lcov-gen="flutter test --coverage" -c 80
+
+      - name: Upload coverage to artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-coverage
+          path: ./coverage/lcov.info
