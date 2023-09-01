@@ -51,17 +51,24 @@ const _serverErrRes = {
 class DioExceptionWidget extends StatelessWidget {
   /// Create a [DioExceptionWidget] that displays [DioException] info in a
   /// simple way.
-  const DioExceptionWidget({super.key, required this.exception});
+  const DioExceptionWidget({super.key, required this.exception, this.action});
 
   final DioException exception;
+
+  /// Add widget on the bottom. Typically an [ElevatedButton].
+  ///
+  /// If null, then no [action] widget rendered on the bottom.
+  final Widget? action;
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
     if (exception.type != DioExceptionType.badResponse) {
+      debugPrint(exception.message);
+
       return _layout(children: [
-        Text(exception.message ?? 'Internal App Error'),
+        const Text('Internal App Error'),
         const Divider(),
         const Text('Sorry for the inconvenience'),
       ]);
@@ -82,11 +89,14 @@ class DioExceptionWidget extends StatelessWidget {
   }
 
   Widget _layout({List<Widget> children = const <Widget>[]}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+    return SizedBox.expand(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: children,
+        children: [
+          ...children,
+          const SizedBox(height: 16.0),
+          action ?? const SizedBox(),
+        ],
       ),
     );
   }
