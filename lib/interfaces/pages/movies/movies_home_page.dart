@@ -19,32 +19,6 @@ class MoviesHomePage extends StatelessWidget {
     const sectionPadding = EdgeInsets.symmetric(horizontal: 16.0);
     const contentWidth = 160.0;
 
-    List<Widget> section({
-      required String title,
-      required AutoDisposeFutureProvider<List<Movie>> moviesProvider,
-    }) {
-      return [
-        Text(title, style: textTheme.titleLarge),
-        SizedBox(
-          height: sectionHeight,
-          child: Consumer(builder: (_, ref, __) {
-            final movieListProvider = ref.watch(moviesProvider);
-
-            return movieListProvider.when(
-              error: RiverpodAsyncValueHandlers.error,
-              loading: RiverpodAsyncValueHandlers.loading,
-              data: (movies) {
-                return _MovieListViewHoriz(
-                  movies: movies,
-                  itemWidth: contentWidth,
-                );
-              },
-            );
-          }),
-        ),
-      ].map((e) => Padding(padding: sectionPadding, child: e)).toList();
-    }
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -58,14 +32,17 @@ class MoviesHomePage extends StatelessWidget {
 
                   return popularMovies.when(
                     error: (error, stackTrace) => SizedBox(
-                      height: 200.0,
+                      height: 300.0,
                       child: RiverpodAsyncValueHandlers.error(
                         error,
                         stackTrace,
+                        action: () => ref
+                            .read(popularMoviesProvider.notifier)
+                            .reFetchMovies(),
                       ),
                     ),
                     loading: () => SizedBox(
-                      height: 200.0,
+                      height: 300.0,
                       child: RiverpodAsyncValueHandlers.loading(),
                     ),
                     data: (movies) {
@@ -84,19 +61,113 @@ class MoviesHomePage extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 16.0),
-              ...section(
-                title: 'On Theatres',
-                moviesProvider: nowPlayingMoviesProvider,
+              // section
+              Padding(
+                padding: sectionPadding,
+                child: Text('On Theatres', style: textTheme.titleLarge),
+              ),
+              Padding(
+                padding: sectionPadding,
+                child: SizedBox(
+                  height: sectionHeight,
+                  child: Consumer(builder: (_, ref, __) {
+                    final nowPlayingMovies =
+                        ref.watch(nowPlayingMoviesProvider);
+
+                    return nowPlayingMovies.when(
+                      loading: RiverpodAsyncValueHandlers.loading,
+                      error: (error, stackTrace) {
+                        return RiverpodAsyncValueHandlers.error(
+                          error,
+                          stackTrace,
+                          action: () {
+                            ref
+                                .read(nowPlayingMoviesProvider.notifier)
+                                .reFetchMovies();
+                          },
+                        );
+                      },
+                      data: (movies) {
+                        return _MovieListViewHoriz(
+                          movies: movies,
+                          itemWidth: contentWidth,
+                        );
+                      },
+                    );
+                  }),
+                ),
               ),
               const SizedBox(height: 16.0),
-              ...section(
-                title: 'Top Rated',
-                moviesProvider: topRatedMoviesProvider,
+              // section
+              Padding(
+                padding: sectionPadding,
+                child: Text('Top Rated', style: textTheme.titleLarge),
+              ),
+              Padding(
+                padding: sectionPadding,
+                child: SizedBox(
+                  height: sectionHeight,
+                  child: Consumer(builder: (_, ref, __) {
+                    final topRatedMovies = ref.watch(topRatedMoviesProvider);
+
+                    return topRatedMovies.when(
+                      loading: RiverpodAsyncValueHandlers.loading,
+                      error: (error, stackTrace) {
+                        return RiverpodAsyncValueHandlers.error(
+                          error,
+                          stackTrace,
+                          action: () {
+                            ref
+                                .read(topRatedMoviesProvider.notifier)
+                                .reFetchMovies();
+                          },
+                        );
+                      },
+                      data: (movies) {
+                        return _MovieListViewHoriz(
+                          movies: movies,
+                          itemWidth: contentWidth,
+                        );
+                      },
+                    );
+                  }),
+                ),
               ),
               const SizedBox(height: 16.0),
-              ...section(
-                title: 'Coming Soon',
-                moviesProvider: upcomingMoviesProvider,
+              // section
+              Padding(
+                padding: sectionPadding,
+                child: Text('Coming Soon', style: textTheme.titleLarge),
+              ),
+              Padding(
+                padding: sectionPadding,
+                child: SizedBox(
+                  height: sectionHeight,
+                  child: Consumer(builder: (_, ref, __) {
+                    final upcomingMovies = ref.watch(upcomingMoviesProvider);
+
+                    return upcomingMovies.when(
+                      loading: RiverpodAsyncValueHandlers.loading,
+                      error: (error, stackTrace) {
+                        return RiverpodAsyncValueHandlers.error(
+                          error,
+                          stackTrace,
+                          action: () {
+                            ref
+                                .read(upcomingMoviesProvider.notifier)
+                                .reFetchMovies();
+                          },
+                        );
+                      },
+                      data: (movies) {
+                        return _MovieListViewHoriz(
+                          movies: movies,
+                          itemWidth: contentWidth,
+                        );
+                      },
+                    );
+                  }),
+                ),
               ),
             ],
           ),
