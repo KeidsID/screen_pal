@@ -131,33 +131,6 @@ VoidCallback _navigateToDetailPage(BuildContext context, int movieId) {
   return () => AppNavigator.moviesDetail(context, movieId);
 }
 
-/// Create a faded Image widget
-///
-/// [begin] is the starting point where the image becomes transparent.
-///
-/// [end] is the end point where the image does not fade.
-Widget _fadeShadedImage(
-  String path, {
-  AlignmentGeometry begin = Alignment.centerLeft,
-  AlignmentGeometry end = Alignment.centerRight,
-}) {
-  return ShaderMask(
-    shaderCallback: (rect) {
-      return LinearGradient(
-        begin: begin,
-        end: end,
-        colors: const [Colors.transparent, Colors.black87, Colors.black],
-      ).createShader(rect);
-    },
-    blendMode: BlendMode.dstIn,
-    child: DefaultNetworkImage(
-      key: _imageKey,
-      imageUrl: '$tmdbImageBaseUrl$path',
-      fit: BoxFit.cover,
-    ),
-  );
-}
-
 class _ThinDeviceLayout extends StatelessWidget {
   const _ThinDeviceLayout({
     Key? key,
@@ -168,44 +141,74 @@ class _ThinDeviceLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
-    return InkWell(
-      onTap: _navigateToDetailPage(context, movie.id),
-      child: Stack(
-        key: _contentContainer,
-        alignment: Alignment.bottomCenter,
-        fit: StackFit.expand,
-        children: [
-          _fadeShadedImage(
-            movie.backdropPath,
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          ),
-          Padding(
+    return Stack(
+      key: _contentContainer,
+      alignment: Alignment.bottomCenter,
+      fit: StackFit.expand,
+      children: [
+        DefaultNetworkImage(
+          key: _imageKey,
+          imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
+          alt: movie.title,
+          imageBuilder: (context, imageProvider) {
+            return Ink.image(
+              image: imageProvider,
+              fit: BoxFit.cover,
+              child: InkWell(onTap: _navigateToDetailPage(context, movie.id)),
+            );
+          },
+        ),
+        _fader(),
+        IgnorePointer(
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              key: _movieDetailKey,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text(
-                  movie.title,
-                  style: textTheme.headlineLarge,
-                  textAlign: TextAlign.center,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  [
-                    movie.releaseDate.year,
-                    '${movie.voteAverage * 10}%',
-                  ].join(' • '),
-                )
-              ],
-            ),
-          )
-        ],
+            child: Builder(builder: (context) {
+              final textTheme = Theme.of(context).textTheme;
+
+              return Column(
+                key: _movieDetailKey,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    movie.title,
+                    style: textTheme.headlineLarge,
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    [
+                      movie.releaseDate.year,
+                      '${movie.voteAverage * 10}%',
+                    ].join(' • '),
+                  )
+                ],
+              );
+            }),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _fader() {
+    return IgnorePointer(
+      child: ShaderMask(
+        shaderCallback: (rect) {
+          return LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.transparent,
+              Colors.black.withOpacity(0.2),
+              Colors.black,
+            ],
+          ).createShader(rect);
+        },
+        blendMode: BlendMode.dstIn,
+        child: Builder(builder: (context) {
+          return Container(color: Theme.of(context).scaffoldBackgroundColor);
+        }),
       ),
     );
   }
@@ -263,7 +266,7 @@ class _WideDeviceLayout extends StatelessWidget {
                                       : 8;
 
                       return Text(
-                        movie.overview * 5,
+                        movie.overview,
                         key: _movieOverview,
                         textAlign: TextAlign.justify,
                         maxLines: maxLines,
@@ -277,12 +280,33 @@ class _WideDeviceLayout extends StatelessWidget {
             Expanded(
               flex: 6,
               child: SizedBox.expand(
-                child: _fadeShadedImage(movie.backdropPath),
+                child: _faderMask(
+                  child: DefaultNetworkImage(
+                    key: _imageKey,
+                    imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
+                    fit: BoxFit.cover,
+                    alt: movie.title,
+                  ),
+                ),
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _faderMask({Widget? child}) {
+    return ShaderMask(
+      shaderCallback: (rect) {
+        return const LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: [Colors.transparent, Colors.black87, Colors.black],
+        ).createShader(rect);
+      },
+      blendMode: BlendMode.dstIn,
+      child: child,
     );
   }
 }
