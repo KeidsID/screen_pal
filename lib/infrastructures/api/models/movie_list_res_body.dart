@@ -37,15 +37,15 @@ class MovieListResBody {
 
 class RawMovie {
   final bool adult;
-  final String backdropPath;
+  final String? backdropPath;
   final List<int> genreIds;
   final int id;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
   final double popularity;
-  final String posterPath;
-  final DateTime releaseDate;
+  final String? posterPath;
+  final DateTime? releaseDate;
   final String title;
   final bool video;
   final double voteAverage;
@@ -53,15 +53,15 @@ class RawMovie {
 
   RawMovie({
     required this.adult,
-    required this.backdropPath,
+    this.backdropPath,
     required this.genreIds,
     required this.id,
     required this.originalLanguage,
     required this.originalTitle,
     required this.overview,
     required this.popularity,
-    required this.posterPath,
-    required this.releaseDate,
+    this.posterPath,
+    this.releaseDate,
     required this.title,
     required this.video,
     required this.voteAverage,
@@ -79,7 +79,7 @@ class RawMovie {
       overview: json["overview"],
       popularity: json["popularity"]?.toDouble(),
       posterPath: json["poster_path"],
-      releaseDate: DateTime.parse(json["release_date"]),
+      releaseDate: DateTime.tryParse(json["release_date"]),
       title: json["title"],
       video: json["video"],
       voteAverage: json["vote_average"]?.toDouble(),
@@ -91,8 +91,10 @@ class RawMovie {
     return Movie(
       adult: adult,
       backdropPath: backdropPath,
-      originalTitle: originalTitle,
+      genreIds: genreIds,
       id: id,
+      originalLanguage: originalLanguage,
+      originalTitle: originalTitle,
       overview: overview,
       popularity: popularity,
       posterPath: posterPath,

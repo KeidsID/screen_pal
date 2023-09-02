@@ -57,7 +57,7 @@ void main() {
                   (e) => e.data,
                   'other movie details that seperated by bullets (" • ")',
                   [
-                    dummyMovie.releaseDate.year,
+                    dummyMovie.releaseDate?.year ?? 'Coming Soon',
                     '${dummyMovie.voteAverage * 10}%'
                   ].join(' • '),
                 ),

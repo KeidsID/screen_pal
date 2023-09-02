@@ -62,7 +62,7 @@ class _MovieCardState extends State<MovieCard> {
                               ?.copyWith(fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
-                        Text('${movie.releaseDate.year}'),
+                        Text('${movie.releaseDate?.year ?? 'Coming Soon'}'),
                         Text('${movie.voteAverage * 10}%')
                       ],
                     ),
