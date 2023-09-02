@@ -110,7 +110,7 @@ class MoviesHomePage extends StatelessWidget {
               ),
               const SizedBox(height: 16.0),
               ...section(
-                title: 'Top Rated',
+                title: 'Coming Soon',
                 moviesProvider: upcomingMoviesProvider,
               ),
             ],

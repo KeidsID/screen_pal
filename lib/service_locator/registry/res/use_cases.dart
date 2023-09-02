@@ -2,6 +2,13 @@ part of '../registry.dart';
 
 void registerUseCases() {
   locator.registerLazySingleton(() {
+    return GetMovieGenres(genresRepo: locator());
+  });
+  locator.registerLazySingleton(() {
+    return GetTvShowGenres(genresRepo: locator());
+  });
+
+  locator.registerLazySingleton(() {
     return GetNowPlayingMovies(moviesRepo: locator());
   });
   locator.registerLazySingleton(() {
@@ -12,5 +19,8 @@ void registerUseCases() {
   });
   locator.registerLazySingleton(() {
     return GetUpcomingMovies(moviesRepo: locator());
+  });
+  locator.registerLazySingleton(() {
+    return GetMovieDetail(moviesRepo: locator());
   });
 }
