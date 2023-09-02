@@ -1,18 +1,21 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:screen_pal/interfaces/providers/genres/genres_providers.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 const _contentContainer = Key('content-container');
 const _imageKey = Key('image-widget');
 const _movieDetailKey = Key('detail-column');
 const _movieOverview = Key('movie-overview');
 
-class MoviesCarousel extends StatefulWidget {
+class MoviesCarousel extends ConsumerStatefulWidget {
   /// Create a Carousel widget that displays basic information of the movies
   /// provided.
   ///
@@ -51,10 +54,10 @@ class MoviesCarousel extends StatefulWidget {
   final Duration autoPlayAnimationDuration;
 
   @override
-  State<MoviesCarousel> createState() => MoviesCarouselState();
+  ConsumerState<MoviesCarousel> createState() => MoviesCarouselState();
 }
 
-class MoviesCarouselState extends State<MoviesCarousel> {
+class MoviesCarouselState extends ConsumerState<MoviesCarousel> {
   /// Carousel current index
   int currentIndex = 0;
   final _controller = CarouselController();
@@ -131,6 +134,50 @@ VoidCallback _navigateToDetailPage(BuildContext context, int movieId) {
   return () => AppNavigator.moviesDetail(context, movieId);
 }
 
+class _MovieExtrasText extends ConsumerWidget {
+  const _MovieExtrasText({
+    required this.movie,
+  }) : super(key: const Key('movie-extras'));
+
+  final Movie movie;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieGenresProv = ref.watch(movieGenresProvider);
+
+    return movieGenresProv.when(
+      loading: () => const Text('...'),
+      error: (error, stackTrace) {
+        debugPrint('movieGenres Error: $error');
+
+        return Text(
+          [
+            movie.releaseDate?.year ?? 'Coming Soon',
+            movie.originalLanguage,
+          ].join(' • '),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        );
+      },
+      data: (genres) {
+        final movieGenreNames = movie.genreIds.map((id) {
+          return genres.firstWhere((e) => e.id == id).name;
+        }).toList();
+
+        return Text(
+          [
+            movie.releaseDate?.year ?? 'Coming Soon',
+            movie.originalLanguage,
+            movieGenreNames.join(', '),
+          ].join(' • '),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        );
+      },
+    );
+  }
+}
+
 class _ThinDeviceLayout extends StatelessWidget {
   const _ThinDeviceLayout({
     Key? key,
@@ -176,12 +223,7 @@ class _ThinDeviceLayout extends StatelessWidget {
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(
-                    [
-                      movie.releaseDate?.year ?? 'Coming Soon',
-                      '${movie.voteAverage * 10}%',
-                    ].join(' • '),
-                  )
+                  _MovieExtrasText(movie: movie),
                 ],
               );
             }),
@@ -247,12 +289,7 @@ class _WideDeviceLayout extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Text(
-                      [
-                        movie.releaseDate?.year ?? 'Coming Soon',
-                        '${movie.voteAverage * 10}%',
-                      ].join(' • '),
-                    ),
+                    _MovieExtrasText(movie: movie),
                     const SizedBox(height: 8.0),
                     Builder(builder: (context) {
                       final deviceH = MediaQuery.of(context).size.height;
