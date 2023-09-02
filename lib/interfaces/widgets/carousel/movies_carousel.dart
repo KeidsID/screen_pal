@@ -178,7 +178,7 @@ class _ThinDeviceLayout extends StatelessWidget {
                   ),
                   Text(
                     [
-                      movie.releaseDate.year,
+                      movie.releaseDate?.year ?? 'Coming Soon',
                       '${movie.voteAverage * 10}%',
                     ].join(' • '),
                   )
@@ -248,8 +248,10 @@ class _WideDeviceLayout extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      [movie.releaseDate.year, '${movie.voteAverage * 10}%']
-                          .join(' • '),
+                      [
+                        movie.releaseDate?.year ?? 'Coming Soon',
+                        '${movie.voteAverage * 10}%',
+                      ].join(' • '),
                     ),
                     const SizedBox(height: 8.0),
                     Builder(builder: (context) {

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
+import 'package:screen_pal/core/entities/movie_detail.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
+import 'package:screen_pal/infrastructures/api/models/movie_detail_res_body.dart';
 import 'package:screen_pal/infrastructures/api/models/movie_list_res_body.dart';
 
 class MoviesRepoImpl implements MoviesRepo {
@@ -45,5 +47,14 @@ class MoviesRepoImpl implements MoviesRepo {
     final resBody = MovieListResBody.fromJson(response.data!);
 
     return resBody.results.map((e) => e.toEntity()).toList();
+  }
+
+  @override
+  Future<MovieDetail> getMovieDetail(int id) async {
+    final response = await _dio.get('$_basePath/$id');
+
+    final resBody = MovieDetailResBody.fromJson(response.data!);
+
+    return resBody.toEntity();
   }
 }
