@@ -9,22 +9,22 @@ import 'package:screen_pal/service_locator/locator.dart';
 
 part 'movie_list_providers.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> nowPlayingMovies(NowPlayingMoviesRef ref) async {
   return locator<GetNowPlayingMovies>().execute();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> popularMovies(PopularMoviesRef ref) {
   return locator<GetPopularMovies>().execute();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> topRatedMovies(TopRatedMoviesRef ref) {
   return locator<GetTopRatedMovies>().execute();
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<Movie>> upcomingMovies(UpcomingMoviesRef ref) {
   return locator<GetUpcomingMovies>().execute();
 }

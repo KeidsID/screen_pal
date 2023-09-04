@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:screen_pal/core/entities/collection.dart';
+import 'package:screen_pal/core/entities/movie_collection.dart';
 import 'package:screen_pal/core/entities/genre.dart';
 
 class MovieDetail extends Equatable {
   final bool adult;
   final String? backdropPath;
-  final Collection? belongsToCollection;
+  final MovieCollection? movieCollection;
   final int budget;
   final List<Genre> genres;
   final String? homepage;
@@ -29,7 +29,7 @@ class MovieDetail extends Equatable {
   const MovieDetail({
     required this.adult,
     this.backdropPath,
-    this.belongsToCollection,
+    this.movieCollection,
     required this.budget,
     required this.genres,
     this.homepage,

@@ -1,6 +1,7 @@
 # Secrets and generated files
 *.env
 *.g.dart
+*.freezed.dart
 
 coverage/
 

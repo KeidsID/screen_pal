@@ -21,7 +21,7 @@ class MoviesHomePage extends StatelessWidget {
 
     List<Widget> section({
       required String title,
-      required AutoDisposeFutureProvider<List<Movie>> moviesProvider,
+      required FutureProvider<List<Movie>> moviesProvider,
     }) {
       return [
         Text(title, style: textTheme.titleLarge),
