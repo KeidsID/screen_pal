@@ -1,4 +1,6 @@
-import 'package:screen_pal/infrastructures/api/models/movie_list_res_body.dart';
+import 'dart:convert';
+
+import 'package:screen_pal/infrastructures/api/models/movie/movie_list_res_body.dart';
 
 const dummyRawMovieListResBody = '''{
   "dates": {
@@ -33,4 +35,4 @@ const dummyRawMovieListResBody = '''{
 }''';
 
 final dummyMovieListResBody =
-    MovieListResBody.fromJson(dummyRawMovieListResBody);
+    MovieListResBody.fromJson(jsonDecode(dummyRawMovieListResBody));

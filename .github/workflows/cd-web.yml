@@ -23,7 +23,7 @@ jobs:
         run: flutter pub get
 
       # https://stackoverflow.com/a/63350136/19337625
-      - name: Generate env and riverpod
+      - name: Generate 3rd party utils
         run: |
           echo "${{ secrets.DOT_ENV_FILE }}" > .env
           dart run build_runner build --delete-conflicting-outputs

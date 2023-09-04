@@ -22,9 +22,12 @@ abstract class RiverpodAsyncValueHandlers {
           )
         : const SizedBox();
 
-    if (error is! DioException) {
-      debugPrint('$error');
+    debugPrint(
+      'RiverpodAsyncValueHandlers.error: '
+      '${error.runtimeType} - $error',
+    );
 
+    if (error is! DioException) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
