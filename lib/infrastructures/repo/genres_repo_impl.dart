@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 import 'package:screen_pal/core/entities/genre.dart';
 import 'package:screen_pal/core/repo/genres_repo.dart';
-import 'package:screen_pal/infrastructures/api/models/movie/raw_genre.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/raw_genre.dart';
 
 class GenresRepoImpl implements GenresRepo {
   const GenresRepoImpl(Dio dio) : _dio = dio;

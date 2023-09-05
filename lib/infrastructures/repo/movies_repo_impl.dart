@@ -5,8 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/core/entities/movie_detail.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
-import 'package:screen_pal/infrastructures/api/models/movie/movie_detail_res_body.dart';
-import 'package:screen_pal/infrastructures/api/models/movie/movie_list_res_body.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/movie_detail_res_body.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/movie_list_res_body.dart';
 
 class MoviesRepoImpl implements MoviesRepo {
   const MoviesRepoImpl(Dio dio) : _dio = dio;

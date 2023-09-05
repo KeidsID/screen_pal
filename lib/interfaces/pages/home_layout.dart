@@ -35,13 +35,13 @@ class _NavBarDelegate {
 }
 
 final _navs = [
-  _NavBarDelegate(const Icon(Icons.movie_outlined), 'Movie'),
-  _NavBarDelegate(const Icon(Icons.tv_outlined), 'Series'),
+  _NavBarDelegate(const Icon(Icons.movie_outlined), 'Movies'),
+  _NavBarDelegate(const Icon(Icons.tv_outlined), 'Tv Shows'),
 ];
 
 ValueChanged<int> _onNavBarItemTap(BuildContext context) {
   return (value) {
-    value == 0 ? AppNavigator.movies(context) : AppNavigator.series(context);
+    value == 0 ? AppNavigator.movies(context) : AppNavigator.tvShows(context);
   };
 }
 

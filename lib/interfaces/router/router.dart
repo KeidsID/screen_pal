@@ -30,10 +30,10 @@ final router = GoRouter(
           builder: (_, __) => const MoviesHomePage(),
         ),
         GoRoute(
-          path: '/series',
+          path: '/tv_shows',
           builder: (_, __) => const Scaffold(
             body: Center(
-              child: Text('Series Page'),
+              child: Text('Tv Shows Page'),
             ),
           ),
         )

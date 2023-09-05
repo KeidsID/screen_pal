@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:screen_pal/core/entities/genre.dart';
-import 'package:screen_pal/core/use_cases/genre/get_movie_genres.dart';
+import 'package:screen_pal/core/use_cases/genres/get_movie_genres.dart';
 import 'package:screen_pal/service_locator/locator.dart';
 
 part 'genres_providers.g.dart';
