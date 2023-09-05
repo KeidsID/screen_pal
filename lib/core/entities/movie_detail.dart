@@ -1,7 +1,8 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:screen_pal/core/entities/movie_collection.dart';
-import 'package:screen_pal/core/entities/genre.dart';
+import 'genre.dart';
+import 'movie_collection.dart';
+import 'spoken_language.dart';
 
 class MovieDetail extends Equatable {
   final bool adult;
@@ -11,7 +12,10 @@ class MovieDetail extends Equatable {
   final List<Genre> genres;
   final String? homepage;
   final int id;
-  final String originalLanguage;
+
+  /// Its in `ISO 639 1` form. Convert it after fetch List of [SpokenLanguage]
+  /// from TMDB Api Server.
+  final String language;
   final String originalTitle;
   final String overview;
   final double popularity;
@@ -34,7 +38,7 @@ class MovieDetail extends Equatable {
     required this.genres,
     this.homepage,
     required this.id,
-    required this.originalLanguage,
+    required this.language,
     required this.originalTitle,
     required this.overview,
     required this.popularity,
@@ -59,7 +63,7 @@ class MovieDetail extends Equatable {
       genres,
       homepage,
       id,
-      originalLanguage,
+      language,
       originalTitle,
       overview,
       popularity,

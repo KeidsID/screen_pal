@@ -2,10 +2,13 @@ part of '../registry.dart';
 
 void registerUseCases() {
   locator.registerLazySingleton(() {
-    return GetMovieGenres(genresRepo: locator());
+    return GetLanguages(extrasRepo: locator());
   });
   locator.registerLazySingleton(() {
-    return GetTvShowGenres(genresRepo: locator());
+    return GetMovieGenres(extrasRepo: locator());
+  });
+  locator.registerLazySingleton(() {
+    return GetTvShowGenres(extrasRepo: locator());
   });
 
   locator.registerLazySingleton(() {

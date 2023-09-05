@@ -52,7 +52,7 @@ class RawMovie with _$RawMovie {
       backdropPath: backdropPath,
       genreIds: genreIds,
       id: id,
-      originalLanguage: originalLanguage,
+      language: originalLanguage,
       originalTitle: originalTitle,
       overview: overview,
       popularity: popularity,

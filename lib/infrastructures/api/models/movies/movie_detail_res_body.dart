@@ -61,7 +61,7 @@ class MovieDetailResBody with _$MovieDetailResBody {
       genres: genres.map((e) => e.toEntity()).toList(),
       homepage: homepage,
       id: id,
-      originalLanguage: originalLanguage,
+      language: originalLanguage,
       originalTitle: originalTitle,
       overview: overview,
       popularity: popularity,
