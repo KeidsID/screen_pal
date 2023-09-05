@@ -1,12 +1,11 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screen_pal/interfaces/providers/genres/genres_providers.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
+import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 
@@ -143,37 +142,31 @@ class _MovieExtrasText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieGenresProv = ref.watch(movieGenresProvider);
+    final movieExtras = ref.watch(movieExtrasProvider);
 
-    return movieGenresProv.when(
-      loading: () => const Text('...'),
-      error: (error, stackTrace) {
-        debugPrint('movieGenres Error: $error');
+    String language = movie.language;
+    List<String> genreNames = [];
 
-        return Text(
-          [
-            movie.releaseDate?.year ?? 'Coming Soon',
-            movie.originalLanguage,
-          ].join(' • '),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        );
-      },
-      data: (genres) {
-        final movieGenreNames = movie.genreIds.map((id) {
-          return genres.firstWhere((e) => e.id == id).name;
-        }).toList();
+    if (movieExtras.languages.isNotEmpty) {
+      language = movieExtras.languages.firstWhere((e) {
+        return e.iso6391 == movie.language;
+      }).englishName;
+    }
 
-        return Text(
-          [
-            movie.releaseDate?.year ?? 'Coming Soon',
-            movie.originalLanguage,
-            movieGenreNames.join(', '),
-          ].join(' • '),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        );
-      },
+    if (movieExtras.genres.isNotEmpty) {
+      genreNames = movie.genreIds.map((id) {
+        return movieExtras.genres.firstWhere((e) => e.id == id).name;
+      }).toList();
+    }
+
+    return Text(
+      [
+        movie.releaseDate?.year ?? 'Coming Soon',
+        language,
+        genreNames.isEmpty ? '...' : genreNames.join(', '),
+      ].join(' • '),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

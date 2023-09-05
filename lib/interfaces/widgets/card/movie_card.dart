@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
+import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 
 class MovieCard extends StatefulWidget {
-  const MovieCard({
-    Key? key,
-    required this.movie,
-  }) : super(key: key);
+  const MovieCard({super.key, required this.movie});
 
   final Movie movie;
 
@@ -31,6 +30,12 @@ class _MovieCardState extends State<MovieCard> {
       child: InkWell(
         onTap: () => AppNavigator.moviesDetail(context, movie.id),
         onHover: (isHovered) => setState(() => isCardHovered = isHovered),
+        onLongPress: () {
+          final scaffoldMessenger = ScaffoldMessenger.of(context);
+
+          scaffoldMessenger.hideCurrentSnackBar();
+          scaffoldMessenger.showSnackBar(_detailSnackBar());
+        },
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -63,13 +68,83 @@ class _MovieCardState extends State<MovieCard> {
                           textAlign: TextAlign.center,
                         ),
                         Text('${movie.releaseDate?.year ?? 'Coming Soon'}'),
-                        Text('${movie.voteAverage * 10}%')
+                        Consumer(builder: (_, ref, __) {
+                          final movieExtras = ref.watch(movieExtrasProvider);
+
+                          String language = movie.language;
+                          List<String> genreNames = [];
+
+                          if (movieExtras.languages.isNotEmpty) {
+                            language = movieExtras.languages.firstWhere((e) {
+                              return e.iso6391 == movie.language;
+                            }).englishName;
+                          }
+
+                          if (movieExtras.genres.isNotEmpty) {
+                            genreNames = movie.genreIds.map((id) {
+                              return movieExtras.genres
+                                  .firstWhere((e) => e.id == id)
+                                  .name;
+                            }).toList();
+                          }
+
+                          return Text(
+                            [
+                              language,
+                              genreNames.isEmpty ? '...' : genreNames[0],
+                            ].join(' • '),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          );
+                        })
                       ],
                     ),
                   )
                 : const SizedBox(),
           ],
         ),
+      ),
+    );
+  }
+
+  SnackBar _detailSnackBar() {
+    final movie = widget.movie;
+
+    return SnackBar(
+      behavior: SnackBarBehavior.floating,
+      content: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(movie.title),
+          Consumer(builder: (_, ref, __) {
+            final movieExtras = ref.watch(movieExtrasProvider);
+
+            String language = movie.language;
+            List<String> genreNames = [];
+
+            if (movieExtras.languages.isNotEmpty) {
+              language = movieExtras.languages.firstWhere((e) {
+                return e.iso6391 == movie.language;
+              }).englishName;
+            }
+
+            if (movieExtras.genres.isNotEmpty) {
+              genreNames = movie.genreIds.map((id) {
+                return movieExtras.genres.firstWhere((e) => e.id == id).name;
+              }).toList();
+            }
+
+            return Text(
+              [
+                '${movie.releaseDate?.year ?? 'Coming Soon'}',
+                language,
+                genreNames.isEmpty ? '...' : genreNames[0],
+              ].join(' • '),
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            );
+          }),
+        ],
       ),
     );
   }
