@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/movie_collection.dart';
 import 'package:screen_pal/core/entities/movie_detail.dart';
-import 'package:screen_pal/infrastructures/api/models/movie/raw_genre.dart';
-import 'package:screen_pal/infrastructures/api/models/movie/raw_spoken_language.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/raw_genre.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/raw_spoken_language.dart';
 
 part 'movie_detail_res_body.freezed.dart';
 part 'movie_detail_res_body.g.dart';
@@ -19,7 +19,8 @@ class MovieDetailResBody with _$MovieDetailResBody {
   const factory MovieDetailResBody({
     required bool adult,
     @JsonKey(name: 'backdrop_path') String? backdropPath,
-    @JsonKey(name: 'belongs_to_collection') RawMovieCollection? collection,
+    @JsonKey(name: 'belongs_to_collection')
+    RawMovieCollection? belongsToCollection,
     required int budget,
     required List<RawGenre> genres,
     String? homepage,
@@ -55,7 +56,7 @@ class MovieDetailResBody with _$MovieDetailResBody {
     return MovieDetail(
       adult: adult,
       backdropPath: backdropPath,
-      movieCollection: collection?.toEntity(),
+      movieCollection: belongsToCollection?.toEntity(),
       budget: budget,
       genres: genres.map((e) => e.toEntity()).toList(),
       homepage: homepage,

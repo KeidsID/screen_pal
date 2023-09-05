@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
-import 'package:screen_pal/core/use_cases/movie/get_top_rated_movies.dart';
+import 'package:screen_pal/core/use_cases/movies/get_top_rated_movies.dart';
 
 import '../../../helpers/mocks/repo/repositories.mocks.dart';
 

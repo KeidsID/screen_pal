@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:screen_pal/infrastructures/api/models/movie/movie_list_res_body.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/movie_list_res_body.dart';
 
 const dummyRawMovieListResBody = '''{
   "dates": {

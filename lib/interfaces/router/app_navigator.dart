@@ -13,8 +13,8 @@ abstract class AppNavigator {
     context.go('/movies/movie-$movieId');
   }
 
-  /// Navigate to `/series` route.
-  static void series(BuildContext context) => context.go('/series');
+  /// Navigate to `/tv_shows` route.
+  static void tvShows(BuildContext context) => context.go('/tv_shows');
 
   /// Navigate to `/settings` route.
   static void settings(BuildContext context) => context.go('/settings');
