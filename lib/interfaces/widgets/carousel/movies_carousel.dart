@@ -9,10 +9,15 @@ import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 
-const _contentContainer = Key('content-container');
+// Tests Utils:
+
+/// To check if which layout are rendered.
+const _contentContainerKey = Key('content-container');
+
 const _imageKey = Key('image-widget');
-const _movieDetailKey = Key('detail-column');
-const _movieOverview = Key('movie-overview');
+const _movieTitleKey = Key('movie-title');
+const _movieExtrasKey = Key('movie-extras');
+const _movieOverviewKey = Key('movie-overview');
 
 class MoviesCarousel extends ConsumerStatefulWidget {
   /// Create a Carousel widget that displays basic information of the movies
@@ -117,8 +122,8 @@ class MoviesCarouselState extends ConsumerState<MoviesCarousel> {
               count: widget.movies.length,
               duration: const Duration(milliseconds: 500),
               effect: WormEffect(
-                dotColor: colorScheme.primaryContainer,
-                activeDotColor: colorScheme.onPrimaryContainer,
+                dotColor: colorScheme.secondaryContainer,
+                activeDotColor: colorScheme.onSecondaryContainer,
               ),
               onDotClicked: (index) => _controller.jumpToPage(index),
             );
@@ -165,6 +170,7 @@ class _MovieExtrasText extends ConsumerWidget {
         language,
         genreNames.isEmpty ? '...' : genreNames.join(', '),
       ].join(' • '),
+      key: _movieExtrasKey,
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
@@ -182,7 +188,7 @@ class _ThinDeviceLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      key: _contentContainer,
+      key: _contentContainerKey,
       alignment: Alignment.bottomCenter,
       fit: StackFit.expand,
       children: [
@@ -206,11 +212,11 @@ class _ThinDeviceLayout extends StatelessWidget {
               final textTheme = Theme.of(context).textTheme;
 
               return Column(
-                key: _movieDetailKey,
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     movie.title,
+                    key: _movieTitleKey,
                     style: textTheme.headlineLarge,
                     textAlign: TextAlign.center,
                     maxLines: 2,
@@ -263,7 +269,7 @@ class _WideDeviceLayout extends StatelessWidget {
     final textTheme = theme.textTheme;
 
     return Card(
-      key: _contentContainer,
+      key: _contentContainerKey,
       child: InkWell(
         onTap: _navigateToDetailPage(context, movie.id),
         child: Row(
@@ -273,11 +279,11 @@ class _WideDeviceLayout extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(24.0).copyWith(right: 40.0),
                 child: Column(
-                  key: _movieDetailKey,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       movie.title,
+                      key: _movieTitleKey,
                       style: textTheme.headlineLarge,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -299,7 +305,7 @@ class _WideDeviceLayout extends StatelessWidget {
 
                       return Text(
                         movie.overview,
-                        key: _movieOverview,
+                        key: _movieOverviewKey,
                         textAlign: TextAlign.justify,
                         maxLines: maxLines,
                         overflow: TextOverflow.ellipsis,

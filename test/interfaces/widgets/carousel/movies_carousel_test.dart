@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
+import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
+import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
 import 'package:screen_pal/interfaces/widgets/carousel/movies_carousel.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../helpers/dummy/dummy_genres.dart';
+import '../../../helpers/dummy/dummy_languages.dart';
 import '../../../helpers/dummy/dummy_movies.dart';
+import '../../../helpers/providers/fake_languages_notifier.dart';
+import '../../../helpers/providers/fake_movie_genres_notifier.dart';
 
 void main() {
   Widget testWidgetApp(List<Movie> movies) {
-    return MaterialApp(
-      home: Scaffold(
-        body: MoviesCarousel(
-          movies: movies,
-          autoPlay: false,
-          enableInfiniteScroll: false,
+    return ProviderScope(
+      overrides: [
+        languagesProvider.overrideWith(() => FakeLanguagesNotifier()),
+        movieGenresProvider.overrideWith(() => FakeMovieGenresNotifier())
+      ],
+      child: MaterialApp(
+        home: Scaffold(
+          body: MoviesCarousel(
+            movies: movies,
+            autoPlay: false,
+            enableInfiniteScroll: false,
+          ),
         ),
       ),
     );
@@ -30,7 +43,7 @@ void main() {
         await tester.pumpWidget(testWidgetApp([dummyMovie]));
 
         expect(
-          tester.widget(_WidgetFinders.movieImage.last),
+          tester.widget(_WidgetFinders.image.last),
           isA<DefaultNetworkImage>().having(
             (e) => e.imageUrl,
             'image url',
@@ -39,29 +52,31 @@ void main() {
         );
 
         expect(
-          tester.widget(_WidgetFinders.movieDetailColumn.last),
-          isA<Column>()
-              .having(
-                (e) => e.children[0],
-                'children[0]',
-                isA<Text>().having(
-                  (e) => e.data,
-                  'movie title',
-                  dummyMovie.title,
-                ),
-              )
-              .having(
-                (e) => e.children[1],
-                'children[1]',
-                isA<Text>().having(
-                  (e) => e.data,
-                  'other movie details that seperated by bullets (" • ")',
-                  [
-                    dummyMovie.releaseDate?.year ?? 'Coming Soon',
-                    '${dummyMovie.voteAverage * 10}%'
-                  ].join(' • '),
-                ),
-              ),
+          tester.widget(_WidgetFinders.movieTitle.last),
+          isA<Text>().having(
+            (e) => e.data,
+            'movie title',
+            dummyMovie.title,
+          ),
+        );
+
+        String language = dummyLanguages.firstWhere((e) {
+          return e.iso6391 == dummyMovie.language;
+        }).englishName;
+
+        List<String> genreNames = dummyMovie.genreIds.map((id) {
+          return dummyMovieGenres.firstWhere((e) => e.id == id).name;
+        }).toList();
+
+        final extras = [
+          dummyMovie.releaseDate?.year ?? 'Coming Soon',
+          language,
+          genreNames.isEmpty ? '...' : genreNames.join(', '),
+        ].join(' • ');
+
+        expect(
+          tester.widget(_WidgetFinders.movieExtras.last),
+          isA<Text>().having((e) => e.data, 'movie extras detail', extras),
         );
       }),
     );
@@ -73,7 +88,7 @@ void main() {
         final dpi = tester.view.devicePixelRatio;
         tester.view.physicalSize = Size(768 * dpi, 476 * dpi);
 
-        await tester.pumpWidget(testWidgetApp(dummyMovies));
+        await tester.pumpWidget(testWidgetApp([dummyMovie]));
 
         await expectLater(
           tester.widget(_WidgetFinders.contentContainer.last),
@@ -91,7 +106,7 @@ void main() {
         final dpi = tester.view.devicePixelRatio;
         tester.view.physicalSize = Size(1024 * dpi, 635 * dpi);
 
-        await tester.pumpWidget(testWidgetApp(dummyMovies));
+        await tester.pumpWidget(testWidgetApp([dummyMovie]));
 
         await expectLater(
           tester.widget(_WidgetFinders.contentContainer.last),
@@ -156,10 +171,11 @@ abstract class _WidgetFinders {
   static Finder get carousel => find.byType(MoviesCarousel);
   static Finder get indicator => find.byType(AnimatedSmoothIndicator);
 
-  /// Include movie image and detail.
   static Finder get contentContainer =>
       find.byKey(const Key('content-container'));
-  static Finder get movieImage => find.byKey(const Key('image-widget'));
-  static Finder get movieDetailColumn => find.byKey(const Key('detail-column'));
+
+  static Finder get image => find.byKey(const Key('image-widget'));
+  static Finder get movieTitle => find.byKey(const Key('movie-title'));
+  static Finder get movieExtras => find.byKey(const Key('movie-extras'));
   static Finder get movieOverview => find.byKey(const Key('movie-overview'));
 }

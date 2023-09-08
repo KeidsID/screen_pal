@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:screen_pal/infrastructures/repo/movies_repo_impl.dart';
 
-import '../../helpers/dummy/dummy_movie_list_res_body.dart';
+import '../../helpers/dummy/dummy_movies.dart';
 import '../../helpers/mocks/services/services.mocks.dart';
 
 void main() {
