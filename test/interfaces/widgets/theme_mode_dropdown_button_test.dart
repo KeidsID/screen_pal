@@ -8,7 +8,7 @@ import 'package:screen_pal/interfaces/widgets/theme_mode_dropdown_button.dart';
 void main() {
   final testWidgetApp = ProviderScope(
     overrides: [
-      appThemeModeProvider.overrideWith(() => FakeAppThemeModeNotifier()),
+      appThemeModeProvider.overrideWith(() => _FakeAppThemeModeNotifier()),
     ],
     child: Consumer(
       builder: (_, ref, __) {
@@ -144,7 +144,7 @@ void main() {
   });
 }
 
-class FakeAppThemeModeNotifier extends AppThemeMode {
+class _FakeAppThemeModeNotifier extends AppThemeMode {
   @override
   ThemeMode build() {
     return ThemeMode.system;
