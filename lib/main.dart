@@ -9,7 +9,7 @@ import 'interfaces/router/router.dart';
 import 'interfaces/router/url_strategy/url_strategy.dart'
     show usePathUrlStrategy;
 import 'interfaces/themes/espresso_and_crema_theme.dart';
-import 'service_locator/locator.dart' as service;
+import 'configs/service_locator/locator.dart' as service;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,6 +32,8 @@ class MainApp extends ConsumerWidget {
       title: kAppName,
       theme: EspressoAndCremaTheme.light,
       darkTheme: EspressoAndCremaTheme.dark,
+      themeAnimationCurve: Curves.easeOut,
+      themeAnimationDuration: const Duration(milliseconds: 500),
       themeMode: ref.watch(appThemeModeProvider),
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
         dragDevices: {

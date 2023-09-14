@@ -48,7 +48,7 @@ class RawMovie with _$RawMovie {
 
   Movie toEntity() {
     return Movie(
-      adult: adult,
+      isAdult: adult,
       backdropPath: backdropPath,
       genreIds: genreIds,
       id: id,

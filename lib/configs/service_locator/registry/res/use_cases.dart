@@ -2,6 +2,13 @@ part of '../registry.dart';
 
 void registerUseCases() {
   locator.registerLazySingleton(() {
+    return GetThemeMode(appSettingsRepo: locator());
+  });
+  locator.registerLazySingleton(() {
+    return SetThemeMode(appSettingsRepo: locator());
+  });
+
+  locator.registerLazySingleton(() {
     return GetLanguages(extrasRepo: locator());
   });
   locator.registerLazySingleton(() {

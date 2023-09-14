@@ -3,15 +3,14 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:screen_pal/infrastructures/cache/theme_mode_cache.dart';
-import 'package:screen_pal/service_locator/locator.dart';
+import 'package:screen_pal/configs/service_locator/locator.dart' as service;
+import 'package:screen_pal/core/use_cases/app/get_theme_mode.dart';
+import 'package:screen_pal/core/use_cases/app/set_theme_mode.dart';
 
 part 'app_theme_mode_provider.g.dart';
 
 @Riverpod(dependencies: [])
 class AppThemeMode extends _$AppThemeMode {
-  static final _cache = locator<ThemeModeCache>();
-
   @override
   ThemeMode build() {
     _init();
@@ -20,13 +19,13 @@ class AppThemeMode extends _$AppThemeMode {
   }
 
   Future<void> _init() async {
-    final themeMode = await _cache.getThemeMode();
+    final themeMode = await service.locator<GetThemeMode>().execute();
 
     state = themeMode;
   }
 
   Future<void> updateMode(ThemeMode mode) async {
-    await _cache.setThemeMode(mode);
+    await service.locator<SetThemeMode>().execute(mode);
     state = mode;
   }
 }
