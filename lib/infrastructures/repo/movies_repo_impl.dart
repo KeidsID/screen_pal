@@ -64,4 +64,14 @@ class MoviesRepoImpl implements MoviesRepo {
 
     return resBody.toEntity();
   }
+
+  @override
+  Future<List<Movie>> getRecommendations(int id) async {
+    final response = await _dio.get<String>('$_basePath/$id/recommendations');
+    final rawResBody = jsonDecode(response.data!);
+
+    final resBody = MovieListResBody.fromJson(rawResBody);
+
+    return resBody.results.map((e) => e.toEntity()).toList();
+  }
 }

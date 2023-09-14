@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:screen_pal/core/entities/movie.dart';
+import 'package:screen_pal/core/use_cases/movies/get_movie_recommendations.dart';
 import 'package:screen_pal/core/use_cases/movies/get_now_playing_movies.dart';
 import 'package:screen_pal/core/use_cases/movies/get_popular_movies.dart';
 import 'package:screen_pal/core/use_cases/movies/get_top_rated_movies.dart';
@@ -27,4 +28,12 @@ Future<List<Movie>> topRatedMovies(TopRatedMoviesRef ref) {
 @Riverpod(keepAlive: true)
 Future<List<Movie>> upcomingMovies(UpcomingMoviesRef ref) {
   return locator<GetUpcomingMovies>().execute();
+}
+
+@riverpod
+Future<List<Movie>> movieRecommendations(
+  MovieRecommendationsRef ref,
+  int movieId,
+) {
+  return locator<GetMovieRecommendations>().execute(movieId);
 }

@@ -9,4 +9,5 @@ abstract class MoviesRepo {
   Future<List<Movie>> getUpcomingMovies();
 
   Future<MovieDetail> getMovieDetail(int id);
+  Future<List<Movie>> getRecommendations(int id);
 }

@@ -8,6 +8,7 @@ import 'package:screen_pal/core/use_cases/extras/get_languages.dart';
 import 'package:screen_pal/core/use_cases/extras/get_movie_genres.dart';
 import 'package:screen_pal/core/use_cases/extras/get_tv_show_genres.dart';
 import 'package:screen_pal/core/use_cases/movies/get_movie_detail.dart';
+import 'package:screen_pal/core/use_cases/movies/get_movie_recommendations.dart';
 import 'package:screen_pal/core/use_cases/movies/get_now_playing_movies.dart';
 import 'package:screen_pal/core/use_cases/movies/get_popular_movies.dart';
 import 'package:screen_pal/core/use_cases/movies/get_top_rated_movies.dart';

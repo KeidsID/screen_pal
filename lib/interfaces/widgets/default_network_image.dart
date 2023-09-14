@@ -43,7 +43,10 @@ class DefaultNetworkImage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Icon(Icons.broken_image_outlined),
-            Text(alt ?? ''),
+            Text(
+              alt ?? '',
+              textAlign: TextAlign.center,
+            ),
           ],
         ),
       ),

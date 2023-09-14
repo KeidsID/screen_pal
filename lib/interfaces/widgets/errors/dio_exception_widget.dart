@@ -74,7 +74,10 @@ class DioExceptionWidget extends StatelessWidget {
       ]);
     }
 
-    final statusCode = exception.response!.statusCode ?? 0;
+    final response = exception.response!;
+    final statusCode = response.statusCode ?? 0;
+
+    debugPrint(response.data);
 
     return _layout(children: [
       Text('$statusCode', style: textTheme.displayMedium),

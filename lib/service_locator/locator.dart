@@ -2,12 +2,12 @@
 
 import 'package:get_it/get_it.dart';
 
-import 'registry/registry.dart';
+import 'registry/registry.dart' as registry;
 
 final locator = GetIt.instance;
 
 Future<void> init() async {
-  registerRepo();
-  registerUseCases();
-  await registerServices();
+  registry.registerRepo();
+  registry.registerUseCases();
+  await registry.registerServices();
 }

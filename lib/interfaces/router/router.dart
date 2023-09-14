@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:screen_pal/interfaces/pages/home_layout.dart';
+import 'package:screen_pal/interfaces/pages/movies/movie_detail_page.dart';
 import 'package:screen_pal/interfaces/pages/movies/movies_home_page.dart';
 import 'package:screen_pal/interfaces/pages/settings_page.dart';
 import 'package:screen_pal/interfaces/widgets/errors/not_found_route_page.dart';
@@ -21,9 +22,7 @@ final router = GoRouter(
   },
   routes: [
     ShellRoute(
-      builder: (_, __, child) {
-        return HomeLayout(child: child);
-      },
+      builder: (_, __, child) => HomeLayout(child: child),
       routes: [
         GoRoute(
           path: '/movies',
@@ -42,6 +41,14 @@ final router = GoRouter(
     GoRoute(
       path: '/settings',
       builder: (_, __) => const SettingsPage(),
+    ),
+    GoRoute(
+      path: '/movies/movie-:id',
+      builder: (context, router) {
+        final movieId = int.parse(router.pathParameters['id'] ?? '0');
+
+        return MovieDetailPage(movieId: movieId);
+      },
     ),
   ],
 );

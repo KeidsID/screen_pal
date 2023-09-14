@@ -85,4 +85,13 @@ class MockMoviesRepo extends _i1.Mock implements _i3.MoviesRepo {
           ),
         )),
       ) as _i4.Future<_i2.MovieDetail>);
+  @override
+  _i4.Future<List<_i5.Movie>> getRecommendations(int? id) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getRecommendations,
+          [id],
+        ),
+        returnValue: _i4.Future<List<_i5.Movie>>.value(<_i5.Movie>[]),
+      ) as _i4.Future<List<_i5.Movie>>);
 }
