@@ -2,7 +2,7 @@
 
 import 'package:dio/dio.dart';
 
-import 'package:screen_pal/common/envs/env.dart';
+import 'package:screen_pal/configs/envs/env.dart';
 
 /// TMDB RestAPI Dio instance with configured environment.
 ///

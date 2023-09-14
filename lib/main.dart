@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'common/constants.dart';
-import 'common/envs/env.dart';
+import 'configs/constants.dart';
+import 'configs/envs/env.dart';
 import 'interfaces/providers/app_theme_mode_provider.dart';
 import 'interfaces/router/router.dart';
 import 'interfaces/router/url_strategy/url_strategy.dart'

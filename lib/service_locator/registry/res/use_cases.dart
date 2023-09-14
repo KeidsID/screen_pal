@@ -26,4 +26,7 @@ void registerUseCases() {
   locator.registerLazySingleton(() {
     return GetMovieDetail(moviesRepo: locator());
   });
+  locator.registerLazySingleton(() {
+    return GetMovieRecommendations(moviesRepo: locator());
+  });
 }

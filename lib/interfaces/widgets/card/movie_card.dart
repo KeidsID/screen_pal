@@ -91,7 +91,7 @@ class _MovieCardState extends State<MovieCard> {
                           return Text(
                             [
                               language,
-                              genreNames.isEmpty ? '...' : genreNames[0],
+                              genreNames.isEmpty ? 'Undefined' : genreNames[0],
                             ].join(' • '),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -138,7 +138,7 @@ class _MovieCardState extends State<MovieCard> {
               [
                 '${movie.releaseDate?.year ?? 'Coming Soon'}',
                 language,
-                genreNames.isEmpty ? '...' : genreNames[0],
+                genreNames.isEmpty ? 'Undefined' : genreNames[0],
               ].join(' • '),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,

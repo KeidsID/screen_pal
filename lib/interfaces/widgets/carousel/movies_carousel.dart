@@ -164,15 +164,18 @@ class _MovieExtrasText extends ConsumerWidget {
       }).toList();
     }
 
-    return Text(
-      [
-        movie.releaseDate?.year ?? 'Coming Soon',
-        language,
-        genreNames.isEmpty ? '...' : genreNames.join(', '),
-      ].join(' • '),
-      key: _movieExtrasKey,
-      maxLines: 1,
-      overflow: TextOverflow.ellipsis,
+    return Opacity(
+      opacity: 0.5,
+      child: Text(
+        [
+          movie.releaseDate?.year ?? 'Coming Soon',
+          language,
+          genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
+        ].join(' • '),
+        key: _movieExtrasKey,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
     );
   }
 }
@@ -195,7 +198,6 @@ class _ThinDeviceLayout extends StatelessWidget {
         DefaultNetworkImage(
           key: _imageKey,
           imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
-          alt: movie.title,
           imageBuilder: (context, imageProvider) {
             return Ink.image(
               image: imageProvider,
@@ -323,7 +325,6 @@ class _WideDeviceLayout extends StatelessWidget {
                     key: _imageKey,
                     imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
                     fit: BoxFit.cover,
-                    alt: movie.title,
                   ),
                 ),
               ),
