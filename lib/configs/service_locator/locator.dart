@@ -9,5 +9,7 @@ final locator = GetIt.instance;
 Future<void> init() async {
   registry.registerRepo();
   registry.registerUseCases();
-  await registry.registerServices();
+  registry.registerServices();
+
+  await locator.allReady();
 }

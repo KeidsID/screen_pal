@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:screen_pal/core/entities/genre.dart';
 import 'package:screen_pal/core/use_cases/extras/get_movie_genres.dart';
 import 'package:screen_pal/core/use_cases/extras/get_tv_show_genres.dart';
-import 'package:screen_pal/service_locator/locator.dart';
+import 'package:screen_pal/configs/service_locator/locator.dart' as service;
 
 part 'genres_providers.g.dart';
 
@@ -18,7 +18,7 @@ class MovieGenres extends _$MovieGenres {
 
   Future<void> _init() async {
     try {
-      state = await locator<GetMovieGenres>().execute();
+      state = await service.locator<GetMovieGenres>().execute();
     } catch (e) {
       state = [];
     }
@@ -36,7 +36,7 @@ class TvShowGenres extends _$TvShowGenres {
 
   Future<void> _init() async {
     try {
-      state = await locator<GetTvShowGenres>().execute();
+      state = await service.locator<GetTvShowGenres>().execute();
     } catch (e) {
       state = [];
     }

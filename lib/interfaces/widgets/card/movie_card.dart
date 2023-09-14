@@ -47,11 +47,14 @@ class _MovieCardState extends State<MovieCard> {
                 fit: BoxFit.cover,
               ),
             ),
-            movie.adult
-                ? const Banner(
-                    message: '18+',
+            movie.isAdult
+                ? Banner(
+                    message: 'ADULT',
                     location: BannerLocation.topEnd,
-                    color: Colors.red,
+                    color: theme.colorScheme.error,
+                    textStyle: textTheme.bodyMedium!.copyWith(
+                      color: theme.colorScheme.onError,
+                    ),
                   )
                 : const SizedBox(),
             isCardHovered

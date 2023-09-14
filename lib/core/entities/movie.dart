@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'spoken_language.dart';
 
 class Movie extends Equatable {
-  final bool adult;
+  final bool isAdult;
   final String? backdropPath;
   final List<int> genreIds;
   final int id;
@@ -21,7 +21,7 @@ class Movie extends Equatable {
   final int voteCount;
 
   const Movie({
-    required this.adult,
+    required this.isAdult,
     this.backdropPath,
     required this.genreIds,
     required this.id,
@@ -39,7 +39,7 @@ class Movie extends Equatable {
   @override
   List<Object?> get props {
     return [
-      adult,
+      isAdult,
       backdropPath,
       genreIds,
       id,
