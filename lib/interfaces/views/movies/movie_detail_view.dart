@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import 'package:screen_pal/configs/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/core/entities/movie_detail.dart';
+import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_detail_provider.dart';
@@ -12,8 +12,8 @@ import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
 
-class MovieDetailPage extends StatelessWidget {
-  const MovieDetailPage({super.key, required this.movieId});
+class MovieDetailView extends StatelessWidget {
+  const MovieDetailView({super.key, required this.movieId});
 
   final int movieId;
 

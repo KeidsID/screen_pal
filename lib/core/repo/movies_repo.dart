@@ -1,5 +1,5 @@
-import 'package:screen_pal/core/entities/movie.dart';
-import 'package:screen_pal/core/entities/movie_detail.dart';
+import 'package:screen_pal/core/entities/movies/movie.dart';
+import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 
 /// Everything you need to manage movies.
 abstract interface class MoviesRepo {

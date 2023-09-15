@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
-import 'package:screen_pal/core/entities/movie.dart';
+import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';

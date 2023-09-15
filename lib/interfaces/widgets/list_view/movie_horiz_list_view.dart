@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/core/entities/movie.dart';
+import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/interfaces/widgets/card/movie_card.dart';
 
 class MovieHorizListView extends StatelessWidget {

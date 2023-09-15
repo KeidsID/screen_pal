@@ -2,7 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:screen_pal/core/entities/movie.dart';
+import 'package:screen_pal/core/entities/movies/movie.dart';
 
 part 'movie_list_res_body.freezed.dart';
 part 'movie_list_res_body.g.dart';

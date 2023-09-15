@@ -12,7 +12,7 @@ final tmdbDio = Dio(BaseOptions(
   headers: {"Authorization": "Bearer ${Env.tmdbAccKey}"},
 ));
 
-/// Use to load an image based on the path given by the API.
+/// Used to load an image based on the path given by the API.
 ///
 /// Example:
 /// ```dart

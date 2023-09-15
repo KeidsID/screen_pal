@@ -3,8 +3,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:screen_pal/core/entities/movie_collection.dart';
-import 'package:screen_pal/core/entities/movie_detail.dart';
+import 'package:screen_pal/core/entities/movies/movie_collection.dart';
+import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/raw_genre.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/raw_spoken_language.dart';
 
