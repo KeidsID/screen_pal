@@ -11,7 +11,7 @@ abstract final class NativeBackButtonInterceptors {
   /// Call [AppNavigator.movies] instead [Navigator.pop].
   static InterceptorFunction toMovies(BuildContext context) {
     return (bool stopDefaultButtonEvent, RouteInfo info) {
-      Future.microtask(() => AppNavigator.movies(context));
+      AppNavigator.movies(context);
 
       return true;
     };

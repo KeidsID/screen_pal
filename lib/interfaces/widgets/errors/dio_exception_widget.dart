@@ -1,5 +1,7 @@
 // coverage:igore-file
 
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -66,6 +68,14 @@ class DioExceptionWidget extends StatelessWidget {
 
     if (exception.type != DioExceptionType.badResponse) {
       debugPrint(exception.message);
+
+      if (exception.error is SocketException) {
+        return _layout(children: [
+          const Text('No Internet Connection'),
+          const Divider(),
+          const Text('Check your network provider'),
+        ]);
+      }
 
       return _layout(children: [
         const Text('Internal App Error'),
