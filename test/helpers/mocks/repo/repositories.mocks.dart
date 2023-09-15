@@ -6,8 +6,8 @@
 import 'dart:async' as _i4;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:screen_pal/core/entities/movie.dart' as _i5;
-import 'package:screen_pal/core/entities/movie_detail.dart' as _i2;
+import 'package:screen_pal/core/entities/movies/movie.dart' as _i5;
+import 'package:screen_pal/core/entities/movies/movie_detail.dart' as _i2;
 import 'package:screen_pal/core/repo/movies_repo.dart' as _i3;
 
 // ignore_for_file: type=lint

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/core/entities/movie.dart';
+import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import 'package:screen_pal/core/entities/movie.dart';
-import 'package:screen_pal/core/entities/movie_detail.dart';
+import 'package:screen_pal/core/entities/movies/movie.dart';
+import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/movie_detail_res_body.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/movie_list_res_body.dart';

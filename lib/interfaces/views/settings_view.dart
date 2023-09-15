@@ -5,8 +5,8 @@ import 'package:screen_pal/configs/constants.dart';
 
 import 'package:screen_pal/interfaces/widgets/theme_mode_dropdown_button.dart';
 
-class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+class SettingsView extends StatelessWidget {
+  const SettingsView({super.key});
 
   @override
   Widget build(BuildContext context) {

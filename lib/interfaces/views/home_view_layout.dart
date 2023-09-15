@@ -5,8 +5,8 @@ import 'package:screen_pal/interfaces/router/app_navigator.dart';
 
 const _navBarKey = Key('navigation-bar');
 
-class HomeLayout extends StatelessWidget {
-  const HomeLayout({
+class HomeViewLayout extends StatelessWidget {
+  const HomeViewLayout({
     Key? key,
     this.child,
   }) : super(key: key);

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:screen_pal/interfaces/pages/home_layout.dart';
+import 'package:screen_pal/interfaces/views/home_view_layout.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +29,7 @@ void main() {
     routes: [
       ShellRoute(
         builder: (_, __, child) {
-          return HomeLayout(child: child);
+          return HomeViewLayout(child: child);
         },
         routes: [
           GoRoute(path: '/movies', builder: dummyPageBuilder('movies-page')),
