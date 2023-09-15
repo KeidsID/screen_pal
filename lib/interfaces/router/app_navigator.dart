@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 /// Used for navigation only.
-abstract class AppNavigator {
+abstract final class AppNavigator {
   /// Navigate to `/movies` route.
   static void movies(BuildContext context) => context.go('/movies');
 
