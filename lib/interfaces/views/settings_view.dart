@@ -1,12 +1,36 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:screen_pal/configs/constants.dart';
 
+import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/configs/utils/native_back_button_interceptors.dart';
 import 'package:screen_pal/interfaces/widgets/theme_mode_dropdown_button.dart';
 
-class SettingsView extends StatelessWidget {
+class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
+
+  @override
+  State<SettingsView> createState() => _SettingsViewState();
+}
+
+class _SettingsViewState extends State<SettingsView> {
+  @override
+  void initState() {
+    super.initState();
+
+    BackButtonInterceptor.add(
+      NativeBackButtonInterceptors.toMovies(context),
+    );
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(
+      NativeBackButtonInterceptors.toMovies(context),
+    );
+
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +73,7 @@ class SettingsView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: () => context.go('/movies')),
+        leading: const BackButton(onPressed: BackButtonInterceptor.popRoute),
         title: const Text('Settings'),
       ),
       body: ListView.builder(

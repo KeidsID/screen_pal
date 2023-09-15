@@ -1,6 +1,8 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:screen_pal/configs/utils/native_back_button_interceptors.dart';
 
 import 'package:screen_pal/configs/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
@@ -12,19 +14,42 @@ import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
 
-class MovieDetailView extends StatelessWidget {
+class MovieDetailView extends StatefulWidget {
   const MovieDetailView({super.key, required this.movieId});
 
   final int movieId;
 
   @override
+  State<MovieDetailView> createState() => _MovieDetailViewState();
+}
+
+class _MovieDetailViewState extends State<MovieDetailView> {
+  @override
+  void initState() {
+    super.initState();
+
+    BackButtonInterceptor.add(
+      NativeBackButtonInterceptors.toMovies(context),
+    );
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(
+      NativeBackButtonInterceptors.toMovies(context),
+    );
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(onPressed: () => AppNavigator.movies(context)),
+        leading: const BackButton(onPressed: BackButtonInterceptor.popRoute),
       ),
       body: Consumer(builder: (context, ref, __) {
-        final movieDetailProv = ref.watch(movieDetailProvider(movieId));
+        final movieDetailProv = ref.watch(movieDetailProvider(widget.movieId));
 
         if (movieDetailProv.isRefreshing) {
           return RiverpodAsyncValueHandlers.loading();
@@ -96,8 +121,8 @@ class MovieDetailView extends StatelessWidget {
                   SizedBox(
                     height: 240.0,
                     child: Consumer(builder: (_, ref, __) {
-                      final movieRecommendationsProv =
-                          ref.watch(movieRecommendationsProvider(movieId));
+                      final movieRecommendationsProv = ref
+                          .watch(movieRecommendationsProvider(widget.movieId));
 
                       if (movieRecommendationsProv.isRefreshing) {
                         return RiverpodAsyncValueHandlers.loading();

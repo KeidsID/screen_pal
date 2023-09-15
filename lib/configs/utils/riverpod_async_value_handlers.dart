@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:screen_pal/interfaces/widgets/errors/dio_exception_widget.dart';
 
-abstract class RiverpodAsyncValueHandlers {
+abstract final class RiverpodAsyncValueHandlers {
   /// [action] used to add refresh provider action.
   ///
   /// If null, then no action button will rendered.
