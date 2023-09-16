@@ -117,7 +117,14 @@ class _ExtrasText extends ConsumerWidget {
   }
 }
 
-List<Widget> _mainContents(BuildContext context, MovieDetail movie) {
+/// [isFlexibleOverview] useful to prevent overflow on [_WideDeviceLayout], but
+/// occurs a white screen error on [_ThinDeviceLayout] when running on release
+/// mode. So make sure set to `false` on [_ThinDeviceLayout].
+List<Widget> _mainContents(
+  BuildContext context,
+  MovieDetail movie, {
+  bool isFlexibleOverview = true,
+}) {
   final textTheme = Theme.of(context).textTheme;
 
   return [
@@ -129,7 +136,9 @@ List<Widget> _mainContents(BuildContext context, MovieDetail movie) {
           movie.tagline.isEmpty ? const SizedBox() : Text('# ${movie.tagline}'),
     ),
     const SizedBox(height: 8.0),
-    Flexible(child: Text(movie.overview)),
+    isFlexibleOverview
+        ? Flexible(child: Text(movie.overview))
+        : Text(movie.overview),
     const Divider(),
     ...[
       Text(
@@ -210,6 +219,13 @@ class _ThinDeviceLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+
+    final maxW = screenSize.width;
+    final maxH = screenSize.height > 800 ? 800 : screenSize.height;
+    final aspectRatio = maxW / maxH;
+
+    final isShowPoster = aspectRatio >= 2 / 3 && maxH > maxW;
+
     final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
@@ -217,15 +233,16 @@ class _ThinDeviceLayout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: screenSize.width,
-            height: screenSize.height * 0.75,
+            width: maxW,
+            height: maxH * 0.75,
             child: DefaultNetworkImage(
-              imageUrl: '$tmdbImageBaseUrl${movie.posterPath}',
+              imageUrl:
+                  '$tmdbImageBaseUrl${isShowPoster ? movie.posterPath : movie.backdropPath}',
               fit: BoxFit.cover,
             ),
           ),
           ...[
-            ..._mainContents(context, movie),
+            ..._mainContents(context, movie, isFlexibleOverview: false),
             const Divider(),
             Text('Recommendations', style: textTheme.headlineSmall),
           ].map((e) {
