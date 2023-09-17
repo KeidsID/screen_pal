@@ -1,10 +1,10 @@
 // coverage:ignore-file
 
-import 'package:flutter/material.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-extension EspressoAndCremaTheme on ThemeData {
+/// Generated from https://rydmike.com/flexcolorscheme/themesplayground-v6
+abstract final class AppThemes {
   static final light = FlexThemeData.light(
     scheme: FlexScheme.espresso,
     surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,

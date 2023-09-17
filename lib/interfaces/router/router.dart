@@ -3,24 +3,27 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import 'package:screen_pal/interfaces/router/utils/dialog_page.dart';
 import 'package:screen_pal/interfaces/views/home_view_layout.dart';
 import 'package:screen_pal/interfaces/views/movies/movie_detail_view.dart';
 import 'package:screen_pal/interfaces/views/movies/movies_home_view.dart';
 import 'package:screen_pal/interfaces/views/settings_view.dart';
+import 'package:screen_pal/interfaces/widgets/dialogs/about_tmdb_dialog.dart';
+import 'package:screen_pal/interfaces/widgets/dialogs/about_app_dialog.dart';
 import 'package:screen_pal/interfaces/widgets/errors/not_found_route_page.dart';
 
 final router = GoRouter(
   initialLocation: '/movies',
   routerNeglect: true,
-  errorBuilder: (_, state) => NotFoundRoutePage(routePath: state.uri.path),
-  redirect: (_, state) {
-    final currentRoute = state.uri.path;
+  errorBuilder: (_, router) => NotFoundRoutePage(routePath: router.uri.path),
+  redirect: (_, router) {
+    final currentRoute = router.uri.path;
 
     if (currentRoute == '/') return '/movies';
 
     return null;
   },
-  routes: [
+  routes: <RouteBase>[
     ShellRoute(
       builder: (_, __, child) => HomeViewLayout(child: child),
       routes: [
@@ -39,9 +42,22 @@ final router = GoRouter(
       ],
     ),
     GoRoute(
-      path: '/settings',
-      builder: (_, __) => const SettingsView(),
-    ),
+        path: '/settings',
+        builder: (_, __) => const SettingsView(),
+        routes: [
+          GoRoute(
+            path: 'about-app',
+            pageBuilder: (_, __) {
+              return DialogPage(builder: (_) => const AboutAppDialog());
+            },
+          ),
+          GoRoute(
+            path: 'about-tmdb',
+            pageBuilder: (_, __) {
+              return DialogPage(builder: (_) => const AboutTmdbDialog());
+            },
+          ),
+        ]),
     GoRoute(
       path: '/movies/movie-:id',
       builder: (context, router) {

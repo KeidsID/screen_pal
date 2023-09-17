@@ -8,7 +8,7 @@ import 'interfaces/providers/app_theme_mode_provider.dart';
 import 'interfaces/router/router.dart';
 import 'interfaces/router/url_strategy/url_strategy.dart'
     show usePathUrlStrategy;
-import 'interfaces/themes/espresso_and_crema_theme.dart';
+import 'interfaces/themes/app_themes.dart';
 import 'configs/service_locator/locator.dart' as service;
 
 void main() async {
@@ -30,8 +30,8 @@ class MainApp extends ConsumerWidget {
       routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: kAppName,
-      theme: EspressoAndCremaTheme.light,
-      darkTheme: EspressoAndCremaTheme.dark,
+      theme: AppThemes.light,
+      darkTheme: AppThemes.dark,
       themeAnimationCurve: Curves.easeOut,
       themeAnimationDuration: const Duration(milliseconds: 500),
       themeMode: ref.watch(appThemeModeProvider),

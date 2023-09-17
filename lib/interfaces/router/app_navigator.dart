@@ -18,4 +18,12 @@ abstract final class AppNavigator {
 
   /// Navigate to `/settings` route.
   static void settings(BuildContext context) => context.go('/settings');
+
+  /// Navigate to `/settings/about-app` route.
+  static void aboutApp(BuildContext context) =>
+      context.go('/settings/about-app');
+
+  /// Navigate to `/settings/about-tmdb` route.
+  static void aboutTmdb(BuildContext context) =>
+      context.go('/settings/about-tmdb');
 }
