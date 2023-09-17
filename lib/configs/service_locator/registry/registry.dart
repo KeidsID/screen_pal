@@ -1,5 +1,6 @@
 // coverage:ignore-file
 
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:screen_pal/configs/service_locator/locator.dart';

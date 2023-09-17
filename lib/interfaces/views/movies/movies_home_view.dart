@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/configs/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
+import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/widgets/carousel/movies_carousel.dart';
 import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
 

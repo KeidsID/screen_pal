@@ -2,13 +2,14 @@
 
 import 'package:dio/dio.dart';
 
+import 'package:screen_pal/configs/constants.dart';
 import 'package:screen_pal/configs/envs/env.dart';
 
 /// TMDB RestAPI Dio instance with configured environment.
 ///
 /// Endpoint reference: https://developer.themoviedb.org/reference
 final tmdbDio = Dio(BaseOptions(
-  baseUrl: 'https://api.themoviedb.org/3',
+  baseUrl: 'https://api.themoviedb.org/$kTmdbApiVersion',
   headers: {"Authorization": "Bearer ${Env.tmdbAccKey}"},
 ));
 

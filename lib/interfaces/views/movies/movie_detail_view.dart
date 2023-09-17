@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
-import 'package:screen_pal/configs/utils/native_back_button_interceptors.dart';
-import 'package:screen_pal/configs/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_detail_provider.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
+import 'package:screen_pal/interfaces/utils/native_back_button_interceptors.dart';
+import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
 
