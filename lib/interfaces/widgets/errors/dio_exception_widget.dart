@@ -53,7 +53,7 @@ const _serverErrRes = {
 class DioExceptionWidget extends StatelessWidget {
   /// Create a [DioExceptionWidget] that displays [DioException] info in a
   /// simple way.
-  const DioExceptionWidget({super.key, required this.exception, this.action});
+  const DioExceptionWidget(this.exception, {super.key, this.action});
 
   final DioException exception;
 
@@ -61,6 +61,19 @@ class DioExceptionWidget extends StatelessWidget {
   ///
   /// If null, then no [action] widget rendered on the bottom.
   final Widget? action;
+
+  Widget _layout({List<Widget> children = const <Widget>[]}) {
+    return SizedBox.expand(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ...children,
+          const SizedBox(height: 16.0),
+          action ?? const SizedBox(),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,31 +99,20 @@ class DioExceptionWidget extends StatelessWidget {
 
     final response = exception.response!;
     final statusCode = response.statusCode ?? 0;
+    final String? statusName = {..._clientErrRes, ..._serverErrRes}[statusCode];
 
-    debugPrint(response.data);
+    debugPrint('DioExceptionWidget ${response.data}');
 
     return _layout(children: [
-      Text('$statusCode', style: textTheme.displayMedium),
+      statusName == null
+          ? const SizedBox()
+          : Text('$statusCode', style: textTheme.displayMedium),
       Text(
-        {..._clientErrRes, ..._serverErrRes}[statusCode] ??
-            'Internal App Error',
+        statusName ?? 'Internal App Error',
         style: textTheme.headlineSmall,
       ),
       const Divider(),
       const Text('Sorry for the inconvenience'),
     ]);
-  }
-
-  Widget _layout({List<Widget> children = const <Widget>[]}) {
-    return SizedBox.expand(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ...children,
-          const SizedBox(height: 16.0),
-          action ?? const SizedBox(),
-        ],
-      ),
-    );
   }
 }

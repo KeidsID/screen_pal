@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class NotFoundRoutePage extends StatelessWidget {
-  const NotFoundRoutePage({super.key, required this.routePath});
+class NotFoundRouteView extends StatelessWidget {
+  const NotFoundRouteView({super.key, required this.routePath});
 
   final String routePath;
 
@@ -20,9 +20,10 @@ class NotFoundRoutePage extends StatelessWidget {
           const Divider(),
           Text('No resource found on "$routePath" path.'),
           const SizedBox(height: 16.0),
-          FilledButton(
+          ElevatedButton.icon(
             onPressed: () => context.go('/'),
-            child: const Text('Back to Home'),
+            icon: const Icon(Icons.home),
+            label: const Text('Back to Home'),
           ),
         ],
       ),

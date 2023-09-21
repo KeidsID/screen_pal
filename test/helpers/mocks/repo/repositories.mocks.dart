@@ -3,12 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:screen_pal/core/entities/movies/movie.dart' as _i5;
+import 'package:screen_pal/core/entities/movies/movie.dart' as _i6;
+import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart'
+    as _i3;
 import 'package:screen_pal/core/entities/movies/movie_detail.dart' as _i2;
-import 'package:screen_pal/core/repo/movies_repo.dart' as _i3;
+import 'package:screen_pal/core/repo/movies_repo.dart' as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -31,67 +33,96 @@ class _FakeMovieDetail_0 extends _i1.SmartFake implements _i2.MovieDetail {
         );
 }
 
+class _FakeMovieCollectionDetail_1 extends _i1.SmartFake
+    implements _i3.MovieCollectionDetail {
+  _FakeMovieCollectionDetail_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [MoviesRepo].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMoviesRepo extends _i1.Mock implements _i3.MoviesRepo {
+class MockMoviesRepo extends _i1.Mock implements _i4.MoviesRepo {
   MockMoviesRepo() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i4.Future<List<_i5.Movie>> getNowPlayingMovies() => (super.noSuchMethod(
+  _i5.Future<List<_i6.Movie>> getNowPlayingMovies() => (super.noSuchMethod(
         Invocation.method(
           #getNowPlayingMovies,
           [],
         ),
-        returnValue: _i4.Future<List<_i5.Movie>>.value(<_i5.Movie>[]),
-      ) as _i4.Future<List<_i5.Movie>>);
+        returnValue: _i5.Future<List<_i6.Movie>>.value(<_i6.Movie>[]),
+      ) as _i5.Future<List<_i6.Movie>>);
   @override
-  _i4.Future<List<_i5.Movie>> getPopularMovies() => (super.noSuchMethod(
+  _i5.Future<List<_i6.Movie>> getPopularMovies() => (super.noSuchMethod(
         Invocation.method(
           #getPopularMovies,
           [],
         ),
-        returnValue: _i4.Future<List<_i5.Movie>>.value(<_i5.Movie>[]),
-      ) as _i4.Future<List<_i5.Movie>>);
+        returnValue: _i5.Future<List<_i6.Movie>>.value(<_i6.Movie>[]),
+      ) as _i5.Future<List<_i6.Movie>>);
   @override
-  _i4.Future<List<_i5.Movie>> getTopRatedMovies() => (super.noSuchMethod(
+  _i5.Future<List<_i6.Movie>> getTopRatedMovies() => (super.noSuchMethod(
         Invocation.method(
           #getTopRatedMovies,
           [],
         ),
-        returnValue: _i4.Future<List<_i5.Movie>>.value(<_i5.Movie>[]),
-      ) as _i4.Future<List<_i5.Movie>>);
+        returnValue: _i5.Future<List<_i6.Movie>>.value(<_i6.Movie>[]),
+      ) as _i5.Future<List<_i6.Movie>>);
   @override
-  _i4.Future<List<_i5.Movie>> getUpcomingMovies() => (super.noSuchMethod(
+  _i5.Future<List<_i6.Movie>> getUpcomingMovies() => (super.noSuchMethod(
         Invocation.method(
           #getUpcomingMovies,
           [],
         ),
-        returnValue: _i4.Future<List<_i5.Movie>>.value(<_i5.Movie>[]),
-      ) as _i4.Future<List<_i5.Movie>>);
+        returnValue: _i5.Future<List<_i6.Movie>>.value(<_i6.Movie>[]),
+      ) as _i5.Future<List<_i6.Movie>>);
   @override
-  _i4.Future<_i2.MovieDetail> getMovieDetail(int? id) => (super.noSuchMethod(
+  _i5.Future<_i2.MovieDetail> getMovieDetail(int? movieId) =>
+      (super.noSuchMethod(
         Invocation.method(
           #getMovieDetail,
-          [id],
+          [movieId],
         ),
-        returnValue: _i4.Future<_i2.MovieDetail>.value(_FakeMovieDetail_0(
+        returnValue: _i5.Future<_i2.MovieDetail>.value(_FakeMovieDetail_0(
           this,
           Invocation.method(
             #getMovieDetail,
-            [id],
+            [movieId],
           ),
         )),
-      ) as _i4.Future<_i2.MovieDetail>);
+      ) as _i5.Future<_i2.MovieDetail>);
   @override
-  _i4.Future<List<_i5.Movie>> getRecommendations(int? id) =>
+  _i5.Future<List<_i6.Movie>> getRecommendations(int? movieId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getRecommendations,
-          [id],
+          [movieId],
         ),
-        returnValue: _i4.Future<List<_i5.Movie>>.value(<_i5.Movie>[]),
-      ) as _i4.Future<List<_i5.Movie>>);
+        returnValue: _i5.Future<List<_i6.Movie>>.value(<_i6.Movie>[]),
+      ) as _i5.Future<List<_i6.Movie>>);
+  @override
+  _i5.Future<_i3.MovieCollectionDetail> getMovieCollectionDetail(
+          int? collectionId) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getMovieCollectionDetail,
+          [collectionId],
+        ),
+        returnValue: _i5.Future<_i3.MovieCollectionDetail>.value(
+            _FakeMovieCollectionDetail_1(
+          this,
+          Invocation.method(
+            #getMovieCollectionDetail,
+            [collectionId],
+          ),
+        )),
+      ) as _i5.Future<_i3.MovieCollectionDetail>);
 }

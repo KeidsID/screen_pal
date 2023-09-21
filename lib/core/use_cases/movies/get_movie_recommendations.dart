@@ -6,5 +6,7 @@ class GetMovieRecommendations {
 
   GetMovieRecommendations({required this.moviesRepo});
 
-  Future<List<Movie>> execute(int id) => moviesRepo.getRecommendations(id);
+  Future<List<Movie>> execute(int movieId) {
+    return moviesRepo.getRecommendations(movieId);
+  }
 }

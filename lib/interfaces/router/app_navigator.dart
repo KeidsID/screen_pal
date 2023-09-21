@@ -5,25 +5,36 @@ import 'package:go_router/go_router.dart';
 
 /// Used for navigation only.
 abstract final class AppNavigator {
-  /// Navigate to `/movies` route.
-  static void movies(BuildContext context) => context.go('/movies');
+  // base paths
 
-  /// Navigate to `/movies/:movieId` route.
-  static void moviesDetail(BuildContext context, int movieId) {
-    context.go('/movies/movie-$movieId');
+  static const _moviesPath = '/movies';
+  static const _tvShowsPath = '/tv-shows';
+  static const _settingsPath = '/settings';
+
+  /// Navigate to `/movies` route.
+  static void movies(BuildContext context) => context.go(_moviesPath);
+
+  /// Navigate to `/movies/movie-:movieId` route.
+  static void movieDetail(BuildContext context, int movieId) {
+    context.go('$_moviesPath/movie-$movieId');
+  }
+
+  /// Navigate to `/movies/movie-collection:movieCollectionId` route.
+  static void movieCollection(BuildContext context, int movieCollectionId) {
+    context.go('$_moviesPath/collections/movie-collection-$movieCollectionId');
   }
 
   /// Navigate to `/tv_shows` route.
-  static void tvShows(BuildContext context) => context.go('/tv_shows');
+  static void tvShows(BuildContext context) => context.go(_tvShowsPath);
 
   /// Navigate to `/settings` route.
-  static void settings(BuildContext context) => context.go('/settings');
+  static void settings(BuildContext context) => context.go(_settingsPath);
 
   /// Navigate to `/settings/about-app` route.
   static void aboutApp(BuildContext context) =>
-      context.go('/settings/about-app');
+      context.go('$_settingsPath/about-app');
 
   /// Navigate to `/settings/about-tmdb` route.
   static void aboutTmdb(BuildContext context) =>
-      context.go('/settings/about-tmdb');
+      context.go('$_settingsPath/about-tmdb');
 }

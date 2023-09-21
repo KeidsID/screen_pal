@@ -137,13 +137,11 @@ class MoviesCarouselState extends ConsumerState<MoviesCarousel> {
 }
 
 VoidCallback _navigateToDetailPage(BuildContext context, int movieId) {
-  return () => AppNavigator.moviesDetail(context, movieId);
+  return () => AppNavigator.movieDetail(context, movieId);
 }
 
 class _MovieExtrasText extends ConsumerWidget {
-  const _MovieExtrasText({
-    required this.movie,
-  }) : super(key: const Key('movie-extras'));
+  const _MovieExtrasText({required this.movie});
 
   final Movie movie;
 
