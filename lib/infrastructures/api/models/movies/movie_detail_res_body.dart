@@ -93,7 +93,14 @@ class RawMovieCollection with _$RawMovieCollection {
   factory RawMovieCollection.fromJson(Map<String, dynamic> json) =>
       _$RawMovieCollectionFromJson(json);
 
-  MovieCollection toEntity() => MovieCollection(id: id, name: name);
+  MovieCollection toEntity() {
+    return MovieCollection(
+      id: id,
+      name: name,
+      posterPath: posterPath,
+      backdropPath: backdropPath,
+    );
+  }
 }
 
 @freezed

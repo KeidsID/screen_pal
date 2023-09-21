@@ -28,7 +28,7 @@ class _MovieCardState extends State<MovieCard> {
 
     return Card(
       child: InkWell(
-        onTap: () => AppNavigator.moviesDetail(context, movie.id),
+        onTap: () => AppNavigator.movieDetail(context, movie.id),
         onHover: (isHovered) => setState(() => isCardHovered = isHovered),
         onLongPress: () {
           final scaffoldMessenger = ScaffoldMessenger.of(context);

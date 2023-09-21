@@ -1,54 +1,30 @@
-import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/core/entities/movies/movie_collection.dart';
 
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_detail_provider.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
-import 'package:screen_pal/interfaces/utils/native_back_button_interceptors.dart';
+import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
 
-class MovieDetailView extends StatefulWidget {
-  const MovieDetailView({super.key, required this.movieId});
+class MovieDetailView extends StatelessWidget {
+  const MovieDetailView(this.movieId, {super.key});
 
   final int movieId;
 
   @override
-  State<MovieDetailView> createState() => _MovieDetailViewState();
-}
-
-class _MovieDetailViewState extends State<MovieDetailView> {
-  @override
-  void initState() {
-    super.initState();
-
-    BackButtonInterceptor.add(
-      NativeBackButtonInterceptors.toMovies(context),
-    );
-  }
-
-  @override
-  void dispose() {
-    BackButtonInterceptor.remove(
-      NativeBackButtonInterceptors.toMovies(context),
-    );
-
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(onPressed: BackButtonInterceptor.popRoute),
-      ),
+      appBar: AppBar(),
       body: Consumer(builder: (context, ref, __) {
-        final movieDetailProv = ref.watch(movieDetailProvider(widget.movieId));
+        final movieDetailProv = ref.watch(movieDetailProvider(movieId));
 
         if (movieDetailProv.isRefreshing) {
           return RiverpodAsyncValueHandlers.loading();
@@ -83,8 +59,10 @@ class _MovieDetailViewState extends State<MovieDetailView> {
   }
 }
 
-class _ExtrasText extends ConsumerWidget {
-  const _ExtrasText(this.movieDetail);
+const _kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
+
+class _MovieDetailExtrasText extends ConsumerWidget {
+  const _MovieDetailExtrasText(this.movieDetail);
 
   final MovieDetail movieDetail;
 
@@ -129,7 +107,7 @@ List<Widget> _mainContents(
 
   return [
     Text(movie.title, style: textTheme.headlineLarge),
-    _ExtrasText(movie),
+    _MovieDetailExtrasText(movie),
     Opacity(
       opacity: 0.5,
       child:
@@ -161,6 +139,54 @@ List<Widget> _mainContents(
       ),
     ].map((e) => Opacity(opacity: 0.75, child: e)),
   ];
+}
+
+class _MovieCollectionCard extends StatelessWidget {
+  const _MovieCollectionCard(this.movieCollection, {super.key});
+
+  final MovieCollection movieCollection;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+
+    return SizedBox(
+      width: 600.0,
+      height: 240.0,
+      child: Card(
+        child: InkWell(
+          onTap: () =>
+              AppNavigator.movieCollection(context, movieCollection.id),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              DefaultNetworkImage(
+                imageUrl: '$tmdbImageBaseUrl${movieCollection.backdropPath}',
+                imageBuilder: (_, imgProvider) => Ink.image(
+                  image: imgProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(color: theme.cardColor.withOpacity(0.6)),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Part of "${movieCollection.name}"',
+                      style: textTheme.headlineSmall,
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _MovieRecommendationsHorizListView extends StatelessWidget {
@@ -198,12 +224,7 @@ class _MovieRecommendationsHorizListView extends StatelessWidget {
               );
             }
 
-            return MovieHorizListView(
-              movies,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16.0,
-              ),
-            );
+            return MovieHorizListView(movies, padding: _kHorizPadding);
           },
         );
       }),
@@ -244,13 +265,14 @@ class _ThinDeviceLayout extends StatelessWidget {
           ...[
             ..._mainContents(context, movie, isFlexibleOverview: false),
             const Divider(),
+            ...(movie.movieCollection == null
+                ? [const SizedBox()]
+                : [
+                    _MovieCollectionCard(movie.movieCollection!),
+                    const Divider(),
+                  ]),
             Text('Recommendations', style: textTheme.headlineSmall),
-          ].map((e) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: e,
-            );
-          }),
+          ].map((e) => Padding(padding: _kHorizPadding, child: e)),
           _MovieRecommendationsHorizListView(movie.id),
         ],
       ),
@@ -265,7 +287,7 @@ class _WideDeviceLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
+    final maxH = MediaQuery.of(context).size.height;
     final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
@@ -274,7 +296,7 @@ class _WideDeviceLayout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: screenSize.height,
+            height: maxH < 400.0 ? 400.0 : maxH,
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -319,8 +341,20 @@ class _WideDeviceLayout extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 16.0),
+          ...(movie.movieCollection == null
+              ? [const SizedBox()]
+              : [
+                  Padding(
+                    padding: _kHorizPadding,
+                    child: Center(
+                      child: _MovieCollectionCard(movie.movieCollection!),
+                    ),
+                  ),
+                  const Divider(),
+                ]),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: _kHorizPadding,
             child: Text('Recommendations', style: textTheme.headlineSmall),
           ),
           _MovieRecommendationsHorizListView(movie.id),

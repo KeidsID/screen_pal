@@ -10,7 +10,7 @@
 </b></h3>
 
 <p align="center">
-Screen Pal is a movies and TV shows app that provides in-depth information about movies and TV shows. With its massive database, users can easily search for their next favorite movies or TV shows. Each search result will provide a plot summary, release date, genre, and more.
+Screen Pal an app that provides in-depth information about movies and TV shows. With its massive database, users can easily search for their next favorite movies or TV shows. Each search result will provide a plot summary, release date, genre, and more.
 </p>
 
 <p align="center">

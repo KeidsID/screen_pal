@@ -48,7 +48,7 @@ ValueChanged<int> _onNavBarItemTap(BuildContext context) {
 int _currentNavIndex(BuildContext context) {
   final currentRoute = GoRouterState.of(context).uri.path;
 
-  return currentRoute == '/movies' ? 0 : 1;
+  return currentRoute.startsWith('/movies') ? 0 : 1;
 }
 
 class _ThinDeviceLayout extends StatelessWidget {
