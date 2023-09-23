@@ -8,15 +8,15 @@ import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/raw_genre.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/raw_spoken_language.dart';
 
-part 'movie_detail_res_body.freezed.dart';
-part 'movie_detail_res_body.g.dart';
+part 'raw_movie_detail.freezed.dart';
+part 'raw_movie_detail.g.dart';
 
 /// TMDB Api response body for requesting movie detail (/movie/:movieId).
 @freezed
-class MovieDetailResBody with _$MovieDetailResBody {
-  const MovieDetailResBody._();
+class RawMovieDetail with _$RawMovieDetail {
+  const RawMovieDetail._();
 
-  const factory MovieDetailResBody({
+  const factory RawMovieDetail({
     required bool adult,
     @JsonKey(name: 'backdrop_path') String? backdropPath,
     @JsonKey(name: 'belongs_to_collection')
@@ -49,8 +49,8 @@ class MovieDetailResBody with _$MovieDetailResBody {
     @JsonKey(name: 'vote_count') required int voteCount,
   }) = _MovieDetailResBody;
 
-  factory MovieDetailResBody.fromJson(Map<String, dynamic> json) =>
-      _$MovieDetailResBodyFromJson(json);
+  factory RawMovieDetail.fromJson(Map<String, dynamic> json) =>
+      _$RawMovieDetailFromJson(json);
 
   MovieDetail toEntity() {
     return MovieDetail(
@@ -61,7 +61,7 @@ class MovieDetailResBody with _$MovieDetailResBody {
       genres: genres.map((e) => e.toEntity()).toList(),
       homepage: homepage,
       id: id,
-      language: originalLanguage,
+      originalLanguage: originalLanguage,
       originalTitle: originalTitle,
       overview: overview,
       popularity: popularity,
@@ -70,6 +70,7 @@ class MovieDetailResBody with _$MovieDetailResBody {
       revenue: revenue,
       runtime: runtime,
       status: status,
+      spokenLanguages: spokenLanguages.map((e) => e.toEntity()).toList(),
       tagline: tagline,
       title: title,
       video: video,

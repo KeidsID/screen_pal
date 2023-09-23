@@ -5,11 +5,16 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
+import 'package:flutter/material.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:screen_pal/core/entities/genre.dart' as _i9;
 import 'package:screen_pal/core/entities/movies/movie.dart' as _i6;
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart'
     as _i3;
 import 'package:screen_pal/core/entities/movies/movie_detail.dart' as _i2;
+import 'package:screen_pal/core/entities/spoken_language.dart' as _i8;
+import 'package:screen_pal/core/repo/app_settings_repo.dart' as _i10;
+import 'package:screen_pal/core/repo/extras_repo.dart' as _i7;
 import 'package:screen_pal/core/repo/movies_repo.dart' as _i4;
 
 // ignore_for_file: type=lint
@@ -125,4 +130,66 @@ class MockMoviesRepo extends _i1.Mock implements _i4.MoviesRepo {
           ),
         )),
       ) as _i5.Future<_i3.MovieCollectionDetail>);
+}
+
+/// A class which mocks [ExtrasRepo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockExtrasRepo extends _i1.Mock implements _i7.ExtrasRepo {
+  MockExtrasRepo() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<List<_i8.SpokenLanguage>> getLanguages() => (super.noSuchMethod(
+        Invocation.method(
+          #getLanguages,
+          [],
+        ),
+        returnValue:
+            _i5.Future<List<_i8.SpokenLanguage>>.value(<_i8.SpokenLanguage>[]),
+      ) as _i5.Future<List<_i8.SpokenLanguage>>);
+  @override
+  _i5.Future<List<_i9.Genre>> getMovieGenres() => (super.noSuchMethod(
+        Invocation.method(
+          #getMovieGenres,
+          [],
+        ),
+        returnValue: _i5.Future<List<_i9.Genre>>.value(<_i9.Genre>[]),
+      ) as _i5.Future<List<_i9.Genre>>);
+  @override
+  _i5.Future<List<_i9.Genre>> getTvShowGenres() => (super.noSuchMethod(
+        Invocation.method(
+          #getTvShowGenres,
+          [],
+        ),
+        returnValue: _i5.Future<List<_i9.Genre>>.value(<_i9.Genre>[]),
+      ) as _i5.Future<List<_i9.Genre>>);
+}
+
+/// A class which mocks [AppSettingsRepo].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAppSettingsRepo extends _i1.Mock implements _i10.AppSettingsRepo {
+  MockAppSettingsRepo() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<bool> setThemeMode(_i11.ThemeMode? themeMode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setThemeMode,
+          [themeMode],
+        ),
+        returnValue: _i5.Future<bool>.value(false),
+      ) as _i5.Future<bool>);
+  @override
+  _i5.Future<_i11.ThemeMode> getThemeMode() => (super.noSuchMethod(
+        Invocation.method(
+          #getThemeMode,
+          [],
+        ),
+        returnValue: _i5.Future<_i11.ThemeMode>.value(_i11.ThemeMode.system),
+      ) as _i5.Future<_i11.ThemeMode>);
 }

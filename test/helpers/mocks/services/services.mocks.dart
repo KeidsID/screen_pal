@@ -12,7 +12,9 @@ import 'package:dio/src/dio_mixin.dart' as _i5;
 import 'package:dio/src/options.dart' as _i2;
 import 'package:dio/src/response.dart' as _i6;
 import 'package:dio/src/transformer.dart' as _i4;
+import 'package:flutter/material.dart' as _i11;
 import 'package:mockito/mockito.dart' as _i1;
+import 'package:screen_pal/infrastructures/cache/theme_mode_cache.dart' as _i10;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -757,4 +759,31 @@ class MockDio extends _i1.Mock implements _i7.Dio {
           ),
         )),
       ) as _i8.Future<_i6.Response<T>>);
+}
+
+/// A class which mocks [ThemeModeCache].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockThemeModeCache extends _i1.Mock implements _i10.ThemeModeCache {
+  MockThemeModeCache() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i8.Future<bool> setThemeMode(_i11.ThemeMode? themeMode) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #setThemeMode,
+          [themeMode],
+        ),
+        returnValue: _i8.Future<bool>.value(false),
+      ) as _i8.Future<bool>);
+  @override
+  _i8.Future<_i11.ThemeMode> getThemeMode() => (super.noSuchMethod(
+        Invocation.method(
+          #getThemeMode,
+          [],
+        ),
+        returnValue: _i8.Future<_i11.ThemeMode>.value(_i11.ThemeMode.system),
+      ) as _i8.Future<_i11.ThemeMode>);
 }

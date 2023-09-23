@@ -9,7 +9,6 @@ import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
 import 'package:screen_pal/interfaces/widgets/carousel/movies_carousel.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../helpers/dummy/dummy_genres.dart';
 import '../../../helpers/dummy/dummy_languages.dart';
@@ -65,7 +64,7 @@ void main() {
         }).englishName;
 
         List<String> genreNames = dummyMovie.genreIds.map((id) {
-          return dummyMovieGenres.firstWhere((e) => e.id == id).name;
+          return dummyGenres.firstWhere((e) => e.id == id).name;
         }).toList();
 
         final extras = [
@@ -116,61 +115,10 @@ void main() {
         await expectLater(_WidgetFinders.movieOverview, findsWidgets);
       }),
     );
-
-    // pumpAndSettle keeps timed out.
-    // testWidgets(
-    //   'indicator should render and animate the carousel correctly',
-    //   (tester) => mockNetworkImagesFor(() async {
-    //     await tester.pumpWidget(testWidgetApp(dummyMovies));
-
-    //     // expect initial index
-    //     expect(
-    //       tester.state(_WidgetFinders.carousel),
-    //       isA<MoviesCarouselState>().having(
-    //         (e) => e.currentIndex,
-    //         'carousel current index',
-    //         0,
-    //       ),
-    //     );
-    //     expect(
-    //       tester.widget(_WidgetFinders.indicator),
-    //       isA<AnimatedSmoothIndicator>().having(
-    //         (e) => e.activeIndex,
-    //         'indicator current index',
-    //         0,
-    //       ),
-    //     );
-
-    //     // tap last indicator dot
-    //     await tester.tap(find.byType(SmoothIndicator).last);
-    //     await tester.pumpAndSettle();
-
-    //     // expect index changes
-    //     expect(
-    //       tester.state(_WidgetFinders.carousel),
-    //       isA<MoviesCarouselState>().having(
-    //         (e) => e.currentIndex,
-    //         'carousel current index',
-    //         1,
-    //       ),
-    //     );
-    //     expect(
-    //       tester.widget(_WidgetFinders.indicator),
-    //       isA<AnimatedSmoothIndicator>().having(
-    //         (e) => e.activeIndex,
-    //         'indicator current index',
-    //         1,
-    //       ),
-    //     );
-    //   }),
-    // );
   });
 }
 
 abstract class _WidgetFinders {
-  static Finder get carousel => find.byType(MoviesCarousel);
-  static Finder get indicator => find.byType(AnimatedSmoothIndicator);
-
   static Finder get contentContainer =>
       find.byKey(const Key('content-container'));
 

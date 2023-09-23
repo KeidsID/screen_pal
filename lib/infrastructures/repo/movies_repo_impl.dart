@@ -6,7 +6,7 @@ import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
-import 'package:screen_pal/infrastructures/api/models/movies/movie_detail_res_body.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/raw_movie_detail.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/movie_list_res_body.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/raw_movie_collection_detail.dart';
 
@@ -15,11 +15,11 @@ class MoviesRepoImpl implements MoviesRepo {
 
   final Dio _dio;
 
-  static const _basePath = '/movie';
+  static const _moviePath = '/movie';
 
   @override
   Future<List<Movie>> getNowPlayingMovies() async {
-    final response = await _dio.get<String>('$_basePath/now_playing');
+    final response = await _dio.get<String>('$_moviePath/now_playing');
     final rawResBody = jsonDecode(response.data!);
 
     final resBody = MovieListResBody.fromJson(rawResBody);
@@ -29,7 +29,7 @@ class MoviesRepoImpl implements MoviesRepo {
 
   @override
   Future<List<Movie>> getPopularMovies() async {
-    final response = await _dio.get<String>('$_basePath/popular');
+    final response = await _dio.get<String>('$_moviePath/popular');
     final rawResBody = jsonDecode(response.data!);
 
     final resBody = MovieListResBody.fromJson(rawResBody);
@@ -39,7 +39,7 @@ class MoviesRepoImpl implements MoviesRepo {
 
   @override
   Future<List<Movie>> getTopRatedMovies() async {
-    final response = await _dio.get<String>('$_basePath/top_rated');
+    final response = await _dio.get<String>('$_moviePath/top_rated');
     final rawResBody = jsonDecode(response.data!);
 
     final resBody = MovieListResBody.fromJson(rawResBody);
@@ -49,7 +49,7 @@ class MoviesRepoImpl implements MoviesRepo {
 
   @override
   Future<List<Movie>> getUpcomingMovies() async {
-    final response = await _dio.get<String>('$_basePath/upcoming');
+    final response = await _dio.get<String>('$_moviePath/upcoming');
     final rawResBody = jsonDecode(response.data!);
 
     final resBody = MovieListResBody.fromJson(rawResBody);
@@ -59,10 +59,10 @@ class MoviesRepoImpl implements MoviesRepo {
 
   @override
   Future<MovieDetail> getMovieDetail(int movieId) async {
-    final response = await _dio.get<String>('$_basePath/$movieId');
+    final response = await _dio.get<String>('$_moviePath/$movieId');
     final rawResBody = jsonDecode(response.data!);
 
-    final resBody = MovieDetailResBody.fromJson(rawResBody);
+    final resBody = RawMovieDetail.fromJson(rawResBody);
 
     return resBody.toEntity();
   }
@@ -70,7 +70,7 @@ class MoviesRepoImpl implements MoviesRepo {
   @override
   Future<List<Movie>> getRecommendations(int movieId) async {
     final response =
-        await _dio.get<String>('$_basePath/$movieId/recommendations');
+        await _dio.get<String>('$_moviePath/$movieId/recommendations');
     final rawResBody = jsonDecode(response.data!);
 
     final resBody = MovieListResBody.fromJson(rawResBody);

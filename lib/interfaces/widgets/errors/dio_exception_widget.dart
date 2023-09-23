@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
+import 'package:screen_pal/configs/constants.dart';
+
 const Map<int, String> _clientErrRes = {
   400: 'Bad Request',
   401: 'Unauthorized',
@@ -80,15 +82,16 @@ class DioExceptionWidget extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     if (exception.type != DioExceptionType.badResponse) {
-      debugPrint(exception.message);
-
-      if (exception.error is SocketException) {
+      if (_connectionCheck(exception)) {
         return _layout(children: [
           const Text('No Internet Connection'),
           const Divider(),
           const Text('Check your network provider'),
         ]);
       }
+
+      kLogger.f('DioExceptionWidget', error: exception);
+      kLogger.f('DioException.type: ${exception.type}');
 
       return _layout(children: [
         const Text('Internal App Error'),
@@ -101,7 +104,7 @@ class DioExceptionWidget extends StatelessWidget {
     final statusCode = response.statusCode ?? 0;
     final String? statusName = {..._clientErrRes, ..._serverErrRes}[statusCode];
 
-    debugPrint('DioExceptionWidget ${response.data}');
+    kLogger.d('${response.data}');
 
     return _layout(children: [
       statusName == null
@@ -114,5 +117,10 @@ class DioExceptionWidget extends StatelessWidget {
       const Divider(),
       const Text('Sorry for the inconvenience'),
     ]);
+  }
+
+  bool _connectionCheck(DioException exception) {
+    return exception.error is SocketException ||
+        exception.type == DioExceptionType.connectionError;
   }
 }
