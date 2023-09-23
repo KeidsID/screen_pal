@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:screen_pal/configs/constants.dart';
-import 'package:screen_pal/core/entities/movies/movie_collection.dart';
 
+import 'package:screen_pal/core/entities/movies/movie_collection.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
-import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_detail_provider.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
@@ -61,29 +59,21 @@ class MovieDetailView extends StatelessWidget {
 
 const _kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
-class _MovieDetailExtrasText extends ConsumerWidget {
+class _MovieDetailExtrasText extends StatelessWidget {
   const _MovieDetailExtrasText(this.movieDetail);
 
   final MovieDetail movieDetail;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final languages = ref.watch(languagesProvider);
-
-    String language = movieDetail.language;
-
-    if (languages.isNotEmpty) {
-      language = languages.firstWhere((e) {
-        return e.iso6391 == movieDetail.language;
-      }).englishName;
-    }
+  Widget build(BuildContext context) {
+    final languages = movieDetail.spokenLanguages;
 
     return Opacity(
       opacity: 0.5,
       child: Text(
         [
           movieDetail.releaseDate?.year ?? 'Coming Soon',
-          language,
+          languages.map((e) => e.englishName).join(', '),
           movieDetail.genres.isEmpty
               ? 'Undefined'
               : movieDetail.genres.map((e) => e.name).join(', ')
@@ -142,7 +132,7 @@ List<Widget> _mainContents(
 }
 
 class _MovieCollectionCard extends StatelessWidget {
-  const _MovieCollectionCard(this.movieCollection, {super.key});
+  const _MovieCollectionCard(this.movieCollection);
 
   final MovieCollection movieCollection;
 

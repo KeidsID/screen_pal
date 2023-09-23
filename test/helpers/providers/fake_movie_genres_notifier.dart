@@ -6,6 +6,6 @@ import '../dummy/dummy_genres.dart';
 class FakeMovieGenresNotifier extends MovieGenres {
   @override
   List<Genre> build() {
-    return dummyMovieGenres;
+    return dummyGenres;
   }
 }

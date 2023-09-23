@@ -13,6 +13,8 @@ class ExtrasRepoImpl implements ExtrasRepo {
 
   final Dio _dio;
 
+  static const _genrePath = '/genre';
+
   @override
   Future<List<SpokenLanguage>> getLanguages() async {
     final response = await _dio.get<String>('/configuration/languages');
@@ -26,7 +28,7 @@ class ExtrasRepoImpl implements ExtrasRepo {
 
   @override
   Future<List<Genre>> getMovieGenres() async {
-    final response = await _dio.get<String>('/genre/movie/list');
+    final response = await _dio.get<String>('$_genrePath/movie/list');
     final rawResBody = jsonDecode(response.data!) as Map<String, dynamic>;
 
     return (rawResBody['genres'] as List)
@@ -37,7 +39,7 @@ class ExtrasRepoImpl implements ExtrasRepo {
 
   @override
   Future<List<Genre>> getTvShowGenres() async {
-    final response = await _dio.get<String>('/genre/tv/list');
+    final response = await _dio.get<String>('$_genrePath/tv/list');
     final rawResBody = jsonDecode(response.data!) as Map<String, dynamic>;
 
     return (rawResBody['genres'] as List)

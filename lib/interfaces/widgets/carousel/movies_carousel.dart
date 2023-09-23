@@ -60,10 +60,10 @@ class MoviesCarousel extends ConsumerStatefulWidget {
   final Duration autoPlayAnimationDuration;
 
   @override
-  ConsumerState<MoviesCarousel> createState() => MoviesCarouselState();
+  ConsumerState<MoviesCarousel> createState() => _MoviesCarouselState();
 }
 
-class MoviesCarouselState extends ConsumerState<MoviesCarousel> {
+class _MoviesCarouselState extends ConsumerState<MoviesCarousel> {
   /// Carousel current index
   int currentIndex = 0;
   final _controller = CarouselController();
@@ -115,7 +115,7 @@ class MoviesCarouselState extends ConsumerState<MoviesCarousel> {
               return _ThinDeviceLayout(movie: movie);
             },
           ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 8.0),
           Builder(builder: (context) {
             final colorScheme = Theme.of(context).colorScheme;
 

@@ -8,31 +8,34 @@ import '../../helpers/dummy/dummy_movies.dart';
 import '../../helpers/mocks/services/services.mocks.dart';
 
 void main() {
-  late MoviesRepoImpl testRepoImpl;
+  late MoviesRepoImpl subject;
   late MockDio mockDio;
 
-  setUp(() {
+  setUpAll(() {
     mockDio = MockDio();
-    testRepoImpl = MoviesRepoImpl(mockDio);
+    subject = MoviesRepoImpl(mockDio);
   });
 
   final expectedMovies = dummyMovieListResBody.results.map((e) {
     return e.toEntity();
   }).toList();
 
+  final expectedMovieDetail = dummyMovieDetail;
+  final expectedCollectionDetail = dummyMovieCollectionDetail;
+
   group('MovieRepoImpl', () {
-    const basePath = '/movie';
+    const apiMoviePath = '/movie';
     group('getNowPlayingMovies()', () {
-      const endpoint = '$basePath/now_playing';
+      const endpoint = '$apiMoviePath/now_playing';
       test('should return list of movies', () async {
         when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
           return Response<String>(
-            data: dummyRawMovieListResBody,
+            data: dummyMovieListResBodyJson,
             requestOptions: RequestOptions(),
           );
         });
 
-        final movies = await testRepoImpl.getNowPlayingMovies();
+        final movies = await subject.getNowPlayingMovies();
 
         expect(movies, expectedMovies);
         verify(mockDio.get<String>(endpoint)).called(1);
@@ -40,16 +43,16 @@ void main() {
     });
 
     group('getPopularMovies()', () {
-      const endpoint = '$basePath/popular';
+      const endpoint = '$apiMoviePath/popular';
       test('should return list of movies', () async {
         when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
           return Response<String>(
-            data: dummyRawMovieListResBody,
+            data: dummyMovieListResBodyJson,
             requestOptions: RequestOptions(),
           );
         });
 
-        final movies = await testRepoImpl.getPopularMovies();
+        final movies = await subject.getPopularMovies();
 
         expect(movies, expectedMovies);
         verify(mockDio.get<String>(endpoint)).called(1);
@@ -57,16 +60,16 @@ void main() {
     });
 
     group('getTopRatedMovies()', () {
-      const endpoint = '$basePath/top_rated';
+      const endpoint = '$apiMoviePath/top_rated';
       test('should return list of movies', () async {
         when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
           return Response<String>(
-            data: dummyRawMovieListResBody,
+            data: dummyMovieListResBodyJson,
             requestOptions: RequestOptions(),
           );
         });
 
-        final movies = await testRepoImpl.getTopRatedMovies();
+        final movies = await subject.getTopRatedMovies();
 
         expect(movies, expectedMovies);
         verify(mockDio.get<String>(endpoint)).called(1);
@@ -74,18 +77,73 @@ void main() {
     });
 
     group('getUpcomingMovies()', () {
-      const endpoint = '$basePath/upcoming';
+      const endpoint = '$apiMoviePath/upcoming';
       test('should return list of movies', () async {
         when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
           return Response<String>(
-            data: dummyRawMovieListResBody,
+            data: dummyMovieListResBodyJson,
             requestOptions: RequestOptions(),
           );
         });
 
-        final movies = await testRepoImpl.getUpcomingMovies();
+        final movies = await subject.getUpcomingMovies();
 
         expect(movies, expectedMovies);
+        verify(mockDio.get<String>(endpoint)).called(1);
+      });
+    });
+
+    group('getMovieDetail()', () {
+      const movieId = 123;
+      const endpoint = '$apiMoviePath/$movieId';
+      test('should return movie detail', () async {
+        when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
+          return Response<String>(
+            data: dummyRawMovieDetailJson,
+            requestOptions: RequestOptions(),
+          );
+        });
+
+        final movie = await subject.getMovieDetail(movieId);
+
+        expect(movie, expectedMovieDetail);
+        verify(mockDio.get<String>(endpoint)).called(1);
+      });
+    });
+
+    group('getRecommendations()', () {
+      const movieId = 123;
+      const endpoint = '$apiMoviePath/$movieId/recommendations';
+      test('should return list of movies', () async {
+        when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
+          return Response<String>(
+            data: dummyMovieListResBodyJson,
+            requestOptions: RequestOptions(),
+          );
+        });
+
+        final movies = await subject.getRecommendations(movieId);
+
+        expect(movies, expectedMovies);
+        verify(mockDio.get<String>(endpoint)).called(1);
+      });
+    });
+
+    group('getMovieCollectionDetail()', () {
+      const collectionId = 123;
+      const endpoint = '/collection/$collectionId';
+      test('should return movie collection detail', () async {
+        when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
+          return Response<String>(
+            data: dummyRawMovieCollectionDetailJson,
+            requestOptions: RequestOptions(),
+          );
+        });
+
+        final collectionDetail =
+            await subject.getMovieCollectionDetail(collectionId);
+
+        expect(collectionDetail, expectedCollectionDetail);
         verify(mockDio.get<String>(endpoint)).called(1);
       });
     });

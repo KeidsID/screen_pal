@@ -2,8 +2,7 @@ import 'dart:convert';
 
 import 'package:screen_pal/infrastructures/api/models/movies/raw_genre.dart';
 
-const dummyRawMovieGenresResBody = '''
-{
+const dummyGenresResBodyJson = '''{
   "genres": [
     {
       "id": 28,
@@ -82,11 +81,9 @@ const dummyRawMovieGenresResBody = '''
       "name": "Western"
     }
   ]
-}
-''';
+}''';
 
-/// Refer to [dummyRawMovieGenresResBody] for the props values.
-final dummyMovieGenres =
-    (jsonDecode(dummyRawMovieGenresResBody)['genres'] as List)
-        .map((e) => RawGenre.fromJson(e).toEntity())
-        .toList();
+/// Refer to [dummyGenresResBodyJson] for the props values.
+final dummyGenres = (jsonDecode(dummyGenresResBodyJson)['genres'] as List)
+    .map((e) => RawGenre.fromJson(e).toEntity())
+    .toList();
