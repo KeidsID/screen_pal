@@ -73,7 +73,9 @@ class _MovieDetailExtrasText extends StatelessWidget {
       child: Text(
         [
           movieDetail.releaseDate?.year ?? 'Coming Soon',
-          languages.map((e) => e.englishName).join(', '),
+          languages.firstWhere((e) {
+            return e.iso6391 == movieDetail.originalLanguage;
+          }).englishName,
           movieDetail.genres.isEmpty
               ? 'Undefined'
               : movieDetail.genres.map((e) => e.name).join(', ')
@@ -85,13 +87,10 @@ class _MovieDetailExtrasText extends StatelessWidget {
   }
 }
 
-/// [isFlexibleOverview] useful to prevent overflow on [_WideDeviceLayout], but
-/// occurs a white screen error on [_ThinDeviceLayout] when running on release
-/// mode. So make sure set to `false` on [_ThinDeviceLayout].
 List<Widget> _mainContents(
   BuildContext context,
   MovieDetail movie, {
-  bool isFlexibleOverview = true,
+  bool isWideLayout = false,
 }) {
   final textTheme = Theme.of(context).textTheme;
 
@@ -104,8 +103,8 @@ List<Widget> _mainContents(
           movie.tagline.isEmpty ? const SizedBox() : Text('# ${movie.tagline}'),
     ),
     const SizedBox(height: 8.0),
-    isFlexibleOverview
-        ? Flexible(child: Text(movie.overview))
+    isWideLayout
+        ? Expanded(child: SingleChildScrollView(child: Text(movie.overview)))
         : Text(movie.overview),
     const Divider(),
     ...[
@@ -165,7 +164,7 @@ class _MovieCollectionCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      'Part of "${movieCollection.name}"',
+                      'Part of ${movieCollection.name}',
                       style: textTheme.headlineSmall,
                     )
                   ],
@@ -177,6 +176,15 @@ class _MovieCollectionCard extends StatelessWidget {
       ),
     );
   }
+}
+
+List<Widget> _movieCollectionSection(MovieCollection? movieCollection) {
+  return (movieCollection == null)
+      ? [const SizedBox()]
+      : [
+          Center(child: _MovieCollectionCard(movieCollection)),
+          const Divider(),
+        ];
 }
 
 class _MovieRecommendationsHorizListView extends StatelessWidget {
@@ -209,9 +217,7 @@ class _MovieRecommendationsHorizListView extends StatelessWidget {
           },
           data: (movies) {
             if (movies.isEmpty) {
-              return const Center(
-                child: Text('No recommendations yet'),
-              );
+              return const Center(child: Text('No recommendations yet'));
             }
 
             return MovieHorizListView(movies, padding: _kHorizPadding);
@@ -235,7 +241,7 @@ class _ThinDeviceLayout extends StatelessWidget {
     final maxH = screenSize.height > 800 ? 800 : screenSize.height;
     final aspectRatio = maxW / maxH;
 
-    final isShowPoster = aspectRatio >= 2 / 3 && maxH > maxW;
+    final isShowPoster = aspectRatio <= 2 / 3 && maxH > maxW;
 
     final textTheme = Theme.of(context).textTheme;
 
@@ -245,7 +251,7 @@ class _ThinDeviceLayout extends StatelessWidget {
         children: [
           SizedBox(
             width: maxW,
-            height: maxH * 0.75,
+            height: (maxH * 0.8) - kToolbarHeight,
             child: DefaultNetworkImage(
               imageUrl:
                   '$tmdbImageBaseUrl${isShowPoster ? movie.posterPath : movie.backdropPath}',
@@ -253,14 +259,9 @@ class _ThinDeviceLayout extends StatelessWidget {
             ),
           ),
           ...[
-            ..._mainContents(context, movie, isFlexibleOverview: false),
+            ..._mainContents(context, movie),
             const Divider(),
-            ...(movie.movieCollection == null
-                ? [const SizedBox()]
-                : [
-                    _MovieCollectionCard(movie.movieCollection!),
-                    const Divider(),
-                  ]),
+            ..._movieCollectionSection(movie.movieCollection),
             Text('Recommendations', style: textTheme.headlineSmall),
           ].map((e) => Padding(padding: _kHorizPadding, child: e)),
           _MovieRecommendationsHorizListView(movie.id),
@@ -277,8 +278,11 @@ class _WideDeviceLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxH = MediaQuery.of(context).size.height;
+    final screenSize = MediaQuery.of(context).size;
     final textTheme = Theme.of(context).textTheme;
+
+    const minH = 400.0;
+    final maxH = screenSize.height > 600 ? 600 : screenSize.height;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 16.0),
@@ -286,7 +290,7 @@ class _WideDeviceLayout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: maxH < 400.0 ? 400.0 : maxH,
+            height: (maxH < minH ? minH : maxH) - kToolbarHeight,
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -303,11 +307,10 @@ class _WideDeviceLayout extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Flexible(
-                        flex: 4,
+                        flex: 2,
                         child: AspectRatio(
                           aspectRatio: 2 / 3,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16.0),
+                          child: Card(
                             child: DefaultNetworkImage(
                               imageUrl: '$tmdbImageBaseUrl${movie.posterPath}',
                               fit: BoxFit.cover,
@@ -316,12 +319,16 @@ class _WideDeviceLayout extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                        flex: 5,
+                        flex: 3,
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _mainContents(context, movie),
+                            children: _mainContents(
+                              context,
+                              movie,
+                              isWideLayout: true,
+                            ),
                           ),
                         ),
                       ),
@@ -332,17 +339,7 @@ class _WideDeviceLayout extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          ...(movie.movieCollection == null
-              ? [const SizedBox()]
-              : [
-                  Padding(
-                    padding: _kHorizPadding,
-                    child: Center(
-                      child: _MovieCollectionCard(movie.movieCollection!),
-                    ),
-                  ),
-                  const Divider(),
-                ]),
+          ..._movieCollectionSection(movie.movieCollection),
           Padding(
             padding: _kHorizPadding,
             child: Text('Recommendations', style: textTheme.headlineSmall),

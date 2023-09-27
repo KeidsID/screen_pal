@@ -72,19 +72,18 @@ class _MoviesCarouselState extends ConsumerState<MoviesCarousel> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
-    final isThin = deviceSize.width < 800;
+    final isThin = deviceSize.width < 800.0;
 
     final deviceH = deviceSize.height;
+    const minH = 400.0;
+    const maxH = 800.0;
 
-    const takenH = 0.65; // percentage taken
+    const takenH = 0.75; // in percent
 
-    const minH = 600.0 * takenH;
-    const maxH = 800.0 * takenH;
-
-    final carouselHeight = deviceH < 600.0
-        ? minH
-        : deviceH >= 800.0
-            ? maxH
+    final carouselHeight = deviceH < minH
+        ? minH * takenH
+        : deviceH >= maxH
+            ? maxH * takenH
             : deviceH * takenH;
 
     return Padding(
@@ -292,27 +291,11 @@ class _WideDeviceLayout extends StatelessWidget {
                     ),
                     _MovieExtrasText(movie: movie),
                     const SizedBox(height: 8.0),
-                    Builder(builder: (context) {
-                      final deviceH = MediaQuery.of(context).size.height;
-
-                      final maxLines = deviceH >= 800.0
-                          ? 16
-                          : deviceH >= 750.0
-                              ? 14
-                              : deviceH >= 700.0
-                                  ? 12
-                                  : deviceH >= 650.0
-                                      ? 10
-                                      : 8;
-
-                      return Text(
-                        movie.overview,
-                        key: _movieOverviewKey,
-                        textAlign: TextAlign.justify,
-                        maxLines: maxLines,
-                        overflow: TextOverflow.ellipsis,
-                      );
-                    }),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Text(movie.overview, key: _movieOverviewKey),
+                      ),
+                    ),
                   ],
                 ),
               ),

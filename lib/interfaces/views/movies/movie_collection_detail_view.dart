@@ -57,13 +57,10 @@ class MovieCollectionDetailView extends StatelessWidget {
   }
 }
 
-/// [isFlexibleOverview] useful to prevent overflow on [_WideDeviceLayout], but
-/// occurs a white screen error on [_ThinDeviceLayout] when running on release
-/// mode. So make sure set to `false` on [_ThinDeviceLayout].
 List<Widget> _mainContents(
   BuildContext context,
   MovieCollectionDetail movieCollection, {
-  bool isFlexibleOverview = true,
+  bool isWideLayout = false,
 }) {
   final textTheme = Theme.of(context).textTheme;
 
@@ -71,8 +68,10 @@ List<Widget> _mainContents(
     Text(movieCollection.name, style: textTheme.headlineLarge),
     _CollectionGenresText(movieCollection),
     const SizedBox(height: 8.0),
-    isFlexibleOverview
-        ? Flexible(child: Text(movieCollection.overview))
+    isWideLayout
+        ? Expanded(
+            child: SingleChildScrollView(child: Text(movieCollection.overview)),
+          )
         : Text(movieCollection.overview),
     const Divider(),
     ...[
@@ -150,8 +149,7 @@ class _ThinDeviceLayout extends StatelessWidget {
             ),
           ),
           ...[
-            ..._mainContents(context, movieCollection,
-                isFlexibleOverview: false),
+            ..._mainContents(context, movieCollection),
             const Divider(),
             Text('Movies', style: textTheme.headlineSmall),
           ].map((e) {
@@ -183,7 +181,7 @@ class _WideDeviceLayout extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: maxH < 400.0 ? 400.0 : maxH,
+            height: (maxH < 400.0 ? 400.0 : maxH) - kToolbarHeight,
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -220,7 +218,11 @@ class _WideDeviceLayout extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _mainContents(context, movieCollection),
+                            children: _mainContents(
+                              context,
+                              movieCollection,
+                              isWideLayout: true,
+                            ),
                           ),
                         ),
                       ),
@@ -230,6 +232,7 @@ class _WideDeviceLayout extends StatelessWidget {
               ],
             ),
           ),
+          const SizedBox(height: 16.0),
           Padding(
             padding: _kHorizPadding,
             child: Text('Movies', style: textTheme.headlineSmall),

@@ -1,5 +1,6 @@
 // coverage:ignore-file
 
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/movies/movie.dart';
