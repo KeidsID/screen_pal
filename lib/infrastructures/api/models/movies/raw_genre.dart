@@ -2,6 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import 'package:screen_pal/core/entities/genre.dart';
 
 part 'raw_genre.freezed.dart';

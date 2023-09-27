@@ -1,9 +1,11 @@
 // coverage:ignore-file
 
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
-import 'package:screen_pal/infrastructures/api/models/movies/raw_movie.dart';
+
+import 'raw_movie.dart';
 
 part 'raw_movie_collection_detail.freezed.dart';
 part 'raw_movie_collection_detail.g.dart';
