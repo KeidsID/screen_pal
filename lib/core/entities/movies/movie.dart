@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../spoken_language.dart';
+import 'package:screen_pal/core/entities/extras/spoken_language.dart';
 
 class Movie extends Equatable {
   final bool isAdult;

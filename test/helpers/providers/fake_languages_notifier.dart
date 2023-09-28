@@ -1,4 +1,4 @@
-import 'package:screen_pal/core/entities/spoken_language.dart';
+import 'package:screen_pal/core/entities/extras/spoken_language.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
 
 class FakeLanguagesNotifier extends Languages {
