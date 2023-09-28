@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 part of '../registry.dart';
 
 void registerRepo() {

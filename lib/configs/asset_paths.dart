@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 /// Contain path to load assets.
 abstract final class AssetPaths {
   /// ![screen_pal icon](https://raw.githubusercontent.com/KeidsID/screen_pal/main/assets/images/app-icon.png)

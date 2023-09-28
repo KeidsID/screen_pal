@@ -2,6 +2,7 @@
 *.env
 *.g.dart
 *.freezed.dart
+*.mocks.dart
 
 coverage/
 
