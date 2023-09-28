@@ -3,7 +3,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:screen_pal/core/use_cases/movies/get_top_rated_movies.dart';
 
-import '../../../helpers/mocks/repo/repositories.mocks.dart';
+import '../../../helpers/mocks/repositories.mocks.dart';
 
 void main() {
   late GetTopRatedMovies testUsecase;

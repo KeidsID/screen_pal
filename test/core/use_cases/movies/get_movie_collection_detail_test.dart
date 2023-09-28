@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:screen_pal/core/use_cases/movies/get_movie_collection_detail.dart';
 
 import '../../../helpers/dummy/dummy_movies.dart';
-import '../../../helpers/mocks/repo/repositories.mocks.dart';
+import '../../../helpers/mocks/repositories.mocks.dart';
 
 void main() {
   late GetMovieCollectionDetail subject;
