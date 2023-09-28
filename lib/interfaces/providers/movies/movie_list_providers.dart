@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:screen_pal/configs/service_locator/locator.dart' as service;
