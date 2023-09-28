@@ -5,7 +5,7 @@ import 'package:mockito/mockito.dart';
 import 'package:screen_pal/infrastructures/repo/movies_repo_impl.dart';
 
 import '../../helpers/dummy/dummy_movies.dart';
-import '../../helpers/mocks/services/services.mocks.dart';
+import '../../helpers/mocks/services.mocks.dart';
 
 void main() {
   late MoviesRepoImpl subject;

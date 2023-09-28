@@ -6,7 +6,7 @@ import 'package:screen_pal/infrastructures/repo/extras_repo_impl.dart';
 
 import '../../helpers/dummy/dummy_genres.dart';
 import '../../helpers/dummy/dummy_languages.dart';
-import '../../helpers/mocks/services/services.mocks.dart';
+import '../../helpers/mocks/services.mocks.dart';
 
 void main() {
   late ExtrasRepoImpl subject;

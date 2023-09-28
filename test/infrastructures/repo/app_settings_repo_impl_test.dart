@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:screen_pal/infrastructures/repo/app_settings_repo_impl.dart';
 
-import '../../helpers/mocks/services/services.mocks.dart';
+import '../../helpers/mocks/services.mocks.dart';
 
 void main() {
   late AppSettingsRepoImpl subject;

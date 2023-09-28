@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:screen_pal/core/use_cases/app/get_theme_mode.dart';
 
-import '../../../helpers/mocks/repo/repositories.mocks.dart';
+import '../../../helpers/mocks/repositories.mocks.dart';
 
 void main() {
   late GetThemeMode subject;

@@ -4,7 +4,7 @@ import 'package:mockito/mockito.dart';
 import 'package:screen_pal/core/use_cases/extras/get_movie_genres.dart';
 
 import '../../../helpers/dummy/dummy_genres.dart';
-import '../../../helpers/mocks/repo/repositories.mocks.dart';
+import '../../../helpers/mocks/repositories.mocks.dart';
 
 void main() {
   late GetMovieGenres subject;
