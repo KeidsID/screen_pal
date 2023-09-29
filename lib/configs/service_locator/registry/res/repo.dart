@@ -8,6 +8,7 @@ void registerRepo() {
       themeModeCache: locator(),
     );
   });
-  locator.registerLazySingleton<MoviesRepo>(() => MoviesRepoImpl(tmdbDio));
   locator.registerLazySingleton<ExtrasRepo>(() => ExtrasRepoImpl(tmdbDio));
+  locator.registerLazySingleton<MoviesRepo>(() => MoviesRepoImpl(tmdbDio));
+  locator.registerLazySingleton<TvShowsRepo>(() => TvShowsRepoImpl(tmdbDio));
 }
