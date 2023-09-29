@@ -33,7 +33,7 @@ class _MovieCardState extends State<MovieCard> {
         onLongPress: () {
           final scaffoldMessenger = ScaffoldMessenger.of(context);
 
-          scaffoldMessenger.hideCurrentSnackBar();
+          scaffoldMessenger.clearSnackBars();
           scaffoldMessenger.showSnackBar(_detailSnackBar());
         },
         child: Stack(
