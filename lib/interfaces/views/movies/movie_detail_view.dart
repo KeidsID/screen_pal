@@ -57,7 +57,8 @@ class MovieDetailView extends StatelessWidget {
   }
 }
 
-const _kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
+const _kContentHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
+const _kBottomPadding = EdgeInsets.only(bottom: 16.0);
 
 class _MovieDetailExtrasText extends StatelessWidget {
   const _MovieDetailExtrasText(this.movieDetail);
@@ -220,7 +221,7 @@ class _MovieRecommendationsHorizListView extends StatelessWidget {
               return const Center(child: Text('No recommendations yet'));
             }
 
-            return MovieHorizListView(movies, padding: _kHorizPadding);
+            return MovieHorizListView(movies, padding: _kContentHorizPadding);
           },
         );
       }),
@@ -246,6 +247,7 @@ class _ThinDeviceLayout extends StatelessWidget {
     final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
+      padding: _kBottomPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -258,12 +260,13 @@ class _ThinDeviceLayout extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
+          const SizedBox(height: 16.0),
           ...[
             ..._mainContents(context, movie),
             const Divider(),
             ..._movieCollectionSection(movie.movieCollection),
             Text('Recommendations', style: textTheme.headlineSmall),
-          ].map((e) => Padding(padding: _kHorizPadding, child: e)),
+          ].map((e) => Padding(padding: _kContentHorizPadding, child: e)),
           _MovieRecommendationsHorizListView(movie.id),
         ],
       ),
@@ -285,7 +288,7 @@ class _WideDeviceLayout extends StatelessWidget {
     final maxH = screenSize.height > 600 ? 600 : screenSize.height;
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: _kBottomPadding,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -339,11 +342,10 @@ class _WideDeviceLayout extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          ..._movieCollectionSection(movie.movieCollection),
-          Padding(
-            padding: _kHorizPadding,
-            child: Text('Recommendations', style: textTheme.headlineSmall),
-          ),
+          ...[
+            ..._movieCollectionSection(movie.movieCollection),
+            Text('Recommendations', style: textTheme.headlineSmall),
+          ].map((e) => Padding(padding: _kContentHorizPadding, child: e)),
           _MovieRecommendationsHorizListView(movie.id),
         ],
       ),

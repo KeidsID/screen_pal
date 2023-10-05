@@ -71,35 +71,7 @@ class _MovieCardState extends State<MovieCard> {
                           textAlign: TextAlign.center,
                         ),
                         Text('${movie.releaseDate?.year ?? 'Coming Soon'}'),
-                        Consumer(builder: (_, ref, __) {
-                          final movieExtras = ref.watch(movieExtrasProvider);
-
-                          String language = movie.language;
-                          List<String> genreNames = [];
-
-                          if (movieExtras.languages.isNotEmpty) {
-                            language = movieExtras.languages.firstWhere((e) {
-                              return e.iso6391 == movie.language;
-                            }).englishName;
-                          }
-
-                          if (movieExtras.genres.isNotEmpty) {
-                            genreNames = movie.genreIds.map((id) {
-                              return movieExtras.genres
-                                  .firstWhere((e) => e.id == id)
-                                  .name;
-                            }).toList();
-                          }
-
-                          return Text(
-                            [
-                              language,
-                              genreNames.isEmpty ? 'Undefined' : genreNames[0],
-                            ].join(' • '),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          );
-                        })
+                        _ExtrasText(movie),
                       ],
                     ),
                   )
@@ -119,36 +91,62 @@ class _MovieCardState extends State<MovieCard> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(movie.title),
-          Consumer(builder: (_, ref, __) {
-            final movieExtras = ref.watch(movieExtrasProvider);
-
-            String language = movie.language;
-            List<String> genreNames = [];
-
-            if (movieExtras.languages.isNotEmpty) {
-              language = movieExtras.languages.firstWhere((e) {
-                return e.iso6391 == movie.language;
-              }).englishName;
-            }
-
-            if (movieExtras.genres.isNotEmpty) {
-              genreNames = movie.genreIds.map((id) {
-                return movieExtras.genres.firstWhere((e) => e.id == id).name;
-              }).toList();
-            }
-
-            return Text(
-              [
-                '${movie.releaseDate?.year ?? 'Coming Soon'}',
-                language,
-                genreNames.isEmpty ? 'Undefined' : genreNames[0],
-              ].join(' • '),
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            );
-          }),
+          _ExtrasText(
+            movie,
+            isShowReleaseDate: true,
+            isShowMainGenreOnly: false,
+          ),
         ],
       ),
+    );
+  }
+}
+
+class _ExtrasText extends ConsumerWidget {
+  const _ExtrasText(
+    this.movie, {
+    this.isShowReleaseDate = false,
+    this.isShowMainGenreOnly = true,
+  });
+
+  final Movie movie;
+
+  final bool isShowReleaseDate;
+  final bool isShowMainGenreOnly;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final movieExtras = ref.watch(movieExtrasProvider);
+
+    String language = movie.language;
+    List<String> genreNames = [];
+
+    if (movieExtras.languages.isNotEmpty) {
+      language = movieExtras.languages.firstWhere((e) {
+        return e.iso6391 == movie.language;
+      }).englishName;
+    }
+
+    if (movieExtras.genres.isNotEmpty) {
+      genreNames = movie.genreIds.map((id) {
+        return movieExtras.genres.firstWhere((e) => e.id == id).name;
+      }).toList();
+    }
+
+    return Text(
+      [
+        ...(isShowReleaseDate
+            ? ['${movie.releaseDate?.year ?? 'Coming Soon'}']
+            : []),
+        language,
+        genreNames.isEmpty
+            ? 'Undefined'
+            : isShowMainGenreOnly
+                ? genreNames[0]
+                : genreNames.join(', '),
+      ].join(' • '),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
