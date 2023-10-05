@@ -12,8 +12,8 @@ import 'package:screen_pal/interfaces/views/movies/movies_home_view.dart';
 import 'package:screen_pal/interfaces/views/settings_view.dart';
 import 'package:screen_pal/interfaces/widgets/dialogs/about_app_dialog.dart';
 import 'package:screen_pal/interfaces/widgets/dialogs/about_tmdb_dialog.dart';
-import 'package:screen_pal/interfaces/widgets/errors/bad_request_error_view.dart';
-import 'package:screen_pal/interfaces/widgets/errors/unknown_error_widget.dart';
+import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
+import 'package:screen_pal/interfaces/widgets/errors/app_http_error_widget.dart';
 
 part 'res/movies_route.dart';
 part 'res/settings_route.dart';
