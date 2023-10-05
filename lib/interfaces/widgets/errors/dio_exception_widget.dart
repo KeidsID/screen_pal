@@ -1,11 +1,13 @@
 // coverage:igore-file
 
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/infrastructures/api/models/tmdb_error_res_body.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_http_error_widget.dart';
 
@@ -38,8 +40,10 @@ class DioExceptionWidget extends StatelessWidget {
         );
       }
 
-      kLogger.f('DioExceptionWidget', error: exception);
-      kLogger.f('DioException.type: ${exception.type}');
+      kLogger.f(
+        'DioExceptionWidget.exception.type: ${exception.type}',
+        error: exception,
+      );
 
       return AppErrorWidget(action: action);
     }
@@ -47,9 +51,24 @@ class DioExceptionWidget extends StatelessWidget {
     final response = exception.response!;
     final statusCode = response.statusCode ?? 0;
 
-    kLogger.d('${response.data}');
+    try {
+      final resBody = TmdbErrorResBody.fromJson(jsonDecode(response.data));
 
-    return AppHttpErrorWidget(statusCode: statusCode, action: action);
+      return AppHttpErrorWidget(
+        statusCode: statusCode,
+        message: resBody.statusMessage,
+        action: action,
+      );
+    } catch (e) {
+      // incase [TmdbErrorResBody] are not valid.
+
+      kLogger.d(
+        'DioExceptionWidget.exception.response.data:\n'
+        '${response.data}',
+      );
+
+      return AppHttpErrorWidget(statusCode: statusCode, action: action);
+    }
   }
 
   bool _connectionCheck(DioException exception) {
