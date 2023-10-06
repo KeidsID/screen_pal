@@ -14,7 +14,8 @@ class RawTvShow with _$RawTvShow {
 
   const factory RawTvShow({
     @JsonKey(name: 'backdrop_path') String? backdropPath,
-    @JsonKey(name: 'first_air_date') required DateTime firstAirDate,
+    // return date string or empty string on response
+    @JsonKey(name: 'first_air_date') required String firstAirDate,
     @JsonKey(name: 'genre_ids') required List<int> genreIds,
     required int id,
     required String name,
@@ -33,15 +34,18 @@ class RawTvShow with _$RawTvShow {
 
   TvShow toEntity() {
     return TvShow(
-      backdropPath: backdropPath,
-      genreIds: genreIds,
       id: id,
-      name: name,
-      originalLanguage: originalLanguage,
-      originalName: originalName,
+      title: name,
       overview: overview,
+      releaseDate: DateTime.tryParse(firstAirDate),
+      language: originalLanguage,
+      genreIds: genreIds,
+      backdropPath: backdropPath,
       posterPath: posterPath,
+      originalTitle: originalName,
+      popularity: popularity,
       voteAverage: voteAverage,
+      voteCount: voteCount,
     );
   }
 }

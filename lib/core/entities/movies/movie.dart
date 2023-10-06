@@ -1,57 +1,39 @@
-import 'package:equatable/equatable.dart';
+import 'package:screen_pal/core/entities/products/product.dart';
 
-import 'package:screen_pal/core/entities/extras/spoken_language.dart';
-
-class Movie extends Equatable {
-  final bool isAdult;
-  final String? backdropPath;
-  final List<int> genreIds;
-  final int id;
-
-  /// Its in `ISO 639 1` form. Convert it after fetch List of [SpokenLanguage]
-  /// from TMDB Api Server.
-  final String language;
-  final String originalTitle;
-  final String overview;
-  final double popularity;
-  final String? posterPath;
-  final DateTime? releaseDate;
-  final String title;
-  final double voteAverage;
-  final int voteCount;
-
+final class Movie extends Product {
   const Movie({
+    required super.id,
+    required super.title,
+    required super.overview,
+    super.releaseDate,
+    required super.language,
+    required super.genreIds,
+    super.backdropPath,
+    super.posterPath,
+    required super.originalTitle,
+    required super.popularity,
+    required super.voteAverage,
+    required super.voteCount,
     required this.isAdult,
-    this.backdropPath,
-    required this.genreIds,
-    required this.id,
-    required this.language,
-    required this.originalTitle,
-    required this.overview,
-    required this.popularity,
-    this.posterPath,
-    this.releaseDate,
-    required this.title,
-    required this.voteAverage,
-    required this.voteCount,
   });
+
+  final bool isAdult;
 
   @override
   List<Object?> get props {
     return [
-      isAdult,
-      backdropPath,
-      genreIds,
       id,
-      language,
-      originalTitle,
-      overview,
-      popularity,
-      posterPath,
-      releaseDate,
       title,
+      overview,
+      backdropPath,
+      posterPath,
+      language,
+      genreIds,
+      originalTitle,
+      popularity,
       voteAverage,
       voteCount,
+      isAdult,
     ];
   }
 }
