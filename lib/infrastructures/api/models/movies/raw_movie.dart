@@ -35,19 +35,19 @@ class RawMovie with _$RawMovie {
 
   Movie toEntity() {
     return Movie(
-      isAdult: adult,
-      backdropPath: backdropPath,
-      genreIds: genreIds,
       id: id,
-      language: originalLanguage,
-      originalTitle: originalTitle,
-      overview: overview,
-      popularity: popularity,
-      posterPath: posterPath,
-      releaseDate: DateTime.tryParse(releaseDate),
       title: title,
+      overview: overview,
+      releaseDate: DateTime.tryParse(releaseDate),
+      language: originalLanguage,
+      genreIds: genreIds,
+      backdropPath: backdropPath,
+      posterPath: posterPath,
+      originalTitle: originalTitle,
+      popularity: popularity,
       voteAverage: voteAverage,
       voteCount: voteCount,
+      isAdult: adult,
     );
   }
 }

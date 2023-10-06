@@ -1,45 +1,35 @@
-import 'package:equatable/equatable.dart';
+import 'package:screen_pal/core/entities/products/product.dart';
 
-import 'package:screen_pal/core/entities/extras/spoken_language.dart';
-
-class TvShow extends Equatable {
-  final String? backdropPath;
-  final List<int> genreIds;
-  final int id;
-  final String name;
-
-  /// Its in `ISO 639 1` form. Convert it after fetch List of [SpokenLanguage]
-  /// from TMDB Api Server.
-  final String originalLanguage;
-  final String originalName;
-  final String overview;
-  final String? posterPath;
-  final double voteAverage;
-
+final class TvShow extends Product {
   const TvShow({
-    this.backdropPath,
-    required this.genreIds,
-    required this.id,
-    required this.name,
-    required this.originalLanguage,
-    required this.originalName,
-    required this.overview,
-    this.posterPath,
-    required this.voteAverage,
+    required super.id,
+    required super.title,
+    required super.overview,
+    super.releaseDate,
+    required super.language,
+    required super.genreIds,
+    super.backdropPath,
+    super.posterPath,
+    required super.originalTitle,
+    required super.popularity,
+    required super.voteAverage,
+    required super.voteCount,
   });
 
   @override
   List<Object?> get props {
     return [
-      backdropPath,
-      genreIds,
       id,
-      name,
-      originalLanguage,
-      originalName,
+      title,
       overview,
+      backdropPath,
       posterPath,
+      language,
+      genreIds,
+      originalTitle,
+      popularity,
       voteAverage,
+      voteCount,
     ];
   }
 }
