@@ -8,7 +8,7 @@ abstract final class AppNavigator {
   // base paths
 
   static const _moviesPath = '/movies';
-  static const _tvShowsPath = '/tv_shows';
+  static const _tvShowsPath = '/tv-shows';
   static const _settingsPath = '/settings';
 
   /// Navigate to `/movies` route.
