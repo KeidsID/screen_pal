@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/core/entities/movies/movie.dart';
-import 'package:screen_pal/interfaces/widgets/card/movie_card.dart';
+import 'package:screen_pal/core/entities/products/product.dart';
+import 'package:screen_pal/interfaces/widgets/products/product_card.dart';
 
-class MovieHorizListView extends StatelessWidget {
-  /// Create a horizontal [ListView] with [MovieCard] items.
-  const MovieHorizListView(
-    this.movies, {
+class ProductHorizListView extends StatelessWidget {
+  const ProductHorizListView(
+    this.products, {
     super.key,
     this.height = 240.0,
     this.itemWidth = 160.0,
     this.padding,
   });
 
-  final List<Movie> movies;
+  final List<Product> products;
 
   final double height;
   final double itemWidth;
@@ -28,11 +27,11 @@ class MovieHorizListView extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: padding,
-        itemCount: movies.length,
+        itemCount: products.length,
         itemBuilder: (_, index) {
-          final movie = movies[index];
+          final movie = products[index];
 
-          return SizedBox(width: itemWidth, child: MovieCard(movie: movie));
+          return SizedBox(width: itemWidth, child: ProductCard(movie));
         },
       ),
     );

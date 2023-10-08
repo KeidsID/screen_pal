@@ -7,7 +7,7 @@ import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_collection_detail_provider.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
-import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
+import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.dart';
 
 const _kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
@@ -158,7 +158,7 @@ class _ThinDeviceLayout extends StatelessWidget {
               child: e,
             );
           }),
-          MovieHorizListView(movieCollection.parts, padding: _kHorizPadding),
+          ProductHorizListView(movieCollection.parts, padding: _kHorizPadding),
         ],
       ),
     );
@@ -237,7 +237,7 @@ class _WideDeviceLayout extends StatelessWidget {
             padding: _kHorizPadding,
             child: Text('Movies', style: textTheme.headlineSmall),
           ),
-          MovieHorizListView(movieCollection.parts, padding: _kHorizPadding),
+          ProductHorizListView(movieCollection.parts, padding: _kHorizPadding),
         ],
       ),
     );

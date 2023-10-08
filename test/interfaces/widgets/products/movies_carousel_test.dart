@@ -3,12 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
 
-import 'package:screen_pal/core/entities/movies/movie.dart';
+import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
-import 'package:screen_pal/interfaces/widgets/carousel/movies_carousel.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/products/products_carousel.dart';
 
 import '../../../helpers/dummy/dummy_genres.dart';
 import '../../../helpers/dummy/dummy_languages.dart';
@@ -17,7 +17,7 @@ import '../../../helpers/providers/fake_languages_notifier.dart';
 import '../../../helpers/providers/fake_movie_genres_notifier.dart';
 
 void main() {
-  Widget testWidgetApp(List<Movie> movies) {
+  Widget testWidgetApp(List<Product> products) {
     return ProviderScope(
       overrides: [
         languagesProvider.overrideWith(() => FakeLanguagesNotifier()),
@@ -25,8 +25,8 @@ void main() {
       ],
       child: MaterialApp(
         home: Scaffold(
-          body: MoviesCarousel(
-            movies: movies,
+          body: ProductsCarousel(
+            products,
             autoPlay: false,
             enableInfiniteScroll: false,
           ),
@@ -35,9 +35,9 @@ void main() {
     );
   }
 
-  group('MoviesCarousel widget', () {
+  group('ProductsCarousel widget', () {
     testWidgets(
-      'should render movie contents correctly',
+      'should render product contents correctly',
       (tester) => mockNetworkImagesFor(() async {
         await tester.pumpWidget(testWidgetApp([dummyMovie]));
 
@@ -51,10 +51,10 @@ void main() {
         );
 
         expect(
-          tester.widget(_WidgetFinders.movieTitle.last),
+          tester.widget(_WidgetFinders.productTitle.last),
           isA<Text>().having(
             (e) => e.data,
-            'movie title',
+            'product title',
             dummyMovie.title,
           ),
         );
@@ -74,15 +74,15 @@ void main() {
         ].join(' • ');
 
         expect(
-          tester.widget(_WidgetFinders.movieExtras.last),
-          isA<Text>().having((e) => e.data, 'movie extras detail', extras),
+          tester.widget(_WidgetFinders.productExtras.last),
+          isA<Text>().having((e) => e.data, 'product extras detail', extras),
         );
       }),
     );
 
     testWidgets(
       'on Thin Device (width < 800) '
-      'should render [Stack] and not contain movie overview',
+      'should render [Stack] and not contain product overview',
       (tester) => mockNetworkImagesFor(() async {
         final dpi = tester.view.devicePixelRatio;
         tester.view.physicalSize = Size(768 * dpi, 476 * dpi);
@@ -94,13 +94,13 @@ void main() {
           isA<Stack>(),
         );
 
-        await expectLater(_WidgetFinders.movieOverview, findsNothing);
+        await expectLater(_WidgetFinders.productOverview, findsNothing);
       }),
     );
 
     testWidgets(
       'on Wide Device (width >= 800) '
-      'should render [Card] and contain movie overview',
+      'should render [Card] and contain product overview',
       (tester) => mockNetworkImagesFor(() async {
         final dpi = tester.view.devicePixelRatio;
         tester.view.physicalSize = Size(1024 * dpi, 635 * dpi);
@@ -112,7 +112,7 @@ void main() {
           isA<Card>(),
         );
 
-        await expectLater(_WidgetFinders.movieOverview, findsWidgets);
+        await expectLater(_WidgetFinders.productOverview, findsWidgets);
       }),
     );
   });
@@ -123,7 +123,8 @@ abstract class _WidgetFinders {
       find.byKey(const Key('content-container'));
 
   static Finder get image => find.byKey(const Key('image-widget'));
-  static Finder get movieTitle => find.byKey(const Key('movie-title'));
-  static Finder get movieExtras => find.byKey(const Key('movie-extras'));
-  static Finder get movieOverview => find.byKey(const Key('movie-overview'));
+  static Finder get productTitle => find.byKey(const Key('product-title'));
+  static Finder get productExtras => find.byKey(const Key('product-extras'));
+  static Finder get productOverview =>
+      find.byKey(const Key('product-overview'));
 }
