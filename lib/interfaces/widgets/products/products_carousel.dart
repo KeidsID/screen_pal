@@ -31,6 +31,7 @@ class ProductsCarousel extends ConsumerStatefulWidget {
   const ProductsCarousel(
     this.products, {
     super.key,
+    this.height = 600.0,
     this.enableInfiniteScroll = true,
     this.autoPlay = false,
     this.autoPlayInterval = const Duration(seconds: 4),
@@ -38,6 +39,9 @@ class ProductsCarousel extends ConsumerStatefulWidget {
   }) : assert(products.length <= 10);
 
   final List<Product> products;
+
+  /// Widget height.
+  final double height;
 
   /// Determines if carousel should loop infinitely or be limited to item length.
   ///
@@ -67,53 +71,51 @@ class ProductsCarousel extends ConsumerStatefulWidget {
 class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
   /// Carousel current index
   int currentIndex = 0;
+
   final _controller = CarouselController();
 
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
-    final isThin = deviceSize.width < 800.0;
+    final maxW = deviceSize.width;
+    final maxH = widget.height;
+    final aspectRatio = deviceSize.aspectRatio;
 
-    final deviceH = deviceSize.height;
-    const minH = 400.0;
-    const maxH = 800.0;
+    final isWide =
+        (maxW >= 600) ? (aspectRatio >= 3 / 2 && maxW > maxH) : false;
 
-    const takenH = 0.75; // in percent
-
-    final carouselHeight = deviceH < minH
-        ? minH * takenH
-        : deviceH >= maxH
-            ? maxH * takenH
-            : deviceH * takenH;
-
-    return Padding(
-      padding: EdgeInsets.only(top: isThin ? 0.0 : 16.0),
+    return Container(
+      width: maxW,
+      height: maxH,
+      padding: EdgeInsets.only(top: isWide ? 16.0 : 0.0),
       child: Column(
         children: [
-          CarouselSlider.builder(
-            carouselController: _controller,
-            options: CarouselOptions(
-              enableInfiniteScroll: widget.enableInfiniteScroll,
-              height: carouselHeight,
-              enlargeCenterPage: isThin ? false : true,
-              enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-              viewportFraction: isThin ? 1 : 0.95,
-              autoPlay: widget.autoPlay,
-              autoPlayInterval: widget.autoPlayInterval,
-              autoPlayAnimationDuration: widget.autoPlayAnimationDuration,
-              onPageChanged: (index, _) => setState(() => currentIndex = index),
+          Expanded(
+            child: SizedBox.expand(
+              child: CarouselSlider.builder(
+                carouselController: _controller,
+                options: CarouselOptions(
+                  enableInfiniteScroll: widget.enableInfiniteScroll,
+                  enlargeCenterPage: isWide,
+                  enlargeStrategy: CenterPageEnlargeStrategy.zoom,
+                  viewportFraction: isWide ? 0.9 : 1,
+                  autoPlay: widget.autoPlay,
+                  autoPlayInterval: widget.autoPlayInterval,
+                  autoPlayAnimationDuration: widget.autoPlayAnimationDuration,
+                  onPageChanged: (index, _) =>
+                      setState(() => currentIndex = index),
+                ),
+                itemCount: widget.products.length,
+                itemBuilder: (context, index, realIndex) {
+                  final product = widget.products[index];
+
+                  if (isWide) return _WideDeviceLayout(product: product);
+
+                  return _ThinDeviceLayout(product: product);
+                },
+              ),
             ),
-            itemCount: widget.products.length,
-            itemBuilder: (context, index, realIndex) {
-              final product = widget.products[index];
-
-              if (!isThin) {
-                return _WideDeviceLayout(product: product);
-              }
-
-              return _ThinDeviceLayout(product: product);
-            },
           ),
           const SizedBox(height: 8.0),
           Builder(builder: (context) {
@@ -149,22 +151,22 @@ class _ExtrasText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieExtras = (product is Movie)
+    final extras = (product is Movie)
         ? ref.watch(movieExtrasProvider)
         : ref.watch(tvShowExtrasProvider);
 
     String language = product.language;
     List<String> genreNames = [];
 
-    if (movieExtras.languages.isNotEmpty) {
-      language = movieExtras.languages.firstWhere((e) {
+    if (extras.languages.isNotEmpty) {
+      language = extras.languages.firstWhere((e) {
         return e.iso6391 == product.language;
       }).englishName;
     }
 
-    if (movieExtras.genres.isNotEmpty) {
+    if (extras.genres.isNotEmpty) {
       genreNames = product.genreIds.map((id) {
-        return movieExtras.genres.firstWhere((e) => e.id == id).name;
+        return extras.genres.firstWhere((e) => e.id == id).name;
       }).toList();
     }
 
