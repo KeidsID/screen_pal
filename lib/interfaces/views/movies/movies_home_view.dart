@@ -1,59 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
+import 'package:screen_pal/interfaces/utils/product_list_section.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/carousel/movies_carousel.dart';
-import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
+import 'package:screen_pal/interfaces/widgets/products/products_carousel.dart';
 
 class MoviesHomeView extends StatelessWidget {
   const MoviesHomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
-    const sectionPadding = EdgeInsets.symmetric(horizontal: 16.0);
-
-    List<Widget> section({
-      required String title,
-      required FutureProvider<List<Movie>> moviesProvider,
-    }) {
-      return [
-        Padding(
-          padding: sectionPadding,
-          child: Text(title, style: textTheme.titleLarge),
-        ),
-        SizedBox(
-          height: 240.0,
-          child: Consumer(builder: (_, ref, __) {
-            final movieList = ref.watch(moviesProvider);
-
-            if (movieList.isRefreshing) {
-              return RiverpodAsyncValueHandlers.loading();
-            }
-
-            return movieList.when(
-              loading: RiverpodAsyncValueHandlers.loading,
-              error: (error, stackTrace) {
-                return RiverpodAsyncValueHandlers.error(
-                  error,
-                  stackTrace,
-                  action: () => ref.invalidate(moviesProvider),
-                );
-              },
-              data: (movies) => MovieHorizListView(
-                movies,
-                padding: sectionPadding,
-              ),
-            );
-          }),
-        ),
-      ];
-    }
-
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -87,8 +44,8 @@ class MoviesHomeView extends StatelessWidget {
                           ? movies
                           : movies.sublist(0, 10);
 
-                      return MoviesCarousel(
-                        movies: filteredMovies,
+                      return ProductsCarousel(
+                        filteredMovies,
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 6),
                         autoPlayAnimationDuration: const Duration(seconds: 2),
@@ -98,19 +55,22 @@ class MoviesHomeView extends StatelessWidget {
                 },
               ),
               const SizedBox(height: 16.0),
-              ...section(
+              ...productListSection(
+                context,
                 title: 'On Theatres',
-                moviesProvider: nowPlayingMoviesProvider,
+                productProvider: nowPlayingMoviesProvider,
               ),
               const SizedBox(height: 16.0),
-              ...section(
+              ...productListSection(
+                context,
                 title: 'Top Rated',
-                moviesProvider: topRatedMoviesProvider,
+                productProvider: topRatedMoviesProvider,
               ),
               const SizedBox(height: 16.0),
-              ...section(
+              ...productListSection(
+                context,
                 title: 'Upcoming on Theatres',
-                moviesProvider: upcomingMoviesProvider,
+                productProvider: upcomingMoviesProvider,
               ),
             ],
           ),

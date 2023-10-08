@@ -10,7 +10,7 @@ import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
-import 'package:screen_pal/interfaces/widgets/list_view/movie_horiz_list_view.dart';
+import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.dart';
 
 class MovieDetailView extends StatelessWidget {
   const MovieDetailView(this.movieId, {super.key});
@@ -221,7 +221,7 @@ class _MovieRecommendationsHorizListView extends StatelessWidget {
               return const Center(child: Text('No recommendations yet'));
             }
 
-            return MovieHorizListView(movies, padding: _kContentHorizPadding);
+            return ProductHorizListView(movies, padding: _kContentHorizPadding);
           },
         );
       }),

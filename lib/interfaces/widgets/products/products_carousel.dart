@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:screen_pal/core/entities/movies/movie.dart';
@@ -14,29 +15,29 @@ import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 /// To check which layout are rendered.
 const _contentContainerKey = Key('content-container');
 
-// To check movie contents:
+// To check product contents:
 
 const _imageKey = Key('image-widget');
-const _movieTitleKey = Key('movie-title');
-const _movieExtrasKey = Key('movie-extras');
-const _movieOverviewKey = Key('movie-overview');
+const _productTitleKey = Key('product-title');
+const _productExtrasKey = Key('product-extras');
+const _productOverviewKey = Key('product-overview');
 
-class MoviesCarousel extends ConsumerStatefulWidget {
-  /// Create a Carousel widget that displays basic information of the movies
-  /// provided.
+class ProductsCarousel extends ConsumerStatefulWidget {
+  /// Create a Carousel widget that displays basic information of the
+  /// movies/tv-shows provided.
   ///
-  /// Max number of movies are 10. To make sure the indicator not overflow
+  /// Max number of product are 10. To make sure the indicator not overflow
   /// from the screen.
-  const MoviesCarousel({
+  const ProductsCarousel(
+    this.products, {
     super.key,
-    required this.movies,
     this.enableInfiniteScroll = true,
     this.autoPlay = false,
     this.autoPlayInterval = const Duration(seconds: 4),
     this.autoPlayAnimationDuration = const Duration(milliseconds: 800),
-  }) : assert(movies.length <= 10);
+  }) : assert(products.length <= 10);
 
-  final List<Movie> movies;
+  final List<Product> products;
 
   /// Determines if carousel should loop infinitely or be limited to item length.
   ///
@@ -60,10 +61,10 @@ class MoviesCarousel extends ConsumerStatefulWidget {
   final Duration autoPlayAnimationDuration;
 
   @override
-  ConsumerState<MoviesCarousel> createState() => _MoviesCarouselState();
+  ConsumerState<ProductsCarousel> createState() => _ProductsCarouselState();
 }
 
-class _MoviesCarouselState extends ConsumerState<MoviesCarousel> {
+class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
   /// Carousel current index
   int currentIndex = 0;
   final _controller = CarouselController();
@@ -103,15 +104,15 @@ class _MoviesCarouselState extends ConsumerState<MoviesCarousel> {
               autoPlayAnimationDuration: widget.autoPlayAnimationDuration,
               onPageChanged: (index, _) => setState(() => currentIndex = index),
             ),
-            itemCount: widget.movies.length,
+            itemCount: widget.products.length,
             itemBuilder: (context, index, realIndex) {
-              final movie = widget.movies[index];
+              final product = widget.products[index];
 
               if (!isThin) {
-                return _WideDeviceLayout(movie: movie);
+                return _WideDeviceLayout(product: product);
               }
 
-              return _ThinDeviceLayout(movie: movie);
+              return _ThinDeviceLayout(product: product);
             },
           ),
           const SizedBox(height: 8.0),
@@ -120,7 +121,7 @@ class _MoviesCarouselState extends ConsumerState<MoviesCarousel> {
 
             return AnimatedSmoothIndicator(
               activeIndex: currentIndex,
-              count: widget.movies.length,
+              count: widget.products.length,
               duration: const Duration(milliseconds: 500),
               effect: WormEffect(
                 dotColor: colorScheme.secondaryContainer,
@@ -135,30 +136,34 @@ class _MoviesCarouselState extends ConsumerState<MoviesCarousel> {
   }
 }
 
-VoidCallback _navigateToDetailPage(BuildContext context, int movieId) {
-  return () => AppNavigator.movieDetail(context, movieId);
+VoidCallback _onItemTap(BuildContext context, Product product) {
+  return () => (product is Movie)
+      ? AppNavigator.movieDetail(context, product.id)
+      : AppNavigator.tvShowDetail(context, product.id);
 }
 
-class _MovieExtrasText extends ConsumerWidget {
-  const _MovieExtrasText({required this.movie});
+class _ExtrasText extends ConsumerWidget {
+  const _ExtrasText({required this.product});
 
-  final Movie movie;
+  final Product product;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieExtras = ref.watch(movieExtrasProvider);
+    final movieExtras = (product is Movie)
+        ? ref.watch(movieExtrasProvider)
+        : ref.watch(tvShowExtrasProvider);
 
-    String language = movie.language;
+    String language = product.language;
     List<String> genreNames = [];
 
     if (movieExtras.languages.isNotEmpty) {
       language = movieExtras.languages.firstWhere((e) {
-        return e.iso6391 == movie.language;
+        return e.iso6391 == product.language;
       }).englishName;
     }
 
     if (movieExtras.genres.isNotEmpty) {
-      genreNames = movie.genreIds.map((id) {
+      genreNames = product.genreIds.map((id) {
         return movieExtras.genres.firstWhere((e) => e.id == id).name;
       }).toList();
     }
@@ -167,11 +172,11 @@ class _MovieExtrasText extends ConsumerWidget {
       opacity: 0.5,
       child: Text(
         [
-          movie.releaseDate?.year ?? 'Coming Soon',
+          product.releaseDate?.year ?? 'Coming Soon',
           language,
           genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
         ].join(' • '),
-        key: _movieExtrasKey,
+        key: _productExtrasKey,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
@@ -182,13 +187,15 @@ class _MovieExtrasText extends ConsumerWidget {
 class _ThinDeviceLayout extends StatelessWidget {
   const _ThinDeviceLayout({
     Key? key,
-    required this.movie,
+    required this.product,
   }) : super(key: key);
 
-  final Movie movie;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Stack(
       key: _contentContainerKey,
       alignment: Alignment.bottomCenter,
@@ -196,12 +203,12 @@ class _ThinDeviceLayout extends StatelessWidget {
       children: [
         DefaultNetworkImage(
           key: _imageKey,
-          imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
+          imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
           imageBuilder: (context, imageProvider) {
             return Ink.image(
               image: imageProvider,
               fit: BoxFit.cover,
-              child: InkWell(onTap: _navigateToDetailPage(context, movie.id)),
+              child: InkWell(onTap: _onItemTap(context, product)),
             );
           },
         ),
@@ -209,24 +216,20 @@ class _ThinDeviceLayout extends StatelessWidget {
         IgnorePointer(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Builder(builder: (context) {
-              final textTheme = Theme.of(context).textTheme;
-
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    movie.title,
-                    key: _movieTitleKey,
-                    style: textTheme.headlineLarge,
-                    textAlign: TextAlign.center,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  _MovieExtrasText(movie: movie),
-                ],
-              );
-            }),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Text(
+                  product.title,
+                  key: _productTitleKey,
+                  style: textTheme.headlineLarge,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                _ExtrasText(product: product),
+              ],
+            ),
           ),
         ),
       ],
@@ -259,10 +262,10 @@ class _ThinDeviceLayout extends StatelessWidget {
 class _WideDeviceLayout extends StatelessWidget {
   const _WideDeviceLayout({
     Key? key,
-    required this.movie,
+    required this.product,
   }) : super(key: key);
 
-  final Movie movie;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -272,7 +275,7 @@ class _WideDeviceLayout extends StatelessWidget {
     return Card(
       key: _contentContainerKey,
       child: InkWell(
-        onTap: _navigateToDetailPage(context, movie.id),
+        onTap: _onItemTap(context, product),
         child: Row(
           children: [
             Expanded(
@@ -283,17 +286,17 @@ class _WideDeviceLayout extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      movie.title,
-                      key: _movieTitleKey,
+                      product.title,
+                      key: _productTitleKey,
                       style: textTheme.headlineLarge,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    _MovieExtrasText(movie: movie),
+                    _ExtrasText(product: product),
                     const SizedBox(height: 8.0),
                     Expanded(
                       child: SingleChildScrollView(
-                        child: Text(movie.overview, key: _movieOverviewKey),
+                        child: Text(product.overview, key: _productOverviewKey),
                       ),
                     ),
                   ],
@@ -306,7 +309,7 @@ class _WideDeviceLayout extends StatelessWidget {
                 child: _faderMask(
                   child: DefaultNetworkImage(
                     key: _imageKey,
-                    imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
+                    imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
                     fit: BoxFit.cover,
                   ),
                 ),

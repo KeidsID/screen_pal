@@ -27,6 +27,11 @@ abstract final class AppNavigator {
   /// Navigate to `/tv_shows` route.
   static void tvShows(BuildContext context) => context.go(_tvShowsPath);
 
+  /// Navigate to `/tv_shows/tv-:tvShowId` route.
+  static void tvShowDetail(BuildContext context, int tvShowId) {
+    context.go('$_tvShowsPath/tv-$tvShowId');
+  }
+
   /// Navigate to `/settings` route.
   static void settings(BuildContext context) => context.go(_settingsPath);
 

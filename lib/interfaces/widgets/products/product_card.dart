@@ -2,33 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/movies/movie.dart';
+import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
 
-class MovieCard extends StatefulWidget {
-  const MovieCard({super.key, required this.movie});
+class ProductCard extends StatefulWidget {
+  const ProductCard(this.product, {super.key});
 
-  final Movie movie;
+  final Product product;
 
   @override
-  State<MovieCard> createState() => _MovieCardState();
+  State<ProductCard> createState() => _ProductCardState();
 }
 
-class _MovieCardState extends State<MovieCard> {
+class _ProductCardState extends State<ProductCard> {
   bool isCardHovered = false;
 
   @override
   Widget build(BuildContext context) {
-    final movie = widget.movie;
+    final product = widget.product;
+    final isAdult = (product is Movie) ? product.isAdult : false;
 
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
 
     return Card(
       child: InkWell(
-        onTap: () => AppNavigator.movieDetail(context, movie.id),
+        onTap: _onCardTap,
         onHover: (isHovered) => setState(() => isCardHovered = isHovered),
         onLongPress: () {
           final scaffoldMessenger = ScaffoldMessenger.of(context);
@@ -40,14 +42,14 @@ class _MovieCardState extends State<MovieCard> {
           fit: StackFit.expand,
           children: [
             DefaultNetworkImage(
-              imageUrl: '$tmdbImageBaseUrl${movie.posterPath}',
-              alt: movie.title,
+              imageUrl: '$tmdbImageBaseUrl${product.posterPath}',
+              alt: product.title,
               imageBuilder: (_, imgProvider) => Ink.image(
                 image: imgProvider,
                 fit: BoxFit.cover,
               ),
             ),
-            movie.isAdult
+            isAdult
                 ? Banner(
                     message: 'ADULT',
                     location: BannerLocation.topEnd,
@@ -65,13 +67,13 @@ class _MovieCardState extends State<MovieCard> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          movie.title,
+                          product.title,
                           style: textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.bold),
                           textAlign: TextAlign.center,
                         ),
-                        Text('${movie.releaseDate?.year ?? 'Coming Soon'}'),
-                        _ExtrasText(movie),
+                        Text('${product.releaseDate?.year ?? 'Coming Soon'}'),
+                        _ExtrasText(product),
                       ],
                     ),
                   )
@@ -82,8 +84,19 @@ class _MovieCardState extends State<MovieCard> {
     );
   }
 
+  void _onCardTap() {
+    final product = widget.product;
+
+    if (product is Movie) {
+      AppNavigator.movieDetail(context, product.id);
+      return;
+    }
+
+    AppNavigator.tvShowDetail(context, product.id);
+  }
+
   SnackBar _detailSnackBar() {
-    final movie = widget.movie;
+    final movie = widget.product;
 
     return SnackBar(
       behavior: SnackBarBehavior.floating,
@@ -104,39 +117,41 @@ class _MovieCardState extends State<MovieCard> {
 
 class _ExtrasText extends ConsumerWidget {
   const _ExtrasText(
-    this.movie, {
+    this.product, {
     this.isShowReleaseDate = false,
     this.isShowMainGenreOnly = true,
   });
 
-  final Movie movie;
+  final Product product;
 
   final bool isShowReleaseDate;
   final bool isShowMainGenreOnly;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final movieExtras = ref.watch(movieExtrasProvider);
+    final extras = (product is Movie)
+        ? ref.watch(movieExtrasProvider)
+        : ref.watch(tvShowExtrasProvider);
 
-    String language = movie.language;
+    String language = product.language;
     List<String> genreNames = [];
 
-    if (movieExtras.languages.isNotEmpty) {
-      language = movieExtras.languages.firstWhere((e) {
-        return e.iso6391 == movie.language;
+    if (extras.languages.isNotEmpty) {
+      language = extras.languages.firstWhere((e) {
+        return e.iso6391 == product.language;
       }).englishName;
     }
 
-    if (movieExtras.genres.isNotEmpty) {
-      genreNames = movie.genreIds.map((id) {
-        return movieExtras.genres.firstWhere((e) => e.id == id).name;
+    if (extras.genres.isNotEmpty) {
+      genreNames = product.genreIds.map((id) {
+        return extras.genres.firstWhere((e) => e.id == id).name;
       }).toList();
     }
 
     return Text(
       [
         ...(isShowReleaseDate
-            ? ['${movie.releaseDate?.year ?? 'Coming Soon'}']
+            ? ['${product.releaseDate?.year ?? 'Coming Soon'}']
             : []),
         language,
         genreNames.isEmpty
