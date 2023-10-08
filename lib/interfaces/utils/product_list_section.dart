@@ -20,7 +20,7 @@ import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.d
 List<Widget> productListSection(
   BuildContext context, {
   required String title,
-  required FutureProvider<List<Product>> productProvider,
+  required FutureProvider<List<Product>> productsProvider,
   EdgeInsets padding = const EdgeInsets.symmetric(horizontal: 16.0),
 }) {
   final textTheme = Theme.of(context).textTheme;
@@ -33,7 +33,7 @@ List<Widget> productListSection(
     SizedBox(
       height: 240.0,
       child: Consumer(builder: (_, ref, __) {
-        final movieList = ref.watch(productProvider);
+        final movieList = ref.watch(productsProvider);
 
         if (movieList.isRefreshing) {
           return RiverpodAsyncValueHandlers.loading();
@@ -45,7 +45,7 @@ List<Widget> productListSection(
             return RiverpodAsyncValueHandlers.error(
               error,
               stackTrace,
-              action: () => ref.invalidate(productProvider),
+              action: () => ref.invalidate(productsProvider),
             );
           },
           data: (products) => ProductHorizListView(products, padding: padding),
