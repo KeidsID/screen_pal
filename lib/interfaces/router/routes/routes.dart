@@ -10,6 +10,7 @@ import 'package:screen_pal/interfaces/views/movies/movie_collection_detail_view.
 import 'package:screen_pal/interfaces/views/movies/movie_detail_view.dart';
 import 'package:screen_pal/interfaces/views/movies/movies_home_view.dart';
 import 'package:screen_pal/interfaces/views/settings_view.dart';
+import 'package:screen_pal/interfaces/views/tv_shows/tv_shows_home_view.dart';
 import 'package:screen_pal/interfaces/widgets/dialogs/about_app_dialog.dart';
 import 'package:screen_pal/interfaces/widgets/dialogs/about_tmdb_dialog.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
