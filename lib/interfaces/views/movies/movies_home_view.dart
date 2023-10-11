@@ -19,19 +19,16 @@ class MoviesHomeView extends StatelessWidget {
               ProductsCarouselSection(popularMoviesProvider),
               const SizedBox(height: 16.0),
               ...productListSection(
-                context,
                 title: 'On Theatres',
                 productsProvider: nowPlayingMoviesProvider,
               ),
               const SizedBox(height: 16.0),
               ...productListSection(
-                context,
                 title: 'Top Rated',
                 productsProvider: topRatedMoviesProvider,
               ),
               const SizedBox(height: 16.0),
               ...productListSection(
-                context,
                 title: 'Upcoming on Theatres',
                 productsProvider: upcomingMoviesProvider,
               ),

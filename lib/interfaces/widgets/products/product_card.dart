@@ -6,7 +6,8 @@ import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
-import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/apps/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard(this.product, {super.key});
@@ -24,9 +25,6 @@ class _ProductCardState extends State<ProductCard> {
   Widget build(BuildContext context) {
     final product = widget.product;
     final isAdult = (product is Movie) ? product.isAdult : false;
-
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
 
     return Card(
       child: InkWell(
@@ -49,35 +47,8 @@ class _ProductCardState extends State<ProductCard> {
                 fit: BoxFit.cover,
               ),
             ),
-            isAdult
-                ? Banner(
-                    message: 'ADULT',
-                    location: BannerLocation.topEnd,
-                    color: theme.colorScheme.error,
-                    textStyle: textTheme.bodyMedium!.copyWith(
-                      color: theme.colorScheme.onError,
-                    ),
-                  )
-                : const SizedBox(),
-            isCardHovered
-                ? Container(
-                    color: theme.cardColor.withOpacity(0.6),
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          product.title,
-                          style: textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                        Text('${product.releaseDate?.year ?? 'Coming Soon'}'),
-                        _ExtrasText(product),
-                      ],
-                    ),
-                  )
-                : const SizedBox(),
+            isAdult ? const _AdultBanner() : const SizedBox(),
+            isCardHovered ? _DetailOnHover(product) : const SizedBox(),
           ],
         ),
       ),
@@ -109,6 +80,58 @@ class _ProductCardState extends State<ProductCard> {
             isShowReleaseDate: true,
             isShowMainGenreOnly: false,
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AdultBanner extends StatelessWidget {
+  const _AdultBanner();
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Banner(
+      message: 'ADULT',
+      location: BannerLocation.topEnd,
+      color: colorScheme.error,
+      textStyle: DefaultTextStyle.of(context)
+          .style
+          .copyWith(color: colorScheme.onError),
+    );
+  }
+}
+
+class _DetailOnHover extends StatelessWidget {
+  const _DetailOnHover(this.product);
+
+  final Product product;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Theme.of(context).cardColor.withOpacity(0.6),
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: MaterialText(
+              product.title,
+              style: M3TextStyles.titleMedium,
+              textAlign: TextAlign.center,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              '${product.releaseDate?.year ?? 'Coming Soon'}',
+            ),
+          ),
+          _ExtrasText(product),
         ],
       ),
     );

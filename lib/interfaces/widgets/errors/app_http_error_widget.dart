@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
 
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 import 'package:screen_pal/interfaces/widgets/errors/dio_exception_widget.dart';
@@ -84,8 +85,6 @@ class AppHttpErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     final String? title = {..._clientErrRes, ..._serverErrRes}[statusCode];
 
     if (title == null) {
@@ -98,8 +97,8 @@ class AppHttpErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$statusCode', style: theme.textTheme.displayMedium),
-            Text(title, style: theme.textTheme.headlineSmall),
+            MaterialText('$statusCode', style: M3TextStyles.displayMedium),
+            MaterialText(title, style: M3TextStyles.headlineSmall),
             const Divider(),
             Text(message),
             const SizedBox(height: 16.0),

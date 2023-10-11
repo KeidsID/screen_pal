@@ -19,19 +19,16 @@ class TvShowsHomeView extends StatelessWidget {
               ProductsCarouselSection(popularTvShowsProvider),
               const SizedBox(height: 16.0),
               ...productListSection(
-                context,
                 title: 'Airing Today',
                 productsProvider: airingTodayTvShowsProvider,
               ),
               const SizedBox(height: 16.0),
               ...productListSection(
-                context,
                 title: 'On Air',
                 productsProvider: onAirTvShowsProvider,
               ),
               const SizedBox(height: 16.0),
               ...productListSection(
-                context,
                 title: 'Top Rated',
                 productsProvider: topRatedTvShowsProvider,
               ),

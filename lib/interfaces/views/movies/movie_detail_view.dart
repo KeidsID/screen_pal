@@ -9,7 +9,8 @@ import 'package:screen_pal/interfaces/providers/movies/movie_detail_provider.dar
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/apps/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
 import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.dart';
 
 class MovieDetailView extends StatelessWidget {
@@ -24,12 +25,12 @@ class MovieDetailView extends StatelessWidget {
       body: Consumer(builder: (context, ref, __) {
         final movieDetailProv = ref.watch(movieDetailProvider(movieId));
 
-        if (movieDetailProv.isRefreshing) {
-          return RiverpodAsyncValueHandlers.loading();
-        }
+        final loadingWidget = RiverpodAsyncValueHandlers.loading();
+
+        if (movieDetailProv.isRefreshing) return loadingWidget;
 
         return movieDetailProv.when(
-          loading: RiverpodAsyncValueHandlers.loading,
+          loading: () => loadingWidget,
           error: (error, stackTrace) => RiverpodAsyncValueHandlers.error(
             error,
             stackTrace,
@@ -69,65 +70,52 @@ class _MovieDetailExtrasText extends StatelessWidget {
   Widget build(BuildContext context) {
     final languages = movieDetail.spokenLanguages;
 
-    return Opacity(
+    return MaterialText(
+      [
+        movieDetail.releaseDate?.year ?? 'Coming Soon',
+        languages.firstWhere((e) {
+          return e.iso6391 == movieDetail.originalLanguage;
+        }).englishName,
+        movieDetail.genres.isEmpty
+            ? 'Undefined'
+            : movieDetail.genres.map((e) => e.name).join(', ')
+      ].join(' • '),
       opacity: 0.5,
-      child: Text(
-        [
-          movieDetail.releaseDate?.year ?? 'Coming Soon',
-          languages.firstWhere((e) {
-            return e.iso6391 == movieDetail.originalLanguage;
-          }).englishName,
-          movieDetail.genres.isEmpty
-              ? 'Undefined'
-              : movieDetail.genres.map((e) => e.name).join(', ')
-        ].join(' • '),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
 
 List<Widget> _mainContents(
-  BuildContext context,
   MovieDetail movie, {
   bool isWideLayout = false,
 }) {
-  final textTheme = Theme.of(context).textTheme;
+  final budget = (movie.budget <= 0)
+      ? 'No Data'
+      : NumberFormat.currency(symbol: r'$').format(movie.budget);
+  final revenue = (movie.revenue <= 0)
+      ? 'No Data'
+      : NumberFormat.currency(symbol: r'$').format(movie.revenue);
 
   return [
-    Text(movie.title, style: textTheme.headlineLarge),
+    MaterialText(movie.title, style: M3TextStyles.headlineLarge),
     _MovieDetailExtrasText(movie),
-    Opacity(
-      opacity: 0.5,
-      child:
-          movie.tagline.isEmpty ? const SizedBox() : Text('# ${movie.tagline}'),
-    ),
+    movie.tagline.isEmpty
+        ? const SizedBox()
+        : MaterialText('# ${movie.tagline}', opacity: 0.5),
     const SizedBox(height: 8.0),
     isWideLayout
         ? Expanded(child: SingleChildScrollView(child: Text(movie.overview)))
         : Text(movie.overview),
     const Divider(),
     ...[
-      Text(
-        'Status: ${movie.status}',
-        style: textTheme.titleSmall,
-      ),
-      Text(
-        'Budget: '
-        '${(movie.budget <= 0) ? 'No Data' : NumberFormat.currency(
-            symbol: r'$',
-          ).format(movie.budget)}',
-        style: textTheme.titleSmall,
-      ),
-      Text(
-        'Revenue: '
-        '${(movie.revenue <= 0) ? 'No Data' : NumberFormat.currency(
-            symbol: r'$',
-          ).format(movie.revenue)}',
-        style: textTheme.titleSmall,
-      ),
-    ].map((e) => Opacity(opacity: 0.75, child: e)),
+      'Status: ${movie.status}',
+      'Budget: $budget',
+      'Revenue: $revenue',
+    ].map((text) {
+      return MaterialText(text, style: M3TextStyles.titleSmall, opacity: 0.75);
+    }),
   ];
 }
 
@@ -138,9 +126,6 @@ class _MovieCollectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
     return SizedBox(
       width: 600.0,
       height: 240.0,
@@ -156,17 +141,20 @@ class _MovieCollectionCard extends StatelessWidget {
                 imageBuilder: (_, imgProvider) => Ink.image(
                   image: imgProvider,
                   fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    Colors.white.withOpacity(0.25),
+                    BlendMode.modulate,
+                  ),
                 ),
               ),
-              Container(color: theme.cardColor.withOpacity(0.6)),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
+                    MaterialText(
                       'Part of ${movieCollection.name}',
-                      style: textTheme.headlineSmall,
+                      style: M3TextStyles.headlineSmall,
                     )
                   ],
                 ),
@@ -244,8 +232,6 @@ class _ThinDeviceLayout extends StatelessWidget {
 
     final isShowPoster = aspectRatio <= 2 / 3 && maxH > maxW;
 
-    final textTheme = Theme.of(context).textTheme;
-
     return SingleChildScrollView(
       padding: _kBottomPadding,
       child: Column(
@@ -262,10 +248,13 @@ class _ThinDeviceLayout extends StatelessWidget {
           ),
           const SizedBox(height: 16.0),
           ...[
-            ..._mainContents(context, movie),
+            ..._mainContents(movie),
             const Divider(),
             ..._movieCollectionSection(movie.movieCollection),
-            Text('Recommendations', style: textTheme.headlineSmall),
+            const MaterialText(
+              'Recommendations',
+              style: M3TextStyles.headlineSmall,
+            ),
           ].map((e) => Padding(padding: _kContentHorizPadding, child: e)),
           _MovieRecommendationsHorizListView(movie.id),
         ],
@@ -282,7 +271,6 @@ class _WideDeviceLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final textTheme = Theme.of(context).textTheme;
 
     const minH = 400.0;
     final maxH = screenSize.height > 600 ? 600 : screenSize.height;
@@ -297,12 +285,11 @@ class _WideDeviceLayout extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Opacity(
-                  opacity: 0.15,
-                  child: DefaultNetworkImage(
-                    imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
-                    fit: BoxFit.cover,
-                  ),
+                DefaultNetworkImage(
+                  imageUrl: '$tmdbImageBaseUrl${movie.backdropPath}',
+                  fit: BoxFit.cover,
+                  color: Colors.white.withOpacity(0.1),
+                  colorBlendMode: BlendMode.modulate,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -327,11 +314,7 @@ class _WideDeviceLayout extends StatelessWidget {
                           padding: const EdgeInsets.all(16.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: _mainContents(
-                              context,
-                              movie,
-                              isWideLayout: true,
-                            ),
+                            children: _mainContents(movie, isWideLayout: true),
                           ),
                         ),
                       ),
@@ -344,7 +327,10 @@ class _WideDeviceLayout extends StatelessWidget {
           const SizedBox(height: 16.0),
           ...[
             ..._movieCollectionSection(movie.movieCollection),
-            Text('Recommendations', style: textTheme.headlineSmall),
+            const MaterialText(
+              'Recommendations',
+              style: M3TextStyles.headlineSmall,
+            ),
           ].map((e) => Padding(padding: _kContentHorizPadding, child: e)),
           _MovieRecommendationsHorizListView(movie.id),
         ],

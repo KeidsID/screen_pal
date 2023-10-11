@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:screen_pal/configs/asset_paths.dart';
 import 'package:screen_pal/configs/constants.dart';
 import 'package:screen_pal/interfaces/utils/tmdb_logo_shader_mask.dart';
+import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutTmdbDialog extends StatelessWidget {
@@ -15,7 +16,6 @@ class AboutTmdbDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
     final materialL10n = MaterialLocalizations.of(context);
 
     return AlertDialog(
@@ -32,18 +32,21 @@ class AboutTmdbDialog extends StatelessWidget {
                   height: 80,
                 ),
               ),
-              Expanded(
+              const Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  padding: EdgeInsets.symmetric(horizontal: 24.0),
                   child: ListBody(
                     children: <Widget>[
-                      Text('The Movie DB', style: textTheme.headlineSmall),
-                      Text(
-                        'API v$kTmdbApiVersion',
-                        style: textTheme.bodyMedium,
+                      MaterialText(
+                        'The Movie DB',
+                        style: M3TextStyles.headlineSmall,
                       ),
-                      const SizedBox(height: 18.0),
-                      Text(_aboutTMDB, style: textTheme.bodySmall),
+                      MaterialText(
+                        'API v$kTmdbApiVersion',
+                        style: M3TextStyles.bodyMedium,
+                      ),
+                      SizedBox(height: 18.0),
+                      MaterialText(_aboutTMDB, style: M3TextStyles.bodySmall),
                     ],
                   ),
                 ),
