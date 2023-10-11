@@ -11,6 +11,8 @@ class DefaultNetworkImage extends StatelessWidget {
     required this.imageUrl,
     this.alt,
     this.fit,
+    this.color,
+    this.colorBlendMode,
     this.imageBuilder,
   });
 
@@ -26,6 +28,20 @@ class DefaultNetworkImage extends StatelessWidget {
   /// [paintImage].
   final BoxFit? fit;
 
+  /// If non-null, this color is blended with each image pixel using
+  /// [colorBlendMode].
+  final Color? color;
+
+  /// Used to combine [color] with this image.
+  ///
+  /// The default is [BlendMode.srcIn]. In terms of the blend mode, [color] is
+  /// the source and this image is the destination.
+  ///
+  /// See also:
+  ///
+  /// [BlendMode], which includes an illustration of the effect of each blend mode.
+  final BlendMode? colorBlendMode;
+
   /// Optional builder to further customize the display of the image.
   final ImageWidgetBuilder? imageBuilder;
 
@@ -34,6 +50,8 @@ class DefaultNetworkImage extends StatelessWidget {
     return CachedNetworkImage(
       imageUrl: imageUrl,
       fit: fit,
+      color: color,
+      colorBlendMode: colorBlendMode,
       imageBuilder: imageBuilder,
       placeholder: (_, __) => const Center(
         child: CircularProgressIndicator(),

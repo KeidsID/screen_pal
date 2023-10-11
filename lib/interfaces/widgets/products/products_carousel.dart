@@ -2,13 +2,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
+import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
-import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/apps/default_network_image.dart';
 
 // Tests Utils:
 
@@ -170,18 +171,16 @@ class _ExtrasText extends ConsumerWidget {
       }).toList();
     }
 
-    return Opacity(
+    return MaterialText(
+      [
+        product.releaseDate?.year ?? 'Coming Soon',
+        language,
+        genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
+      ].join(' • '),
+      key: _productExtrasKey,
       opacity: 0.5,
-      child: Text(
-        [
-          product.releaseDate?.year ?? 'Coming Soon',
-          language,
-          genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
-        ].join(' • '),
-        key: _productExtrasKey,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
@@ -196,8 +195,6 @@ class _ThinDeviceLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-
     return Stack(
       key: _contentContainerKey,
       alignment: Alignment.bottomCenter,
@@ -221,10 +218,10 @@ class _ThinDeviceLayout extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
+                MaterialText(
                   product.title,
                   key: _productTitleKey,
-                  style: textTheme.headlineLarge,
+                  style: M3TextStyles.headlineLarge,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -240,23 +237,23 @@ class _ThinDeviceLayout extends StatelessWidget {
 
   Widget _fader() {
     return IgnorePointer(
-      child: ShaderMask(
-        shaderCallback: (rect) {
-          return LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Colors.transparent,
-              Colors.black.withOpacity(0.2),
-              Colors.black,
-            ],
-          ).createShader(rect);
-        },
-        blendMode: BlendMode.dstIn,
-        child: Builder(builder: (context) {
-          return Container(color: Theme.of(context).scaffoldBackgroundColor);
-        }),
-      ),
+      child: Builder(builder: (context) {
+        final color = Theme.of(context).scaffoldBackgroundColor;
+
+        return Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Colors.transparent,
+                color.withOpacity(0.2),
+                color,
+              ],
+            ),
+          ),
+        );
+      }),
     );
   }
 }
@@ -271,9 +268,6 @@ class _WideDeviceLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final textTheme = theme.textTheme;
-
     return Card(
       key: _contentContainerKey,
       child: InkWell(
@@ -287,10 +281,10 @@ class _WideDeviceLayout extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    MaterialText(
                       product.title,
                       key: _productTitleKey,
-                      style: textTheme.headlineLarge,
+                      style: M3TextStyles.headlineLarge,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -305,35 +299,24 @@ class _WideDeviceLayout extends StatelessWidget {
                 ),
               ),
             ),
+            const VerticalDivider(width: 2.0, thickness: 2.0),
             Expanded(
               flex: 6,
-              child: SizedBox.expand(
-                child: _faderMask(
-                  child: DefaultNetworkImage(
-                    key: _imageKey,
-                    imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
+              child: DefaultNetworkImage(
+                key: _imageKey,
+                imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
+                fit: BoxFit.cover,
+                imageBuilder: (context, imageProvider) {
+                  return Ink.image(
+                    image: imageProvider,
                     fit: BoxFit.cover,
-                  ),
-                ),
+                  );
+                },
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _faderMask({Widget? child}) {
-    return ShaderMask(
-      shaderCallback: (rect) {
-        return const LinearGradient(
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
-          colors: [Colors.transparent, Colors.black87, Colors.black],
-        ).createShader(rect);
-      },
-      blendMode: BlendMode.dstIn,
-      child: child,
     );
   }
 }

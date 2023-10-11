@@ -5,8 +5,10 @@ import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_collection_detail_provider.dart';
+import 'package:screen_pal/interfaces/utils/product_list_section.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/apps/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
 import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.dart';
 
 const _kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
@@ -58,14 +60,11 @@ class MovieCollectionDetailView extends StatelessWidget {
 }
 
 List<Widget> _mainContents(
-  BuildContext context,
   MovieCollectionDetail movieCollection, {
   bool isWideLayout = false,
 }) {
-  final textTheme = Theme.of(context).textTheme;
-
   return [
-    Text(movieCollection.name, style: textTheme.headlineLarge),
+    MaterialText(movieCollection.name, style: M3TextStyles.headlineLarge),
     _CollectionGenresText(movieCollection),
     const SizedBox(height: 8.0),
     isWideLayout
@@ -74,12 +73,11 @@ List<Widget> _mainContents(
           )
         : Text(movieCollection.overview),
     const Divider(),
-    ...[
-      Text(
-        'Movie count: ${movieCollection.parts.length}',
-        style: textTheme.titleSmall,
-      ),
-    ].map((e) => Opacity(opacity: 0.75, child: e)),
+    MaterialText(
+      'Movie count: ${movieCollection.parts.length}',
+      style: M3TextStyles.titleSmall,
+      opacity: 0.75,
+    ),
   ];
 }
 
@@ -107,13 +105,11 @@ class _CollectionGenresText extends ConsumerWidget {
       }).toList();
     }
 
-    return Opacity(
+    return MaterialText(
+      genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
       opacity: 0.5,
-      child: Text(
-        genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
@@ -133,8 +129,6 @@ class _ThinDeviceLayout extends StatelessWidget {
 
     final isShowPoster = aspectRatio >= 2 / 3 && maxH > maxW;
 
-    final textTheme = Theme.of(context).textTheme;
-
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,9 +143,9 @@ class _ThinDeviceLayout extends StatelessWidget {
             ),
           ),
           ...[
-            ..._mainContents(context, movieCollection),
+            ..._mainContents(movieCollection),
             const Divider(),
-            Text('Movies', style: textTheme.headlineSmall),
+            const MaterialText('Movies', style: M3TextStyles.headlineSmall),
           ].map((e) {
             return Padding(
               padding: _kHorizPadding,
@@ -173,7 +167,6 @@ class _WideDeviceLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final maxH = MediaQuery.of(context).size.height;
-    final textTheme = Theme.of(context).textTheme;
 
     return SingleChildScrollView(
       padding: const EdgeInsets.only(bottom: 16.0),
@@ -185,13 +178,11 @@ class _WideDeviceLayout extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                Opacity(
-                  opacity: 0.15,
-                  child: DefaultNetworkImage(
-                    imageUrl:
-                        '$tmdbImageBaseUrl${movieCollection.backdropPath}',
-                    fit: BoxFit.cover,
-                  ),
+                DefaultNetworkImage(
+                  imageUrl: '$tmdbImageBaseUrl${movieCollection.backdropPath}',
+                  fit: BoxFit.cover,
+                  color: Colors.white.withOpacity(0.15),
+                  colorBlendMode: BlendMode.modulate,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
@@ -219,7 +210,6 @@ class _WideDeviceLayout extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: _mainContents(
-                              context,
                               movieCollection,
                               isWideLayout: true,
                             ),
@@ -233,11 +223,10 @@ class _WideDeviceLayout extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
-          Padding(
-            padding: _kHorizPadding,
-            child: Text('Movies', style: textTheme.headlineSmall),
+          ...productListSection(
+            title: 'Movies',
+            products: movieCollection.parts,
           ),
-          ProductHorizListView(movieCollection.parts, padding: _kHorizPadding),
         ],
       ),
     );

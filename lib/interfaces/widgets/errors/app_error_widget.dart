@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
 
 import 'package:screen_pal/interfaces/widgets/errors/app_http_error_widget.dart';
 
@@ -32,15 +33,13 @@ class AppErrorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return SizedBox.expand(
       child: Padding(
         padding: padding ?? const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(title, style: theme.textTheme.headlineSmall),
+            MaterialText(title, style: M3TextStyles.headlineSmall),
             const Divider(),
             Text(message),
             const SizedBox(height: 16.0),
