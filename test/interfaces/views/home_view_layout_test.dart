@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:screen_pal/interfaces/views/home_view_layout.dart';
 
+import '../../helpers/tester/tester_view_emulators.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -33,7 +35,7 @@ void main() {
         },
         routes: [
           GoRoute(path: '/movies', builder: dummyPageBuilder('movies-page')),
-          GoRoute(path: '/tv_shows', builder: dummyPageBuilder('tv-shows-page'))
+          GoRoute(path: '/tv-shows', builder: dummyPageBuilder('tv-shows-page'))
         ],
       ),
       GoRoute(path: '/settings', builder: dummyPageBuilder('settings-page')),
@@ -43,43 +45,62 @@ void main() {
   final testWidgetApp = MaterialApp.router(routerConfig: dummyRouter);
 
   group('HomeLayout widget', () {
-    testWidgets(
-      'on Thin Device (width < 600)'
-      'should render BottomNavigationBar',
-      (tester) async {
-        final dpi = tester.view.devicePixelRatio;
-        tester.view.physicalSize = Size(412 * dpi, 915 * dpi);
-
-        await tester.pumpWidget(testWidgetApp);
-
-        await expectLater(
+    group('should render BottomNavigationBar', () {
+      Future<void> expectBottomNavigationBar(WidgetTester tester) {
+        return expectLater(
           tester.widget(_WidgetFinders.navBar),
           isA<BottomNavigationBar>(),
         );
-      },
-    );
+      }
 
-    testWidgets(
-      'on Wide Device (width >= 600)'
-      'should render NavigationRail',
-      (tester) async {
-        final dpi = tester.view.devicePixelRatio;
-        tester.view.physicalSize = Size(1024 * dpi, 600 * dpi);
+      testWidgets('on Mobile device', (tester) async {
+        TesterViewEmulators.samsungGalaxyS20Ultra(tester);
 
         await tester.pumpWidget(testWidgetApp);
 
-        await expectLater(
+        await expectBottomNavigationBar(tester);
+      });
+    });
+
+    group('should render NavigationRail', () {
+      Future<void> expectNavigationRail(WidgetTester tester) {
+        return expectLater(
           tester.widget(_WidgetFinders.navBar),
           isA<NavigationRail>(),
         );
-      },
-    );
+      }
+
+      testWidgets('on Mobile device (landscape)', (tester) async {
+        TesterViewEmulators.samsungGalaxyS20Ultra(
+          tester,
+          isPotrait: false,
+        );
+
+        await tester.pumpWidget(testWidgetApp);
+
+        await expectNavigationRail(tester);
+      });
+      testWidgets('on Tablet device', (tester) async {
+        TesterViewEmulators.galaxyTabS4(tester);
+
+        await tester.pumpWidget(testWidgetApp);
+
+        await expectNavigationRail(tester);
+      });
+      testWidgets('on Laptop device', (tester) async {
+        TesterViewEmulators.asusVivobook14(tester);
+
+        await tester.pumpWidget(testWidgetApp);
+
+        await expectNavigationRail(tester);
+      });
+    });
 
     testWidgets(
       'should act as the home page navigator',
       (tester) async {
         await tester.pumpWidget(testWidgetApp);
-        // expect all the nav widgets (movies, tv_shows, and settings)
+        // expect all the nav widgets (movies, tv-shows, and settings)
         expect(_WidgetFinders.moviesNav, findsOneWidget);
         expect(_WidgetFinders.seriesNav, findsOneWidget);
         expect(_WidgetFinders.settingsNav, findsOneWidget);
@@ -87,7 +108,7 @@ void main() {
         // expect initial page
         expect(_WidgetFinders.moviesPage, findsOneWidget);
 
-        // navigate to '/tv_shows' route
+        // navigate to '/tv-shows' route
         await tester.tap(_WidgetFinders.seriesNav);
         await tester.pumpAndSettle();
 
@@ -96,8 +117,8 @@ void main() {
         expect(_WidgetFinders.seriesNav, findsOneWidget);
         expect(_WidgetFinders.settingsNav, findsOneWidget);
 
-        // expect '/tv_shows' route page.
-        expect(_WidgetFinders.seriesPage, findsOneWidget);
+        // expect '/tv-shows' route page.
+        expect(_WidgetFinders.tvShowsPage, findsOneWidget);
 
         // navigate to '/settings' route
         await tester.tap(_WidgetFinders.settingsNav);
@@ -110,7 +131,7 @@ void main() {
         await tester.tap(_WidgetFinders.backButton);
         await tester.pumpAndSettle();
 
-        // expect all the nav widgets (movies, tv_shows, and settings)
+        // expect all the nav widgets (movies, tv-shows, and settings)
         expect(_WidgetFinders.moviesNav, findsOneWidget);
         expect(_WidgetFinders.seriesNav, findsOneWidget);
         expect(_WidgetFinders.settingsNav, findsOneWidget);
@@ -126,7 +147,7 @@ abstract class _WidgetFinders {
   static get backButton => find.text('back-button');
 
   static get moviesPage => find.text('movies-page');
-  static get seriesPage => find.text('tv-shows-page');
+  static get tvShowsPage => find.text('tv-shows-page');
   static get settingsPage => find.text('settings-page');
 
   static get navBar => find.byKey(const Key('navigation-bar'));

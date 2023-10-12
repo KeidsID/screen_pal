@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
+import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.dart';
 
 /// Declarative product list view section on home view.

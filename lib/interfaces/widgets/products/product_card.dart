@@ -6,8 +6,8 @@ import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
-import 'package:screen_pal/interfaces/widgets/apps/default_network_image.dart';
-import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
+import 'package:screen_pal/interfaces/widgets/others/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard(this.product, {super.key});

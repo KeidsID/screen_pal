@@ -7,7 +7,7 @@ import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/extras/languages_provider.dart';
-import 'package:screen_pal/interfaces/widgets/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/others/default_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/products/products_carousel.dart';
 
 import '../../../helpers/dummy/dummy_genres.dart';
@@ -15,6 +15,7 @@ import '../../../helpers/dummy/dummy_languages.dart';
 import '../../../helpers/dummy/dummy_movies.dart';
 import '../../../helpers/providers/fake_languages_notifier.dart';
 import '../../../helpers/providers/fake_movie_genres_notifier.dart';
+import '../../../helpers/tester/tester_view_emulators.dart';
 
 void main() {
   Widget testWidgetApp(List<Product> products) {
@@ -80,41 +81,83 @@ void main() {
       }),
     );
 
-    testWidgets(
-      'on Thin Device (width < 800) '
-      'should render [Stack] and not contain product overview',
-      (tester) => mockNetworkImagesFor(() async {
-        final dpi = tester.view.devicePixelRatio;
-        tester.view.physicalSize = Size(768 * dpi, 476 * dpi);
-
-        await tester.pumpWidget(testWidgetApp([dummyMovie]));
-
+    group('should render [Stack] and not contain product overview', () {
+      Future<void> expectStackAndNoOverviewLater(WidgetTester tester) async {
         await expectLater(
           tester.widget(_WidgetFinders.contentContainer.last),
           isA<Stack>(),
         );
 
         await expectLater(_WidgetFinders.productOverview, findsNothing);
-      }),
-    );
+      }
 
-    testWidgets(
-      'on Wide Device (width >= 800) '
-      'should render [Card] and contain product overview',
-      (tester) => mockNetworkImagesFor(() async {
-        final dpi = tester.view.devicePixelRatio;
-        tester.view.physicalSize = Size(1024 * dpi, 635 * dpi);
+      testWidgets('on Mobile device', (tester) {
+        return mockNetworkImagesFor(() async {
+          TesterViewEmulators.samsungGalaxyS20Ultra(tester);
 
-        await tester.pumpWidget(testWidgetApp([dummyMovie]));
+          await tester.pumpWidget(testWidgetApp([dummyMovie]));
 
+          await expectStackAndNoOverviewLater(tester);
+        });
+      });
+      testWidgets('on Tablet device', (tester) {
+        return mockNetworkImagesFor(() async {
+          TesterViewEmulators.galaxyTabS4(tester);
+
+          await tester.pumpWidget(testWidgetApp([dummyMovie]));
+
+          await expectStackAndNoOverviewLater(tester);
+        });
+      });
+      testWidgets('on Tablet L device', (tester) {
+        return mockNetworkImagesFor(() async {
+          TesterViewEmulators.iPadPro(tester);
+
+          await tester.pumpWidget(testWidgetApp([dummyMovie]));
+
+          await expectStackAndNoOverviewLater(tester);
+        });
+      });
+    });
+
+    group('should render [Card] and contain product overview', () {
+      Future<void> expectCardAndOverviewLater(WidgetTester tester) async {
         await expectLater(
           tester.widget(_WidgetFinders.contentContainer.last),
           isA<Card>(),
         );
 
         await expectLater(_WidgetFinders.productOverview, findsWidgets);
-      }),
-    );
+      }
+
+      testWidgets('on Mobile device (landscape)', (tester) {
+        return mockNetworkImagesFor(() async {
+          TesterViewEmulators.samsungGalaxyS20Ultra(tester, isPotrait: false);
+
+          await tester.pumpWidget(testWidgetApp([dummyMovie]));
+
+          await expectCardAndOverviewLater(tester);
+        });
+      });
+      testWidgets('on Tablet device (landscape)', (tester) {
+        return mockNetworkImagesFor(() async {
+          TesterViewEmulators.galaxyTabS4(tester, isPotrait: false);
+
+          await tester.pumpWidget(testWidgetApp([dummyMovie]));
+
+          await expectCardAndOverviewLater(tester);
+        });
+      });
+      testWidgets('on Laptop L device', (tester) {
+        return mockNetworkImagesFor(() async {
+          TesterViewEmulators.asusVivobook14(tester);
+
+          await tester.pumpWidget(testWidgetApp([dummyMovie]));
+
+          await expectCardAndOverviewLater(tester);
+        });
+      });
+    });
   });
 }
 

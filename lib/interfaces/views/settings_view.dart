@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/utils/native_back_button_interceptors.dart';
-import 'package:screen_pal/interfaces/widgets/apps/theme_mode_dropdown_button.dart';
+import 'package:screen_pal/interfaces/widgets/others/theme_mode_dropdown_button.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({super.key});
