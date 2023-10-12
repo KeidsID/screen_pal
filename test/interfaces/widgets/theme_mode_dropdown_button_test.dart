@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:screen_pal/interfaces/providers/app_theme_mode_provider.dart';
-import 'package:screen_pal/interfaces/widgets/theme_mode_dropdown_button.dart';
+import 'package:screen_pal/interfaces/widgets/others/theme_mode_dropdown_button.dart';
 
 void main() {
   final testWidgetApp = ProviderScope(

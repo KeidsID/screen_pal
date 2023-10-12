@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
+import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 import 'package:screen_pal/interfaces/widgets/errors/dio_exception_widget.dart';

@@ -7,8 +7,8 @@ import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_collection_detail_provider.dart';
 import 'package:screen_pal/interfaces/utils/product_list_section.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/apps/default_network_image.dart';
-import 'package:screen_pal/interfaces/widgets/apps/material_text.dart';
+import 'package:screen_pal/interfaces/widgets/others/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.dart';
 
 const _kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);

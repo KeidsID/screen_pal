@@ -19,6 +19,8 @@ void main() {
     'GetMovieDetail use case '
     'should orchestrating get movie detail action correctly',
     () async {
+      provideDummy(dummyMovieDetail); // mockito helper
+
       when(mockMoviesRepo.getMovieDetail(123))
           .thenAnswer((_) async => dummyMovieDetail);
 
