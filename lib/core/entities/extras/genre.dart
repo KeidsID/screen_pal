@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class Genre extends Equatable {
+final class Genre extends Equatable {
   final int id;
   final String name;
 

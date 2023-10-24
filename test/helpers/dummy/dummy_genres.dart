@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:screen_pal/infrastructures/api/models/movies/raw_genre.dart';
+import 'package:screen_pal/infrastructures/api/models/others/raw_genre.dart';
 
 const dummyGenresResBodyJson = '''{
   "genres": [

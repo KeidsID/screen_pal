@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'genre.dart';
 import 'spoken_language.dart';
 
-class Extras extends Equatable {
+final class Extras extends Equatable {
   final List<SpokenLanguage> languages;
   final List<Genre> genres;
 

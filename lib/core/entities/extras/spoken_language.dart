@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class SpokenLanguage extends Equatable {
+final class SpokenLanguage extends Equatable {
   final String englishName;
   final String iso6391;
   final String name;

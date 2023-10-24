@@ -68,13 +68,13 @@ class _MovieDetailExtrasText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final languages = movieDetail.spokenLanguages;
+    final languages = movieDetail.languages;
 
     return MaterialText(
       [
         movieDetail.releaseDate?.year ?? 'Coming Soon',
         languages.firstWhere((e) {
-          return e.iso6391 == movieDetail.originalLanguage;
+          return e.iso6391 == movieDetail.language;
         }).englishName,
         movieDetail.genres.isEmpty
             ? 'Undefined'

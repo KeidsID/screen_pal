@@ -17,12 +17,18 @@ class RawMovie with _$RawMovie {
     @JsonKey(name: 'backdrop_path') String? backdropPath,
     @JsonKey(name: 'genre_ids') required List<int> genreIds,
     required int id,
+
+    /// {@macro screen_pal.infrastructures.api.models.languageCode}
     @JsonKey(name: 'original_language') required String originalLanguage,
     @JsonKey(name: 'original_title') required String originalTitle,
     required String overview,
     required double popularity,
     @JsonKey(name: 'poster_path') String? posterPath,
-    // return date string or empty string on response
+
+    /// {@template screen_pal.infrastructures.api.models.dateString}
+    /// Its `date string` or `empty string` type. So make sure to convert it
+    /// using [DateTime.tryParse].
+    /// {@endtemplate}
     @JsonKey(name: 'release_date') required String releaseDate,
     required String title,
     required bool video,

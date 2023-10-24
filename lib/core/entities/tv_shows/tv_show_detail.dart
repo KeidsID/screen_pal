@@ -1,9 +1,9 @@
 import 'package:screen_pal/core/entities/products/product_detail.dart';
+import 'package:screen_pal/core/entities/tv_shows/episode.dart';
+import 'package:screen_pal/core/entities/tv_shows/season.dart';
 
-import 'movie_collection.dart';
-
-final class MovieDetail extends ProductDetail {
-  const MovieDetail({
+final class TvShowDetail extends ProductDetail {
+  const TvShowDetail({
     required super.id,
     required super.title,
     required super.originalTitle,
@@ -21,21 +21,27 @@ final class MovieDetail extends ProductDetail {
     required super.popularity,
     required super.voteAverage,
     required super.voteCount,
-    required this.runtime,
-    this.movieCollection,
-    required this.budget,
-    required this.revenue,
-    required this.video,
+    required this.type,
+    this.lastAirDate,
+    this.lastEpisodeToAir,
+    this.nextEpisodeToAir,
+    required this.seasons,
+    required this.episodeCount,
+    required this.seasonCount,
   });
 
-  /// {@template screen_pal.core.entities.runtime}
-  /// Runtime in minute.
-  /// {@endtemplate}
-  final int runtime;
-  final MovieCollection? movieCollection;
-  final int budget;
-  final int revenue;
-  final bool video;
+  /// Tv Show type (Scripted, Miniseries, etc).
+  final String type;
+  final DateTime? lastAirDate;
+  final Episode? lastEpisodeToAir;
+  final Episode? nextEpisodeToAir;
+  final List<Season> seasons;
+
+  /// Number of episodes.
+  final int episodeCount;
+
+  /// Number of seasons.
+  final int seasonCount;
 
   @override
   List<Object?> get props {
@@ -57,11 +63,13 @@ final class MovieDetail extends ProductDetail {
       popularity,
       voteAverage,
       voteCount,
-      runtime,
-      movieCollection,
-      budget,
-      revenue,
-      video,
+      type,
+      lastAirDate,
+      lastEpisodeToAir,
+      nextEpisodeToAir,
+      seasons,
+      episodeCount,
+      seasonCount,
     ];
   }
 }
