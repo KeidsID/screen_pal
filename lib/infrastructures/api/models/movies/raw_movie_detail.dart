@@ -5,9 +5,11 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/movies/movie_collection.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
+import 'package:screen_pal/infrastructures/api/models/others/raw_company.dart';
+import 'package:screen_pal/infrastructures/api/models/others/raw_country.dart';
 
-import 'raw_genre.dart';
-import 'raw_spoken_language.dart';
+import '../others/raw_genre.dart';
+import '../others/raw_spoken_language.dart';
 
 part 'raw_movie_detail.freezed.dart';
 part 'raw_movie_detail.g.dart';
@@ -27,16 +29,19 @@ class RawMovieDetail with _$RawMovieDetail {
     String? homepage,
     required int id,
     @JsonKey(name: 'imdb_id') String? imdbId,
+
+    /// {@macro screen_pal.infrastructures.api.models.languageCode}
     @JsonKey(name: 'original_language') required String originalLanguage,
     @JsonKey(name: 'original_title') required String originalTitle,
     required String overview,
     required double popularity,
     @JsonKey(name: 'poster_path') String? posterPath,
     @JsonKey(name: 'production_companies')
-    required List<ProductionCompany> productionCompanies,
+    required List<RawCompany> productionCompanies,
     @JsonKey(name: 'production_countries')
-    required List<ProductionCountry> productionCountries,
-    // return date string or empty string on response
+    required List<RawCountry> productionCountries,
+
+    /// {@macro screen_pal.infrastructures.api.models.dateString}
     @JsonKey(name: 'release_date') required String releaseDate,
     required int revenue,
     required int runtime,
@@ -55,28 +60,28 @@ class RawMovieDetail with _$RawMovieDetail {
 
   MovieDetail toEntity() {
     return MovieDetail(
-      adult: adult,
-      backdropPath: backdropPath,
-      movieCollection: belongsToCollection?.toEntity(),
-      budget: budget,
-      genres: genres.map((e) => e.toEntity()).toList(),
-      homepage: homepage,
       id: id,
-      originalLanguage: originalLanguage,
+      title: title,
       originalTitle: originalTitle,
-      overview: overview,
-      popularity: popularity,
+      backdropPath: backdropPath,
       posterPath: posterPath,
       releaseDate: DateTime.tryParse(releaseDate),
-      revenue: revenue,
-      runtime: runtime,
+      overview: overview,
+      language: originalLanguage,
+      languages: spokenLanguages.map((e) => e.toEntity()).toList(),
+      genres: genres.map((e) => e.toEntity()).toList(),
+      adult: adult,
       status: status,
-      spokenLanguages: spokenLanguages.map((e) => e.toEntity()).toList(),
       tagline: tagline,
-      title: title,
-      video: video,
+      homepage: homepage,
+      popularity: popularity,
       voteAverage: voteAverage,
       voteCount: voteCount,
+      movieCollection: belongsToCollection?.toEntity(),
+      runtime: runtime,
+      budget: budget,
+      revenue: revenue,
+      video: video,
     );
   }
 }
@@ -103,28 +108,4 @@ class RawMovieCollection with _$RawMovieCollection {
       backdropPath: backdropPath,
     );
   }
-}
-
-@freezed
-class ProductionCompany with _$ProductionCompany {
-  const factory ProductionCompany({
-    required int id,
-    @JsonKey(name: 'logo_path') String? logoPath,
-    required String name,
-    @JsonKey(name: 'origin_country') required String originCountry,
-  }) = _ProductionCompany;
-
-  factory ProductionCompany.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCompanyFromJson(json);
-}
-
-@freezed
-class ProductionCountry with _$ProductionCountry {
-  const factory ProductionCountry({
-    @JsonKey(name: 'iso_3166_1') required String iso31661,
-    required String name,
-  }) = _ProductionCountry;
-
-  factory ProductionCountry.fromJson(Map<String, dynamic> json) =>
-      _$ProductionCountryFromJson(json);
 }

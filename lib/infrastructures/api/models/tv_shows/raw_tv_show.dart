@@ -14,12 +14,17 @@ class RawTvShow with _$RawTvShow {
 
   const factory RawTvShow({
     @JsonKey(name: 'backdrop_path') String? backdropPath,
-    // return date string or empty string on response
+
+    /// {@macro screen_pal.infrastructures.api.models.dateString}
     @JsonKey(name: 'first_air_date') required String firstAirDate,
     @JsonKey(name: 'genre_ids') required List<int> genreIds,
     required int id,
     required String name,
+
+    /// {@macro screen_pal.infrastructures.api.models.countryCode}
     @JsonKey(name: 'origin_country') required List<String> originCountry,
+
+    /// {@macro screen_pal.infrastructures.api.models.languageCode}
     @JsonKey(name: 'original_language') required String originalLanguage,
     @JsonKey(name: 'original_name') required String originalName,
     required String overview,

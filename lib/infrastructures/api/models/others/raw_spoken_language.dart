@@ -15,6 +15,10 @@ class RawSpokenLanguage with _$RawSpokenLanguage {
 
   const factory RawSpokenLanguage({
     @JsonKey(name: 'english_name') required String englishName,
+
+    /// {@template screen_pal.infrastructures.api.models.languageCode}
+    /// Its language `ISO 639-1` code.
+    /// {@endtemplate}
     @JsonKey(name: 'iso_639_1') required String iso6391,
     required String name,
   }) = _RawSpokenLanguage;
