@@ -13,7 +13,7 @@ class Episode extends Equatable {
     required this.overview,
     required this.episodeNumber,
     required this.episodeType,
-    required this.runtime,
+    this.runtime,
     required this.voteCount,
     required this.voteAverage,
     required this.showId,
@@ -31,7 +31,7 @@ class Episode extends Equatable {
   final String episodeType;
 
   /// {@macro screen_pal.core.entities.runtime}
-  final int runtime;
+  final int? runtime;
   final int voteCount;
   final double voteAverage;
 

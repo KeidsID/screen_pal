@@ -12,7 +12,7 @@ void main() {
 
   setUp(() {
     mockTvShowsRepo = MockTvShowsRepo();
-    subject = GetOnAirTvShows(mockTvShowsRepo);
+    subject = GetOnAirTvShows(tvShowsRepo: mockTvShowsRepo);
   });
 
   test(

@@ -21,7 +21,7 @@ final class MovieDetail extends ProductDetail {
     required super.popularity,
     required super.voteAverage,
     required super.voteCount,
-    required this.runtime,
+    this.runtime,
     this.movieCollection,
     required this.budget,
     required this.revenue,
@@ -31,7 +31,7 @@ final class MovieDetail extends ProductDetail {
   /// {@template screen_pal.core.entities.runtime}
   /// Runtime in minute.
   /// {@endtemplate}
-  final int runtime;
+  final int? runtime;
   final MovieCollection? movieCollection;
   final int budget;
   final int revenue;

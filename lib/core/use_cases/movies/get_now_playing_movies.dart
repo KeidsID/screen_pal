@@ -1,10 +1,11 @@
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
 
-class GetNowPlayingMovies {
-  final MoviesRepo moviesRepo;
+final class GetNowPlayingMovies {
+  const GetNowPlayingMovies({required MoviesRepo moviesRepo})
+      : _moviesRepo = moviesRepo;
 
-  GetNowPlayingMovies({required this.moviesRepo});
+  final MoviesRepo _moviesRepo;
 
-  Future<List<Movie>> execute() => moviesRepo.getNowPlayingMovies();
+  Future<List<Movie>> execute() => _moviesRepo.getNowPlayingMovies();
 }

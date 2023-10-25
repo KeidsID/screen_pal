@@ -1,10 +1,11 @@
 import 'package:screen_pal/core/entities/extras/genre.dart';
 import 'package:screen_pal/core/repo/extras_repo.dart';
 
-class GetTvShowGenres {
-  final ExtrasRepo extrasRepo;
+final class GetTvShowGenres {
+  const GetTvShowGenres({required ExtrasRepo extrasRepo})
+      : _extrasRepo = extrasRepo;
 
-  GetTvShowGenres({required this.extrasRepo});
+  final ExtrasRepo _extrasRepo;
 
-  Future<List<Genre>> execute() => extrasRepo.getTvShowGenres();
+  Future<List<Genre>> execute() => _extrasRepo.getTvShowGenres();
 }

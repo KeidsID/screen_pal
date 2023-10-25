@@ -1,8 +1,9 @@
 import 'package:screen_pal/core/entities/tv_shows/tv_show.dart';
 import 'package:screen_pal/core/repo/tv_shows_repo.dart';
 
-class GetPopularTvShows {
-  const GetPopularTvShows(TvShowsRepo tvShowsRepo) : _tvShowsRepo = tvShowsRepo;
+final class GetPopularTvShows {
+  const GetPopularTvShows({required TvShowsRepo tvShowsRepo})
+      : _tvShowsRepo = tvShowsRepo;
 
   final TvShowsRepo _tvShowsRepo;
 
