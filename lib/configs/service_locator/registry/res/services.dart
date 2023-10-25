@@ -3,8 +3,10 @@
 part of '../registry.dart';
 
 void registerServices() {
-  locator.registerSingletonAsync(() => PackageInfo.fromPlatform());
-  locator.registerSingletonAsync(() => SharedPreferences.getInstance());
+  locator
+    ..registerLazySingleton(() => ThemeModeCache(locator()))
 
-  locator.registerLazySingleton(() => ThemeModeCache(locator()));
+    // external services
+    ..registerSingletonAsync(() => PackageInfo.fromPlatform())
+    ..registerSingletonAsync(() => SharedPreferences.getInstance());
 }

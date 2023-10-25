@@ -64,4 +64,15 @@ class TvShowsRepoImpl implements TvShowsRepo {
 
     return resBody.toEntity();
   }
+
+  @override
+  Future<List<TvShow>> getTvShowRecommendations(int tvShowId) async {
+    final response =
+        await _dio.get<String>('$_tvShowPath/$tvShowId/recommendations');
+    final rawResBody = jsonDecode(response.data!);
+
+    final resBody = TvShowListResBody.fromJson(rawResBody);
+
+    return resBody.results.map((e) => e.toEntity()).toList();
+  }
 }
