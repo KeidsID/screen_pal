@@ -23,7 +23,7 @@ class RawEpisode with _$RawEpisode {
     @JsonKey(name: 'episode_number') required int episodeNumber,
     @JsonKey(name: 'episode_type') required String episodeType,
     @JsonKey(name: 'production_code') required String productionCode,
-    required int runtime,
+    int? runtime,
     @JsonKey(name: 'season_number') required int seasonNumber,
     @JsonKey(name: 'show_id') required int showId,
     @JsonKey(name: 'still_path') required String? stillPath,

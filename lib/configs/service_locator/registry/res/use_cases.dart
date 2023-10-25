@@ -28,8 +28,16 @@ void registerUseCases() {
   });
 
   // tv_shows
-  locator.registerLazySingleton(() => GetAiringTodayTvShows(locator()));
-  locator.registerLazySingleton(() => GetOnAirTvShows(locator()));
-  locator.registerLazySingleton(() => GetPopularTvShows(locator()));
-  locator.registerLazySingleton(() => GetTopRatedTvShows(locator()));
+  locator.registerLazySingleton(() {
+    return GetAiringTodayTvShows(tvShowsRepo: locator());
+  });
+  locator.registerLazySingleton(() => GetOnAirTvShows(tvShowsRepo: locator()));
+  locator.registerLazySingleton(() {
+    return GetPopularTvShows(tvShowsRepo: locator());
+  });
+  locator.registerLazySingleton(() {
+    return GetTopRatedTvShows(tvShowsRepo: locator());
+  });
+
+  locator.registerLazySingleton(() => GetTvShowDetail(tvShowsRepo: locator()));
 }

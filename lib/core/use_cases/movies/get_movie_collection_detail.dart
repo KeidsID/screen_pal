@@ -1,12 +1,13 @@
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
 
-class GetMovieCollectionDetail {
-  final MoviesRepo moviesRepo;
+final class GetMovieCollectionDetail {
+  const GetMovieCollectionDetail({required MoviesRepo moviesRepo})
+      : _moviesRepo = moviesRepo;
 
-  GetMovieCollectionDetail({required this.moviesRepo});
+  final MoviesRepo _moviesRepo;
 
   Future<MovieCollectionDetail> execute(int collectionId) {
-    return moviesRepo.getMovieCollectionDetail(collectionId);
+    return _moviesRepo.getMovieCollectionDetail(collectionId);
   }
 }

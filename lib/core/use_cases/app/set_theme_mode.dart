@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:screen_pal/core/repo/app_settings_repo.dart';
 
-class SetThemeMode {
-  final AppSettingsRepo appSettingsRepo;
+final class SetThemeMode {
+  const SetThemeMode({required AppSettingsRepo appSettingsRepo})
+      : _appSettingsRepo = appSettingsRepo;
 
-  SetThemeMode({required this.appSettingsRepo});
+  final AppSettingsRepo _appSettingsRepo;
 
-  Future<bool> execute(ThemeMode mode) => appSettingsRepo.setThemeMode(mode);
+  Future<bool> execute(ThemeMode mode) => _appSettingsRepo.setThemeMode(mode);
 }

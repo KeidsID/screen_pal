@@ -24,6 +24,7 @@ import 'package:screen_pal/core/use_cases/tv_shows/get_airing_today_tv_shows.dar
 import 'package:screen_pal/core/use_cases/tv_shows/get_on_air_tv_shows.dart';
 import 'package:screen_pal/core/use_cases/tv_shows/get_popular_tv_shows.dart';
 import 'package:screen_pal/core/use_cases/tv_shows/get_top_rated_tv_shows.dart';
+import 'package:screen_pal/core/use_cases/tv_shows/get_tv_show_detail.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/infrastructures/cache/theme_mode_cache.dart';
 import 'package:screen_pal/infrastructures/repo/app_settings_repo_impl.dart';

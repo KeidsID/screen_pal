@@ -1,10 +1,11 @@
 import 'package:screen_pal/core/entities/extras/spoken_language.dart';
 import 'package:screen_pal/core/repo/extras_repo.dart';
 
-class GetLanguages {
-  final ExtrasRepo extrasRepo;
+final class GetLanguages {
+  const GetLanguages({required ExtrasRepo extrasRepo})
+      : _extrasRepo = extrasRepo;
 
-  GetLanguages({required this.extrasRepo});
+  final ExtrasRepo _extrasRepo;
 
-  Future<List<SpokenLanguage>> execute() => extrasRepo.getLanguages();
+  Future<List<SpokenLanguage>> execute() => _extrasRepo.getLanguages();
 }
