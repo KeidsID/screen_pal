@@ -9,4 +9,5 @@ abstract interface class TvShowsRepo {
   Future<List<TvShow>> getTopRatedTvShows();
 
   Future<TvShowDetail> getTvShowDetail(int tvShowId);
+  Future<List<TvShow>> getTvShowRecommendations(int tvShowId);
 }

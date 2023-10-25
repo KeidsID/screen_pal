@@ -22,9 +22,9 @@ void main() {
       when(mockTvShowsRepo.getTopRatedTvShows())
           .thenAnswer((_) async => [dummyTvShow]);
 
-      final movies = await subject.execute();
+      final tvShows = await subject.execute();
 
-      expect(movies, [dummyTvShow]);
+      expect(tvShows, [dummyTvShow]);
       verify(mockTvShowsRepo.getTopRatedTvShows()).called(1);
     },
   );

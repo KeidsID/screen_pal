@@ -24,9 +24,9 @@ void main() {
       when(mockTvShowsRepo.getTvShowDetail(123))
           .thenAnswer((_) async => dummyTvShowDetail);
 
-      final movies = await subject.execute(123);
+      final tvShow = await subject.execute(123);
 
-      expect(movies, dummyTvShowDetail);
+      expect(tvShow, dummyTvShowDetail);
       verify(mockTvShowsRepo.getTvShowDetail(123)).called(1);
     },
   );
