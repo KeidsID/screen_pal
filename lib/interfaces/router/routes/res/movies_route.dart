@@ -25,7 +25,8 @@ Widget _movieDetailBuilder(BuildContext context, GoRouterState router) {
         body: AppHttpErrorWidget(
           statusCode: 400,
           message: 'Invalid path format. '
-              'Valid movie id are numbers (ex: "/movie-123").',
+              'Valid movie id are numbers with "movie-" as prefix '
+              '(ex: "/movie-123").',
           action: ElevatedButton.icon(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back),

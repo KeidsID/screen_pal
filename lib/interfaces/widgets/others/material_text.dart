@@ -118,37 +118,34 @@ class MaterialText extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
 
-    properties.add(StringProperty('data', data, showName: false));
-    properties.add(EnumProperty<M3TextStyles>(
-      'style',
-      style,
-      defaultValue: M3TextStyles.bodyMedium,
-    ));
-    properties.add(DoubleProperty('opacity', opacity, defaultValue: 1));
+    properties
+      ..add(StringProperty('data', data, showName: false))
+      ..add(EnumProperty<M3TextStyles>(
+        'style',
+        style,
+        defaultValue: M3TextStyles.bodyMedium,
+      ))
+      ..add(DoubleProperty('opacity', opacity, defaultValue: 1))
+      ..add(EnumProperty<TextAlign>('textAlign', textAlign, defaultValue: null))
+      ..add(EnumProperty<TextDirection>(
+        'textDirection',
+        textDirection,
+        defaultValue: null,
+      ))
+      ..add(FlagProperty(
+        'softWrap',
+        value: softWrap,
+        ifTrue: 'wrapping at box width',
+        ifFalse: 'no wrapping except at line break characters',
+        showName: true,
+      ))
+      ..add(EnumProperty<TextOverflow>(
+        'overflow',
+        overflow,
+        defaultValue: null,
+      ))
+      ..add(IntProperty('maxLines', maxLines, defaultValue: null));
 
-    properties.add(EnumProperty<TextAlign>(
-      'textAlign',
-      textAlign,
-      defaultValue: null,
-    ));
-    properties.add(EnumProperty<TextDirection>(
-      'textDirection',
-      textDirection,
-      defaultValue: null,
-    ));
-    properties.add(FlagProperty(
-      'softWrap',
-      value: softWrap,
-      ifTrue: 'wrapping at box width',
-      ifFalse: 'no wrapping except at line break characters',
-      showName: true,
-    ));
-    properties.add(EnumProperty<TextOverflow>(
-      'overflow',
-      overflow,
-      defaultValue: null,
-    ));
-    properties.add(IntProperty('maxLines', maxLines, defaultValue: null));
     if (semanticsLabel != null) {
       properties.add(StringProperty('semanticsLabel', semanticsLabel));
     }

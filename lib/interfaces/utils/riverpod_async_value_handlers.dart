@@ -28,7 +28,11 @@ abstract final class RiverpodAsyncValueHandlers {
       return DioExceptionWidget(error, action: actionButton);
     }
 
-    kLogger.f('RiverpodAsyncValueHandlers.error', error: error);
+    kLogger.f(
+      'RiverpodAsyncValueHandlers.error',
+      error: error,
+      stackTrace: stackTrace,
+    );
 
     return AppErrorWidget(action: actionButton);
   }
