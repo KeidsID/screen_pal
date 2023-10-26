@@ -13,7 +13,7 @@ class RawSeason with _$RawSeason {
 
   const factory RawSeason({
     /// {@macro screen_pal.infrastructures.api.models.dateString}
-    @JsonKey(name: 'air_date') required String airDate,
+    @JsonKey(name: 'air_date') required String? airDate,
     @JsonKey(name: 'episode_count') required int episodeCount,
     required int id,
     required String name,
@@ -31,7 +31,7 @@ class RawSeason with _$RawSeason {
       id: id,
       seasonNumber: seasonNumber,
       name: name,
-      airDate: DateTime.tryParse(airDate),
+      airDate: DateTime.tryParse('$airDate'),
       posterPath: posterPath,
       overview: overview,
       episodeCount: episodeCount,
