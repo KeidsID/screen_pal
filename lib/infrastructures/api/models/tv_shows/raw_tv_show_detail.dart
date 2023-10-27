@@ -52,7 +52,7 @@ class RawTvShowDetail with _$RawTvShowDetail {
     @JsonKey(name: 'original_name') required String originalName,
     required String overview,
     required double popularity,
-    @JsonKey(name: 'posted_path') String? posterPath,
+    @JsonKey(name: 'poster_path') String? posterPath,
     @JsonKey(name: 'production_companies')
     required List<RawCompany> productionCompanies,
     @JsonKey(name: 'production_countries')
