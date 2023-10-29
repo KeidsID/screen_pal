@@ -43,6 +43,7 @@ class DioExceptionWidget extends StatelessWidget {
       kLogger.f(
         'DioExceptionWidget.exception.type: ${exception.type}',
         error: exception,
+        stackTrace: exception.stackTrace,
       );
 
       return AppErrorWidget(action: action);

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
-import 'package:screen_pal/interfaces/utils/product_list_section.dart';
-import 'package:screen_pal/interfaces/widgets/products/products_carousel_section.dart';
+import 'package:screen_pal/interfaces/widgets.dart';
 
 class MoviesHomeView extends StatelessWidget {
   const MoviesHomeView({super.key});
@@ -18,17 +17,17 @@ class MoviesHomeView extends StatelessWidget {
             children: [
               ProductsCarouselSection(popularMoviesProvider),
               const SizedBox(height: 16.0),
-              ...productListSection(
+              ProductListSection(
                 title: 'On Theatres',
                 productsProvider: nowPlayingMoviesProvider,
               ),
               const SizedBox(height: 16.0),
-              ...productListSection(
+              ProductListSection(
                 title: 'Top Rated',
                 productsProvider: topRatedMoviesProvider,
               ),
               const SizedBox(height: 16.0),
-              ...productListSection(
+              ProductListSection(
                 title: 'Upcoming on Theatres',
                 productsProvider: upcomingMoviesProvider,
               ),

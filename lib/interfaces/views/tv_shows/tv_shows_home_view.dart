@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/interfaces/providers/tv_shows/tv_show_list_providers.dart';
-import 'package:screen_pal/interfaces/utils/product_list_section.dart';
-import 'package:screen_pal/interfaces/widgets/products/products_carousel_section.dart';
+import 'package:screen_pal/interfaces/widgets.dart';
 
 class TvShowsHomeView extends StatelessWidget {
   const TvShowsHomeView({super.key});
@@ -18,17 +17,17 @@ class TvShowsHomeView extends StatelessWidget {
             children: [
               ProductsCarouselSection(popularTvShowsProvider),
               const SizedBox(height: 16.0),
-              ...productListSection(
+              ProductListSection(
                 title: 'Airing Today',
                 productsProvider: airingTodayTvShowsProvider,
               ),
               const SizedBox(height: 16.0),
-              ...productListSection(
+              ProductListSection(
                 title: 'On Air',
                 productsProvider: onAirTvShowsProvider,
               ),
               const SizedBox(height: 16.0),
-              ...productListSection(
+              ProductListSection(
                 title: 'Top Rated',
                 productsProvider: topRatedTvShowsProvider,
               ),

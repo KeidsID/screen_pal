@@ -152,7 +152,8 @@ class MaterialText extends StatelessWidget {
   }
 }
 
-/// Enum for [MaterialText.style].
+/// Enum for [MaterialText.style]. Can be converted to [TextStyle] by using
+/// [toStyle] extension.
 enum M3TextStyles {
   /// Largest of the display styles.
   ///

@@ -26,14 +26,14 @@ Powered by <a href="https://www.themoviedb.org"> <img
 
 ## Dev Note
 
-If you want to create your app, here are the requirements.
+Want to contribute? here are the requirements to run it.
 
 ### Requirements
 
 - `.env` file
 
   ```env
-  IS_USE_PATH_URL_STRATEGY=bool
+  IS_USE_PATH_URL_STRATEGY=<bool (optional/default: true)>
   TMDB_ACC_TOKEN=<your own tmdb acc token>
   ```
 
@@ -52,3 +52,8 @@ If you want to create your app, here are the requirements.
     Refs:
 
     - [PathUrlStrategy needs better docs (expected server behavior)](https://github.com/flutter/flutter/issues/89763)
+
+- run this command to generate the required files
+  ```sh
+  dart run build_runner build --delete-conflicting-outputs
+  ```

@@ -15,15 +15,15 @@ class ProductsCarouselSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
-    final carouselHeight = deviceSize.height * 0.75;
-    final filteredCarouselHeight = (carouselHeight < 400.0)
+    final height = deviceSize.height * 0.75;
+    final maxH = (height < 400.0)
         ? 400.0
-        : (carouselHeight > 800.0)
+        : (height > 800.0)
             ? 800.0
-            : carouselHeight;
+            : height;
 
     return SizedBox(
-      height: filteredCarouselHeight,
+      height: maxH,
       child: Consumer(
         builder: (_, ref, __) {
           final popularMovies = ref.watch(productsProvider);
@@ -45,7 +45,7 @@ class ProductsCarouselSection extends StatelessWidget {
 
               return ProductsCarousel(
                 filteredProducts,
-                height: filteredCarouselHeight,
+                height: maxH,
                 autoPlay: true,
                 autoPlayInterval: const Duration(seconds: 6),
                 autoPlayAnimationDuration: const Duration(seconds: 2),

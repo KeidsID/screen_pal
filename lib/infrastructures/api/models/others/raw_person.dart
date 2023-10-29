@@ -13,7 +13,7 @@ class RawPerson with _$RawPerson {
     @JsonKey(name: 'credit_id') required String creditId,
     required String name,
     required int gender,
-    @JsonKey(name: 'profile_path') required String profilePath,
+    @JsonKey(name: 'profile_path') required String? profilePath,
   }) = _RawPerson;
 
   factory RawPerson.fromJson(Map<String, dynamic> json) =>
