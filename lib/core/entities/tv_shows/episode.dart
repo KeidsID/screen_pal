@@ -28,6 +28,8 @@ class Episode extends Equatable {
   final String? stillPath;
   final String overview;
   final int episodeNumber;
+
+  /// "standard" or "finale".
   final String episodeType;
 
   /// {@macro screen_pal.core.entities.runtime}
