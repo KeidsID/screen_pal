@@ -55,5 +55,6 @@ Want to contribute? here are the requirements to run it.
 
 - run this command to generate the required files
   ```sh
+  flutter pub get
   dart run build_runner build --delete-conflicting-outputs
   ```
