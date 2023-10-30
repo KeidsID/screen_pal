@@ -150,8 +150,8 @@ abstract class _WidgetFinders {
   static get tvShowsPage => find.text('tv-shows-page');
   static get settingsPage => find.text('settings-page');
 
-  static get navBar => find.byKey(const Key('navigation-bar'));
-  static get moviesNav => find.byIcon(Icons.movie_outlined);
-  static get seriesNav => find.byIcon(Icons.tv_outlined);
-  static get settingsNav => find.byIcon(Icons.settings);
+  static get navBar => find.byKey(const Key('navigation-bar')).last;
+  static get moviesNav => find.byKey(const Key('nav-movies'));
+  static get seriesNav => find.byKey(const Key('nav-tv-shows'));
+  static get settingsNav => find.byKey(const Key('nav-settings'));
 }

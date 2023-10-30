@@ -5,6 +5,10 @@ import 'package:screen_pal/interfaces/router/app_navigator.dart';
 
 const _navBarKey = Key('navigation-bar');
 
+const _moviesNav = Key('nav-movies');
+const _tvShowsNav = Key('nav-tv-shows');
+const _settingsNav = Key('nav-settings');
+
 class HomeViewLayout extends StatelessWidget {
   const HomeViewLayout({
     Key? key,
@@ -41,19 +45,19 @@ class _NavBarDelegate {
 
 final _navs = [
   _NavBarDelegate(
-    icon: const Icon(Icons.movie_outlined),
+    icon: const Icon(key: _moviesNav, Icons.movie_outlined),
     label: 'Movies',
-    activeIcon: const Icon(Icons.movie),
+    activeIcon: const Icon(key: _moviesNav, Icons.movie),
   ),
   _NavBarDelegate(
-    icon: const Icon(Icons.tv_outlined),
+    icon: const Icon(key: _tvShowsNav, Icons.tv_outlined),
     label: 'Tv Shows',
-    activeIcon: const Icon(Icons.tv),
+    activeIcon: const Icon(key: _tvShowsNav, Icons.tv),
   ),
   _NavBarDelegate(
-    icon: const Icon(Icons.settings_outlined),
+    icon: const Icon(key: _settingsNav, Icons.settings_outlined),
     label: 'Settings',
-    activeIcon: const Icon(Icons.settings),
+    activeIcon: const Icon(key: _settingsNav, Icons.settings),
   ),
 ];
 

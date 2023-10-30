@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -96,6 +97,9 @@ class _WideDeviceLayout extends StatelessWidget {
     const minH = 400.0;
     final maxH = screenSize.height > 600 ? 600 : screenSize.height;
 
+    final theme = Theme.of(context);
+    final scaffoldBgColor = theme.scaffoldBackgroundColor;
+
     return SingleChildScrollView(
       padding: _kScrollViewPadding,
       child: Column(
@@ -111,8 +115,11 @@ class _WideDeviceLayout extends StatelessWidget {
                 DefaultNetworkImage(
                   imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
                   fit: BoxFit.cover,
-                  color: Colors.white.withOpacity(0.1),
-                  colorBlendMode: BlendMode.modulate,
+                ),
+                Container(
+                  color: (theme.brightness == Brightness.light)
+                      ? scaffoldBgColor.darken(3).withOpacity(0.9)
+                      : scaffoldBgColor.lighten(3).withOpacity(0.9),
                 ),
 
                 // main section with poster image

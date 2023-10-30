@@ -89,5 +89,39 @@ void main() {
         verify(mockDio.get<String>(endpoint)).called(1);
       });
     });
+
+    group('getTvShowDetail()', () {
+      const endpoint = '$tvShowsPath/123';
+      test('should return tv show detail', () async {
+        when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
+          return Response<String>(
+            data: dummyRawTvShowDetailJson,
+            requestOptions: RequestOptions(),
+          );
+        });
+
+        final tvShows = await subject.getTvShowDetail(123);
+
+        expect(tvShows, dummyTvShowDetail);
+        verify(mockDio.get<String>(endpoint)).called(1);
+      });
+    });
+
+    group('getTvShowRecommendations()', () {
+      const endpoint = '$tvShowsPath/123/recommendations';
+      test('should return list of tv show', () async {
+        when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
+          return Response<String>(
+            data: dummyTvShowListResBodyJson,
+            requestOptions: RequestOptions(),
+          );
+        });
+
+        final tvShows = await subject.getTvShowRecommendations(123);
+
+        expect(tvShows, expectedTvShows);
+        verify(mockDio.get<String>(endpoint)).called(1);
+      });
+    });
   });
 }
