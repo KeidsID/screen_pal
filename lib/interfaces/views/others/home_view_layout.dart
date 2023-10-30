@@ -28,25 +28,54 @@ class HomeViewLayout extends StatelessWidget {
 }
 
 class _NavBarDelegate {
-  _NavBarDelegate(this.icon, this.label);
+  _NavBarDelegate({
+    required this.icon,
+    required this.label,
+    Icon? activeIcon,
+  }) : activeIcon = activeIcon ?? icon;
 
   final Icon icon;
   final String label;
+  final Icon activeIcon;
 }
 
 final _navs = [
-  _NavBarDelegate(const Icon(Icons.movie_outlined), 'Movies'),
-  _NavBarDelegate(const Icon(Icons.tv_outlined), 'Tv Shows'),
+  _NavBarDelegate(
+    icon: const Icon(Icons.movie_outlined),
+    label: 'Movies',
+    activeIcon: const Icon(Icons.movie),
+  ),
+  _NavBarDelegate(
+    icon: const Icon(Icons.tv_outlined),
+    label: 'Tv Shows',
+    activeIcon: const Icon(Icons.tv),
+  ),
+  _NavBarDelegate(
+    icon: const Icon(Icons.settings_outlined),
+    label: 'Settings',
+    activeIcon: const Icon(Icons.settings),
+  ),
 ];
 
 ValueChanged<int> _onNavBarItemTap(BuildContext context) {
   return (value) {
-    value == 0 ? AppNavigator.movies(context) : AppNavigator.tvShows(context);
+    switch (value) {
+      case 0:
+        AppNavigator.movies(context);
+        break;
+      case 1:
+        AppNavigator.tvShows(context);
+        break;
+      default:
+        AppNavigator.settings(context);
+    }
   };
 }
 
 int _currentNavIndex(BuildContext context) {
   final currentRoute = GoRouterState.of(context).uri.path;
+
+  if (currentRoute.startsWith('/settings')) return 2;
 
   return currentRoute.startsWith('/movies') ? 0 : 1;
 }
@@ -61,29 +90,20 @@ class _ThinDeviceLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
     return Scaffold(
       body: child,
       bottomNavigationBar: BottomNavigationBar(
         key: _navBarKey,
-        showUnselectedLabels: false,
         onTap: _onNavBarItemTap(context),
         currentIndex: _currentNavIndex(context),
         items: _navs
             .map((e) => BottomNavigationBarItem(
                   icon: e.icon,
                   label: e.label,
+                  activeIcon: e.activeIcon,
                 ))
             .toList(),
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: theme.bottomNavigationBarTheme.backgroundColor,
-        tooltip: 'Settings',
-        onPressed: () => AppNavigator.settings(context),
-        child: const Icon(Icons.settings),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
@@ -101,33 +121,7 @@ class _WideDeviceLayout extends StatelessWidget {
     return SafeArea(
       child: Row(
         children: [
-          NavigationRail(
-            key: _navBarKey,
-            labelType: NavigationRailLabelType.selected,
-            onDestinationSelected: _onNavBarItemTap(context),
-            selectedIndex: _currentNavIndex(context),
-            destinations: _navs
-                .map((e) => NavigationRailDestination(
-                      icon: e.icon,
-                      label: Text(e.label),
-                    ))
-                .toList(),
-            trailing: Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(
-                      tooltip: 'Settings',
-                      onPressed: () => AppNavigator.settings(context),
-                      icon: const Icon(Icons.settings),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
+          const _DynamicNavRail(key: _navBarKey),
           const VerticalDivider(width: 2.0, thickness: 2.0),
           Expanded(
             child: Scaffold(
@@ -135,6 +129,55 @@ class _WideDeviceLayout extends StatelessWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class _DynamicNavRail extends StatefulWidget {
+  const _DynamicNavRail({super.key});
+
+  @override
+  State<_DynamicNavRail> createState() => _DynamicNavRailState();
+}
+
+class _DynamicNavRailState extends State<_DynamicNavRail> {
+  bool isExtended = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (ev) => setState(() => isExtended = true),
+      onExit: (ev) => setState(() => isExtended = false),
+      child: NavigationRail(
+        key: widget.key,
+        extended: isExtended,
+        onDestinationSelected: _onNavBarItemTap(context),
+        selectedIndex: _currentNavIndex(context),
+        destinations: _navs
+            .map((e) => NavigationRailDestination(
+                  icon: e.icon,
+                  label: Text(e.label),
+                  selectedIcon: e.activeIcon,
+                ))
+            .toList(),
+        trailing: Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                IconButton(
+                  tooltip: (isExtended) ? 'Shrink' : 'Extend',
+                  onPressed: () => setState(() => isExtended = !isExtended),
+                  icon: Icon(
+                    (isExtended) ? Icons.chevron_left : Icons.chevron_right,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
