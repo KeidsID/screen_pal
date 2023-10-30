@@ -42,10 +42,10 @@ class _MainSection extends StatelessWidget {
     if (product is MovieDetail) {
       final budget = (product.budget <= 0)
           ? 'No Data'
-          : NumberFormat.currency(symbol: r'$').format(product.budget);
+          : intl.NumberFormat.currency(symbol: r'$').format(product.budget);
       final revenue = (product.revenue <= 0)
           ? 'No Data'
-          : NumberFormat.currency(symbol: r'$').format(product.revenue);
+          : intl.NumberFormat.currency(symbol: r'$').format(product.revenue);
 
       contents = [
         'Status: ${product.status}',
@@ -55,7 +55,7 @@ class _MainSection extends StatelessWidget {
     } else if (product is TvShowDetail) {
       final nextAirDate = (product.nextEpisodeToAir?.airDate == null)
           ? 'No Data'
-          : DateFormat.yMMMd().format(product.nextEpisodeToAir!.airDate!);
+          : intl.DateFormat.yMMMd().format(product.nextEpisodeToAir!.airDate!);
 
       contents = [
         'Status: ${product.status}',

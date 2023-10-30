@@ -26,7 +26,10 @@ class _TvShowSeasonSection extends StatelessWidget {
             'Last Season',
             style: kSectionTitleStyle,
           ),
-          _LastSeasonCard(season: lastSeason, episode: lastEpisode),
+          Align(
+            alignment: Alignment.center,
+            child: _LastSeasonCard(season: lastSeason, episode: lastEpisode),
+          ),
           const Divider(),
         ],
       ),
@@ -61,8 +64,79 @@ class _LastSeasonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: MaterialText(season.name),
+    final overview =
+        (season.overview.isNotEmpty) ? season.overview : 'No overview';
+
+    final seasonOrder = season.seasonNumber.toOrdinal();
+    final episodeOrder = episode.episodeNumber.toOrdinal();
+    final episodeType = episode.episodeType;
+
+    return SizedBox(
+      width: 800.0,
+      height: 320.0,
+      child: Card(
+        child: Row(
+          children: [
+            AspectRatio(
+              aspectRatio: 2 / 3,
+              child: DefaultNetworkImage(
+                imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
+                alt: '${season.seasonNumber} Season-${season.name}',
+                fit: BoxFit.cover,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    MaterialText(season.name, style: M3TextStyles.titleLarge),
+                    MaterialText('# $seasonOrder Season', opacity: 0.5),
+                    const Divider(),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: MaterialText(overview),
+                      ),
+                    ),
+                    const Divider(),
+                    const MaterialText(
+                      'Last Episode',
+                      style: M3TextStyles.titleMedium,
+                    ),
+                    const SizedBox(height: 8.0),
+                    Wrap(
+                      spacing: 8.0,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            MaterialText(episode.name),
+                            MaterialText('# $episodeOrder Episode',
+                                opacity: 0.5),
+                          ],
+                        ),
+                        (episodeType != 'finale')
+                            ? const SizedBox()
+                            : const Card(
+                                elevation: 3.0,
+                                child: Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: MaterialText(
+                                    'Season Finale',
+                                    style: M3TextStyles.labelMedium,
+                                  ),
+                                ),
+                              ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

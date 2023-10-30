@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:screen_pal/configs/constants.dart';
+import 'package:intl/intl.dart' as intl;
 
+import 'package:screen_pal/configs/constants.dart';
 import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/providers/tv_shows/tv_show_list_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/utils/to_ordinal.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 part 'sections/_main_section.dart';
