@@ -18,7 +18,7 @@ final List<RouteBase> routes = [
     routes: [
       _moviesRoute,
       _tvShowsRoute,
+      _settingsRoute,
     ],
   ),
-  _settingsRoute,
 ];

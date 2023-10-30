@@ -91,7 +91,12 @@ class _LastSeasonCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MaterialText(season.name, style: M3TextStyles.titleLarge),
+                    MaterialText(
+                      season.name,
+                      style: M3TextStyles.titleLarge,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                     MaterialText('# $seasonOrder Season', opacity: 0.5),
                     const Divider(),
                     Expanded(
@@ -111,7 +116,11 @@ class _LastSeasonCard extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            MaterialText(episode.name),
+                            MaterialText(
+                              episode.name,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                             MaterialText('# $episodeOrder Episode',
                                 opacity: 0.5),
                           ],
