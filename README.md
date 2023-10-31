@@ -2,15 +2,18 @@
   Screen Pal
 </b></h1>
 
+[![CI - Test Coverage](https://github.com/KeidsID/screen_pal/actions/workflows/ci-test.yml/badge.svg)](https://github.com/KeidsID/screen_pal/actions/workflows/ci-test.yml)
 [![codecov](https://codecov.io/github/KeidsID/screen_pal/graph/badge.svg?token=G20RM8PYOH)](https://codecov.io/github/KeidsID/screen_pal)
 [![CD Web](https://github.com/KeidsID/screen_pal/actions/workflows/cd-web.yml/badge.svg)](https://github.com/KeidsID/screen_pal/actions/workflows/cd-web.yml)
 
-<h3 align="center"><b>
+![Headline](repo-assets/banner.png)
+
+<!-- <h3 align="center"><b>
   Discover Your Next Favorite Movies or TV Shows from Your Best Pal
-</b></h3>
+</b></h3> -->
 
 <p align="center">
-Screen Pal an app that provides in-depth information about movies and TV shows. With its massive database, users can easily search for their next favorite movies or TV shows. Each search result will provide a plot summary, release date, genre, and more.
+Screen Pal is an app that provides information about movies and TV shows. With its massive database, users can easily search for their next favorite movies or TV shows. Each search result will provide a plot summary, release date, genre, and more.
 </p>
 
 <p align="center">
