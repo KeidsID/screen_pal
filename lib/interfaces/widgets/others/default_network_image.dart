@@ -10,6 +10,7 @@ class DefaultNetworkImage extends StatelessWidget {
     super.key,
     required this.imageUrl,
     this.alt,
+    this.repeat = ImageRepeat.noRepeat,
     this.fit,
     this.color,
     this.colorBlendMode,
@@ -21,6 +22,9 @@ class DefaultNetworkImage extends StatelessWidget {
   /// Alternative information of an image that will be displayed if the image
   /// cannot be loaded.
   final String? alt;
+
+  /// How to paint any portions of the layout bounds not covered by the image.
+  final ImageRepeat repeat;
 
   /// How to inscribe the image into the space allocated during layout.
   ///
@@ -49,6 +53,7 @@ class DefaultNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
+      repeat: repeat,
       fit: fit,
       color: color,
       colorBlendMode: colorBlendMode,
