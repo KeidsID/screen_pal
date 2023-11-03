@@ -84,7 +84,7 @@ class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
     final aspectRatio = deviceSize.aspectRatio;
 
     final isWide =
-        (maxW >= 600) ? (aspectRatio >= 3 / 2 && maxW > maxH) : false;
+        (maxW >= 1000) ? (aspectRatio >= 16 / 9 && maxW > maxH) : false;
 
     return Container(
       width: maxW,
@@ -275,7 +275,6 @@ class _WideDeviceLayout extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              flex: 4,
               child: Padding(
                 padding: const EdgeInsets.all(24.0).copyWith(right: 40.0),
                 child: Column(
@@ -300,8 +299,8 @@ class _WideDeviceLayout extends StatelessWidget {
               ),
             ),
             const VerticalDivider(width: 2.0, thickness: 2.0),
-            Expanded(
-              flex: 6,
+            AspectRatio(
+              aspectRatio: 16 / 9,
               child: DefaultNetworkImage(
                 key: _imageKey,
                 imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
