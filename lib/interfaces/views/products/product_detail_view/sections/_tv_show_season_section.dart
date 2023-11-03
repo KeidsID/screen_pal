@@ -64,6 +64,66 @@ class _LastSeasonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox(
+      width: 900.0,
+      height: 320.0,
+      child: Card(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            kLogger.d('${constraints.maxWidth}');
+
+            return (constraints.maxWidth > 600.0)
+                ? _wideLayout()
+                : _thinLayout(context);
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _wideLayout() {
+    return Row(
+      children: [
+        AspectRatio(
+          aspectRatio: 2 / 3,
+          child: DefaultNetworkImage(
+            imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
+            alt: '${season.seasonNumber} Season-${season.name}',
+            fit: BoxFit.cover,
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0).copyWith(left: 16.0),
+            child: _contents(),
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _thinLayout(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        // bg image
+        DefaultNetworkImage(
+          imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
+          repeat: ImageRepeat.repeatX,
+          fit: BoxFit.fitHeight,
+        ),
+        Container(color: Theme.of(context).cardColor.withOpacity(0.9)),
+
+        // contents
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _contents(),
+        )
+      ],
+    );
+  }
+
+  Widget _contents() {
     final overview =
         (season.overview.isNotEmpty) ? season.overview : 'No overview';
 
@@ -71,81 +131,57 @@ class _LastSeasonCard extends StatelessWidget {
     final episodeOrder = episode.episodeNumber.toOrdinal();
     final episodeType = episode.episodeType;
 
-    return SizedBox(
-      width: 800.0,
-      height: 320.0,
-      child: Card(
-        child: Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        MaterialText(
+          season.name,
+          style: M3TextStyles.titleLarge,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        MaterialText('# $seasonOrder Season', opacity: 0.5),
+        const Divider(),
+        Expanded(
+          child: SingleChildScrollView(
+            child: MaterialText(overview),
+          ),
+        ),
+        const Divider(),
+        const MaterialText(
+          'Last Episode',
+          style: M3TextStyles.titleMedium,
+        ),
+        const SizedBox(height: 8.0),
+        Wrap(
+          spacing: 8.0,
           children: [
-            AspectRatio(
-              aspectRatio: 2 / 3,
-              child: DefaultNetworkImage(
-                imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
-                alt: '${season.seasonNumber} Season-${season.name}',
-                fit: BoxFit.cover,
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MaterialText(
+                  episode.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                MaterialText('# $episodeOrder Episode', opacity: 0.5),
+              ],
             ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MaterialText(
-                      season.name,
-                      style: M3TextStyles.titleLarge,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    MaterialText('# $seasonOrder Season', opacity: 0.5),
-                    const Divider(),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: MaterialText(overview),
+            (episodeType != 'finale')
+                ? const SizedBox()
+                : const Card(
+                    elevation: 3.0,
+                    child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: MaterialText(
+                        'Season Finale',
+                        style: M3TextStyles.labelMedium,
                       ),
                     ),
-                    const Divider(),
-                    const MaterialText(
-                      'Last Episode',
-                      style: M3TextStyles.titleMedium,
-                    ),
-                    const SizedBox(height: 8.0),
-                    Wrap(
-                      spacing: 8.0,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            MaterialText(
-                              episode.name,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            MaterialText('# $episodeOrder Episode',
-                                opacity: 0.5),
-                          ],
-                        ),
-                        (episodeType != 'finale')
-                            ? const SizedBox()
-                            : const Card(
-                                elevation: 3.0,
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: MaterialText(
-                                    'Season Finale',
-                                    style: M3TextStyles.labelMedium,
-                                  ),
-                                ),
-                              ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            )
+                  ),
           ],
         ),
-      ),
+      ],
     );
   }
 }
