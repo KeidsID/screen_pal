@@ -1,11 +1,11 @@
 {
-    "name": "flutter_movie_app",
-    "short_name": "flutter_movie_app",
+    "name": "Screen Pal",
+    "short_name": "Screen Pal",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Screen Pal is a movies and TV shows app that provides information about movies and TV shows.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
