@@ -2,9 +2,9 @@
 
 ### Changed
 
-- Better "Last season card" UI on mobile device.
-- Better image at [Carousel] UI on dekstop device.
-- Better [NavigationRail] UX.
+- Better "Last season section" UI on mobile device.
+- Better "image at carousel" UI on tablet/dekstop device.
+- Better navigation UX and performance.
 
 ## v1.0.0 - initial release
 
