@@ -1,0 +1,74 @@
+name: CI/CD - Test and Preview
+
+on:
+  pull_request_review:
+    types:
+      - submitted
+      - edited
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+          flutter-version: "3.x"
+
+      - name: Checkout PR branch
+        uses: actions/checkout@v3
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Generate dev environment
+        run: |
+          echo "${{ secrets.DEV_ENV_FILE }}" > .env
+          dart run build_runner build --delete-conflicting-outputs
+
+      - name: Test with min 80% coverage
+        run: |
+          dart pub global activate dlcov
+          dlcov --lcov-gen="flutter test --coverage" -c 80
+
+      - name: Upload coverage
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-coverage
+          path: ./coverage/lcov.info
+
+      - name: Flutter build web profile
+        run: flutter build web --web-renderer canvaskit --profile
+
+      - name: Upload build-web-preview
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-web-preview
+          path: ./build/web
+
+  deploy-preview:
+    needs: test
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout preview branch
+        uses: actions/checkout@v3
+        with:
+          ref: preview
+
+      - name: Download build-web-preview
+        uses: actions/download-artifact@v2
+        with:
+          name: build-web-preview
+          path: ./
+
+      - name: Push build to preview branch
+        run: |
+          git add .
+          git commit -m "deploy preview"
+          git push origin preview

@@ -14,5 +14,5 @@ abstract class Env {
   static const bool isUsePathUrlStrategy = _Env.isUsePathUrlStrategy;
 
   @EnviedField(varName: 'TMDB_ACC_TOKEN')
-  static final String tmdbAccKey = _Env.tmdbAccKey;
+  static final String tmdbAccToken = _Env.tmdbAccToken;
 }

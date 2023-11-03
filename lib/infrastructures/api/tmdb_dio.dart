@@ -10,7 +10,7 @@ import 'package:screen_pal/configs/envs/env.dart';
 /// Endpoint reference: https://developer.themoviedb.org/reference
 final tmdbDio = Dio(BaseOptions(
   baseUrl: 'https://api.themoviedb.org/$kTmdbApiVersion',
-  headers: {"Authorization": "Bearer ${Env.tmdbAccKey}"},
+  headers: {"Authorization": "Bearer ${Env.tmdbAccToken}"},
 ));
 
 /// Used to load an image based on the path given by the API.

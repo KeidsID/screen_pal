@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+
+  <body>
+    <script>
+      // Will redirect to url that had hash prefix 
+      // ("/screen_pal/movies" into "/screen_pal/#/movies").
+
+      const baseUrl = "https://keidsid.github.io/screen_pal";
+      const currentRoute = `${window.location}`.slice(baseUrl.length);
+
+      window.location.replace(`/screen_pal/#${currentRoute}`);
+    </script>
+  </body>
+</html>

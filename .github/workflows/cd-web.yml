@@ -1,4 +1,4 @@
-name: CD - Web
+name: CD - Web Release
 
 # https://igorsteblii.medium.com/deploy-flutter-web-app-with-github-actions-or-gitlab-ci-cd-on-pages-in-5-min-6a473ac79101
 on:
@@ -23,12 +23,16 @@ jobs:
         run: flutter pub get
 
       # https://stackoverflow.com/a/63350136/19337625
-      - name: Generate 3rd party utils
+      - name: Generate prod environment
         run: |
-          echo "${{ secrets.DOT_ENV_FILE }}" > .env
+          echo "${{ secrets.PROD_ENV_FILE }}" > .env
           dart run build_runner build --delete-conflicting-outputs
 
-      - name: Flutter build web
+      - name: Add github-pages redirect config
+        working-directory: web
+        run: echo "${{secrets.GH_PAGES_404}}" > 404.html
+
+      - name: Flutter build web release
         run:
           flutter build web --web-renderer canvaskit --release --base-href
           "/screen_pal/"
@@ -41,11 +45,11 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-
     permissions:
       contents: write
+
+    runs-on: ubuntu-latest
 
     steps:
       - name: Download build
