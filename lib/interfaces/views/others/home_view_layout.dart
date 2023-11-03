@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:screen_pal/configs/constants.dart';
 
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 
+// test utils:
+
+// To test which nav bar are rendered (BottomNavBar or NavRail).
 const _navBarKey = Key('navigation-bar');
 
+// to test navigations.
 const _moviesNav = Key('nav-movies');
 const _tvShowsNav = Key('nav-tv-shows');
 const _settingsNav = Key('nav-settings');
@@ -63,6 +68,8 @@ final _navs = [
 
 ValueChanged<int> _onNavBarItemTap(BuildContext context) {
   return (value) {
+    if (_currentNavIndex(context) == value) return;
+
     switch (value) {
       case 0:
         AppNavigator.movies(context);
@@ -151,12 +158,16 @@ class _DynamicNavRailState extends State<_DynamicNavRail> {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (ev) => setState(() => isExtended = true),
-      onExit: (ev) => setState(() => isExtended = false),
+      onEnter: (_) => _setIsExtended(value: true),
+      onExit: (_) => _setIsExtended(value: false),
       child: NavigationRail(
         key: widget.key,
         extended: isExtended,
-        onDestinationSelected: _onNavBarItemTap(context),
+        onDestinationSelected: (navIndex) {
+          _setIsExtended(value: false);
+
+          _onNavBarItemTap(context)(navIndex);
+        },
         selectedIndex: _currentNavIndex(context),
         destinations: _navs
             .map((e) => NavigationRailDestination(
@@ -165,24 +176,37 @@ class _DynamicNavRailState extends State<_DynamicNavRail> {
                   selectedIcon: e.activeIcon,
                 ))
             .toList(),
-        trailing: Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                IconButton(
-                  tooltip: (isExtended) ? 'Shrink' : 'Extend',
-                  onPressed: () => setState(() => isExtended = !isExtended),
-                  icon: Icon(
-                    (isExtended) ? Icons.chevron_left : Icons.chevron_right,
+        trailing: kIsMobile
+            ? Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                        tooltip: (isExtended) ? 'Shrink' : 'Extend',
+                        onPressed: () => _setIsExtended(),
+                        icon: Icon(
+                          (isExtended)
+                              ? Icons.chevron_left
+                              : Icons.chevron_right,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
-          ),
-        ),
+              )
+            : null,
       ),
     );
+  }
+
+  /// Prevent unnecessary widget rebuild on updating state.
+  void _setIsExtended({bool? value}) {
+    if (value == null) return setState(() => isExtended = !isExtended);
+
+    return (value)
+        ? ((!isExtended) ? setState(() => isExtended = true) : null)
+        : ((isExtended) ? setState(() => isExtended = false) : null);
   }
 }
