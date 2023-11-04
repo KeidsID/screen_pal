@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/*"
+  to = "https://screen-pal-preview.netlify.app/#/:splat"
+  status = 200

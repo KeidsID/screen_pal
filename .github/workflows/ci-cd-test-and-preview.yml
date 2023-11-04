@@ -39,9 +39,9 @@ jobs:
           name: test-coverage
           path: ./coverage/lcov.info
 
-      - name: Add netlify 404 handler
+      - name: Add netlify config
         working-directory: web
-        run: echo "${{secrets.NETLIFY_404}}" > 404.html
+        run: echo "${{secrets.NETLIFY_CONFIG}}" > netlify.toml
 
       - name: Flutter build web profile
         run: flutter build web --web-renderer canvaskit --profile
@@ -72,17 +72,9 @@ jobs:
           name: build-web-preview
           path: ./
 
-      # https://stackoverflow.com/a/69936361/19337625
-      - name: Get Pull Request Number
-        id: pr
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo "::set-output name=pr_num::$(gh pr view --json number -q .number || echo "")"
-
       - name: Push build to preview branch
         env:
-          PR_REF: "https://github.com/KeidsID/screen_pal/pull/${{steps.pr.outputs.pr_num}}"
+          PR_REF: https://github.com/KeidsID/screen_pal/pull/${{github.event.pull_request.number}}
         run: |
           git config --global user.email "keidscode@gmail.com"
           git config --global user.name "KeidsID"
