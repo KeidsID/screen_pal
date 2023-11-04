@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:screen_pal/configs/constants.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -84,7 +85,7 @@ class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
     final aspectRatio = deviceSize.aspectRatio;
 
     final isWide =
-        (maxW >= 1000) ? (aspectRatio >= 16 / 9 && maxW > maxH) : false;
+        (maxW >= 1000) ? (aspectRatio >= kAspectRatio() && maxW > maxH) : false;
 
     return Container(
       width: maxW,
@@ -111,9 +112,14 @@ class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
                 itemBuilder: (context, index, realIndex) {
                   final product = widget.products[index];
 
-                  if (isWide) return _WideDeviceLayout(product: product);
+                  if (isWide) {
+                    return _WideDeviceLayout(
+                      product,
+                      key: _contentContainerKey,
+                    );
+                  }
 
-                  return _ThinDeviceLayout(product: product);
+                  return _ThinDeviceLayout(product, key: _contentContainerKey);
                 },
               ),
             ),
@@ -186,20 +192,18 @@ class _ExtrasText extends ConsumerWidget {
 }
 
 class _ThinDeviceLayout extends StatelessWidget {
-  const _ThinDeviceLayout({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
+  const _ThinDeviceLayout(this.product, {super.key});
 
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      key: _contentContainerKey,
+      key: key,
       alignment: Alignment.bottomCenter,
       fit: StackFit.expand,
       children: [
+        // image
         DefaultNetworkImage(
           key: _imageKey,
           imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
@@ -212,6 +216,8 @@ class _ThinDeviceLayout extends StatelessWidget {
           },
         ),
         _fader(),
+
+        // detail
         IgnorePointer(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -259,17 +265,14 @@ class _ThinDeviceLayout extends StatelessWidget {
 }
 
 class _WideDeviceLayout extends StatelessWidget {
-  const _WideDeviceLayout({
-    Key? key,
-    required this.product,
-  }) : super(key: key);
+  const _WideDeviceLayout(this.product, {super.key});
 
   final Product product;
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      key: _contentContainerKey,
+      key: key,
       child: InkWell(
         onTap: _onItemTap(context, product),
         child: Row(
@@ -300,7 +303,7 @@ class _WideDeviceLayout extends StatelessWidget {
             ),
             const VerticalDivider(width: 2.0, thickness: 2.0),
             AspectRatio(
-              aspectRatio: 16 / 9,
+              aspectRatio: kAspectRatio(isPotrait: false),
               child: DefaultNetworkImage(
                 key: _imageKey,
                 imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',

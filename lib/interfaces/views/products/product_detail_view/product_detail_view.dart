@@ -30,8 +30,8 @@ class ProductDetailView extends StatelessWidget {
     final maxH = mediaQuery.size.height;
     final aspectRatio = mediaQuery.size.aspectRatio;
 
-    if (maxW >= 600) {
-      if (aspectRatio >= 3 / 2 && maxW > maxH) {
+    if (maxW >= 900) {
+      if (aspectRatio >= kAspectRatio() && maxW > maxH) {
         return _WideDeviceLayout(product);
       }
 
@@ -57,7 +57,7 @@ class _ThinDeviceLayout extends StatelessWidget {
     final maxH = screenSize.height > 800 ? 800 : screenSize.height;
     final aspectRatio = maxW / maxH;
 
-    final isShowPoster = aspectRatio <= 2 / 3 && maxH > maxW;
+    final isShowPoster = aspectRatio <= kAspectRatio() && maxH > maxW;
 
     return SingleChildScrollView(
       padding: _kScrollViewPadding,
@@ -132,7 +132,7 @@ class _WideDeviceLayout extends StatelessWidget {
                       Flexible(
                         flex: 2,
                         child: AspectRatio(
-                          aspectRatio: 2 / 3,
+                          aspectRatio: kAspectRatio(),
                           child: Card(
                             child: DefaultNetworkImage(
                               imageUrl:
