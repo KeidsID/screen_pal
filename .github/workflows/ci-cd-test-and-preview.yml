@@ -39,9 +39,9 @@ jobs:
           name: test-coverage
           path: ./coverage/lcov.info
 
-      - name: Add netlify config
+      - name: Add netlify 404 handler
         working-directory: web
-        run: echo "${{secrets.NETLIFY_CONFIG}}" > netlify.toml
+        run: echo '${{secrets.NETLIFY_404}}' > 404.html
 
       - name: Flutter build web profile
         run: flutter build web --web-renderer canvaskit --profile
