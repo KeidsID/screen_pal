@@ -69,6 +69,8 @@ jobs:
 
       - name: Push build to preview branch
         run: |
+          git config --global user.email "kemalidris3362@gmail.com"
+          git config --global user.name "Kemal Idris (Web-Preview Push)"
           git add .
           git commit -m "deploy preview"
           git push origin preview
