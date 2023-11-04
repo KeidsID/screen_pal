@@ -2,9 +2,9 @@
   Screen Pal
 </b></h1>
 
-[![CI - Test Coverage](https://github.com/KeidsID/screen_pal/actions/workflows/ci-test.yml/badge.svg)](https://github.com/KeidsID/screen_pal/actions/workflows/ci-test.yml)
+[![CI/CD - Test and Preview](https://github.com/KeidsID/screen_pal/actions/workflows/ci-cd-test-and-preview.yml/badge.svg)](https://screen-pal-preview.netlify.app)
 [![codecov](https://codecov.io/github/KeidsID/screen_pal/graph/badge.svg?token=G20RM8PYOH)](https://codecov.io/github/KeidsID/screen_pal)
-[![CD Web](https://github.com/KeidsID/screen_pal/actions/workflows/cd-web.yml/badge.svg)](https://github.com/KeidsID/screen_pal/actions/workflows/cd-web.yml)
+[![CD - Web](https://github.com/KeidsID/screen_pal/actions/workflows/cd-web.yml/badge.svg)](https://keidsid.github.io/screen_pal)
 
 ![Headline](repo-assets/banner.png)
 
@@ -20,12 +20,20 @@ Screen Pal is an app that provides information about movies and TV shows. With i
 Screen Pal offers a user-friendly interface that makes it easy for users to find the information they need. The app is designed to serve all types of viewers, from casual viewers to fans of movies and TV shows. Users can explore different genres and countries to find titles that interest them.
 </p>
 
-Powered by <a href="https://www.themoviedb.org"> <img 
+Copyright © 2023 KeidsID (Kemal Idris)
+
+Database by <a href="https://www.themoviedb.org"> <img 
     src="assets/images/tmdb/alt-short.svg"
     alt="www.themoviedb.org"
     width="80px"
     height="10px"
   /> </a>.
+
+<a href="https://flutter.dev/"> <img 
+  src="https://storage.googleapis.com/cms-storage-bucket/916809aa4c8f73ad70d2.svg"
+  alt= "flutter"
+  width="200px"
+/> </a>
 
 ## Dev Note
 

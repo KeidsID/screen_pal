@@ -21,40 +21,43 @@ class AboutTmdbDialog extends StatelessWidget {
 
     return AlertDialog(
       scrollable: true,
-      content: ListBody(
-        children: <Widget>[
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              TmdbLogoShaderMask(
-                child: SvgPicture.asset(
-                  AssetPaths.tmdbPrimaryFullIcon,
-                  width: 80,
-                  height: 80,
-                ),
-              ),
-              const Expanded(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24.0),
-                  child: ListBody(
-                    children: <Widget>[
-                      MaterialText(
-                        'The Movie DB',
-                        style: M3TextStyles.headlineSmall,
-                      ),
-                      MaterialText(
-                        'API v$kTmdbApiVersion',
-                        style: M3TextStyles.bodyMedium,
-                      ),
-                      SizedBox(height: 18.0),
-                      MaterialText(_aboutTMDB, style: M3TextStyles.bodySmall),
-                    ],
+      content: SizedBox(
+        width: 600.0,
+        child: ListBody(
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                TmdbLogoShaderMask(
+                  child: SvgPicture.asset(
+                    AssetPaths.tmdbPrimaryFullIcon,
+                    width: 80,
+                    height: 80,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                const Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24.0),
+                    child: ListBody(
+                      children: <Widget>[
+                        MaterialText(
+                          'The Movie DB',
+                          style: M3TextStyles.headlineSmall,
+                        ),
+                        MaterialText(
+                          'API v$kTmdbApiVersion',
+                          style: M3TextStyles.bodyMedium,
+                        ),
+                        SizedBox(height: 18.0),
+                        MaterialText(_aboutTMDB, style: M3TextStyles.bodySmall),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       actions: <Widget>[
         TextButton(
