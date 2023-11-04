@@ -73,14 +73,12 @@ class AppHttpErrorWidget extends StatelessWidget {
   /// The HTTP error status code.
   final int statusCode;
 
-  /// Aditional message for error details.
+  /// {@macro screen_pal.interfaces.widgets.errors.AppErrorWidget.message}
   final String message;
 
   final EdgeInsetsGeometry? padding;
 
-  /// Add widget on the bottom. Typically an [ElevatedButton].
-  ///
-  /// If null, then no [action] widget rendered on the bottom.
+  /// {@macro screen_pal.interfaces.widgets.errors.AppErrorWidget.action}
   final Widget? action;
 
   @override
