@@ -4,10 +4,14 @@
 
   <body>
     <script>
-      const baseUrl = "https://keidsid.github.io/screen_pal";
-      const filteredLocation = `${window.location}`.slice(baseUrl.length);
+      // Will redirect to url that had hash prefix 
+      // ("/screen_pal/movies" into "/screen_pal/#/movies").
 
-      window.location.replace(`/screen_pal/#${filteredLocation}`);
+      const baseUrl = "https://keidsid.github.io/screen_pal";
+      const currentRoute = `${window.location}`.slice(baseUrl.length);
+
+      window.location.replace(`/screen_pal/#${currentRoute}`);
     </script>
   </body>
 </html>
+
