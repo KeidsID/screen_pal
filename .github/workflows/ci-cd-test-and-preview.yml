@@ -39,6 +39,10 @@ jobs:
           name: test-coverage
           path: ./coverage/lcov.info
 
+      - name: Add netlify 404 handler
+        working-directory: web
+        run: echo "${{secrets.NETLIFY_404}}" > 404.html
+
       - name: Flutter build web profile
         run: flutter build web --web-renderer canvaskit --profile
 
@@ -72,5 +76,5 @@ jobs:
           git config --global user.email "kemalidris3362@gmail.com"
           git config --global user.name "Kemal Idris (Web-Preview Push)"
           git add .
-          git commit -m "deploy preview"
+          git commit -m "web-preview build from PR https://github.com/KeidsID/screen_pal/pull/${{github.event.number}}"
           git push origin preview

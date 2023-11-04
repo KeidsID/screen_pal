@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+
+  <body>
+    <script>
+      // Will redirect to url that had hash prefix 
+      // ("/movies" into "/#/movies").
+
+      const baseUrl = "https://screen-pal-preview.netlify.app";
+      const currentRoute = `${window.location}`.slice(baseUrl.length);
+
+      window.location.replace(`/#${currentRoute}`);
+    </script>
+  </body>
+</html>

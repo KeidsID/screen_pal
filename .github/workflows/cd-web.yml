@@ -28,7 +28,7 @@ jobs:
           echo "${{ secrets.PROD_ENV_FILE }}" > .env
           dart run build_runner build --delete-conflicting-outputs
 
-      - name: Add github-pages redirect config
+      - name: Add github-pages 404 handler
         working-directory: web
         run: echo "${{secrets.GH_PAGES_404}}" > 404.html
 

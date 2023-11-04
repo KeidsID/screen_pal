@@ -164,7 +164,7 @@ class _DynamicNavRailState extends State<_DynamicNavRail> {
         key: widget.key,
         extended: isExtended,
         onDestinationSelected: (navIndex) {
-          _setIsExtended(value: false);
+          if (kIsMobile) _setIsExtended(value: false);
 
           _onNavBarItemTap(context)(navIndex);
         },
