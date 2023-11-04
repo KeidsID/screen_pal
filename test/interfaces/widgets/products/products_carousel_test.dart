@@ -109,15 +109,6 @@ void main() {
           await expectStackAndNoOverviewLater(tester);
         });
       });
-      testWidgets('on Tablet L device', (tester) {
-        return mockNetworkImagesFor(() async {
-          TesterViewEmulators.iPadPro(tester);
-
-          await tester.pumpWidget(testWidgetApp([dummyMovie]));
-
-          await expectStackAndNoOverviewLater(tester);
-        });
-      });
     });
 
     group('should render [Card] and contain product overview', () {
@@ -130,24 +121,25 @@ void main() {
         await expectLater(_WidgetFinders.productOverview, findsWidgets);
       }
 
-      testWidgets('on Mobile device (landscape)', (tester) {
+      testWidgets('on Tablet L (potrait) device', (tester) {
         return mockNetworkImagesFor(() async {
-          TesterViewEmulators.samsungGalaxyS20Ultra(tester, isPotrait: false);
+          TesterViewEmulators.iPadPro(tester);
 
           await tester.pumpWidget(testWidgetApp([dummyMovie]));
 
           await expectCardAndOverviewLater(tester);
         });
       });
-      testWidgets('on Tablet device (landscape)', (tester) {
+      testWidgets('on Tablet L (landscape)/Laptop device', (tester) {
         return mockNetworkImagesFor(() async {
-          TesterViewEmulators.galaxyTabS4(tester, isPotrait: false);
+          TesterViewEmulators.iPadPro(tester, isPotrait: false);
 
           await tester.pumpWidget(testWidgetApp([dummyMovie]));
 
           await expectCardAndOverviewLater(tester);
         });
       });
+
       testWidgets('on Laptop L device', (tester) {
         return mockNetworkImagesFor(() async {
           TesterViewEmulators.asusVivobook14(tester);
@@ -163,7 +155,7 @@ void main() {
 
 abstract class _WidgetFinders {
   static Finder get contentContainer =>
-      find.byKey(const Key('content-container'));
+      find.byKey(const Key('content-container')).last;
 
   static Finder get image => find.byKey(const Key('image-widget'));
   static Finder get productTitle => find.byKey(const Key('product-title'));

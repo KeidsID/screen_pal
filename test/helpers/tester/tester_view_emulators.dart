@@ -4,10 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 /// Contain static methods to emulate device into the [WidgetTester].
 ///
 /// ```dart
-/// // emulate 712 x 1138 view
+/// // emulate 712 x 1138 view.
 /// TesterViewEmulators.galaxyTabS4(tester);
 ///
-/// // emulate 1138 x 712 view
+/// // emulate 1138 x 712 view.
 /// TesterViewEmulators.galaxyTabS4(tester, isPotrait: false);
 /// ```
 abstract final class TesterViewEmulators {
@@ -36,7 +36,7 @@ abstract final class TesterViewEmulators {
     tester.view.physicalSize = size;
   }
 
-  /// Will emulate the view of a `Tablet` device (712 x 1138 on potrait)
+  /// Will emulate the view of a `Tablet` device (712 x 1138 on potrait).
   static void galaxyTabS4(WidgetTester tester, {bool isPotrait = true}) {
     final size =
         _getTesableSize(tester, width: 712, height: 1138, isPotrait: isPotrait);
@@ -44,7 +44,7 @@ abstract final class TesterViewEmulators {
     tester.view.physicalSize = size;
   }
 
-  /// Will emulate the view of a `Tablet L`/`Laptop` device (1024 x 1366 on potrait)
+  /// Will emulate the view of a `Tablet L`/`Laptop` device (1024 x 1366 on potrait).
   static void iPadPro(WidgetTester tester, {bool isPotrait = true}) {
     final size = _getTesableSize(
       tester,
@@ -56,7 +56,7 @@ abstract final class TesterViewEmulators {
     tester.view.physicalSize = size;
   }
 
-  /// Will emulate the view of a `Laptop L` device (1920 x 1080)
+  /// Will emulate the view of a `Laptop L` device (1920 x 1080).
   static void asusVivobook14(WidgetTester tester) {
     final size = _getTesableSize(tester, width: 1920, height: 1080);
 

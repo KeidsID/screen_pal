@@ -85,13 +85,13 @@ class _LastSeasonCard extends StatelessWidget {
     return Row(
       children: [
         AspectRatio(
-          aspectRatio: 2 / 3,
+          aspectRatio: kAspectRatio(),
           child: DefaultNetworkImage(
             imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
-            alt: '${season.seasonNumber} Season-${season.name}',
             fit: BoxFit.cover,
           ),
         ),
+        const VerticalDivider(width: 2.0, thickness: 2.0),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.all(8.0).copyWith(left: 16.0),
@@ -107,10 +107,12 @@ class _LastSeasonCard extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         // bg image
-        DefaultNetworkImage(
-          imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
-          repeat: ImageRepeat.repeatX,
-          fit: BoxFit.fitHeight,
+        Flexible(
+          child: DefaultNetworkImage(
+            imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
+            repeat: ImageRepeat.repeatX,
+            fit: BoxFit.fitHeight,
+          ),
         ),
         Container(color: Theme.of(context).cardColor.withOpacity(0.9)),
 
