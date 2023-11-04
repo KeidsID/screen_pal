@@ -21,14 +21,18 @@ class AppErrorWidget extends StatelessWidget {
   /// Title that explains the error in one short sentence.
   final String title;
 
+  /// {@template screen_pal.interfaces.widgets.errors.AppErrorWidget.message}
   /// Aditional message for error details.
+  /// {@endtemplate}
   final String message;
 
   final EdgeInsetsGeometry? padding;
 
+  /// {@template screen_pal.interfaces.widgets.errors.AppErrorWidget.action}
   /// Add widget on the bottom. Typically an [ElevatedButton].
   ///
   /// If null, then no [action] widget rendered on the bottom.
+  /// {@endtemplate}
   final Widget? action;
 
   @override

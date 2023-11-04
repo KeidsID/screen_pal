@@ -24,9 +24,7 @@ class DioExceptionWidget extends StatelessWidget {
 
   final DioException exception;
 
-  /// Add widget on the bottom. Typically an [ElevatedButton].
-  ///
-  /// If null, then no [action] widget rendered on the bottom.
+  /// {@macro screen_pal.interfaces.widgets.errors.AppErrorWidget.action}
   final Widget? action;
 
   @override
