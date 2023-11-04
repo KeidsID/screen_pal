@@ -107,7 +107,7 @@ class _LastSeasonCard extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         // bg image
-        Flexible(
+        SizedBox(
           child: DefaultNetworkImage(
             imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
             repeat: ImageRepeat.repeatX,
