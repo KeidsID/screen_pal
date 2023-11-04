@@ -30,7 +30,7 @@ jobs:
 
       - name: Add github-pages 404 handler
         working-directory: web
-        run: echo "${{secrets.GH_PAGES_404}}" > 404.html
+        run: echo '${{secrets.GH_PAGES_404}}' > 404.html
 
       - name: Flutter build web release
         run:
