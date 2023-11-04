@@ -55,6 +55,7 @@ jobs:
   deploy-preview:
     needs: test
     permissions:
+      pull-requests: read
       contents: write
 
     runs-on: ubuntu-latest
@@ -71,10 +72,20 @@ jobs:
           name: build-web-preview
           path: ./
 
-      - name: Push build to preview branch
+      # https://stackoverflow.com/a/69936361/19337625
+      - name: Get Pull Request Number
+        id: pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config --global user.email "kemalidris3362@gmail.com"
-          git config --global user.name "Kemal Idris (Web-Preview Push)"
+          echo "::set-output name=pr_num::$(gh pr view --json number -q .number || echo "")"
+
+      - name: Push build to preview branch
+        env:
+          PR_REF: "https://github.com/KeidsID/screen_pal/pull/${{steps.pr.outputs.pr_num}}"
+        run: |
+          git config --global user.email "keidscode@gmail.com"
+          git config --global user.name "KeidsID"
           git add .
-          git commit -m "web-preview build from PR https://github.com/KeidsID/screen_pal/pull/${{github.event.number}}"
+          git commit -m "web-preview build from PR ${{env.PR_REF}}"
           git push origin preview
