@@ -8,7 +8,7 @@ import 'package:logger/logger.dart';
 import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 
 const kAppName = 'Screen Pal';
-const kAppLegalese = 'Copyright (c) 2023 KeidsID (Kemal Idris)';
+const kAppLegalese = 'MIT License\n\nCopyright © 2023 KeidsID (Kemal Idris)';
 const kTmdbApiVersion = '3';
 
 /// Use this to debug instead [debugPrint].
