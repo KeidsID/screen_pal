@@ -1,6 +1,9 @@
 /// Every model classes for the app.
 library entities;
 
+export 'entities/credits/cast.dart';
+export 'entities/credits/credits.dart';
+export 'entities/credits/crew.dart';
 export 'entities/extras/extras.dart';
 export 'entities/extras/genre.dart';
 export 'entities/extras/spoken_language.dart';
@@ -8,6 +11,7 @@ export 'entities/movies/movie.dart';
 export 'entities/movies/movie_collection.dart';
 export 'entities/movies/movie_collection_detail.dart';
 export 'entities/movies/movie_detail.dart';
+export 'entities/person/person.dart';
 export 'entities/products/product.dart';
 export 'entities/products/product_detail.dart';
 export 'entities/tv_shows/episode.dart';

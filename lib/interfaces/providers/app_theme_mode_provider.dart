@@ -9,7 +9,8 @@ import 'package:screen_pal/core/use_cases/app/set_theme_mode.dart';
 
 part 'app_theme_mode_provider.g.dart';
 
-@riverpod
+// satisfies dependency lint warning for override provider on test
+@Riverpod(keepAlive: true, dependencies: [])
 class AppThemeMode extends _$AppThemeMode {
   @override
   ThemeMode build() {
