@@ -9,7 +9,7 @@ import 'package:screen_pal/core/use_cases/app/set_theme_mode.dart';
 
 part 'app_theme_mode_provider.g.dart';
 
-@Riverpod(dependencies: [])
+@riverpod
 class AppThemeMode extends _$AppThemeMode {
   @override
   ThemeMode build() {

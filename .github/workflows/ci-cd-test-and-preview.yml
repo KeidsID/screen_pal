@@ -10,12 +10,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        flutter-version: [3.10.x]
+
     steps:
-      - name: Setup Flutter SDK
+      - name: Setup Flutter v${{ matrix.flutter-version }} SDK
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-          flutter-version: "3.x"
+          flutter-version: ${{ matrix.flutter-version }}
 
       - name: Checkout PR branch
         uses: actions/checkout@v3
