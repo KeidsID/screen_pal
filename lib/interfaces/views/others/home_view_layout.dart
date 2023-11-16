@@ -15,10 +15,7 @@ const _tvShowsNav = Key('nav-tv-shows');
 const _settingsNav = Key('nav-settings');
 
 class HomeViewLayout extends StatelessWidget {
-  const HomeViewLayout({
-    Key? key,
-    this.child,
-  }) : super(key: key);
+  const HomeViewLayout({super.key, this.child});
 
   final Widget? child;
 
@@ -92,10 +89,7 @@ int _currentNavIndex(BuildContext context) {
 }
 
 class _ThinDeviceLayout extends StatelessWidget {
-  const _ThinDeviceLayout({
-    Key? key,
-    this.child,
-  }) : super(key: key);
+  const _ThinDeviceLayout({this.child});
 
   final Widget? child;
 
@@ -120,10 +114,7 @@ class _ThinDeviceLayout extends StatelessWidget {
 }
 
 class _WideDeviceLayout extends StatelessWidget {
-  const _WideDeviceLayout({
-    Key? key,
-    this.child,
-  }) : super(key: key);
+  const _WideDeviceLayout({this.child});
 
   final Widget? child;
 
