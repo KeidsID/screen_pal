@@ -1,10 +1,12 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:screen_pal/core/entities/credits/credits.dart';
 
 import 'package:screen_pal/core/entities/tv_shows/tv_show.dart';
 import 'package:screen_pal/core/entities/tv_shows/tv_show_detail.dart';
 import 'package:screen_pal/core/repo/tv_shows_repo.dart';
+import 'package:screen_pal/infrastructures/api/models/credits/raw_credits.dart';
 import 'package:screen_pal/infrastructures/api/models/tv_shows/raw_tv_show_detail.dart';
 import 'package:screen_pal/infrastructures/api/models/tv_shows/tv_show_list_res_body.dart';
 
@@ -56,6 +58,17 @@ class TvShowsRepoImpl implements TvShowsRepo {
   }
 
   @override
+  Future<List<TvShow>> getTvShowRecommendations(int tvShowId) async {
+    final response =
+        await _dio.get<String>('$_tvShowPath/$tvShowId/recommendations');
+    final rawResBody = jsonDecode(response.data!);
+
+    final resBody = TvShowListResBody.fromJson(rawResBody);
+
+    return resBody.results.map((e) => e.toEntity()).toList();
+  }
+
+  @override
   Future<TvShowDetail> getTvShowDetail(int tvShowId) async {
     final response = await _dio.get<String>('$_tvShowPath/$tvShowId');
     final rawResBody = jsonDecode(response.data!);
@@ -66,13 +79,12 @@ class TvShowsRepoImpl implements TvShowsRepo {
   }
 
   @override
-  Future<List<TvShow>> getTvShowRecommendations(int tvShowId) async {
-    final response =
-        await _dio.get<String>('$_tvShowPath/$tvShowId/recommendations');
+  Future<Credits> getTvShowCredits(int tvShowId) async {
+    final response = await _dio.get<String>('$_tvShowPath/$tvShowId/credits');
     final rawResBody = jsonDecode(response.data!);
 
-    final resBody = TvShowListResBody.fromJson(rawResBody);
+    final resBody = RawCredits.fromJson(rawResBody);
 
-    return resBody.results.map((e) => e.toEntity()).toList();
+    return resBody.toEntity();
   }
 }

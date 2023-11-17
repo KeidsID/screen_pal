@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:screen_pal/infrastructures/repo/tv_shows_repo_impl.dart';
 
+import '../../helpers/dummy/dummy_credits.dart';
 import '../../helpers/dummy/dummy_tv_shows.dart';
 import '../../helpers/mocks/services.mocks.dart';
 
@@ -121,6 +122,25 @@ void main() {
 
         expect(tvShows, expectedTvShows);
         verify(mockDio.get<String>(endpoint)).called(1);
+      });
+    });
+
+    group('getTvShowCredits()', () {
+      const tvShowId = 123;
+      const endpoint = '/tv/$tvShowId/credits';
+
+      test('should return credits of the movie', () async {
+        when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
+          return Response<String>(
+            requestOptions: RequestOptions(),
+            data: dummyRawTvShowCreditsJson,
+          );
+        });
+
+        final credits = await subject.getTvShowCredits(tvShowId);
+
+        verify(mockDio.get<String>(endpoint)).called(1);
+        expect(credits, dummyTvShowCredits);
       });
     });
   });

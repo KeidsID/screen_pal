@@ -3,6 +3,8 @@ library use_cases;
 
 export 'use_cases/app/get_theme_mode.dart';
 export 'use_cases/app/set_theme_mode.dart';
+export 'use_cases/credits/get_movie_credits.dart';
+export 'use_cases/credits/get_tv_show_credits.dart';
 export 'use_cases/extras/get_languages.dart';
 export 'use_cases/extras/get_movie_genres.dart';
 export 'use_cases/extras/get_tv_show_genres.dart';

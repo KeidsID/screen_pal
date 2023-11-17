@@ -10,7 +10,7 @@ part 'raw_person.g.dart';
 
 @freezed
 class RawPerson with _$RawPerson {
-  RawPerson._();
+  const RawPerson._();
 
   const factory RawPerson({
     required int id,

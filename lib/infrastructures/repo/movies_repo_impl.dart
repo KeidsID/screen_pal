@@ -2,13 +2,15 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
+import 'package:screen_pal/core/entities/credits/credits.dart';
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';
-import 'package:screen_pal/infrastructures/api/models/movies/raw_movie_detail.dart';
+import 'package:screen_pal/infrastructures/api/models/credits/raw_credits.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/movie_list_res_body.dart';
 import 'package:screen_pal/infrastructures/api/models/movies/raw_movie_collection_detail.dart';
+import 'package:screen_pal/infrastructures/api/models/movies/raw_movie_detail.dart';
 
 class MoviesRepoImpl implements MoviesRepo {
   const MoviesRepoImpl(Dio dio) : _dio = dio;
@@ -58,6 +60,17 @@ class MoviesRepoImpl implements MoviesRepo {
   }
 
   @override
+  Future<List<Movie>> getRecommendations(int movieId) async {
+    final response =
+        await _dio.get<String>('$_moviePath/$movieId/recommendations');
+    final rawResBody = jsonDecode(response.data!);
+
+    final resBody = MovieListResBody.fromJson(rawResBody);
+
+    return resBody.results.map((e) => e.toEntity()).toList();
+  }
+
+  @override
   Future<MovieDetail> getMovieDetail(int movieId) async {
     final response = await _dio.get<String>('$_moviePath/$movieId');
     final rawResBody = jsonDecode(response.data!);
@@ -68,14 +81,13 @@ class MoviesRepoImpl implements MoviesRepo {
   }
 
   @override
-  Future<List<Movie>> getRecommendations(int movieId) async {
-    final response =
-        await _dio.get<String>('$_moviePath/$movieId/recommendations');
+  Future<Credits> getMovieCredits(int movieId) async {
+    final response = await _dio.get<String>('$_moviePath/$movieId/credits');
     final rawResBody = jsonDecode(response.data!);
 
-    final resBody = MovieListResBody.fromJson(rawResBody);
+    final resBody = RawCredits.fromJson(rawResBody);
 
-    return resBody.results.map((e) => e.toEntity()).toList();
+    return resBody.toEntity();
   }
 
   @override
