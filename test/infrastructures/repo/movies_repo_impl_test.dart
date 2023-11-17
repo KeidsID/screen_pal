@@ -4,6 +4,7 @@ import 'package:mockito/mockito.dart';
 
 import 'package:screen_pal/infrastructures/repo/movies_repo_impl.dart';
 
+import '../../helpers/dummy/dummy_credits.dart';
 import '../../helpers/dummy/dummy_movies.dart';
 import '../../helpers/mocks/services.mocks.dart';
 
@@ -145,6 +146,25 @@ void main() {
 
         expect(collectionDetail, expectedCollectionDetail);
         verify(mockDio.get<String>(endpoint)).called(1);
+      });
+    });
+
+    group('getMovieCredits()', () {
+      const movieId = 123;
+      const endpoint = '/movie/$movieId/credits';
+
+      test('should return credits of the movie', () async {
+        when(mockDio.get<String>(endpoint)).thenAnswer((_) async {
+          return Response<String>(
+            requestOptions: RequestOptions(),
+            data: dummyRawMovieCreditsJson,
+          );
+        });
+
+        final credits = await subject.getMovieCredits(movieId);
+
+        verify(mockDio.get<String>(endpoint)).called(1);
+        expect(credits, dummyMovieCredits);
       });
     });
   });

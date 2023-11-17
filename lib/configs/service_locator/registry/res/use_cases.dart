@@ -8,6 +8,10 @@ void registerUseCases() {
     ..registerLazySingleton(() => GetThemeMode(appSettingsRepo: locator()))
     ..registerLazySingleton(() => SetThemeMode(appSettingsRepo: locator()))
 
+    // credits
+    ..registerLazySingleton(() => GetMovieCredits(moviesRepo: locator()))
+    ..registerLazySingleton(() => GetTvShowCredits(tvShowsRepo: locator()))
+
     // extras
     ..registerLazySingleton(() => GetLanguages(extrasRepo: locator()))
     ..registerLazySingleton(() => GetMovieGenres(extrasRepo: locator()))
