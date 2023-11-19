@@ -5,6 +5,7 @@ export 'widgets/credits/person_card.dart';
 export 'widgets/credits/persons_horiz_list_view.dart';
 export 'widgets/dialogs/about_app_dialog.dart';
 export 'widgets/dialogs/about_tmdb_dialog.dart';
+export 'widgets/dialogs/policies_dialog.dart';
 export 'widgets/errors/app_error_widget.dart';
 export 'widgets/errors/app_http_error_widget.dart';
 export 'widgets/errors/dio_exception_widget.dart';

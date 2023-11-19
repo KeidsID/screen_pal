@@ -58,12 +58,14 @@ class DioExceptionWidget extends StatelessWidget {
         message: resBody.statusMessage,
         action: action,
       );
-    } catch (e) {
+    } catch (e, stack) {
       // incase [TmdbErrorResBody] are not valid.
 
       kLogger.d(
         'DioExceptionWidget.exception.response.data:\n'
         '${response.data}',
+        error: e,
+        stackTrace: stack,
       );
 
       return AppHttpErrorWidget(statusCode: statusCode, action: action);

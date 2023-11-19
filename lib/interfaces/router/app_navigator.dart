@@ -39,6 +39,14 @@ abstract final class AppNavigator {
   static void aboutApp(BuildContext context) =>
       context.go('$_settingsPath/about-app');
 
+  /// Navigate to `/settings/about-app/privacy-policy` route.
+  static void privacyPolicy(BuildContext context) =>
+      context.go('$_settingsPath/about-app/privacy-policy');
+
+  /// Navigate to `/settings/about-app/terms-of-use` route.
+  static void termsOfUse(BuildContext context) =>
+      context.go('$_settingsPath/about-app/terms-of-use');
+
   /// Navigate to `/settings/about-tmdb` route.
   static void aboutTmdb(BuildContext context) =>
       context.go('$_settingsPath/about-tmdb');

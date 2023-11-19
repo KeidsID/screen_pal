@@ -64,7 +64,7 @@ class AppHttpErrorWidget extends StatelessWidget {
   ///    [DioException] that provided.
   const AppHttpErrorWidget({
     super.key,
-    required this.statusCode,
+    this.statusCode = 500,
     this.message = 'Sorry for the inconvenience',
     this.padding,
     this.action,
