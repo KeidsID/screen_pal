@@ -29,9 +29,9 @@ class ProductHorizListView extends StatelessWidget {
         padding: padding,
         itemCount: products.length,
         itemBuilder: (_, index) {
-          final movie = products[index];
+          final product = products[index];
 
-          return SizedBox(width: itemWidth, child: ProductCard(movie));
+          return SizedBox(width: itemWidth, child: ProductCard(product));
         },
       ),
     );
