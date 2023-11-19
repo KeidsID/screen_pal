@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/interfaces/providers/app_theme_mode_provider.dart';
+import 'package:screen_pal/interfaces/providers/others/app_theme_mode_provider.dart';
 
 class ThemeModeDropdownButton extends ConsumerWidget {
   const ThemeModeDropdownButton({super.key});

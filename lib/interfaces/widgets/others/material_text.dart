@@ -30,6 +30,7 @@ class MaterialText extends StatelessWidget {
     super.key,
     this.style = M3TextStyles.bodyMedium,
     this.opacity = 1.0,
+    this.isBold = false,
     this.textAlign,
     this.textDirection,
     this.softWrap,
@@ -50,6 +51,9 @@ class MaterialText extends StatelessWidget {
   ///
   /// Out of range values will have unexpected effects.
   final double opacity;
+
+  /// Define the text as bold, bold styling will be applied.
+  final bool isBold;
 
   /// How the text should be aligned horizontally.
   final TextAlign? textAlign;
@@ -104,7 +108,10 @@ class MaterialText extends StatelessWidget {
     return Text(
       data,
       key: key,
-      style: textStyle?.copyWith(color: color?.withOpacity(opacity)),
+      style: textStyle?.copyWith(
+        color: color?.withOpacity(opacity),
+        fontWeight: (isBold) ? FontWeight.bold : null,
+      ),
       textAlign: textAlign,
       textDirection: textDirection,
       softWrap: softWrap,

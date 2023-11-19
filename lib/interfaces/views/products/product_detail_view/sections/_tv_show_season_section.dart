@@ -70,8 +70,6 @@ class _LastSeasonCard extends StatelessWidget {
       child: Card(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            kLogger.d('${constraints.maxWidth}');
-
             return (constraints.maxWidth > 600.0)
                 ? _wideLayout()
                 : _thinLayout(context);

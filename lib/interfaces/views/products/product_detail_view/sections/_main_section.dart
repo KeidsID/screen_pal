@@ -68,13 +68,6 @@ class _MainSection extends StatelessWidget {
       return MaterialText(text, style: M3TextStyles.titleSmall, opacity: 0.75);
     }).toList();
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-
-    properties.add(kIsVisibleFlagProperty(true));
-  }
 }
 
 class _ProductDetailExtrasText extends StatelessWidget {

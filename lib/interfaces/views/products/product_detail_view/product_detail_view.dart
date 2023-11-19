@@ -7,12 +7,15 @@ import 'package:intl/intl.dart' as intl;
 import 'package:screen_pal/configs/constants.dart';
 import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
+import 'package:screen_pal/interfaces/providers/credits/products_credits.dart';
 import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/providers/tv_shows/tv_show_list_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/utils/to_ordinal.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
+part 'sections/_credits_section.dart';
 part 'sections/_main_section.dart';
 part 'sections/_movie_collection_section.dart';
 part 'sections/_product_recommendations_section.dart';
@@ -76,6 +79,7 @@ class _ThinDeviceLayout extends StatelessWidget {
           const SizedBox(height: 16.0),
           _MainSection(product),
           const Padding(padding: kHorizPadding, child: Divider()),
+          _CreditsSection(product),
           _MovieCollectionSection(product),
           _TvShowSeasonSection(product),
           _ProductRecommendationsSection(product),
@@ -160,6 +164,7 @@ class _WideDeviceLayout extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16.0),
+          _CreditsSection(product),
           _MovieCollectionSection(product),
           _TvShowSeasonSection(product),
           _ProductRecommendationsSection(product),

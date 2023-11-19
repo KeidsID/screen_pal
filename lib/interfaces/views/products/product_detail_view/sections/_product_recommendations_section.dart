@@ -21,11 +21,4 @@ class _ProductRecommendationsSection extends StatelessWidget {
       autoDisposeProductsProvider: provider,
     );
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-
-    properties.add(kIsVisibleFlagProperty(true));
-  }
 }

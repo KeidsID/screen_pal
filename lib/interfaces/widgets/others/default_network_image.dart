@@ -61,15 +61,25 @@ class DefaultNetworkImage extends StatelessWidget {
       placeholder: (_, __) => const Center(
         child: CircularProgressIndicator(),
       ),
-      errorWidget: (_, __, ___) => Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      errorWidget: (context, __, ___) => Center(
+        child: Stack(
+          fit: StackFit.expand,
           children: [
-            const Icon(Icons.broken_image_outlined),
-            Text(
-              alt ?? '',
-              textAlign: TextAlign.center,
+            Placeholder(
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
             ),
+            alt == null
+                ? const Icon(Icons.broken_image_outlined)
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.broken_image_outlined),
+                      Text(
+                        alt!,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
           ],
         ),
       ),
