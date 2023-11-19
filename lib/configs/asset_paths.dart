@@ -10,4 +10,7 @@ abstract final class AssetPaths {
   static const tmdbPrimaryFullIcon = 'assets/images/tmdb/primary-full.svg';
   static const tmdbPrimaryLongIcon = 'assets/images/tmdb/primary-long.svg';
   static const tmdbPrimaryShortIcon = 'assets/images/tmdb/primary-short.svg';
+
+  static const privacyPolicy = 'policies/privacy-policy.md';
+  static const termsOfUse = 'policies/terms-of-use.md';
 }

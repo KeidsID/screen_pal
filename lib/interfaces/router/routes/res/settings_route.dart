@@ -11,6 +11,20 @@ final _settingsRoute = GoRoute(
       pageBuilder: (_, __) {
         return DialogPage(builder: (_) => const AboutAppDialog());
       },
+      routes: [
+        GoRoute(
+          path: 'privacy-policy',
+          pageBuilder: (_, __) => DialogPage(
+            builder: (_) => const PoliciesDialog(PolicyType.privacyPolicy),
+          ),
+        ),
+        GoRoute(
+          path: 'terms-of-use',
+          pageBuilder: (_, __) => DialogPage(
+            builder: (_) => const PoliciesDialog(PolicyType.termsOfUse),
+          ),
+        )
+      ],
     ),
     GoRoute(
       path: 'about-tmdb',
