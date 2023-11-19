@@ -1,25 +1,32 @@
 # Privacy Policy
 
-Last updated: November 15th, 2023
+Effective Date: November 26th, 2023
 
-KeidsID ("us", "we", or "our") operates the Screen Pal mobile application (the
-"App").
+When using any of our products or interacting with
+[keidsid.github.io/screen_pal/](https://keidsid.github.io/screen_pal/) which is
+owned and operated by KeidsID ("We", "Our", or "Us") that do not
+have a separate privacy policy, you consent to the collection, transfer,
+storage, processing, disclosure and use of your information as described in this
+Privacy Policy. This includes any information you choose to provide that is
+deemed sensitive under applicable law. If you do not agree with the terms of
+this Privacy Policy, you should not use our products (a Screen Pal app, or
+site), or access or interact with any other aspect of our's business.
 
-This page informs you of our policies regarding the collection, use, and
-disclosure of personal data when you use our App and the choices you have
-associated with that data.
+BY ACCEPTING THE PRIVACY POLICY, YOU AUTHORIZE US TO USE AND SHARE WITH OTHER
+KEIDSID AFFILIATES, AS WELL AS CERTAIN TRUSTED BUSINESS PARTNERS AND SERVICE
+PROVIDERS CERTAIN, WHICH MAY BE LOCATED OUTSIDE OF YOUR COUNTRY OF RESIDENCE
+(INCLUDING COUNTRIES THAT DO NOT PROVIDE THE SAME LEVEL OF PROTECTION FOR THE
+PROCESSING OF PERSONAL DATA THE SAME AS YOUR COUNTRY OF RESIDENCE) INFORMATION
+PROVIDED BY YOU TO US (WHICH WE ARE UNABLE TO COLLECT AT THE MOMENT). YOU
+ACKNOWLEDGE AND AGREE TO THE IMPORTANCE OF SHARING SUCH INFORMATION FOR THE
+PROVISION OF OUR PRODUCTS. THIS CONSENT IS GIVEN FOR FOR THE DURATION OF YOUR
+RELATIONSHIP WITH US.
 
 ## Information Collection and Use
 
-We do not collect any personal information from users of our App.
-
-## Log Data
-
-We do not log any data when you use the App.
-
-## Cookies
-
-We do not use cookies in connection with our App.
+We want to be transparent about the information we do not collect. Our app does
+not gather any personal information, and users cannot provide such information
+through our app. Additionally, we do not collect log data or use cookies.
 
 ## Service Providers
 
@@ -42,13 +49,16 @@ identifiable information to us, please contact us at keidscode@gmail.com and you
 may request to exercise your applicable access, rectification, cancellation,
 and/or objection rights.
 
-## Changes to This Privacy Policy
+## Changes
 
-We may update our Privacy Policy from time to time. Thus, you are advised to
-review this page periodically for any changes. We will notify you of any changes
-by posting the new Privacy Policy on this page.
+We may update this policy from time to time. We will notify you of any changes
+by posting the new policy online on this page, and if the changes are
+significant, we will provide a more prominent notice. It is your responsibility
+to read this Privacy Policy carefully and review any changes that may have been
+made. Because changes will be posted on this page, we encourage you to check
+this page regularly.
 
 ## Contact Us
 
-If you have any questions or suggestions about our Privacy Policy, do not
+If you have any questions about our Privacy Policy, do not
 hesitate to contact us at keidscode@gmail.com.
