@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/core/repo/app_settings_repo.dart';
+import 'package:screen_pal/core/services/cache/theme_mode_cache.dart';
 
 final class GetThemeMode {
-  const GetThemeMode({required AppSettingsRepo appSettingsRepo})
+  const GetThemeMode({required ThemeModeCache appSettingsRepo})
       : _appSettingsRepo = appSettingsRepo;
 
-  final AppSettingsRepo _appSettingsRepo;
+  final ThemeModeCache _appSettingsRepo;
 
   Future<ThemeMode> execute() => _appSettingsRepo.getThemeMode();
 }

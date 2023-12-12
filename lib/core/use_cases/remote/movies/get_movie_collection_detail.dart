@@ -1,5 +1,5 @@
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
-import 'package:screen_pal/core/repo/movies_repo.dart';
+import 'package:screen_pal/core/services/remote/movies_repo.dart';
 
 final class GetMovieCollectionDetail {
   const GetMovieCollectionDetail({required MoviesRepo moviesRepo})

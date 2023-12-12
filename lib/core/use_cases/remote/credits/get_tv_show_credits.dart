@@ -1,5 +1,5 @@
 import 'package:screen_pal/core/entities/credits/credits.dart';
-import 'package:screen_pal/core/repo/tv_shows_repo.dart';
+import 'package:screen_pal/core/services/remote/tv_shows_repo.dart';
 
 final class GetTvShowCredits {
   final TvShowsRepo _moviesRepo;

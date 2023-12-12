@@ -1,5 +1,5 @@
 import 'package:screen_pal/core/entities/extras/genre.dart';
-import 'package:screen_pal/core/repo/extras_repo.dart';
+import 'package:screen_pal/core/services/remote/extras_repo.dart';
 
 final class GetMovieGenres {
   const GetMovieGenres({required ExtrasRepo extrasRepo})

@@ -1,5 +1,5 @@
 import 'package:screen_pal/core/entities/tv_shows/tv_show.dart';
-import 'package:screen_pal/core/repo/tv_shows_repo.dart';
+import 'package:screen_pal/core/services/remote/tv_shows_repo.dart';
 
 final class GetTopRatedTvShows {
   const GetTopRatedTvShows({required TvShowsRepo tvShowsRepo})
