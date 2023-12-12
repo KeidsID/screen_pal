@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-/// Everything you need to manage app settings.
-abstract interface class AppSettingsRepo {
+abstract interface class ThemeModeCache {
+  @protected
+  String get cacheKey => 'app.theme_mode';
+
   Future<bool> setThemeMode(ThemeMode themeMode);
   Future<ThemeMode> getThemeMode();
 }
