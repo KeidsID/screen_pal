@@ -2,7 +2,8 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:screen_pal/common/service_locator/locator.dart' as service;
+import 'package:screen_pal/infrastructures/service_locator/locator.dart'
+    as service;
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/use_cases/movies/get_movie_recommendations.dart';
 import 'package:screen_pal/core/use_cases/movies/get_now_playing_movies.dart';
