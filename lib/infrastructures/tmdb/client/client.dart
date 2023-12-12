@@ -4,21 +4,14 @@ import 'package:dio/dio.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/common/envs/env.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
-/// TMDB RestAPI Dio instance with configured environment.
+/// TMDB RestAPI Dio client with configured environment.
 ///
 /// Endpoint reference: https://developer.themoviedb.org/reference
-final tmdbDio = Dio(BaseOptions(
+///
+/// To use images path from api response, please refer to [tmdbImageBaseUrl].
+final tmdbClient = Dio(BaseOptions(
   baseUrl: 'https://api.themoviedb.org/$kTmdbApiVersion',
   headers: {"Authorization": "Bearer ${Env.tmdbAccToken}"},
 ));
-
-/// Used to load an image based on the path given by the API.
-///
-/// Example:
-/// ```dart
-/// const pathFromApi = '/netflix.jpg';
-///
-/// Image.network('$tmdbImageBaseUrl$pathFromApi');
-/// ```
-const tmdbImageBaseUrl = 'https://image.tmdb.org/t/p/original';

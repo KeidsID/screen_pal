@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/movies/movie_collection.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
-import 'package:screen_pal/infrastructures/api/models/others/raw_company.dart';
-import 'package:screen_pal/infrastructures/api/models/others/raw_country.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_company.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_country.dart';
 
 import '../others/raw_genre.dart';
 import '../others/raw_spoken_language.dart';
