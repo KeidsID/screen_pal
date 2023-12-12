@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:screen_pal/configs/service_locator/locator.dart' as service;
+import 'package:screen_pal/common/service_locator/locator.dart' as service;
 import 'package:screen_pal/core/use_cases/app/get_theme_mode.dart';
 import 'package:screen_pal/core/use_cases/app/set_theme_mode.dart';
 

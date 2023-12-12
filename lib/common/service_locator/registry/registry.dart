@@ -3,7 +3,7 @@
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:screen_pal/configs/service_locator/locator.dart';
+import 'package:screen_pal/common/service_locator/locator.dart';
 import 'package:screen_pal/core/repo/app_settings_repo.dart';
 import 'package:screen_pal/core/repo/extras_repo.dart';
 import 'package:screen_pal/core/repo/movies_repo.dart';

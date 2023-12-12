@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/infrastructures/api/models/tmdb_error_res_body.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_http_error_widget.dart';
