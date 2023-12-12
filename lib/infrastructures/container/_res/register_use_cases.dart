@@ -1,13 +1,15 @@
 // coverage:ignore-file
 
-part of '../registry.dart';
+part of '../container.dart';
 
-void registerUseCases() {
+void _registerUseCases() {
+  // cache
   locator
-    // apps
-    ..registerLazySingleton(() => GetThemeMode(appSettingsRepo: locator()))
-    ..registerLazySingleton(() => SetThemeMode(appSettingsRepo: locator()))
+    ..registerLazySingleton(() => GetThemeMode(themeModeCache: locator()))
+    ..registerLazySingleton(() => SetThemeMode(themeModeCache: locator()));
 
+  // remote
+  locator
     // credits
     ..registerLazySingleton(() => GetMovieCredits(moviesRepo: locator()))
     ..registerLazySingleton(() => GetTvShowCredits(tvShowsRepo: locator()))

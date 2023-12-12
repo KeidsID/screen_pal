@@ -4,13 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:screen_pal/core/entities/tv_shows/tv_show_detail.dart';
 
-import 'package:screen_pal/infrastructures/api/models/others/raw_company.dart';
-import 'package:screen_pal/infrastructures/api/models/others/raw_country.dart';
-import 'package:screen_pal/infrastructures/api/models/others/raw_genre.dart';
-import 'package:screen_pal/infrastructures/api/models/others/raw_person.dart';
-import 'package:screen_pal/infrastructures/api/models/others/raw_spoken_language.dart';
-import 'package:screen_pal/infrastructures/api/models/tv_shows/raw_episode.dart';
-import 'package:screen_pal/infrastructures/api/models/tv_shows/raw_season.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_company.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_country.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_genre.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_person.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_spoken_language.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/raw_episode.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/raw_season.dart';
 
 part 'raw_tv_show_detail.freezed.dart';
 part 'raw_tv_show_detail.g.dart';
