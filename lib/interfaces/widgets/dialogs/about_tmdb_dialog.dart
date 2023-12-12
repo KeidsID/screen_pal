@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:screen_pal/configs/asset_paths.dart';
-import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/common/asset_paths.dart';
+import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/utils/tmdb_logo_shader_mask.dart';
 import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 

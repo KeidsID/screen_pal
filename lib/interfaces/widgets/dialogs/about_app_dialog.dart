@@ -3,9 +3,9 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:screen_pal/configs/asset_paths.dart';
-import 'package:screen_pal/configs/constants.dart';
-import 'package:screen_pal/configs/service_locator/locator.dart' as service;
+import 'package:screen_pal/common/asset_paths.dart';
+import 'package:screen_pal/common/constants.dart';
+import 'package:screen_pal/common/service_locator/locator.dart' as service;
 
 class AboutAppDialog extends StatelessWidget {
   const AboutAppDialog({super.key});

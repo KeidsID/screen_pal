@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities/person/person.dart';
 
 import 'person_card.dart';

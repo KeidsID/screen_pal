@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'package:screen_pal/configs/asset_paths.dart';
+import 'package:screen_pal/common/asset_paths.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 
 enum PolicyType { privacyPolicy, termsOfUse }

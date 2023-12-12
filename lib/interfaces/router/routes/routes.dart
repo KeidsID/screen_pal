@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/router/utils/dialog_page.dart';
 import 'package:screen_pal/interfaces/views.dart';
 import 'package:screen_pal/interfaces/widgets.dart';

@@ -1,7 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screen_pal/configs/constants.dart';
+import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
