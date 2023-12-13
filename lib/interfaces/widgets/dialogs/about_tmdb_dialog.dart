@@ -5,7 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:screen_pal/common/asset_paths.dart';
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/utils/tmdb_logo_shader_mask.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
+import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 
 class AboutTmdbDialog extends StatelessWidget {
   const AboutTmdbDialog({super.key});
@@ -35,21 +35,21 @@ class AboutTmdbDialog extends StatelessWidget {
                     height: 80,
                   ),
                 ),
-                const Expanded(
+                Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
                     child: ListBody(
                       children: <Widget>[
-                        MaterialText(
+                        Text(
                           'The Movie DB',
-                          style: M3TextStyles.headlineSmall,
+                          style: M3TextStyles.headlineSmall.toStyle(context),
                         ),
-                        MaterialText(
-                          'API v$kTmdbApiVersion',
-                          style: M3TextStyles.bodyMedium,
+                        const Text('API v$kTmdbApiVersion'),
+                        const SizedBox(height: 18.0),
+                        Text(
+                          _aboutTMDB,
+                          style: M3TextStyles.bodySmall.toStyle(context),
                         ),
-                        SizedBox(height: 18.0),
-                        MaterialText(_aboutTMDB, style: M3TextStyles.bodySmall),
                       ],
                     ),
                   ),

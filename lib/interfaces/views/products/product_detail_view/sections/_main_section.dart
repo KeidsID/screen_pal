@@ -19,11 +19,17 @@ class _MainSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MaterialText(product.title, style: M3TextStyles.headlineLarge),
+          Text(
+            product.title,
+            style: M3TextStyles.headlineLarge.toStyle(context),
+          ),
           _ProductDetailExtrasText(product),
           product.tagline.isEmpty
               ? const SizedBox()
-              : MaterialText('# ${product.tagline}', opacity: 0.5),
+              : Text(
+                  '# ${product.tagline}',
+                  style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
+                ),
           const SizedBox(height: 8.0),
           isWideLayout
               ? Expanded(
@@ -36,8 +42,8 @@ class _MainSection extends StatelessWidget {
     );
   }
 
-  List<MaterialText> statsDetail(ProductDetail product) {
-    late List<String> contents;
+  List<Widget> statsDetail(ProductDetail product) {
+    late final List<String> contents;
 
     if (product is MovieDetail) {
       final budget = (product.budget <= 0)
@@ -65,7 +71,12 @@ class _MainSection extends StatelessWidget {
     }
 
     return contents.map((text) {
-      return MaterialText(text, style: M3TextStyles.titleSmall, opacity: 0.75);
+      return Builder(builder: (context) {
+        return Text(
+          text,
+          style: M3TextStyles.titleSmall.toStyle(context, opacity: 0.75),
+        );
+      });
     }).toList();
   }
 }
@@ -79,7 +90,7 @@ class _ProductDetailExtrasText extends StatelessWidget {
   Widget build(BuildContext context) {
     final languages = product.languages;
 
-    return MaterialText(
+    return Text(
       [
         product.releaseDate?.year ?? 'Coming Soon',
         languages.firstWhere((e) => e.iso6391 == product.language).englishName,
@@ -87,7 +98,7 @@ class _ProductDetailExtrasText extends StatelessWidget {
             ? 'Undefined'
             : product.genres.map((e) => e.name).join(', ')
       ].join(' • '),
-      opacity: 0.5,
+      style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );

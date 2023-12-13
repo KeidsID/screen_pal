@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 extension OrdinalNumber on int {
   /// Format int into ordinal format (1st, 2nd, and so on).
   ///
-  /// Throw error if [number] value below 1.
+  /// Throw error if [int] value below 1.
   String toOrdinal({Locale locale = const Locale('en', 'US')}) {
     if (this < 1) {
       throw const FormatException("Below one ordinal does'nt exists");

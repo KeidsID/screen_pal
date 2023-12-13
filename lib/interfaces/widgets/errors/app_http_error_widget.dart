@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
+import 'package:flutter/material.dart';
 
+import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 import 'package:screen_pal/interfaces/widgets/errors/dio_exception_widget.dart';
 
@@ -95,8 +95,11 @@ class AppHttpErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MaterialText('$statusCode', style: M3TextStyles.displayMedium),
-            MaterialText(title, style: M3TextStyles.headlineSmall),
+            Text(
+              '$statusCode',
+              style: M3TextStyles.displayMedium.toStyle(context),
+            ),
+            Text(title, style: M3TextStyles.headlineSmall.toStyle(context)),
             const Divider(),
             Text(message),
             const SizedBox(height: 16.0),

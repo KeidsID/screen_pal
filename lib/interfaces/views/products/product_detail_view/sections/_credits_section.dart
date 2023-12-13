@@ -18,11 +18,11 @@ class _CreditsSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
+        Padding(
           padding: kHorizPadding,
-          child: MaterialText(
+          child: Text(
             'Casts',
-            style: M3TextStyles.headlineMedium,
+            style: M3TextStyles.headlineMedium.toStyle(context),
           ),
         ),
         Consumer(builder: (context, ref, child) {
@@ -46,12 +46,12 @@ class _CreditsSection extends StatelessWidget {
               final casts = credits.casts;
 
               if (casts.isEmpty) {
-                return const SizedBox(
+                return SizedBox(
                   height: placeholderHeight,
                   child: Center(
-                    child: MaterialText(
+                    child: Text(
                       'No special cast',
-                      style: M3TextStyles.titleMedium,
+                      style: M3TextStyles.titleMedium.toStyle(context),
                     ),
                   ),
                 );

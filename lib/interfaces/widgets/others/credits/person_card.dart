@@ -42,10 +42,12 @@ class PersonCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      MaterialText(
+                      Text(
                         person.name,
-                        style: M3TextStyles.titleMedium,
-                        isBold: true,
+                        style: M3TextStyles.titleMedium.toStyle(
+                          context,
+                          isBold: true,
+                        ),
                       ),
                       _role(person),
                     ],

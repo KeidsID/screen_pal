@@ -5,7 +5,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
+
+import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 
 const kAppName = 'Screen Pal';
 const kAppLegalese = 'MIT License\n\nCopyright © 2023 KeidsID (Kemal Idris)';
