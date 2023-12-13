@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
+import 'package:screen_pal/interfaces/providers/remote/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class MoviesHomeView extends StatelessWidget {

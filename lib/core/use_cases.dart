@@ -1,5 +1,5 @@
 /// Every bussiness logic for the app.
-library use_cases;
+library core_use_cases;
 
 export 'use_cases/cache/get_theme_mode.dart';
 export 'use_cases/cache/set_theme_mode.dart';

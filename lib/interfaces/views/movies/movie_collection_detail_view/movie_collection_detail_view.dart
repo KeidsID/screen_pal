@@ -3,9 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
-import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
-import 'package:screen_pal/interfaces/providers/extras/genres_providers.dart';
-import 'package:screen_pal/interfaces/providers/movies/movie_collection_detail_provider.dart';
+import 'package:screen_pal/interfaces/providers/remote/extras/genres_providers.dart';
+import 'package:screen_pal/interfaces/providers/remote/movies/movie_collection_detail_provider.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
@@ -79,9 +78,10 @@ class _ThinDeviceLayout extends StatelessWidget {
           SizedBox(
             width: maxW,
             height: (maxH * 0.8) - kToolbarHeight,
-            child: DefaultNetworkImage(
-              imageUrl: '$tmdbImageBaseUrl'
-                  '${isShowPoster ? movieCollection.posterPath : movieCollection.backdropPath}',
+            child: CommonNetworkImage(
+              imageUrl: isShowPoster
+                  ? '${movieCollection.posterImageUrl}'
+                  : '${movieCollection.backdropImageUrl}',
               fit: BoxFit.cover,
             ),
           ),
@@ -114,8 +114,8 @@ class _WideDeviceLayout extends StatelessWidget {
             child: Stack(
               fit: StackFit.expand,
               children: [
-                DefaultNetworkImage(
-                  imageUrl: '$tmdbImageBaseUrl${movieCollection.backdropPath}',
+                CommonNetworkImage(
+                  imageUrl: '${movieCollection.backdropImageUrl}',
                   fit: BoxFit.cover,
                   color: Colors.white.withOpacity(0.15),
                   colorBlendMode: BlendMode.modulate,
@@ -131,9 +131,8 @@ class _WideDeviceLayout extends StatelessWidget {
                           aspectRatio: 2 / 3,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(16.0),
-                            child: DefaultNetworkImage(
-                              imageUrl:
-                                  '$tmdbImageBaseUrl${movieCollection.posterPath}',
+                            child: CommonNetworkImage(
+                              imageUrl: '${movieCollection.posterImageUrl}',
                               fit: BoxFit.cover,
                             ),
                           ),

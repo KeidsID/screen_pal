@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/interfaces/providers/tv_shows/tv_show_list_providers.dart';
+import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_list_providers.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class TvShowsHomeView extends StatelessWidget {

@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:screen_pal/core/entities/tv_shows/episode.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 part 'raw_episode.freezed.dart';
 part 'raw_episode.g.dart';
@@ -38,7 +39,7 @@ class RawEpisode with _$RawEpisode {
       seasonNumber: seasonNumber,
       name: name,
       airDate: DateTime.tryParse(airDate),
-      stillPath: stillPath,
+      stillImagePath: TmdbStillImageSizes.original.secureFetchUrl(stillPath),
       overview: overview,
       episodeNumber: episodeNumber,
       episodeType: episodeType,

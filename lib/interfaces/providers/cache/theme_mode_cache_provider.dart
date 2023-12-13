@@ -3,16 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:screen_pal/infrastructures/service_locator/locator.dart'
-    as service;
-import 'package:screen_pal/core/use_cases/app/get_theme_mode.dart';
-import 'package:screen_pal/core/use_cases/app/set_theme_mode.dart';
+import 'package:screen_pal/infrastructures/container/container.dart'
+    as container;
+import 'package:screen_pal/core/use_cases/cache/get_theme_mode.dart';
+import 'package:screen_pal/core/use_cases/cache/set_theme_mode.dart';
 
-part 'app_theme_mode_provider.g.dart';
+part 'theme_mode_cache_provider.g.dart';
 
 // satisfies dependency lint warning for override provider on test
 @Riverpod(keepAlive: true, dependencies: [])
-class AppThemeMode extends _$AppThemeMode {
+class ThemeModeCache extends _$ThemeModeCache {
   @override
   ThemeMode build() {
     _init();
@@ -21,13 +21,13 @@ class AppThemeMode extends _$AppThemeMode {
   }
 
   Future<void> _init() async {
-    final themeMode = await service.locator<GetThemeMode>().execute();
+    final themeMode = await container.locator<GetThemeMode>().execute();
 
     state = themeMode;
   }
 
   Future<void> updateMode(ThemeMode mode) async {
-    await service.locator<SetThemeMode>().execute(mode);
+    await container.locator<SetThemeMode>().execute(mode);
     state = mode;
   }
 }

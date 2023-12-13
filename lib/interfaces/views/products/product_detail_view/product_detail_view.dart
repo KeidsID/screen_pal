@@ -6,10 +6,9 @@ import 'package:intl/intl.dart' as intl;
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities.dart';
-import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
-import 'package:screen_pal/interfaces/providers/credits/products_credits.dart';
-import 'package:screen_pal/interfaces/providers/movies/movie_list_providers.dart';
-import 'package:screen_pal/interfaces/providers/tv_shows/tv_show_list_providers.dart';
+import 'package:screen_pal/interfaces/providers/remote/credits/products_credits.dart';
+import 'package:screen_pal/interfaces/providers/remote/movies/movie_list_providers.dart';
+import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_list_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/utils/to_ordinal.dart';
@@ -70,9 +69,10 @@ class _ThinDeviceLayout extends StatelessWidget {
           SizedBox(
             width: maxW,
             height: (maxH * 0.8) - kToolbarHeight,
-            child: DefaultNetworkImage(
-              imageUrl: '$tmdbImageBaseUrl'
-                  '${(isShowPoster) ? product.posterPath : product.backdropPath}',
+            child: CommonNetworkImage(
+              imageUrl: isShowPoster
+                  ? '${product.posterImageUrl}'
+                  : '${product.backdropImageUrl}',
               fit: BoxFit.cover,
             ),
           ),
@@ -116,8 +116,8 @@ class _WideDeviceLayout extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 // bg image
-                DefaultNetworkImage(
-                  imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
+                CommonNetworkImage(
+                  imageUrl: '${product.backdropImageUrl}',
                   fit: BoxFit.cover,
                 ),
                 Container(
@@ -138,9 +138,8 @@ class _WideDeviceLayout extends StatelessWidget {
                         child: AspectRatio(
                           aspectRatio: kAspectRatio(),
                           child: Card(
-                            child: DefaultNetworkImage(
-                              imageUrl:
-                                  '$tmdbImageBaseUrl${product.posterPath}',
+                            child: CommonNetworkImage(
+                              imageUrl: '${product.posterImageUrl}',
                               alt: product.title,
                               fit: BoxFit.cover,
                             ),

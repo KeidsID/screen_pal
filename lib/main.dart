@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/constants.dart';
 import 'common/envs/env.dart';
-import 'infrastructures/container/container.dart' as service;
-import 'interfaces/providers/others/app_theme_mode_provider.dart';
+import 'infrastructures/container/container.dart' as container;
+import 'interfaces/providers/cache/theme_mode_cache_provider.dart';
 import 'interfaces/router/router.dart';
 import 'interfaces/router/url_strategy/url_strategy.dart';
 import 'interfaces/themes/app_themes.dart';
@@ -13,7 +13,7 @@ import 'interfaces/themes/app_themes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await service.init();
+  await container.init();
 
   if (Env.isUsePathUrlStrategy) usePathUrlStrategy();
 
@@ -33,7 +33,7 @@ class MainApp extends ConsumerWidget {
       darkTheme: AppThemes.dark,
       themeAnimationCurve: Curves.easeOut,
       themeAnimationDuration: const Duration(milliseconds: 500),
-      themeMode: ref.watch(appThemeModeProvider),
+      themeMode: ref.watch(themeModeCacheProvider),
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
         dragDevices: {
           PointerDeviceKind.touch,

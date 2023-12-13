@@ -8,8 +8,8 @@ abstract base class ProductDetail extends Equatable {
   final int id;
   final String title;
   final String originalTitle;
-  final String? backdropPath;
-  final String? posterPath;
+  final String? backdropImageUrl;
+  final String? posterImageUrl;
   final DateTime? releaseDate;
   final String overview;
 
@@ -31,8 +31,8 @@ abstract base class ProductDetail extends Equatable {
     required this.id,
     required this.title,
     required this.originalTitle,
-    this.backdropPath,
-    this.posterPath,
+    this.backdropImageUrl,
+    this.posterImageUrl,
     this.releaseDate,
     required this.overview,
     required this.language,

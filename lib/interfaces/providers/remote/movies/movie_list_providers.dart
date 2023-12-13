@@ -2,14 +2,9 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:screen_pal/infrastructures/service_locator/locator.dart'
-    as service;
+import 'package:screen_pal/infrastructures/container/container.dart' as service;
 import 'package:screen_pal/core/entities/movies/movie.dart';
-import 'package:screen_pal/core/use_cases/movies/get_movie_recommendations.dart';
-import 'package:screen_pal/core/use_cases/movies/get_now_playing_movies.dart';
-import 'package:screen_pal/core/use_cases/movies/get_popular_movies.dart';
-import 'package:screen_pal/core/use_cases/movies/get_top_rated_movies.dart';
-import 'package:screen_pal/core/use_cases/movies/get_upcoming_movies.dart';
+import 'package:screen_pal/core/use_cases.dart';
 
 part 'movie_list_providers.g.dart';
 

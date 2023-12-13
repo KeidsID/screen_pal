@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/credits/crew.dart';
 import 'package:screen_pal/core/entities/person/person.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 part 'raw_crew.freezed.dart';
 part 'raw_crew.g.dart';
@@ -36,7 +37,8 @@ class RawCrew with _$RawCrew {
       creditId: creditId,
       name: name,
       gender: Gender.values[gender],
-      profilePath: profilePath,
+      profileImageUrl:
+          TmdbProfileImageSizes.original.secureFetchUrl(profilePath),
       originalName: originalName,
       job: job,
       department: department,

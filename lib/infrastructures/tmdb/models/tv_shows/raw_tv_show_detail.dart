@@ -11,6 +11,7 @@ import 'package:screen_pal/infrastructures/tmdb/models/others/raw_person.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/others/raw_spoken_language.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/raw_episode.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/raw_season.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 part 'raw_tv_show_detail.freezed.dart';
 part 'raw_tv_show_detail.g.dart';
@@ -75,8 +76,9 @@ class RawTvShowDetail with _$RawTvShowDetail {
       id: id,
       title: name,
       originalTitle: originalName,
-      backdropPath: backdropPath,
-      posterPath: posterPath,
+      backdropImageUrl:
+          TmdbBackdropImageSizes.original.secureFetchUrl(backdropPath),
+      posterImageUrl: TmdbPosterImageSizes.original.secureFetchUrl(posterPath),
       releaseDate: DateTime.tryParse(firstAirDate),
       overview: overview,
       language: originalLanguage,

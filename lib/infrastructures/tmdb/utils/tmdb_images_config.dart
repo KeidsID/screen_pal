@@ -55,11 +55,19 @@ const tmdbImageSecureBaseUrl = 'https://image.tmdb.org/t/p/';
 
 @protected
 mixin TmdbImageSizesMixin on Enum {
-  /// Url to fetch image. Make sure to provide valid path (start with `/`).
-  String fetchUrl(String path) => "$tmdbImageBaseUrl$name$path";
+  /// Url to fetch image. Return null if not valid path (start with `/`).
+  String? fetchUrl(String? path) {
+    if (path == null || !path.startsWith('/')) return null;
+
+    return "$tmdbImageBaseUrl$name$path";
+  }
 
   /// Secure version of [fetchUrl].
-  String secureFetchUrl(String path) => '$tmdbImageSecureBaseUrl$name$path';
+  String? secureFetchUrl(String? path) {
+    if (path == null || !path.startsWith('/')) return null;
+
+    return '$tmdbImageSecureBaseUrl$name$path';
+  }
 }
 
 /// Sizes for backdrop image.
