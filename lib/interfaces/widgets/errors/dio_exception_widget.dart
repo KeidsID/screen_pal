@@ -7,7 +7,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/infrastructures/api/models/tmdb_error_res_body.dart';
+import 'package:screen_pal/infrastructures/tmdb/errors/common_response_exception.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_http_error_widget.dart';
 
@@ -51,7 +51,8 @@ class DioExceptionWidget extends StatelessWidget {
     final statusCode = response.statusCode ?? 0;
 
     try {
-      final resBody = TmdbErrorResBody.fromJson(jsonDecode(response.data));
+      final resBody =
+          CommonResponseException.fromJson(jsonDecode(response.data));
 
       return AppHttpErrorWidget(
         statusCode: statusCode,

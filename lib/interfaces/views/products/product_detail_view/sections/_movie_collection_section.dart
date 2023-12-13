@@ -55,8 +55,8 @@ class _MovieCollectionCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              DefaultNetworkImage(
-                imageUrl: '$tmdbImageBaseUrl${movieCollection.backdropPath}',
+              CommonNetworkImage(
+                imageUrl: '${movieCollection.backdropPath}',
                 imageBuilder: (_, imgProvider) => Ink.image(
                   image: imgProvider,
                   fit: BoxFit.cover,

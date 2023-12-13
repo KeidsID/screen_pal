@@ -5,6 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/credits/cast.dart';
 import 'package:screen_pal/core/entities/person/person.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 part 'raw_cast.freezed.dart';
 part 'raw_cast.g.dart';
@@ -36,7 +37,8 @@ class RawCast with _$RawCast {
       creditId: creditId,
       name: name,
       gender: Gender.values[gender],
-      profilePath: profilePath,
+      profileImageUrl:
+          TmdbProfileImageSizes.original.secureFetchUrl(profilePath),
       originalName: originalName,
       character: character,
       department: knownForDepartment,

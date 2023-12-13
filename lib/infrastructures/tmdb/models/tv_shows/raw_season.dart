@@ -3,6 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:screen_pal/core/entities/tv_shows/season.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 part 'raw_season.freezed.dart';
 part 'raw_season.g.dart';
@@ -32,7 +33,7 @@ class RawSeason with _$RawSeason {
       seasonNumber: seasonNumber,
       name: name,
       airDate: DateTime.tryParse('$airDate'),
-      posterPath: posterPath,
+      posterImageUrl: TmdbPosterImageSizes.original.secureFetchUrl(posterPath),
       overview: overview,
       episodeCount: episodeCount,
       voteAverage: voteAverage,

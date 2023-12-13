@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 import 'raw_movie.dart';
 
@@ -31,8 +32,9 @@ class RawMovieCollectionDetail with _$RawMovieCollectionDetail {
       id: id,
       name: name,
       overview: overview,
-      posterPath: posterPath,
-      backdropPath: backdropPath,
+      posterImageUrl: TmdbPosterImageSizes.original.secureFetchUrl(posterPath),
+      backdropImageUrl:
+          TmdbBackdropImageSizes.original.secureFetchUrl(backdropPath),
       parts: parts.map((e) => e.toEntity()).toList(),
     );
   }

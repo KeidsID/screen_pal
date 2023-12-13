@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:screen_pal/core/entities/credits/cast.dart';
 import 'package:screen_pal/core/entities/credits/crew.dart';
 import 'package:screen_pal/core/entities/person/person.dart';
-import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class PersonCard extends StatelessWidget {
@@ -31,8 +30,8 @@ class PersonCard extends StatelessWidget {
           children: [
             Expanded(
               flex: 2,
-              child: DefaultNetworkImage(
-                imageUrl: '$tmdbImageBaseUrl${person.profilePath}',
+              child: CommonNetworkImage(
+                imageUrl: '${person.profileImageUrl}',
                 fit: BoxFit.cover,
               ),
             ),

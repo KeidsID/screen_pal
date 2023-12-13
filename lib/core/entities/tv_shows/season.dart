@@ -6,7 +6,7 @@ final class Season extends Equatable {
     required this.seasonNumber,
     required this.name,
     this.airDate,
-    this.posterPath,
+    this.posterImageUrl,
     required this.overview,
     required this.episodeCount,
     required this.voteAverage,
@@ -16,7 +16,7 @@ final class Season extends Equatable {
   final int seasonNumber;
   final String name;
   final DateTime? airDate;
-  final String? posterPath;
+  final String? posterImageUrl;
   final String overview;
   final int episodeCount;
   final double voteAverage;
@@ -28,7 +28,7 @@ final class Season extends Equatable {
       seasonNumber,
       name,
       airDate,
-      posterPath,
+      posterImageUrl,
       overview,
       episodeCount,
       voteAverage,

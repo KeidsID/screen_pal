@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/interfaces/providers/others/app_theme_mode_provider.dart';
+import 'package:screen_pal/interfaces/providers/cache/theme_mode_cache_provider.dart';
 
 class ThemeModeDropdownButton extends ConsumerWidget {
   const ThemeModeDropdownButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeMode = ref.watch(appThemeModeProvider);
-    final themeModeNotifier = ref.read(appThemeModeProvider.notifier);
+    final themeMode = ref.watch(themeModeCacheProvider);
+    final themeModeNotifier = ref.read(themeModeCacheProvider.notifier);
 
     return DropdownButton<ThemeMode>(
       value: themeMode,

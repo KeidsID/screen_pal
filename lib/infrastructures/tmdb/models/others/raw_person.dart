@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/person/person.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 part 'raw_person.freezed.dart';
 part 'raw_person.g.dart';
@@ -29,7 +30,8 @@ class RawPerson with _$RawPerson {
       creditId: creditId,
       name: name,
       gender: Gender.values[gender],
-      profilePath: profilePath,
+      profileImageUrl:
+          TmdbProfileImageSizes.original.secureFetchUrl(profilePath),
     );
   }
 }

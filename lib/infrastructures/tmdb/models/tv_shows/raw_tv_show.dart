@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:screen_pal/core/entities/tv_shows/tv_show.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 part 'raw_tv_show.freezed.dart';
 part 'raw_tv_show.g.dart';
@@ -45,8 +46,9 @@ class RawTvShow with _$RawTvShow {
       releaseDate: DateTime.tryParse(firstAirDate),
       language: originalLanguage,
       genreIds: genreIds,
-      backdropPath: backdropPath,
-      posterPath: posterPath,
+      backdropImageUrl:
+          TmdbBackdropImageSizes.original.secureFetchUrl(backdropPath),
+      posterImageUrl: TmdbPosterImageSizes.original.secureFetchUrl(posterPath),
       originalTitle: originalName,
       popularity: popularity,
       voteAverage: voteAverage,

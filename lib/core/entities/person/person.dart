@@ -13,14 +13,14 @@ class Person extends Equatable {
   final String creditId;
   final String name;
   final Gender gender;
-  final String? profilePath;
+  final String? profileImageUrl;
 
   const Person({
     required this.id,
     required this.creditId,
     required this.name,
     required this.gender,
-    this.profilePath,
+    this.profileImageUrl,
   });
 
   @override
@@ -30,7 +30,7 @@ class Person extends Equatable {
       creditId,
       name,
       gender,
-      profilePath,
+      profileImageUrl,
     ];
   }
 }

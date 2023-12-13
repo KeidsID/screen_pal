@@ -1,16 +1,15 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/core/entities/products/product.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities/movies/movie.dart';
-import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
-import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
+import 'package:screen_pal/core/entities/products/product.dart';
+import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
-import 'package:screen_pal/interfaces/widgets/others/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 
 // Tests Utils:
 
@@ -204,16 +203,13 @@ class _ThinDeviceLayout extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         // image
-        DefaultNetworkImage(
-          key: _imageKey,
-          imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
-          imageBuilder: (context, imageProvider) {
-            return Ink.image(
-              image: imageProvider,
-              fit: BoxFit.cover,
-              child: InkWell(onTap: _onItemTap(context, product)),
-            );
-          },
+        InkWell(
+          onTap: _onItemTap(context, product),
+          child: CommonNetworkImage(
+            key: _imageKey,
+            imageUrl: '${product.backdropImageUrl}',
+            fit: BoxFit.cover,
+          ),
         ),
         _fader(),
 
@@ -304,16 +300,10 @@ class _WideDeviceLayout extends StatelessWidget {
             const VerticalDivider(width: 2.0, thickness: 2.0),
             AspectRatio(
               aspectRatio: kAspectRatio(isPotrait: false),
-              child: DefaultNetworkImage(
+              child: CommonNetworkImage(
                 key: _imageKey,
-                imageUrl: '$tmdbImageBaseUrl${product.backdropPath}',
+                imageUrl: '${product.backdropImageUrl}',
                 fit: BoxFit.cover,
-                imageBuilder: (context, imageProvider) {
-                  return Ink.image(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  );
-                },
               ),
             ),
           ],

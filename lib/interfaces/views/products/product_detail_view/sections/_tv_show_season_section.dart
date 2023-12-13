@@ -84,8 +84,8 @@ class _LastSeasonCard extends StatelessWidget {
       children: [
         AspectRatio(
           aspectRatio: kAspectRatio(),
-          child: DefaultNetworkImage(
-            imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
+          child: CommonNetworkImage(
+            imageUrl: '${season.posterImageUrl}',
             fit: BoxFit.cover,
           ),
         ),
@@ -106,8 +106,8 @@ class _LastSeasonCard extends StatelessWidget {
       children: [
         // bg image
         SizedBox(
-          child: DefaultNetworkImage(
-            imageUrl: '$tmdbImageBaseUrl${season.posterPath}',
+          child: CommonNetworkImage(
+            imageUrl: '${season.posterImageUrl}',
             repeat: ImageRepeat.repeatX,
             fit: BoxFit.fitHeight,
           ),

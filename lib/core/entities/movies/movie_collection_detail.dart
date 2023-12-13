@@ -5,16 +5,16 @@ class MovieCollectionDetail extends Equatable {
   final int id;
   final String name;
   final String overview;
-  final String? posterPath;
-  final String? backdropPath;
+  final String? posterImageUrl;
+  final String? backdropImageUrl;
   final List<Movie> parts;
 
   const MovieCollectionDetail({
     required this.id,
     required this.name,
     required this.overview,
-    this.posterPath,
-    this.backdropPath,
+    this.posterImageUrl,
+    this.backdropImageUrl,
     required this.parts,
   });
 
@@ -24,8 +24,8 @@ class MovieCollectionDetail extends Equatable {
       id,
       name,
       overview,
-      posterPath,
-      backdropPath,
+      posterImageUrl,
+      backdropImageUrl,
       parts,
     ];
   }

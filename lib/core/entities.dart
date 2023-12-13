@@ -1,5 +1,5 @@
 /// Every model classes for the app.
-library entities;
+library core_entities;
 
 export 'entities/credits/cast.dart';
 export 'entities/credits/credits.dart';

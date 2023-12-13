@@ -3,10 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
-import 'package:screen_pal/infrastructures/api/tmdb_dio.dart';
-import 'package:screen_pal/interfaces/providers/extras/extras_providers.dart';
+import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
-import 'package:screen_pal/interfaces/widgets/others/default_network_image.dart';
+import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 
 class ProductCard extends StatefulWidget {
@@ -39,13 +38,10 @@ class _ProductCardState extends State<ProductCard> {
         child: Stack(
           fit: StackFit.expand,
           children: [
-            DefaultNetworkImage(
-              imageUrl: '$tmdbImageBaseUrl${product.posterPath}',
+            CommonNetworkImage(
+              imageUrl: '${product.posterImageUrl}',
               alt: product.title,
-              imageBuilder: (_, imgProvider) => Ink.image(
-                image: imgProvider,
-                fit: BoxFit.cover,
-              ),
+              fit: BoxFit.cover,
             ),
             isAdult ? const _AdultBanner() : const SizedBox(),
             isCardHovered ? _DetailOnHover(product) : const SizedBox(),

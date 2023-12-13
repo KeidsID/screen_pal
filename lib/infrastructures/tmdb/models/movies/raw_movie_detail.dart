@@ -7,6 +7,7 @@ import 'package:screen_pal/core/entities/movies/movie_collection.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/others/raw_company.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/others/raw_country.dart';
+import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
 import '../others/raw_genre.dart';
 import '../others/raw_spoken_language.dart';
@@ -63,8 +64,9 @@ class RawMovieDetail with _$RawMovieDetail {
       id: id,
       title: title,
       originalTitle: originalTitle,
-      backdropPath: backdropPath,
-      posterPath: posterPath,
+      backdropImageUrl:
+          TmdbBackdropImageSizes.original.secureFetchUrl(backdropPath),
+      posterImageUrl: TmdbPosterImageSizes.original.secureFetchUrl(posterPath),
       releaseDate: DateTime.tryParse(releaseDate),
       overview: overview,
       language: originalLanguage,

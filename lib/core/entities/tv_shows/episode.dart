@@ -9,7 +9,7 @@ class Episode extends Equatable {
     required this.seasonNumber,
     required this.name,
     this.airDate,
-    this.stillPath,
+    this.stillImagePath,
     required this.overview,
     required this.episodeNumber,
     required this.episodeType,
@@ -25,7 +25,7 @@ class Episode extends Equatable {
   final DateTime? airDate;
 
   /// Image path.
-  final String? stillPath;
+  final String? stillImagePath;
   final String overview;
   final int episodeNumber;
 
@@ -47,7 +47,7 @@ class Episode extends Equatable {
       seasonNumber,
       name,
       airDate,
-      stillPath,
+      stillImagePath,
       overview,
       episodeNumber,
       episodeType,

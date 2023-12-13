@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/interfaces/providers/tv_shows/tv_show_detail_provider.dart';
+import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_detail_provider.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/views/products/product_detail_view/product_detail_view.dart';
 
