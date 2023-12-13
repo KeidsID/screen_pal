@@ -9,7 +9,7 @@ import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
+import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 
 // Tests Utils:
 
@@ -176,14 +176,14 @@ class _ExtrasText extends ConsumerWidget {
       }).toList();
     }
 
-    return MaterialText(
+    return Text(
       [
         product.releaseDate?.year ?? 'Coming Soon',
         language,
         genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
       ].join(' • '),
       key: _productExtrasKey,
-      opacity: 0.5,
+      style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );
@@ -220,10 +220,10 @@ class _ThinDeviceLayout extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                MaterialText(
+                Text(
                   product.title,
                   key: _productTitleKey,
-                  style: M3TextStyles.headlineLarge,
+                  style: M3TextStyles.headlineLarge.toStyle(context),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -279,10 +279,10 @@ class _WideDeviceLayout extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    MaterialText(
+                    Text(
                       product.title,
                       key: _productTitleKey,
-                      style: M3TextStyles.headlineLarge,
+                      style: M3TextStyles.headlineLarge.toStyle(context),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

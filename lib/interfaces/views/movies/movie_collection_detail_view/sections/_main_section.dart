@@ -18,7 +18,10 @@ class _MainSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          MaterialText(movieCollection.name, style: M3TextStyles.headlineLarge),
+          Text(
+            movieCollection.name,
+            style: M3TextStyles.headlineLarge.toStyle(context),
+          ),
           _CollectionGenresText(movieCollection),
           const SizedBox(height: 8.0),
           isWideLayout
@@ -29,10 +32,9 @@ class _MainSection extends StatelessWidget {
                 )
               : Text(movieCollection.overview),
           const Divider(),
-          MaterialText(
+          Text(
             'Movie count: ${movieCollection.parts.length}',
-            style: M3TextStyles.titleSmall,
-            opacity: 0.75,
+            style: M3TextStyles.titleSmall.toStyle(context, opacity: 0.75),
           ),
         ],
       ),
@@ -64,9 +66,9 @@ class _CollectionGenresText extends ConsumerWidget {
       }).toList();
     }
 
-    return MaterialText(
+    return Text(
       genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
-      opacity: 0.5,
+      style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );

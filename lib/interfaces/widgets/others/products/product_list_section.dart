@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
-import 'package:screen_pal/interfaces/widgets/products/product_horiz_list_view.dart';
+import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
+import 'package:screen_pal/interfaces/widgets/others/products/product_horiz_list_view.dart';
 
 /// {@template screen_pal.interfaces.widgets.products.ProductListSection}
 /// Common product list view section on the app.
@@ -77,9 +77,9 @@ class ProductListSection extends StatelessWidget {
         data: (products) {
           if (products.isEmpty) {
             return Center(
-              child: MaterialText(
+              child: Text(
                 alt ?? 'No data',
-                style: M3TextStyles.titleMedium,
+                style: M3TextStyles.titleMedium.toStyle(context),
               ),
             );
           }
@@ -96,7 +96,9 @@ class ProductListSection extends StatelessWidget {
       children: [
         Padding(
           padding: padding,
-          child: MaterialText(title, style: kSectionTitleStyle),
+          child: Builder(builder: (context) {
+            return Text(title, style: kSectionTitleStyle.toStyle(context));
+          }),
         ),
         SizedBox(height: 240.0, child: child),
       ],

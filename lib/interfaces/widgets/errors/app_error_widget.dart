@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 
+import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal/interfaces/widgets/errors/app_http_error_widget.dart';
 
 class AppErrorWidget extends StatelessWidget {
@@ -43,7 +43,7 @@ class AppErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            MaterialText(title, style: M3TextStyles.headlineSmall),
+            Text(title, style: M3TextStyles.headlineSmall.toStyle(context)),
             const Divider(),
             Text(message),
             const SizedBox(height: 16.0),

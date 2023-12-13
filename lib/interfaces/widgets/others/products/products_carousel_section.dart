@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/products/products_carousel.dart';
+import 'package:screen_pal/interfaces/widgets/others/products/products_carousel.dart';
 
 class ProductsCarouselSection extends StatelessWidget {
   /// Carousel section on home view.

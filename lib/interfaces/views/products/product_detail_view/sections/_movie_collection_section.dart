@@ -71,9 +71,9 @@ class _MovieCollectionCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    MaterialText(
+                    Text(
                       'Part of ${movieCollection.name}',
-                      style: M3TextStyles.headlineSmall,
+                      style: M3TextStyles.headlineSmall.toStyle(context),
                     )
                   ],
                 ),

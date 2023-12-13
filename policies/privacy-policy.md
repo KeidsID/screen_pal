@@ -4,13 +4,13 @@ Effective Date: November 26th, 2023
 
 When using any of our products or interacting with
 [keidsid.github.io/screen_pal/](https://keidsid.github.io/screen_pal/) which is
-owned and operated by KeidsID ("We", "Our", or "Us") that do not
-have a separate privacy policy, you consent to the collection, transfer,
-storage, processing, disclosure and use of your information as described in this
-Privacy Policy. This includes any information you choose to provide that is
-deemed sensitive under applicable law. If you do not agree with the terms of
-this Privacy Policy, you should not use our products (a Screen Pal app, or
-site), or access or interact with any other aspect of our's business.
+owned and operated by KeidsID ("We", "Our", or "Us") that do not have a separate
+privacy policy, you consent to the collection, transfer, storage, processing,
+disclosure and use of your information as described in this Privacy Policy. This
+includes any information you choose to provide that is deemed sensitive under
+applicable law. If you do not agree with the terms of this Privacy Policy, you
+should not use our products (a Screen Pal app, or site), or access or interact
+with any other aspect of our's business.
 
 BY ACCEPTING THE PRIVACY POLICY, YOU AUTHORIZE US TO USE AND SHARE WITH OTHER
 KEIDSID AFFILIATES, AS WELL AS CERTAIN TRUSTED BUSINESS PARTNERS AND SERVICE
@@ -60,5 +60,5 @@ this page regularly.
 
 ## Contact Us
 
-If you have any questions about our Privacy Policy, do not
-hesitate to contact us at keidscode@gmail.com.
+If you have any questions about our Privacy Policy, do not hesitate to contact
+us at keidscode@gmail.com.

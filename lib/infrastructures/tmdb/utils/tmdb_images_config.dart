@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 /// This library contain images config for [TMDB](https://www.themoviedb.org) API.
 ///
 /// TMDB API only response image path.

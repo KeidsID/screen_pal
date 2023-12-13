@@ -22,9 +22,9 @@ class _TvShowSeasonSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const MaterialText(
+          Text(
             'Last Season',
-            style: kSectionTitleStyle,
+            style: kSectionTitleStyle.toStyle(context),
           ),
           Align(
             alignment: Alignment.center,
@@ -131,57 +131,70 @@ class _LastSeasonCard extends StatelessWidget {
     final episodeOrder = episode.episodeNumber.toOrdinal();
     final episodeType = episode.episodeType;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        MaterialText(
-          season.name,
-          style: M3TextStyles.titleLarge,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        MaterialText('# $seasonOrder Season', opacity: 0.5),
-        const Divider(),
-        Expanded(
-          child: SingleChildScrollView(
-            child: MaterialText(overview),
-          ),
-        ),
-        const Divider(),
-        const MaterialText(
-          'Last Episode',
-          style: M3TextStyles.titleMedium,
-        ),
-        const SizedBox(height: 8.0),
-        Wrap(
-          spacing: 8.0,
+    return Builder(
+      builder: (context) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MaterialText(
-                  episode.name,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                MaterialText('# $episodeOrder Episode', opacity: 0.5),
-              ],
+            Text(
+              season.name,
+              style: M3TextStyles.titleLarge.toStyle(context),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-            (episodeType != 'finale')
-                ? const SizedBox()
-                : const Card(
-                    elevation: 3.0,
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: MaterialText(
-                        'Season Finale',
-                        style: M3TextStyles.labelMedium,
+            Text(
+              '# $seasonOrder Season',
+              style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
+            ),
+            const Divider(),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(overview),
+              ),
+            ),
+            const Divider(),
+            Text(
+              'Last Episode',
+              style: M3TextStyles.titleMedium.toStyle(context),
+            ),
+            const SizedBox(height: 8.0),
+            Wrap(
+              spacing: 8.0,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      episode.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      '# $episodeOrder Episode',
+                      style: M3TextStyles.bodyMedium.toStyle(
+                        context,
+                        opacity: 0.5,
                       ),
                     ),
-                  ),
+                  ],
+                ),
+                (episodeType != 'finale')
+                    ? const SizedBox()
+                    : Card(
+                        elevation: 3.0,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'Season Finale',
+                            style: M3TextStyles.labelMedium.toStyle(context),
+                          ),
+                        ),
+                      ),
+              ],
+            ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }

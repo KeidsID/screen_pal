@@ -5,8 +5,8 @@ import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
-import 'package:screen_pal/interfaces/widgets/others/material_text.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard(this.product, {super.key});
@@ -114,9 +114,9 @@ class _DetailOnHover extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: MaterialText(
+            child: Text(
               product.title,
-              style: M3TextStyles.titleMedium,
+              style: M3TextStyles.titleMedium.toStyle(context),
               textAlign: TextAlign.center,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,

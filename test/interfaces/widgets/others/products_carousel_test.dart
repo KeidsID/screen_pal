@@ -7,7 +7,7 @@ import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/languages_provider.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
-import 'package:screen_pal/interfaces/widgets/products/products_carousel.dart';
+import 'package:screen_pal/interfaces/widgets/others/products/products_carousel.dart';
 
 import '../../../helpers/dummy/dummy_genres.dart';
 import '../../../helpers/dummy/dummy_languages.dart';

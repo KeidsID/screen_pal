@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/core/entities/person/person.dart';
+import 'package:screen_pal/core/entities.dart';
 
 import 'person_card.dart';
 
