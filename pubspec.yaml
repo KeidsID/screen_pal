@@ -7,25 +7,20 @@ description:
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none"
 
-version: 1.0.1+1
+version: 1.1.1+1
 
 environment:
   sdk: ^3.0.0
   flutter: ^3.10.0
 
 dependencies:
-  # from sdk
+  # sdk
   flutter:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
 
-  # theme
-  cupertino_icons: ^1.0.2
-  flex_color_scheme: ^7.2.0
-  google_fonts: ^6.1.0
-
-  # dart utils
+  # dart
   dio: ^5.3.2
   envied: ^0.5.1
   equatable: ^2.0.5
@@ -33,20 +28,27 @@ dependencies:
   intl: ^0.18.1
   logger: ^2.0.2
 
-  # flutter utils
+  # flutter
   flutter_markdown: ^0.6.18+2
-  flutter_native_splash: ^2.3.3
   flutter_riverpod: ^2.3.6
   go_router: ^12.1.1
   package_info_plus: ^4.1.0
   shared_preferences: ^2.2.0
   url_launcher: ^6.1.14
 
+  # styles
+  cupertino_icons: ^1.0.2
+  flex_color_scheme: ^7.2.0
+  google_fonts: ^6.1.0
+
   # widgets
   cached_network_image: ^3.2.3
   carousel_slider: ^4.2.1
   flutter_svg: ^2.0.7
   smooth_page_indicator: ^1.1.0
+
+  # native
+  flutter_native_splash: ^2.3.3
 
   # annotations
   freezed_annotation: ^2.4.1
@@ -62,7 +64,7 @@ dev_dependencies:
   mockito: ^5.4.2
   network_image_mock: ^2.1.1
 
-  # native gens
+  # native
   icons_launcher: ^2.1.3
 
   # lints

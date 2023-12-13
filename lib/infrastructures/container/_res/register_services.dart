@@ -1,10 +1,14 @@
 part of '../container.dart';
 
 void _registerServices() {
+  // external
+  locator
+    ..registerSingletonAsync(() => PackageInfo.fromPlatform())
+    ..registerSingletonAsync(() => SharedPreferences.getInstance());
+
+  // internal
   locator
     // cache
-    ..registerSingletonAsync(() => SharedPreferences.getInstance())
-    //
     ..registerLazySingleton<ThemeModeCache>(() => ThemeModeCacheImpl(locator()))
 
     // remote
