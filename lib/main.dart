@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'common/constants.dart';
 import 'common/envs/env.dart';
 import 'infrastructures/container/container.dart' as container;
-import 'interfaces/providers/cache/theme_mode_cache_provider.dart';
+import 'interfaces/providers/cache/app_theme_mode_provider.dart';
 import 'interfaces/router/router.dart';
 import 'interfaces/router/url_strategy/url_strategy.dart';
 import 'interfaces/themes/app_themes.dart';
@@ -33,7 +33,7 @@ class MainApp extends ConsumerWidget {
       darkTheme: AppThemes.dark,
       themeAnimationCurve: Curves.easeOut,
       themeAnimationDuration: const Duration(milliseconds: 500),
-      themeMode: ref.watch(themeModeCacheProvider),
+      themeMode: ref.watch(appThemeModeProvider),
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
         dragDevices: {
           PointerDeviceKind.touch,

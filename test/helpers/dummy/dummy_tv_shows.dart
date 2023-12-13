@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:screen_pal/infrastructures/api/models/tv_shows/raw_tv_show_detail.dart';
-import 'package:screen_pal/infrastructures/api/models/tv_shows/tv_show_list_res_body.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/raw_tv_show_detail.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/tv_show_list_res_body.dart';
 
 const dummyTvShowListResBodyJson = '''
 {

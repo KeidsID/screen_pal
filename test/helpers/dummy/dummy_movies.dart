@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
 import 'package:screen_pal/core/entities/movies/movie_detail.dart';
-import 'package:screen_pal/infrastructures/api/models/movies/movie_list_res_body.dart';
-import 'package:screen_pal/infrastructures/api/models/movies/raw_movie_collection_detail.dart';
-import 'package:screen_pal/infrastructures/api/models/movies/raw_movie_detail.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/movies/movie_list_res_body.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/movies/raw_movie_collection_detail.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/movies/raw_movie_detail.dart';
 
 const dummyMovieListResBodyJson = '''{
   "dates": {

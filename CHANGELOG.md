@@ -1,3 +1,13 @@
+## v1.1.1
+
+### Added
+
+- Movies and Tv Shows credits (casts and crews).
+
+### Patch
+
+- Project structures changes.
+
 ## v1.0.1
 
 ### Changed
