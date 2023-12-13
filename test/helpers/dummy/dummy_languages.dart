@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:screen_pal/infrastructures/api/models/others/raw_spoken_language.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/others/raw_spoken_language.dart';
 
 const dummyLanguagesJson = '''[
   {

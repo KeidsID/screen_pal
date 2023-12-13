@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:screen_pal/infrastructures/api/models/credits/raw_credits.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_credits.dart';
 
 const dummyRawMovieCreditsJson = '''{
   "id": 609681,
