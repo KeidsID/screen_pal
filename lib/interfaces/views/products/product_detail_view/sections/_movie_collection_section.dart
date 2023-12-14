@@ -50,13 +50,13 @@ class _MovieCollectionCard extends StatelessWidget {
       height: 240.0,
       child: Card(
         child: InkWell(
-          onTap: () =>
-              AppNavigator.movieCollection(context, movieCollection.id),
+          onTap: () => MovieCollectionRoute(collectionId: movieCollection.id)
+              .go(context),
           child: Stack(
             fit: StackFit.expand,
             children: [
               CommonNetworkImage(
-                imageUrl: '${movieCollection.backdropPath}',
+                imageUrl: '${movieCollection.backdropImageUrl}',
                 imageBuilder: (_, imgProvider) => Ink.image(
                   image: imgProvider,
                   fit: BoxFit.cover,

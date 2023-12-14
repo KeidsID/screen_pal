@@ -106,8 +106,9 @@ class RawMovieCollection with _$RawMovieCollection {
     return MovieCollection(
       id: id,
       name: name,
-      posterPath: posterPath,
-      backdropPath: backdropPath,
+      posterImageUrl: TmdbPosterImageSizes.original.secureFetchUrl(posterPath),
+      backdropImageUrl:
+          TmdbBackdropImageSizes.original.secureFetchUrl(backdropPath),
     );
   }
 }

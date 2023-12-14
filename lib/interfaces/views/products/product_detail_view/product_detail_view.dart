@@ -9,7 +9,7 @@ import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/providers/remote/credits/products_credits.dart';
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_list_providers.dart';
-import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/router/routes.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/utils/to_ordinal.dart';
 import 'package:screen_pal/interfaces/widgets.dart';

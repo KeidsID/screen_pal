@@ -1,14 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:screen_pal/interfaces/providers/remote/extras/languages_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/constants.dart';
 import 'common/envs/env.dart';
 import 'infrastructures/container/container.dart' as container;
 import 'interfaces/providers/cache/app_theme_mode_provider.dart';
 import 'interfaces/providers/remote/extras/genres_providers.dart';
+import 'interfaces/providers/remote/extras/languages_provider.dart';
 import 'interfaces/router/router.dart';
 import 'interfaces/router/url_strategy/url_strategy.dart';
 import 'interfaces/themes/app_themes.dart';

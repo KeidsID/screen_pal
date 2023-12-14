@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:screen_pal/common/constants.dart';
 
-import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/router/routes.dart';
 
 // test utils:
 
@@ -69,13 +69,13 @@ ValueChanged<int> _onNavBarItemTap(BuildContext context) {
 
     switch (value) {
       case 0:
-        AppNavigator.movies(context);
+        const MoviesRoute().go(context);
         break;
       case 1:
-        AppNavigator.tvShows(context);
+        const TvShowsRoute().go(context);
         break;
       default:
-        AppNavigator.settings(context);
+        const SettingsRoute().go(context);
     }
   };
 }

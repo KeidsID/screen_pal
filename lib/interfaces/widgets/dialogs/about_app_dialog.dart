@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/router/routes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:screen_pal/common/asset_paths.dart';
@@ -26,11 +26,11 @@ class AboutAppDialog extends StatelessWidget {
           children: [
             TextButton(
               child: const Text('Privacy Policy'),
-              onPressed: () => AppNavigator.privacyPolicy(context),
+              onPressed: () => const PrivacyPolicyRoute().go(context),
             ),
             TextButton(
               child: const Text('Terms of Use'),
-              onPressed: () => AppNavigator.termsOfUse(context),
+              onPressed: () => const TermsOfUseRoute().go(context),
             ),
             TextButton(
               child: const Text('Source Code'),

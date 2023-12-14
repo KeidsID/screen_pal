@@ -7,6 +7,16 @@
 ### Patch
 
 - Project structures changes.
+  - core
+    - re-organize folders
+    - redefine [AppSettingsRepo] into [ThemeModeCache] instead.
+  - infrastrucutures
+    - apply core changes.
+    - rename "service_locator" into "container".
+  - interfaces
+    - apply infrastructures changes.
+    - re-organize folders.
+    - Remove [AppNavigator], use typed routes to navigate instead.
 
 ## v1.0.1
 

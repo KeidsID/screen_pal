@@ -30,7 +30,7 @@ jobs:
       - name: Generate dev environment
         run: |
           echo "${{ secrets.DEV_ENV_FILE }}" > .env
-          dart run build_runner build --delete-conflicting-outputs
+          dart run build_runner build -d
 
       - name: Test with min 80% coverage
         run: |
