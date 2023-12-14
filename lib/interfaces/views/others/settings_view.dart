@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/router/routes.dart';
 import 'package:screen_pal/interfaces/widgets/others/theme_mode_dropdown_button.dart';
 
 class SettingsView extends StatelessWidget {
@@ -21,12 +21,12 @@ class SettingsView extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.info_outlined),
             title: const Text('About App'),
-            onTap: () => AppNavigator.aboutApp(context),
+            onTap: () => const AboutAppRoute().go(context),
           ),
           ListTile(
             leading: const Icon(Icons.info_outlined),
             title: const Text('About TMDB'),
-            onTap: () => AppNavigator.aboutTmdb(context),
+            onTap: () => const AboutTmdbRoute().go(context),
           ),
         ],
       ),

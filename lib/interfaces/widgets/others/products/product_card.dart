@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:screen_pal/core/entities/movies/movie.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
-import 'package:screen_pal/interfaces/router/app_navigator.dart';
+import 'package:screen_pal/interfaces/router/routes.dart';
 import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
 
@@ -55,11 +55,11 @@ class _ProductCardState extends State<ProductCard> {
     final product = widget.product;
 
     if (product is Movie) {
-      AppNavigator.movieDetail(context, product.id);
+      MovieDetailRoute(movieId: product.id).go(context);
       return;
     }
 
-    AppNavigator.tvShowDetail(context, product.id);
+    TvShowDetailRoute(tvShowId: product.id).go(context);
   }
 
   SnackBar _detailSnackBar() {
