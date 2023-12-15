@@ -55,11 +55,11 @@ class _ProductCardState extends State<ProductCard> {
     final product = widget.product;
 
     if (product is Movie) {
-      MovieDetailRoute(movieId: product.id).go(context);
+      MovieDetailRoute(movieId: '${product.id}').go(context);
       return;
     }
 
-    TvShowDetailRoute(tvShowId: product.id).go(context);
+    TvShowDetailRoute(tvShowId: '${product.id}').go(context);
   }
 
   SnackBar _detailSnackBar() {

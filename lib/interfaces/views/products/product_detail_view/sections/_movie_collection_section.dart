@@ -50,8 +50,9 @@ class _MovieCollectionCard extends StatelessWidget {
       height: 240.0,
       child: Card(
         child: InkWell(
-          onTap: () => MovieCollectionRoute(collectionId: movieCollection.id)
-              .go(context),
+          onTap: () => MovieCollectionRoute(
+            collectionId: '${movieCollection.id}',
+          ).go(context),
           child: Stack(
             fit: StackFit.expand,
             children: [

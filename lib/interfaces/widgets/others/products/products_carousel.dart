@@ -146,8 +146,8 @@ class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
 
 VoidCallback _onItemTap(BuildContext context, Product product) {
   return () => (product is Movie)
-      ? MovieDetailRoute(movieId: product.id).go(context)
-      : TvShowDetailRoute(tvShowId: product.id).go(context);
+      ? MovieDetailRoute(movieId: '${product.id}').go(context)
+      : TvShowDetailRoute(tvShowId: '${product.id}').go(context);
 }
 
 class _ExtrasText extends ConsumerWidget {
