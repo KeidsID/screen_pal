@@ -20,10 +20,27 @@ final class TvShowDetailRoute extends GoRouteData {
   /// {@macro interfaces.router.routes.tv_show_detail_route}
   const TvShowDetailRoute({required this.tvShowId});
 
-  final int tvShowId;
+  /// Provide [TvShow.id].
+  final String tvShowId;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return TvShowDetailView(tvShowId);
+    final id = int.tryParse(tvShowId);
+
+    if (id == null) {
+      return Scaffold(
+        body: AppHttpErrorWidget(
+          statusCode: 400,
+          message: 'Invalid tv show id. Only accepts numbers.',
+          action: ElevatedButton.icon(
+            onPressed: () => context.pop(),
+            icon: const Icon(Icons.arrow_back),
+            label: const Text('Go Back'),
+          ),
+        ),
+      );
+    }
+
+    return TvShowDetailView(id);
   }
 }
