@@ -22,7 +22,7 @@ final class AboutAppRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return DialogPage(builder: (_) => const AboutAppDialog());
+    return DialogPage(builder: (_) => const AboutAppDialogView());
   }
 }
 
@@ -36,7 +36,7 @@ final class PrivacyPolicyRoute extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return DialogPage(builder: (_) {
-      return const PoliciesDialog(PolicyType.privacyPolicy);
+      return const PoliciesDialogView(PolicyType.privacyPolicy);
     });
   }
 }
@@ -51,7 +51,7 @@ final class TermsOfUseRoute extends GoRouteData {
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
     return DialogPage(builder: (_) {
-      return const PoliciesDialog(PolicyType.termsOfUse);
+      return const PoliciesDialogView(PolicyType.termsOfUse);
     });
   }
 }
@@ -65,6 +65,6 @@ final class AboutTmdbRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return DialogPage(builder: (_) => const AboutTmdbDialog());
+    return DialogPage(builder: (_) => const AboutTmdbDialogView());
   }
 }

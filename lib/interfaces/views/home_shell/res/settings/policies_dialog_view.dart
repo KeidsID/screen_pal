@@ -7,11 +7,11 @@ import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
 
 enum PolicyType { privacyPolicy, termsOfUse }
 
-class PoliciesDialog extends StatelessWidget {
+class PoliciesDialogView extends StatelessWidget {
   /// Define which content to load.
   final PolicyType policy;
 
-  const PoliciesDialog(this.policy, {super.key});
+  const PoliciesDialogView(this.policy, {super.key});
 
   @override
   Widget build(BuildContext context) {

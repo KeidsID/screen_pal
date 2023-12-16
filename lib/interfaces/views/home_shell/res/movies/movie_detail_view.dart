@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_detail_provider.dart';
+import 'package:screen_pal/interfaces/providers/remote/movies/movie_detail_provider.dart';
 import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/views/products/product_detail_view/product_detail_view.dart';
+import 'package:screen_pal/interfaces/views/utils/product_detail_view/product_detail_view.dart';
 
-class TvShowDetailView extends StatelessWidget {
-  const TvShowDetailView(this.tvShowId, {super.key});
+class MovieDetailView extends StatelessWidget {
+  const MovieDetailView(this.movieId, {super.key});
 
-  final int tvShowId;
+  final int movieId;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Consumer(builder: (context, ref, __) {
-        final movieDetailProv = ref.watch(tvShowDetailProvider(tvShowId));
+        final movieDetailProv = ref.watch(movieDetailProvider(movieId));
 
         final loadingWidget = RiverpodAsyncValueHandlers.loading();
 
@@ -26,9 +26,9 @@ class TvShowDetailView extends StatelessWidget {
           error: (error, stackTrace) => RiverpodAsyncValueHandlers.error(
             error,
             stackTrace,
-            action: () => ref.invalidate(tvShowDetailProvider),
+            action: () => ref.invalidate(movieDetailProvider),
           ),
-          data: (tvShow) => ProductDetailView(tvShow),
+          data: (movie) => ProductDetailView(movie, isViewHasAppBar: true),
         );
       }),
     );

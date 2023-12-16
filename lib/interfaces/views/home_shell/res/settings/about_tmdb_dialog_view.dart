@@ -7,8 +7,8 @@ import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/utils/tmdb_logo_shader_mask.dart';
 import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 
-class AboutTmdbDialog extends StatelessWidget {
-  const AboutTmdbDialog({super.key});
+class AboutTmdbDialogView extends StatelessWidget {
+  const AboutTmdbDialogView({super.key});
 
   static const _aboutTMDB =
       "The Movie Database (TMDB) is a community built movie and TV database. "

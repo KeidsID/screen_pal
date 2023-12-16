@@ -7,8 +7,8 @@ import 'package:screen_pal/common/asset_paths.dart';
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/infrastructures/container/container.dart' as service;
 
-class AboutAppDialog extends StatelessWidget {
-  const AboutAppDialog({super.key});
+class AboutAppDialogView extends StatelessWidget {
+  const AboutAppDialogView({super.key});
 
   @override
   Widget build(BuildContext context) {

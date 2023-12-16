@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:screen_pal/interfaces/views/others/home_view_layout.dart';
+import 'package:screen_pal/interfaces/views/home_shell/home_view_layout.dart';
 
 import '../../helpers/tester/tester_view_emulators.dart';
 
