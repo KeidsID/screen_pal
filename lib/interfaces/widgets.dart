@@ -2,10 +2,8 @@
 library widgets;
 
 export 'utils/m3_text_styles.dart';
+export 'widgets/common/common_detail_view_layout.dart';
 export 'widgets/common/common_network_image.dart';
-export 'widgets/dialogs/about_app_dialog.dart';
-export 'widgets/dialogs/about_tmdb_dialog.dart';
-export 'widgets/dialogs/policies_dialog.dart';
 export 'widgets/errors/app_error_widget.dart';
 export 'widgets/errors/app_http_error_widget.dart';
 export 'widgets/errors/dio_exception_widget.dart';

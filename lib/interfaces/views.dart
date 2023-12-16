@@ -1,11 +1,14 @@
 /// Every views that used by this app.
 library views;
 
-export 'views/movies/movie_collection_detail_view/movie_collection_detail_view.dart';
-export 'views/movies/movie_detail_view.dart';
-export 'views/movies/movies_home_view.dart';
-export 'views/others/home_view_layout.dart';
-export 'views/others/settings_view.dart';
-export 'views/products/product_detail_view/product_detail_view.dart';
-export 'views/tv_shows/tv_show_detail_view.dart';
-export 'views/tv_shows/tv_shows_home_view.dart';
+export 'views/home_shell/home_view_layout.dart';
+export 'views/home_shell/res/movies/movie_collection_detail_view.dart';
+export 'views/home_shell/res/movies/movie_detail_view.dart';
+export 'views/home_shell/res/movies/movies_home_view.dart';
+export 'views/home_shell/res/settings/about_app_dialog_view.dart';
+export 'views/home_shell/res/settings/about_tmdb_dialog_view.dart';
+export 'views/home_shell/res/settings/policies_dialog_view.dart';
+export 'views/home_shell/res/settings/settings_view.dart';
+export 'views/home_shell/res/tv_shows/tv_show_detail_view.dart';
+export 'views/home_shell/res/tv_shows/tv_shows_home_view.dart';
+export 'views/utils/product_detail_view/product_detail_view.dart';
