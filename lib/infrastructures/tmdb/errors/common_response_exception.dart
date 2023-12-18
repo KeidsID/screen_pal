@@ -7,8 +7,9 @@ part 'common_response_exception.freezed.dart';
 part 'common_response_exception.g.dart';
 
 @freezed
-class CommonResponseException with _$CommonResponseException {
-  @Implements<Exception>()
+class CommonResponseException
+    with _$CommonResponseException
+    implements Exception {
   const factory CommonResponseException({
     required bool success,
     @JsonKey(name: 'status_code') required int statusCode,

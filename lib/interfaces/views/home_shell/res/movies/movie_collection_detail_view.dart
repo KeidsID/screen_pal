@@ -1,10 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_collection_detail_provider.dart';
-import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class MovieCollectionDetailView extends StatelessWidget {
@@ -17,20 +17,29 @@ class MovieCollectionDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(),
       body: Consumer(builder: (context, ref, __) {
-        final movieCollectionDetailProv =
-            ref.watch(movieCollectionDetailProvider(collectionId));
-
-        if (movieCollectionDetailProv.isRefreshing) {
-          return RiverpodAsyncValueHandlers.loading();
-        }
+        final watchedProv = movieCollectionDetailProvider(collectionId);
+        final movieCollectionDetailProv = ref.watch(watchedProv);
 
         return movieCollectionDetailProv.when(
-          loading: RiverpodAsyncValueHandlers.loading,
-          error: (error, stackTrace) => RiverpodAsyncValueHandlers.error(
-            error,
-            stackTrace,
-            action: () => ref.invalidate(movieCollectionDetailProvider),
-          ),
+          skipLoadingOnRefresh: false,
+          loading: () => const SizedCircularProgressIndicator.expand(),
+
+          //
+          error: (e, trace) {
+            final action = ElevatedButton.icon(
+              onPressed: () => ref.refresh(watchedProv),
+              icon: const Icon(Icons.refresh),
+              label: const Text('Refresh'),
+            );
+
+            if (e is DioException) {
+              return SizedDioExceptionWidget.expand(e, action: action);
+            }
+
+            return SizedExceptionWidget.expand(e, trace: trace, action: action);
+          },
+
+          //
           data: (data) {
             return CommonDetailViewLayout(
               delegate: CommonDetailViewLayoutDelegate(
