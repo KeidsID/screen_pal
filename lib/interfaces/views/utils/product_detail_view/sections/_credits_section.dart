@@ -28,26 +28,28 @@ class _CreditsSection extends StatelessWidget {
         Consumer(builder: (context, ref, child) {
           final creditsAsync = ref.watch(provider);
 
-          final loadingWidget = RiverpodAsyncValueHandlers.loading();
-          const placeholderHeight = 270.0;
-
-          if (creditsAsync.isRefreshing) return loadingWidget;
+          const maxH = 270.0;
 
           return creditsAsync.when(
-            loading: () => SizedBox(
-              height: placeholderHeight,
-              child: loadingWidget,
-            ),
-            error: (err, stack) => SizedBox(
-              height: placeholderHeight,
-              child: RiverpodAsyncValueHandlers.error(err, stack),
-            ),
+            skipLoadingOnRefresh: false,
+            loading: () => const SizedCircularProgressIndicator(height: maxH),
+
+            //
+            error: (e, trace) {
+              if (e is DioException) {
+                return SizedDioExceptionWidget(e, height: maxH);
+              }
+
+              return SizedExceptionWidget(e, trace: trace, height: maxH);
+            },
+
+            //
             data: (credits) {
               final casts = credits.casts;
 
               if (casts.isEmpty) {
                 return SizedBox(
-                  height: placeholderHeight,
+                  height: maxH,
                   child: Center(
                     child: Text(
                       'No special cast',

@@ -1,9 +1,9 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/products/product.dart';
-import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/widgets/others/products/products_carousel.dart';
+import 'package:screen_pal/interfaces/widgets.dart';
 
 class ProductsCarouselSection extends StatelessWidget {
   /// Carousel section on home view.
@@ -28,17 +28,30 @@ class ProductsCarouselSection extends StatelessWidget {
         builder: (_, ref, __) {
           final popularMovies = ref.watch(productsProvider);
 
-          final loadingWidget = RiverpodAsyncValueHandlers.loading();
-
-          if (popularMovies.isRefreshing) return loadingWidget;
-
           return popularMovies.when(
-            loading: () => loadingWidget,
-            error: (error, stackTrace) => RiverpodAsyncValueHandlers.error(
-              error,
-              stackTrace,
-              action: () => ref.invalidate(productsProvider),
-            ),
+            skipLoadingOnRefresh: false,
+            loading: () => const SizedCircularProgressIndicator.expand(),
+
+            //
+            error: (e, trace) {
+              final action = ElevatedButton.icon(
+                onPressed: () => ref.refresh(productsProvider),
+                icon: const Icon(Icons.refresh_outlined),
+                label: const Text('Refresh'),
+              );
+
+              if (e is DioException) {
+                return SizedDioExceptionWidget.expand(e, action: action);
+              }
+
+              return SizedExceptionWidget.expand(
+                e,
+                trace: trace,
+                action: action,
+              );
+            },
+
+            //
             data: (products) {
               final filteredProducts =
                   (products.length <= 10) ? products : products.sublist(0, 10);

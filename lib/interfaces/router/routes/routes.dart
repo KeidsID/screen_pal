@@ -9,8 +9,8 @@ import 'package:screen_pal/interfaces/views.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 part 'res/home_shell/movies.dart';
-part 'res/home_shell/tv_shows.dart';
 part 'res/home_shell/settings.dart';
+part 'res/home_shell/tv_shows.dart';
 part 'routes.g.dart';
 
 final GlobalKey<NavigatorState> routerNavKey = GlobalKey<NavigatorState>();

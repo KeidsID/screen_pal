@@ -3,7 +3,7 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'package:screen_pal/common/asset_paths.dart';
-import 'package:screen_pal/interfaces/widgets/errors/app_error_widget.dart';
+import 'package:screen_pal/interfaces/widgets.dart';
 
 enum PolicyType { privacyPolicy, termsOfUse }
 
@@ -36,10 +36,15 @@ class PoliciesDialogView extends StatelessWidget {
                 final data = snapshot.data;
 
                 if (data == null) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: SizedCircularProgressIndicator());
                 }
 
-                if (snapshot.hasError) return const AppErrorWidget();
+                if (snapshot.hasError) {
+                  return SizedExceptionWidget(
+                    snapshot.error,
+                    trace: snapshot.stackTrace,
+                  );
+                }
 
                 return Markdown(
                   data: data,

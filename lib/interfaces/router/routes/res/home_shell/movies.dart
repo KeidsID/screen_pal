@@ -29,9 +29,11 @@ final class MovieDetailRoute extends GoRouteData {
 
     if (id == null) {
       return Scaffold(
-        body: AppHttpErrorWidget(
-          statusCode: 400,
-          message: 'Invalid movid id. Only accepts numbers.',
+        body: SizedExceptionWidget.expand(
+          BasicHttpException(
+            statusCode: 400,
+            message: 'Invalid movid id. Only accepts numbers.',
+          ),
           action: ElevatedButton.icon(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back),
@@ -61,9 +63,11 @@ final class MovieCollectionRoute extends GoRouteData {
 
     if (id == null) {
       return Scaffold(
-        body: AppHttpErrorWidget(
-          statusCode: 400,
-          message: 'Invalid collection id. Only accepts numbers.',
+        body: SizedExceptionWidget.expand(
+          BasicHttpException(
+            statusCode: 400,
+            message: 'Invalid collection id. Only accepts numbers.',
+          ),
           action: ElevatedButton.icon(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back),

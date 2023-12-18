@@ -1,12 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities/products/product.dart';
-import 'package:screen_pal/interfaces/utils/riverpod_async_value_handlers.dart';
-import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
-import 'package:screen_pal/interfaces/widgets/others/products/product_horiz_list_view.dart';
+import 'package:screen_pal/interfaces/widgets.dart';
 
 /// {@template screen_pal.interfaces.widgets.products.ProductListSection}
 /// Common product list view section on the app.
@@ -61,19 +60,29 @@ class ProductListSection extends StatelessWidget {
     }
 
     return _layout(child: Consumer(builder: (_, ref, __) {
-      final prov = ref.watch(autoDisposeProductsProvider ?? productsProvider!);
-
-      final loadingWidget = RiverpodAsyncValueHandlers.loading();
-
-      if (prov.isRefreshing) return loadingWidget;
+      final watchedProv = autoDisposeProductsProvider ?? productsProvider!;
+      final prov = ref.watch(watchedProv);
 
       return prov.when(
-        loading: () => loadingWidget,
-        error: (error, stackTrace) => RiverpodAsyncValueHandlers.error(
-          error,
-          stackTrace,
-          action: () => ref.invalidate(productsProvider!),
-        ),
+        skipLoadingOnRefresh: false,
+        loading: () => const SizedCircularProgressIndicator.expand(),
+
+        //
+        error: (e, trace) {
+          final action = ElevatedButton.icon(
+            onPressed: () => ref.refresh(watchedProv),
+            icon: const Icon(Icons.refresh_outlined),
+            label: const Text('Refresh'),
+          );
+
+          if (e is DioException) {
+            return SizedDioExceptionWidget.expand(e, action: action);
+          }
+
+          return SizedExceptionWidget.expand(e, trace: trace, action: action);
+        },
+
+        //
         data: (products) {
           if (products.isEmpty) {
             return Center(

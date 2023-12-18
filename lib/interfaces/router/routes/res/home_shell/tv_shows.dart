@@ -29,9 +29,11 @@ final class TvShowDetailRoute extends GoRouteData {
 
     if (id == null) {
       return Scaffold(
-        body: AppHttpErrorWidget(
-          statusCode: 400,
-          message: 'Invalid tv show id. Only accepts numbers.',
+        body: SizedExceptionWidget(
+          BasicHttpException(
+            statusCode: 400,
+            message: 'Invalid tv show id. Only accepts numbers.',
+          ),
           action: ElevatedButton.icon(
             onPressed: () => context.pop(),
             icon: const Icon(Icons.arrow_back),

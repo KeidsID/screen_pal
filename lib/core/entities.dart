@@ -4,6 +4,8 @@ library core_entities;
 export 'entities/credits/cast.dart';
 export 'entities/credits/credits.dart';
 export 'entities/credits/crew.dart';
+export 'entities/errors/basic_exception.dart';
+export 'entities/errors/basic_http_exception.dart';
 export 'entities/extras/extras.dart';
 export 'entities/extras/genre.dart';
 export 'entities/extras/spoken_language.dart';
