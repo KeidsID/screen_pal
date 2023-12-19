@@ -34,14 +34,13 @@ class RawCrew with _$RawCrew {
   Crew toEntity() {
     return Crew(
       id: id,
-      creditId: creditId,
       name: name,
       gender: Gender.values[gender],
       profileImageUrl:
           TmdbProfileImageSizes.original.secureFetchUrl(profilePath),
       originalName: originalName,
       job: job,
-      department: department,
+      knownForDepartment: department,
       popularity: popularity,
       adult: adult,
     );

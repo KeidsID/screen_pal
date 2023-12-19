@@ -5,6 +5,7 @@ export 'use_cases/cache/get_theme_mode.dart';
 export 'use_cases/cache/set_theme_mode.dart';
 export 'use_cases/remote/credits/get_movie_credits.dart';
 export 'use_cases/remote/credits/get_tv_show_credits.dart';
+export 'use_cases/remote/credits/get_tv_show_full_credits.dart';
 export 'use_cases/remote/extras/get_languages.dart';
 export 'use_cases/remote/extras/get_movie_genres.dart';
 export 'use_cases/remote/extras/get_tv_show_genres.dart';

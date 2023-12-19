@@ -34,16 +34,14 @@ class RawCast with _$RawCast {
   Cast toEntity() {
     return Cast(
       id: id,
-      creditId: creditId,
       name: name,
       gender: Gender.values[gender],
       profileImageUrl:
           TmdbProfileImageSizes.original.secureFetchUrl(profilePath),
       originalName: originalName,
       character: character,
-      department: knownForDepartment,
+      knownForDepartment: knownForDepartment,
       adult: adult,
-      order: order,
       popularity: popularity,
     );
   }
