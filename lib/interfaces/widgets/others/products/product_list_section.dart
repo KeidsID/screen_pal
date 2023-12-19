@@ -39,7 +39,7 @@ class ProductListSection extends StatelessWidget {
   final FutureProvider<List<Product>>? productsProvider;
 
   /// Tertiary/Fallback product provider. If this an empty [List], then section
-  /// will not be visible ([SizedBox] with zero size will be rendered instead).
+  /// will not be visible ([SizedBox.shrink] will be rendered instead).
   final List<Product> products;
 
   /// Alternative information of the section that will be displayed if the
@@ -53,7 +53,7 @@ class ProductListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!_checkProducts()) return const SizedBox();
+    if (!_checkProducts()) return const SizedBox.shrink();
 
     if (autoDisposeProductsProvider == null && productsProvider == null) {
       return _layout(child: ProductHorizListView(products, padding: padding));

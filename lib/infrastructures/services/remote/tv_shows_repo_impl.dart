@@ -1,12 +1,11 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:screen_pal/core/entities/credits/credits.dart';
 
-import 'package:screen_pal/core/entities/tv_shows/tv_show.dart';
-import 'package:screen_pal/core/entities/tv_shows/tv_show_detail.dart';
+import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/core/services/remote/tv_shows_repo.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_credits.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_tv_full_credits.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/raw_tv_show_detail.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/tv_show_list_res_body.dart';
 
@@ -84,6 +83,17 @@ class TvShowsRepoImpl implements TvShowsRepo {
     final rawResBody = jsonDecode(response.data!);
 
     final resBody = RawCredits.fromJson(rawResBody);
+
+    return resBody.toEntity();
+  }
+
+  @override
+  Future<TvFullCredits> getTvShowFullCredits(int tvShowId) async {
+    final response =
+        await _dio.get<String>('$_tvShowPath/$tvShowId/aggregate_credits');
+    final rawResBody = jsonDecode(response.data!);
+
+    final resBody = RawTvFullCredits.fromJson(rawResBody);
 
     return resBody.toEntity();
   }

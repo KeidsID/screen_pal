@@ -27,7 +27,6 @@ class RawPerson with _$RawPerson {
   Person toEntity() {
     return Person(
       id: id,
-      creditId: creditId,
       name: name,
       gender: Gender.values[gender],
       profileImageUrl:

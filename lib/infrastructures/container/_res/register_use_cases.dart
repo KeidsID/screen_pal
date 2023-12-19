@@ -13,6 +13,7 @@ void _registerUseCases() {
     // credits
     ..registerLazySingleton(() => GetMovieCredits(moviesRepo: locator()))
     ..registerLazySingleton(() => GetTvShowCredits(tvShowsRepo: locator()))
+    ..registerLazySingleton(() => GetTvShowFullCredits(tvShowsRepo: locator()))
 
     // extras
     ..registerLazySingleton(() => GetLanguages(extrasRepo: locator()))

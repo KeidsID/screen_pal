@@ -1,6 +1,4 @@
-import 'package:screen_pal/core/entities/credits/credits.dart';
-import 'package:screen_pal/core/entities/tv_shows/tv_show.dart';
-import 'package:screen_pal/core/entities/tv_shows/tv_show_detail.dart';
+import 'package:screen_pal/core/entities.dart';
 
 /// Everything you need to manage Tv Shows.
 abstract interface class TvShowsRepo {
@@ -12,4 +10,5 @@ abstract interface class TvShowsRepo {
 
   Future<TvShowDetail> getTvShowDetail(int tvShowId);
   Future<Credits> getTvShowCredits(int tvShowId);
+  Future<TvFullCredits> getTvShowFullCredits(int tvShowId);
 }

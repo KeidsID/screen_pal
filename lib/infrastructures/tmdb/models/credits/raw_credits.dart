@@ -3,7 +3,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:screen_pal/core/entities/credits/credits.dart';
+import 'package:screen_pal/core/entities.dart';
 
 import 'raw_cast.dart';
 import 'raw_crew.dart';
@@ -26,7 +26,7 @@ class RawCredits with _$RawCredits {
 
   Credits toEntity() {
     return Credits(
-      id: id,
+      productId: id,
       casts: cast.map((e) => e.toEntity()).toList(),
       crews: crew.map((e) => e.toEntity()).toList(),
     );

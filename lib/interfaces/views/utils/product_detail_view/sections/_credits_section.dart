@@ -59,10 +59,37 @@ class _CreditsSection extends StatelessWidget {
                 );
               }
 
-              return PersonsHorizListView(casts);
+              const maxCasts = 10;
+              final filteredCasts =
+                  casts.length > maxCasts ? casts.sublist(0, maxCasts) : casts;
+
+              return PersonsHorizListView(
+                filteredCasts,
+                trailing: Center(
+                  child: TextButton(
+                    onPressed: () {},
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('View More'),
+                        SizedBox(width: 8.0),
+                        Icon(Icons.arrow_right_alt)
+                      ],
+                    ),
+                  ),
+                ),
+              );
             },
           );
         }),
+        const SizedBox(height: 8.0),
+        Padding(
+          padding: kHorizPadding,
+          child: TextButton(
+            onPressed: () {},
+            child: const Text('Full Cast & Crew'),
+          ),
+        ),
         const Padding(padding: kHorizPadding, child: Divider()),
       ],
     );
