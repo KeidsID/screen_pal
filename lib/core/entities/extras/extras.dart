@@ -12,6 +12,9 @@ final class Extras extends Equatable {
     required this.genres,
   });
 
+  /// Returns true if [languages] or [genres] are empty.
+  bool get hasEmpty => languages.isEmpty || genres.isEmpty;
+
   @override
   List<Object> get props => [languages, genres];
 }

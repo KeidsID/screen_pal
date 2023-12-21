@@ -17,6 +17,7 @@
     - apply infrastructures changes.
     - re-organize folders.
     - Remove [AppNavigator], use typed routes to navigate instead.
+      #0911282e1c75e34b40bb994eed23e6c7aeccef06
 
 ## v1.0.1
 

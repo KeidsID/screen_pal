@@ -15,11 +15,11 @@ class ProductsCarouselSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
 
-    final height = deviceSize.height * 0.75;
+    final height = deviceSize.height * 0.5;
     final maxH = (height < 400.0)
         ? 400.0
-        : (height > 800.0)
-            ? 800.0
+        : (height > 600.0)
+            ? 600.0
             : height;
 
     return SizedBox(

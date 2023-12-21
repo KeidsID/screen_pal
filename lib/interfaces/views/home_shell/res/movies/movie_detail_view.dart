@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_detail_provider.dart';
-import 'package:screen_pal/interfaces/views/utils/product_detail_view/product_detail_view.dart';
+import 'package:screen_pal/interfaces/utils/product_detail_view/product_detail_view.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class MovieDetailView extends StatelessWidget {

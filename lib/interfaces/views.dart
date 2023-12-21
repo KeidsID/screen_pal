@@ -11,4 +11,4 @@ export 'views/home_shell/res/settings/policies_dialog_view.dart';
 export 'views/home_shell/res/settings/settings_view.dart';
 export 'views/home_shell/res/tv_shows/tv_show_detail_view.dart';
 export 'views/home_shell/res/tv_shows/tv_shows_home_view.dart';
-export 'views/utils/product_detail_view/product_detail_view.dart';
+export 'views/restart_app_view.dart';

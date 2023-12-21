@@ -7,6 +7,7 @@ import 'package:intl/intl.dart' as intl;
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/providers/remote/credits/products_credits.dart';
+import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_list_providers.dart';
 import 'package:screen_pal/interfaces/router/routes.dart';

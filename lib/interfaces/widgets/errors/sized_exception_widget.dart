@@ -81,33 +81,37 @@ final class SizedExceptionWidget extends SizedExceptionWidgetUIBase {
     String? message,
   }) {
     return Builder(builder: (context) {
-      return SizedBox(
-        width: width,
-        height: height,
-        child: Padding(
-          padding: padding,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              statusCode == null
-                  ? const SizedBox.shrink()
-                  : Text(
-                      '$statusCode',
-                      style: M3TextStyles.displayMedium.toStyle(context),
-                    ),
-              Text(
-                title ?? 'Internal App Error',
-                style: M3TextStyles.headlineSmall.toStyle(context),
-              ),
-              const Divider(),
-              Text(message ?? 'Sorry for the inconvenience'),
-              ...action == null
-                  ? []
-                  : [
-                      const SizedBox(height: 16.0),
-                      action!,
-                    ],
-            ],
+      return DefaultTextStyle.merge(
+        style: M3TextStyles.bodyMedium.toStyle(context),
+        textAlign: TextAlign.center,
+        child: SizedBox(
+          width: width,
+          height: height,
+          child: Padding(
+            padding: padding,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                statusCode == null
+                    ? const SizedBox.shrink()
+                    : Text(
+                        '$statusCode',
+                        style: M3TextStyles.displayMedium.toStyle(context),
+                      ),
+                Text(
+                  title ?? 'Internal App Error',
+                  style: M3TextStyles.headlineSmall.toStyle(context),
+                ),
+                const Divider(),
+                Text(message ?? 'Sorry for the inconvenience'),
+                ...action == null
+                    ? []
+                    : [
+                        const SizedBox(height: 16.0),
+                        action!,
+                      ],
+              ],
+            ),
           ),
         ),
       );
