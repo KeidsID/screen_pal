@@ -23,7 +23,7 @@ const _productTitleKey = Key('product-title');
 const _productExtrasKey = Key('product-extras');
 const _productOverviewKey = Key('product-overview');
 
-class ProductsCarousel extends ConsumerStatefulWidget {
+class ProductsCarousel extends StatefulWidget {
   /// Create a Carousel widget that displays basic information of the
   /// movies/tv-shows provided.
   ///
@@ -66,10 +66,10 @@ class ProductsCarousel extends ConsumerStatefulWidget {
   final Duration autoPlayAnimationDuration;
 
   @override
-  ConsumerState<ProductsCarousel> createState() => _ProductsCarouselState();
+  State<ProductsCarousel> createState() => _ProductsCarouselState();
 }
 
-class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
+class _ProductsCarouselState extends State<ProductsCarousel> {
   /// Carousel current index
   int currentIndex = 0;
 
@@ -81,14 +81,14 @@ class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
 
     final maxW = deviceSize.width;
     final maxH = widget.height;
-    final aspectRatio = deviceSize.aspectRatio;
 
+    final aspectRatio = deviceSize.aspectRatio;
     final isWide =
         (maxW >= 1000) ? (aspectRatio >= kAspectRatio() && maxW > maxH) : false;
 
     return Container(
       width: maxW,
-      height: maxH,
+      height: isWide ? maxH : maxH * 20.0,
       padding: EdgeInsets.only(top: isWide ? 16.0 : 0.0),
       child: Column(
         children: [
@@ -98,6 +98,7 @@ class _ProductsCarouselState extends ConsumerState<ProductsCarousel> {
                 carouselController: _controller,
                 options: CarouselOptions(
                   enableInfiniteScroll: widget.enableInfiniteScroll,
+                  aspectRatio: kAspectRatio(isPotrait: !isWide),
                   enlargeCenterPage: isWide,
                   enlargeStrategy: CenterPageEnlargeStrategy.zoom,
                   viewportFraction: isWide ? 0.9 : 1,

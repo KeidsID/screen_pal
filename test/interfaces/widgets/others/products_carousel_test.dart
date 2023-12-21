@@ -12,16 +12,14 @@ import 'package:screen_pal/interfaces/widgets/others/products/products_carousel.
 import '../../../helpers/dummy/dummy_genres.dart';
 import '../../../helpers/dummy/dummy_languages.dart';
 import '../../../helpers/dummy/dummy_movies.dart';
-import '../../../helpers/providers/fake_languages_notifier.dart';
-import '../../../helpers/providers/fake_movie_genres_notifier.dart';
 import '../../../helpers/tester/tester_view_emulators.dart';
 
 void main() {
   Widget testWidgetApp(List<Product> products) {
     return ProviderScope(
       overrides: [
-        languagesProvider.overrideWith(() => FakeLanguagesNotifier()),
-        movieGenresProvider.overrideWith(() => FakeMovieGenresNotifier())
+        languagesProvider.overrideWith((ref) => Future.value(dummyLanguages)),
+        movieGenresProvider.overrideWith((ref) => Future.value(dummyGenres))
       ],
       child: MaterialApp(
         home: Scaffold(

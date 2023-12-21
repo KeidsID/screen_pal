@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
-import 'package:screen_pal/interfaces/providers/remote/extras/genres_providers.dart';
+import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_collection_detail_provider.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
@@ -72,7 +72,8 @@ class _CollectionGenresText extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final genres = ref.watch(movieGenresProvider);
+    final extras = ref.watch(movieExtrasProvider);
+    final genres = extras.genres;
 
     List<String> genreNames = [];
 

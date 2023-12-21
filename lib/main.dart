@@ -7,8 +7,7 @@ import 'common/constants.dart';
 import 'common/envs/env.dart';
 import 'infrastructures/container/container.dart' as container;
 import 'interfaces/providers/cache/app_theme_mode_provider.dart';
-import 'interfaces/providers/remote/extras/genres_providers.dart';
-import 'interfaces/providers/remote/extras/languages_provider.dart';
+import 'interfaces/providers/remote/extras/extras_providers.dart';
 import 'interfaces/router/router.dart';
 import 'interfaces/router/url_strategy/url_strategy.dart';
 import 'interfaces/themes/app_themes.dart';
@@ -36,20 +35,15 @@ class _MainAppState extends ConsumerState<MainApp> {
 
   @override
   Widget build(BuildContext context) {
-    final movieGenres = ref.watch(movieGenresProvider);
-    final tvShowGenres = ref.watch(tvShowGenresProvider);
-    final languages = ref.watch(languagesProvider);
+    final extrasState = ref.watch(extrasDependenciesStateProvider);
 
-    if (!_isSplashRemoved &&
-        movieGenres.isNotEmpty &&
-        tvShowGenres.isNotEmpty &&
-        languages.isNotEmpty) {
+    if (!_isSplashRemoved && !extrasState.isLoading) {
       FlutterNativeSplash.remove();
       setState(() => _isSplashRemoved = true);
     }
 
     return MaterialApp.router(
-      routerConfig: router,
+      routerConfig: ref.watch(routerProvider),
       debugShowCheckedModeBanner: false,
       title: kAppName,
       theme: AppThemes.light,
@@ -58,10 +52,7 @@ class _MainAppState extends ConsumerState<MainApp> {
       themeAnimationDuration: const Duration(milliseconds: 500),
       themeMode: ref.watch(appThemeModeProvider),
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
-        dragDevices: {
-          PointerDeviceKind.touch,
-          PointerDeviceKind.mouse,
-        },
+        dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
       ),
     );
   }

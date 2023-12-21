@@ -10,37 +10,11 @@ import 'package:screen_pal/core/use_cases/remote/extras/get_tv_show_genres.dart'
 part 'genres_providers.g.dart';
 
 @Riverpod(keepAlive: true, dependencies: [])
-class MovieGenres extends _$MovieGenres {
-  @override
-  List<Genre> build() {
-    _init();
-
-    return [];
-  }
-
-  Future<void> _init() async {
-    try {
-      state = await service.locator<GetMovieGenres>().execute();
-    } catch (e) {
-      state = [];
-    }
-  }
+Future<List<Genre>> movieGenres(MovieGenresRef ref) {
+  return service.locator<GetMovieGenres>().execute();
 }
 
 @Riverpod(keepAlive: true, dependencies: [])
-class TvShowGenres extends _$TvShowGenres {
-  @override
-  List<Genre> build() {
-    _init();
-
-    return [];
-  }
-
-  Future<void> _init() async {
-    try {
-      state = await service.locator<GetTvShowGenres>().execute();
-    } catch (e) {
-      state = [];
-    }
-  }
+Future<List<Genre>> tvShowGenres(TvShowGenresRef ref) {
+  return service.locator<GetTvShowGenres>().execute();
 }

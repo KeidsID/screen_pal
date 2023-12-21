@@ -9,19 +9,6 @@ import 'package:screen_pal/core/use_cases/remote/extras/get_languages.dart';
 part 'languages_provider.g.dart';
 
 @Riverpod(keepAlive: true, dependencies: [])
-class Languages extends _$Languages {
-  @override
-  List<SpokenLanguage> build() {
-    _init();
-
-    return [];
-  }
-
-  Future<void> _init() async {
-    try {
-      state = await service.locator<GetLanguages>().execute();
-    } catch (e) {
-      state = [];
-    }
-  }
+Future<List<SpokenLanguage>> languages(LanguagesRef ref) {
+  return service.locator<GetLanguages>().execute();
 }

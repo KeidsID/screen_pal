@@ -13,8 +13,23 @@ part 'res/home_shell/settings.dart';
 part 'res/home_shell/tv_shows.dart';
 part 'routes.g.dart';
 
-final GlobalKey<NavigatorState> routerNavKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> homeShellNavKey = GlobalKey<NavigatorState>();
+final routerNavKey = GlobalKey<NavigatorState>(debugLabel: 'router');
+final homeShellNavKey =
+    GlobalKey<NavigatorState>(debugLabel: 'home-shell-route');
+
+/// {@template interfaces.router.routes.RefreshRoute}
+/// `/` route.
+/// {@endtemplate}
+@TypedGoRoute<RootRoute>(path: '/')
+final class RootRoute extends GoRouteData {
+  /// {@macro interfaces.router.routes.RefreshRoute}
+  const RootRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const RestartAppView();
+  }
+}
 
 /// Shell route for `/movies`, `/tv-shows` and `/settings` routes.
 @TypedShellRoute<HomeShellRoute>(

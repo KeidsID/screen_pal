@@ -4,15 +4,20 @@ import 'package:envied/envied.dart';
 
 part 'env.g.dart';
 
-@Envied(obfuscate: true)
+/// Contain environment variables from `.env` file.
+@Envied(obfuscate: true, useConstantCase: true)
 abstract class Env {
-  @EnviedField(
-    varName: 'IS_USE_PATH_URL_STRATEGY',
-    obfuscate: false,
-    defaultValue: true,
-  )
+  /// Whether to use path url strategy or flutter default.
+  ///
+  /// Flutter default web url will have hash ("domain.com/#/path").
+  ///
+  /// https://github.com/flutter/flutter/issues/89763
+  @EnviedField(obfuscate: false, defaultValue: false)
   static const bool isUsePathUrlStrategy = _Env.isUsePathUrlStrategy;
 
-  @EnviedField(varName: 'TMDB_ACC_TOKEN')
+  /// TMDB Access Token.
+  ///
+  /// https://developer.themoviedb.org/docs/faq#how-do-i-apply-for-an-api-key
+  @EnviedField()
   static final String tmdbAccToken = _Env.tmdbAccToken;
 }
