@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:screen_pal/core/entities/credits/person_from_credits.dart';
 
+/// Contains the total number of episodes and jobs so far.
 final class TvFullCrew extends PersonFromCredits {
   const TvFullCrew({
     required super.id,

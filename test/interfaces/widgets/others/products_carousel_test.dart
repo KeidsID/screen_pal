@@ -1,11 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
+import 'package:screen_pal/core/entities/extras/extras.dart';
 
 import 'package:screen_pal/core/entities/products/product.dart';
-import 'package:screen_pal/interfaces/providers/remote/extras/genres_providers.dart';
-import 'package:screen_pal/interfaces/providers/remote/extras/languages_provider.dart';
+import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/others/products/products_carousel.dart';
 
@@ -14,12 +15,26 @@ import '../../../helpers/dummy/dummy_languages.dart';
 import '../../../helpers/dummy/dummy_movies.dart';
 import '../../../helpers/tester/tester_view_emulators.dart';
 
+abstract class _WidgetFinders {
+  static Finder get contentContainer =>
+      find.byKey(const Key('content-container')).last;
+
+  static Finder get image => find.byKey(const Key('image-widget'));
+  static Finder get productTitle => find.byKey(const Key('product-title'));
+  static Finder get productExtras => find.byKey(const Key('product-extras'));
+  static Finder get productOverview =>
+      find.byKey(const Key('product-overview'));
+}
+
 void main() {
+  EquatableConfig.stringify = true;
+
   Widget testWidgetApp(List<Product> products) {
     return ProviderScope(
       overrides: [
-        languagesProvider.overrideWith((ref) => Future.value(dummyLanguages)),
-        movieGenresProvider.overrideWith((ref) => Future.value(dummyGenres))
+        movieExtrasProvider.overrideWith((ref) {
+          return Extras(languages: dummyLanguages, genres: dummyGenres);
+        }),
       ],
       child: MaterialApp(
         home: Scaffold(
@@ -65,7 +80,7 @@ void main() {
           return dummyGenres.firstWhere((e) => e.id == id).name;
         }).toList();
 
-        final extras = [
+        final expectedExtrasText = [
           dummyMovie.releaseDate?.year ?? 'Coming Soon',
           language,
           genreNames.isEmpty ? '...' : genreNames.join(', '),
@@ -73,7 +88,11 @@ void main() {
 
         expect(
           tester.widget(_WidgetFinders.productExtras.last),
-          isA<Text>().having((e) => e.data, 'product extras detail', extras),
+          isA<Text>().having(
+            (e) => e.data,
+            'product extras detail',
+            expectedExtrasText,
+          ),
         );
       }),
     );
@@ -148,15 +167,4 @@ void main() {
       });
     });
   });
-}
-
-abstract class _WidgetFinders {
-  static Finder get contentContainer =>
-      find.byKey(const Key('content-container')).last;
-
-  static Finder get image => find.byKey(const Key('image-widget'));
-  static Finder get productTitle => find.byKey(const Key('product-title'));
-  static Finder get productExtras => find.byKey(const Key('product-extras'));
-  static Finder get productOverview =>
-      find.byKey(const Key('product-overview'));
 }
