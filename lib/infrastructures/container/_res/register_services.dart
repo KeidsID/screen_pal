@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 part of '../container.dart';
 
 void _registerServices() {

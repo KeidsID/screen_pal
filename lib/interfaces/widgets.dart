@@ -14,4 +14,5 @@ export 'widgets/others/products/product_horiz_list_view.dart';
 export 'widgets/others/products/product_list_section.dart';
 export 'widgets/others/products/products_carousel.dart';
 export 'widgets/others/products/products_carousel_section.dart';
+export 'widgets/others/products/product_detail_view/product_detail_view.dart';
 export 'widgets/others/theme_mode_dropdown_button.dart';

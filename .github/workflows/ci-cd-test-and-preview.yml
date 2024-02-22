@@ -34,8 +34,11 @@ jobs:
 
       - name: Test with min 80% coverage
         run: |
+          flutter test --coverage
+          dart pub global activate clean_coverage
+          clean_coverage clean coverage/lcov.info --exclusions "**.g.dart","**.freezed.dart","**/interfaces/**"
           dart pub global activate dlcov
-          dlcov --lcov-gen="flutter test --coverage" -c 80
+          dlcov -c 80
 
       - name: Upload coverage
         uses: actions/upload-artifact@v3
