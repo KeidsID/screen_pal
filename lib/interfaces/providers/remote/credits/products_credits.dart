@@ -11,12 +11,12 @@ part 'products_credits.g.dart';
 
 @riverpod
 Future<Credits> movieCredits(MovieCreditsRef ref, int movieId) {
-  return container.locator<GetMovieCredits>().execute(movieId);
+  return container.locator<GetMovieCreditsCase>().execute(movieId);
 }
 
 @riverpod
 Future<Credits> tvShowCredits(TvShowCreditsRef ref, int tvShowId) {
-  return container.locator<GetTvShowCredits>().execute(tvShowId);
+  return container.locator<GetTvShowCreditsCase>().execute(tvShowId);
 }
 
 @riverpod
@@ -24,5 +24,5 @@ Future<TvFullCredits> tvShowFullCredits(
   TvShowFullCreditsRef ref,
   int tvShowId,
 ) {
-  return container.locator<GetTvShowFullCredits>().execute(tvShowId);
+  return container.locator<GetTvShowFullCreditsCase>().execute(tvShowId);
 }

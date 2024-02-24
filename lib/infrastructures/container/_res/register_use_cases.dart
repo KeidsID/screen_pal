@@ -5,38 +5,42 @@ part of '../container.dart';
 void _registerUseCases() {
   // cache
   locator
-    ..registerLazySingleton(() => GetThemeMode(themeModeCache: locator()))
-    ..registerLazySingleton(() => SetThemeMode(themeModeCache: locator()));
+    ..registerLazySingleton(() => GetThemeModeCase(themeModeCache: locator()))
+    ..registerLazySingleton(() => SetThemeModeCase(themeModeCache: locator()));
 
   // remote
   locator
     // credits
-    ..registerLazySingleton(() => GetMovieCredits(moviesRepo: locator()))
-    ..registerLazySingleton(() => GetTvShowCredits(tvShowsRepo: locator()))
-    ..registerLazySingleton(() => GetTvShowFullCredits(tvShowsRepo: locator()))
+    ..registerLazySingleton(() => GetMovieCreditsCase(moviesRepo: locator()))
+    ..registerLazySingleton(() => GetTvShowCreditsCase(tvShowsRepo: locator()))
+    ..registerLazySingleton(
+        () => GetTvShowFullCreditsCase(tvShowsRepo: locator()))
 
     // extras
-    ..registerLazySingleton(() => GetLanguages(extrasRepo: locator()))
-    ..registerLazySingleton(() => GetMovieGenres(extrasRepo: locator()))
-    ..registerLazySingleton(() => GetTvShowGenres(extrasRepo: locator()))
+    ..registerLazySingleton(() => GetLanguagesCase(extrasRepo: locator()))
+    ..registerLazySingleton(() => GetMovieGenresCase(extrasRepo: locator()))
+    ..registerLazySingleton(() => GetTvShowGenresCase(extrasRepo: locator()))
 
     // movies
-    ..registerLazySingleton(() => GetNowPlayingMovies(moviesRepo: locator()))
-    ..registerLazySingleton(() => GetPopularMovies(moviesRepo: locator()))
-    ..registerLazySingleton(() => GetTopRatedMovies(moviesRepo: locator()))
-    ..registerLazySingleton(() => GetUpcomingMovies(moviesRepo: locator()))
-    ..registerLazySingleton(() => GetMovieDetail(moviesRepo: locator()))
     ..registerLazySingleton(
-        () => GetMovieRecommendations(moviesRepo: locator()))
+        () => GetNowPlayingMoviesCase(moviesRepo: locator()))
+    ..registerLazySingleton(() => GetPopularMoviesCase(moviesRepo: locator()))
+    ..registerLazySingleton(() => GetTopRatedMoviesCase(moviesRepo: locator()))
+    ..registerLazySingleton(() => GetUpcomingMoviesCase(moviesRepo: locator()))
+    ..registerLazySingleton(() => GetMovieDetailCase(moviesRepo: locator()))
     ..registerLazySingleton(
-        () => GetMovieCollectionDetail(moviesRepo: locator()))
+        () => GetMovieRecommendationsCase(moviesRepo: locator()))
+    ..registerLazySingleton(
+        () => GetMovieCollectionDetailCase(moviesRepo: locator()))
 
     // tv_shows
-    ..registerLazySingleton(() => GetAiringTodayTvShows(tvShowsRepo: locator()))
-    ..registerLazySingleton(() => GetOnAirTvShows(tvShowsRepo: locator()))
-    ..registerLazySingleton(() => GetPopularTvShows(tvShowsRepo: locator()))
-    ..registerLazySingleton(() => GetTopRatedTvShows(tvShowsRepo: locator()))
-    ..registerLazySingleton(() => GetTvShowDetail(tvShowsRepo: locator()))
     ..registerLazySingleton(
-        () => GetTvShowRecommendations(tvShowsRepo: locator()));
+        () => GetAiringTodayTvShowsCase(tvShowsRepo: locator()))
+    ..registerLazySingleton(() => GetOnAirTvShowsCase(tvShowsRepo: locator()))
+    ..registerLazySingleton(() => GetPopularTvShowsCase(tvShowsRepo: locator()))
+    ..registerLazySingleton(
+        () => GetTopRatedTvShowsCase(tvShowsRepo: locator()))
+    ..registerLazySingleton(() => GetTvShowDetailCase(tvShowsRepo: locator()))
+    ..registerLazySingleton(
+        () => GetTvShowRecommendationsCase(tvShowsRepo: locator()));
 }
