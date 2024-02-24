@@ -5,9 +5,9 @@ import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 /// {@template interfaces.widgets.common.common_detail_view_layout}
-/// Responsive widget for common detail view.
+/// Responsive widget for common detail view that didn't deppend on entity.
 ///
-/// Typically used on [Scaffold.body].
+/// Typically used on [Scaffold.body] to make sure theme is applied.
 /// {@endtemplate}
 class CommonDetailViewLayout extends StatelessWidget {
   /// {@macro interfaces.widgets.common.common_detail_view_layout}

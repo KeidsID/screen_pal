@@ -5,8 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:screen_pal/infrastructures/container/container.dart'
     as container;
-import 'package:screen_pal/core/use_cases/cache/get_theme_mode.dart';
-import 'package:screen_pal/core/use_cases/cache/set_theme_mode.dart';
+import 'package:screen_pal/core/use_cases.dart';
 
 part 'app_theme_mode_provider.g.dart';
 
@@ -21,13 +20,13 @@ class AppThemeMode extends _$AppThemeMode {
   }
 
   Future<void> _init() async {
-    final themeMode = await container.locator<GetThemeMode>().execute();
+    final themeMode = await container.locator<GetThemeModeCase>().execute();
 
     state = themeMode;
   }
 
   Future<void> updateMode(ThemeMode mode) async {
-    await container.locator<SetThemeMode>().execute(mode);
+    await container.locator<SetThemeModeCase>().execute(mode);
     state = mode;
   }
 }

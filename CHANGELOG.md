@@ -10,12 +10,12 @@
   - core
     - re-organize folders
     - redefine [AppSettingsRepo] into [ThemeModeCache] instead.
+    - Rename all "use case" classes with "Case" suffix (eg. [GetThemeModeCase] instead of [GetThemeMode]).
   - infrastrucutures
-    - apply core changes.
     - rename "service_locator" into "container".
   - interfaces
-    - apply infrastructures changes.
     - re-organize folders.
+    - apply infrastructures changes.
     - Remove [AppNavigator], use typed routes to navigate instead.
       #0911282e1c75e34b40bb994eed23e6c7aeccef06
 
