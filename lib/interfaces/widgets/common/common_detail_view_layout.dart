@@ -74,8 +74,10 @@ class CommonDetailViewLayoutDelegate {
   /// Typically a [Text].
   final Widget subtitle;
 
-  /// Same style and shown below [subtitle]. It will start with "#" on the ui, so
-  /// make sure the [tagline] you provide did'nt start with "#".
+  /// Same style and shown below [subtitle].
+  ///
+  /// It will start with "#" on the ui, so make sure the [tagline] you provide
+  /// did'nt start with "#".
   ///
   /// Render nothing if its null or empty string.
   final String? tagline;
@@ -87,7 +89,7 @@ class CommonDetailViewLayoutDelegate {
   /// [Column.children].
   ///
   /// Typically a list of stats of the product.
-  /// ```
+  /// ```js
   /// [
   ///   'Status: Released',
   ///   'Budget: $100.000.000',

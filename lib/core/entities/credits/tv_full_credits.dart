@@ -1,19 +1,25 @@
-import 'package:equatable/equatable.dart';
+import 'credits.dart';
+import 'tv_full_cast.dart';
+import 'tv_full_crew.dart';
 
-import 'package:screen_pal/core/entities/credits/tv_full_cast.dart';
-import 'package:screen_pal/core/entities/credits/tv_full_crew.dart';
-
-class TvFullCredits extends Equatable {
+/// Include every episode of a TV show in the credits.
+final class TvFullCredits extends CreditsBase {
   const TvFullCredits({
-    required this.tvShowId,
+    required this.productId,
     required this.casts,
     required this.crews,
   });
 
-  final int tvShowId;
+  /// [TvShow] id.
+  @override
+  final int productId;
+
+  @override
   final List<TvFullCast> casts;
+
+  @override
   final List<TvFullCrew> crews;
 
   @override
-  List<Object?> get props => [tvShowId];
+  List<Object?> get props => [productId];
 }

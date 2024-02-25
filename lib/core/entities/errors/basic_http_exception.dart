@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'basic_exception.dart';
 
 /// {@template core.entities.errors.BasicHttpException}
@@ -24,6 +26,7 @@ class BasicHttpException extends BasicException {
   /// HTTP
   /// [Client Error Responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses)
   /// names map.
+  @protected
   static const clientErrorResponses = {
     400: 'Bad Request',
     401: 'Unauthorized',
@@ -57,6 +60,7 @@ class BasicHttpException extends BasicException {
   /// HTTP
   /// [Server Error Responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses)
   /// names map.
+  @protected
   static const serverErrorResponses = {
     500: 'Internal Server Error',
     501: 'Not Implemented',

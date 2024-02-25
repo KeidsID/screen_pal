@@ -1,6 +1,9 @@
-import 'package:screen_pal/core/entities/credits/person_from_credits.dart';
+import 'package:screen_pal/core/entities/credits/credit_person.dart';
 
-final class Cast extends PersonFromCredits {
+final class Cast extends CreditPerson {
+  @override
+  String get mainRole => character;
+
   final String character;
 
   const Cast({

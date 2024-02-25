@@ -1,6 +1,9 @@
-import 'package:screen_pal/core/entities/credits/person_from_credits.dart';
+import 'package:screen_pal/core/entities/credits/credit_person.dart';
 
-final class Crew extends PersonFromCredits {
+final class Crew extends CreditPerson {
+  @override
+  String get mainRole => job;
+
   final String job;
 
   const Crew({

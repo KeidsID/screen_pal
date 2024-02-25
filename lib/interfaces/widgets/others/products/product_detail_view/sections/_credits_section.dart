@@ -7,12 +7,12 @@ class _CreditsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    late final AutoDisposeFutureProvider<Credits> provider;
+    late final AutoDisposeFutureProvider<Credits> creditsProvider;
 
     if (product is MovieDetail) {
-      provider = movieCreditsProvider(product.id);
+      creditsProvider = movieCreditsProvider(product.id);
     } else {
-      provider = tvShowCreditsProvider(product.id);
+      creditsProvider = tvShowCreditsProvider(product.id);
     }
 
     return Column(
@@ -26,7 +26,7 @@ class _CreditsSection extends StatelessWidget {
           ),
         ),
         Consumer(builder: (context, ref, child) {
-          final creditsAsync = ref.watch(provider);
+          final creditsAsync = ref.watch(creditsProvider);
 
           const maxH = 270.0;
 
@@ -60,24 +60,27 @@ class _CreditsSection extends StatelessWidget {
               }
 
               const maxCasts = 10;
+              final isMaxxed = casts.length > maxCasts;
               final filteredCasts =
-                  casts.length > maxCasts ? casts.sublist(0, maxCasts) : casts;
+                  isMaxxed ? casts.sublist(0, maxCasts) : casts;
 
-              return PersonsHorizListView(
+              return CreditPersonsHorizListView(
                 filteredCasts,
-                trailing: Center(
-                  child: TextButton(
-                    onPressed: () {},
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text('View More'),
-                        SizedBox(width: 8.0),
-                        Icon(Icons.arrow_right_alt)
-                      ],
-                    ),
-                  ),
-                ),
+                trailing: isMaxxed
+                    ? Center(
+                        child: TextButton(
+                          onPressed: () => _navToProductCredits(context),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('View more casts'),
+                              SizedBox(width: 8.0),
+                              Icon(Icons.arrow_right_alt)
+                            ],
+                          ),
+                        ),
+                      )
+                    : null,
               );
             },
           );
@@ -86,12 +89,22 @@ class _CreditsSection extends StatelessWidget {
         Padding(
           padding: kHorizPadding,
           child: TextButton(
-            onPressed: () {},
+            onPressed: () => _navToProductCredits(context),
             child: const Text('Full Cast & Crew'),
           ),
         ),
         const Padding(padding: kHorizPadding, child: Divider()),
       ],
     );
+  }
+
+  void _navToProductCredits(BuildContext context) {
+    if (product is MovieDetail) {
+      // navigate to movie credits.
+
+      return;
+    }
+
+    // navigate to tv show full credits.
   }
 }
