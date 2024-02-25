@@ -42,20 +42,17 @@ AsyncValue<void> extrasDependenciesState(ExtrasDependenciesStateRef ref) {
   final tvShowGenresAsync = ref.watch(tvShowGenresProvider);
   final languagesAsync = ref.watch(languagesProvider);
 
-  return movieGenresAsync.when(
-    skipLoadingOnRefresh: false,
-    loading: () => const AsyncLoading(),
-    error: (error, trace) => AsyncError(error, trace),
-    data: (_) => tvShowGenresAsync.when(
-      skipLoadingOnRefresh: false,
-      loading: () => const AsyncLoading(),
-      error: (error, trace) => AsyncError(error, trace),
-      data: (_) => languagesAsync.when(
-        skipLoadingOnRefresh: false,
-        loading: () => const AsyncLoading(),
-        error: (error, trace) => AsyncError(error, trace),
-        data: (_) => const AsyncData(null),
-      ),
-    ),
-  );
+  final isLoading = movieGenresAsync.isLoading ||
+      tvShowGenresAsync.isLoading ||
+      languagesAsync.isLoading;
+
+  final AsyncError? error = movieGenresAsync.asError ??
+      tvShowGenresAsync.asError ??
+      languagesAsync.asError;
+
+  if (isLoading) return const AsyncLoading<void>();
+
+  if (error != null) return AsyncError<void>(error, error.stackTrace);
+
+  return const AsyncData(null);
 }

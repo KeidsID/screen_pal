@@ -1,9 +1,9 @@
 import 'package:equatable/equatable.dart';
 
-import 'package:screen_pal/core/entities/credits/person_from_credits.dart';
+import 'package:screen_pal/core/entities/credits/credit_person.dart';
 
 /// Contains the total number of episodes and roles so far.
-final class TvFullCast extends PersonFromCredits {
+final class TvFullCast extends CreditPerson {
   const TvFullCast({
     required super.id,
     required super.name,
@@ -19,6 +19,9 @@ final class TvFullCast extends PersonFromCredits {
 
   final int totalEpisodeCount;
   final List<TvCastRole> roles;
+
+  @override
+  String? get mainRole => roles.firstOrNull?.character;
 }
 
 class TvCastRole extends Equatable {

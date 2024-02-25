@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/core/entities/credits/cast.dart';
-import 'package:screen_pal/core/entities/credits/crew.dart';
-import 'package:screen_pal/core/entities/person/person.dart';
+import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
-class PersonCard extends StatelessWidget {
-  /// [Cast] or [Crew].
-  final Person person;
-
-  final double width;
-  final double height;
-
-  const PersonCard(
-    this.person, {
+class CreditPersonCard extends StatelessWidget {
+  const CreditPersonCard(
+    this.creditPerson, {
     super.key,
     this.width = 160.0,
     this.height = 270.0,
   });
+
+  final CreditPerson creditPerson;
+
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +28,7 @@ class PersonCard extends StatelessWidget {
             Expanded(
               flex: 2,
               child: CommonNetworkImage(
-                imageUrl: '${person.profileImageUrl}',
+                imageUrl: '${creditPerson.profileImageUrl}',
                 fit: BoxFit.cover,
               ),
             ),
@@ -43,13 +40,13 @@ class PersonCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        person.name,
+                        creditPerson.name,
                         style: M3TextStyles.titleMedium.toStyle(
                           context,
                           isBold: true,
                         ),
                       ),
-                      _role(person),
+                      Text(creditPerson.mainRole ?? ''),
                     ],
                   ),
                 ),
@@ -59,12 +56,5 @@ class PersonCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Widget _role(Person person) {
-    final String role =
-        (person is Cast) ? person.character : (person as Crew).job;
-
-    return Text(role);
   }
 }

@@ -1,7 +1,7 @@
-import 'package:screen_pal/core/entities/person/person.dart';
+import 'package:screen_pal/core/entities.dart';
 
-abstract base class PersonFromCredits extends Person {
-  const PersonFromCredits({
+abstract base class CreditPerson extends Person {
+  const CreditPerson({
     required super.id,
     required super.name,
     required super.gender,
@@ -16,4 +16,10 @@ abstract base class PersonFromCredits extends Person {
   final String knownForDepartment;
   final bool adult;
   final double popularity;
+
+  /// Get the main role of the person.
+  ///
+  /// Same as [Cast.character] or [Crew.job]. But will return the first
+  /// character/job for [TvFullCast]/[TvFullCrew] type.
+  String? get mainRole;
 }

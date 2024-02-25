@@ -25,7 +25,7 @@ class RawTvFullCredits with _$RawTvFullCredits {
 
   TvFullCredits toEntity() {
     return TvFullCredits(
-      tvShowId: id,
+      productId: id,
       casts: cast.map((e) => e.toEntity()).toList(),
       crews: crew.map((e) => e.toEntity()).toList(),
     );
