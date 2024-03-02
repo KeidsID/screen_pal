@@ -11,7 +11,7 @@ import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.d
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_list_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_list_providers.dart';
 import 'package:screen_pal/interfaces/router/routes.dart';
-import 'package:screen_pal/interfaces/utils/to_ordinal.dart';
+import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 part 'sections/_credits_section.dart';

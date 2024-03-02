@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/router/routes/utils/dialog_page.dart';
+import 'package:screen_pal/interfaces/router/routes/utils/invalid_route_exception_view.dart';
 import 'package:screen_pal/interfaces/views.dart';
-import 'package:screen_pal/interfaces/widgets.dart';
 
 part 'res/home_shell/movies.dart';
 part 'res/home_shell/settings.dart';
@@ -37,7 +37,10 @@ final class RootRoute extends GoRouteData {
     TypedGoRoute<MoviesRoute>(
       path: '/movies',
       routes: [
-        TypedGoRoute<MovieDetailRoute>(path: ':movieId'),
+        TypedGoRoute<MovieDetailRoute>(
+          path: ':movieId',
+          routes: [TypedGoRoute<MovieCreditsRoute>(path: 'credits')],
+        ),
         TypedGoRoute<MovieCollectionRoute>(path: 'collections/:collectionId')
       ],
     ),
@@ -45,7 +48,12 @@ final class RootRoute extends GoRouteData {
     //
     TypedGoRoute<TvShowsRoute>(
       path: '/tv-shows',
-      routes: [TypedGoRoute<TvShowDetailRoute>(path: ':tvShowId')],
+      routes: [
+        TypedGoRoute<TvShowDetailRoute>(
+          path: ':tvShowId',
+          routes: [TypedGoRoute<TvShowCreditsRoute>(path: 'credits')],
+        ),
+      ],
     ),
 
     //

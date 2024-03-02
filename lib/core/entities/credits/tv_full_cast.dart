@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'package:screen_pal/core/entities/credits/credit_person.dart';
 
-/// Contains the total number of episodes and roles so far.
+/// Contains the total number of episodes and character roles so far.
 final class TvFullCast extends CreditPerson {
   const TvFullCast({
     required super.id,
