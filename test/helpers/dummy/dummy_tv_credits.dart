@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_tv_full_credits.dart';
+import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_tv_credits.dart';
 
-const dummyRawTvFullCreditsJson = '''{
+const dummyRawTvCreditsJson = '''{
   "cast": [
     {
       "adult": false,
@@ -124,6 +124,6 @@ const dummyRawTvFullCreditsJson = '''{
   "id": 1398
 }''';
 
-final dummyRawTvShowFullCredits =
-    RawTvFullCredits.fromJson(jsonDecode(dummyRawTvFullCreditsJson));
-final dummyTvShowFullCredits = dummyRawTvShowFullCredits.toEntity();
+final dummyRawTvShowCredits =
+    RawTvCredits.fromJson(jsonDecode(dummyRawTvCreditsJson));
+final dummyTvShowCredits = dummyRawTvShowCredits.toEntity();

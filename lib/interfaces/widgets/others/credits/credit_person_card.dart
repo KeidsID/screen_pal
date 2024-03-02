@@ -47,7 +47,7 @@ class CreditPersonCard extends StatelessWidget {
                           isBold: true,
                         ),
                       ),
-                      Text(creditPerson.mainRole ?? ''),
+                      Text(creditPerson.mainRole),
                     ],
                   ),
                 ),

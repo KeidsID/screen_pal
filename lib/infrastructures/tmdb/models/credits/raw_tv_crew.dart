@@ -3,18 +3,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:screen_pal/core/entities/credits/tv_full_crew.dart';
+import 'package:screen_pal/core/entities/credits/tv_crew.dart';
 import 'package:screen_pal/core/entities/person/person.dart';
 import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
-part 'raw_tv_full_crew.freezed.dart';
-part 'raw_tv_full_crew.g.dart';
+part 'raw_tv_crew.freezed.dart';
+part 'raw_tv_crew.g.dart';
 
 @freezed
-class RawTvFullCrew with _$RawTvFullCrew {
-  const RawTvFullCrew._();
+class RawTvCrew with _$RawTvCrew {
+  const RawTvCrew._();
 
-  const factory RawTvFullCrew({
+  const factory RawTvCrew({
     required bool adult,
     required int gender,
     required int id,
@@ -26,13 +26,13 @@ class RawTvFullCrew with _$RawTvFullCrew {
     required List<RawTvCrewJob> jobs,
     required String department,
     @JsonKey(name: 'total_episode_count') required int totalEpisodeCount,
-  }) = _RawTvFullCrew;
+  }) = _RawTvCrew;
 
-  factory RawTvFullCrew.fromJson(Map<String, dynamic> json) =>
-      _$RawTvFullCrewFromJson(json);
+  factory RawTvCrew.fromJson(Map<String, dynamic> json) =>
+      _$RawTvCrewFromJson(json);
 
-  TvFullCrew toEntity() {
-    return TvFullCrew(
+  TvCrew toEntity() {
+    return TvCrew(
       id: id,
       name: name,
       gender: Gender.values[gender],
@@ -44,7 +44,7 @@ class RawTvFullCrew with _$RawTvFullCrew {
       popularity: popularity,
       department: department,
       totalEpisodeCount: totalEpisodeCount,
-      jobs: jobs.map((e) => e.toEntity()).toList(),
+      roles: jobs.map((e) => e.toEntity()).toList(),
     );
   }
 }
@@ -62,8 +62,8 @@ class RawTvCrewJob with _$RawTvCrewJob {
   factory RawTvCrewJob.fromJson(Map<String, dynamic> json) =>
       _$RawTvCrewJobFromJson(json);
 
-  TvCrewJob toEntity() {
-    return TvCrewJob(
+  TvCrewRole toEntity() {
+    return TvCrewRole(
       creditId: creditId,
       job: job,
       episodeCount: episodeCount,

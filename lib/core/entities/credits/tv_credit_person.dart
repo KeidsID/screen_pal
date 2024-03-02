@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:screen_pal/core/entities.dart';
 
-import 'package:screen_pal/core/entities/credits/credit_person.dart';
-
-/// Contains the total number of episodes and character roles so far.
-final class TvFullCast extends CreditPerson {
-  const TvFullCast({
+/// Contains the total number of episodes and roles (character/job) so far.
+///
+/// See [TvCrew] and [TvCast] for more details.
+abstract base class TvCreditPerson extends CreditPerson {
+  const TvCreditPerson({
     required super.id,
     required super.name,
     required super.gender,
@@ -14,26 +15,24 @@ final class TvFullCast extends CreditPerson {
     required super.adult,
     required super.popularity,
     required this.totalEpisodeCount,
-    required this.roles,
   });
 
   final int totalEpisodeCount;
-  final List<TvCastRole> roles;
 
-  @override
-  String? get mainRole => roles.firstOrNull?.character;
+  List<TvRoleBase> get roles;
 }
 
-class TvCastRole extends Equatable {
-  const TvCastRole({
+abstract base class TvRoleBase extends Equatable {
+  const TvRoleBase({
     required this.creditId,
-    required this.character,
     required this.episodeCount,
   });
 
   final String creditId;
-  final String character;
   final int episodeCount;
+
+  /// [TvCastRole.character]/[TvCrewRole.job].
+  String get role => '?';
 
   @override
   List<Object?> get props => [creditId];
