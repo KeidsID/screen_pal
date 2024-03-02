@@ -12,7 +12,7 @@ class TvShowCreditsView extends ConsumerWidget {
 
   final int tvShowId;
 
-  AutoDisposeFutureProvider<TvFullCredits> get _creditsProvider =>
+  AutoDisposeFutureProvider<TvCredits> get _creditsProvider =>
       tvShowFullCreditsProvider(tvShowId);
 
   @override

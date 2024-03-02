@@ -2,12 +2,13 @@
 library core_entities;
 
 export 'entities/credits/cast.dart';
+export 'entities/credits/credit_person.dart';
 export 'entities/credits/credits.dart';
 export 'entities/credits/crew.dart';
-export 'entities/credits/credit_person.dart';
-export 'entities/credits/tv_full_cast.dart';
-export 'entities/credits/tv_full_credits.dart';
-export 'entities/credits/tv_full_crew.dart';
+export 'entities/credits/tv_cast.dart';
+export 'entities/credits/tv_credit_person.dart';
+export 'entities/credits/tv_credits.dart';
+export 'entities/credits/tv_crew.dart';
 export 'entities/errors/basic_exception.dart';
 export 'entities/errors/basic_http_exception.dart';
 export 'entities/extras/extras.dart';

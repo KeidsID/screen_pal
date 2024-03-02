@@ -3,18 +3,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:screen_pal/core/entities/credits/tv_full_cast.dart';
+import 'package:screen_pal/core/entities/credits/tv_cast.dart';
 import 'package:screen_pal/core/entities/person/person.dart';
 import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
 
-part 'raw_tv_full_cast.freezed.dart';
-part 'raw_tv_full_cast.g.dart';
+part 'raw_tv_cast.freezed.dart';
+part 'raw_tv_cast.g.dart';
 
 @freezed
-class RawTvFullCast with _$RawTvFullCast {
-  const RawTvFullCast._();
+class RawTvCast with _$RawTvCast {
+  const RawTvCast._();
 
-  const factory RawTvFullCast({
+  const factory RawTvCast({
     required bool adult,
     required int gender,
     required int id,
@@ -26,13 +26,13 @@ class RawTvFullCast with _$RawTvFullCast {
     required List<RawTvCastRole> roles,
     @JsonKey(name: 'total_episode_count') required int totalEpisodeCount,
     required int order,
-  }) = _RawTvFullCast;
+  }) = _RawTvCast;
 
-  factory RawTvFullCast.fromJson(Map<String, dynamic> json) =>
-      _$RawTvFullCastFromJson(json);
+  factory RawTvCast.fromJson(Map<String, dynamic> json) =>
+      _$RawTvCastFromJson(json);
 
-  TvFullCast toEntity() {
-    return TvFullCast(
+  TvCast toEntity() {
+    return TvCast(
       id: id,
       name: name,
       gender: Gender.values[gender],

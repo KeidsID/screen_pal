@@ -20,7 +20,7 @@ Future<Credits> tvShowCredits(TvShowCreditsRef ref, int tvShowId) {
 }
 
 @riverpod
-Future<TvFullCredits> tvShowFullCredits(
+Future<TvCredits> tvShowFullCredits(
   TvShowFullCreditsRef ref,
   int tvShowId,
 ) {

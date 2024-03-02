@@ -10,5 +10,5 @@ abstract interface class TvShowsRepo {
 
   Future<TvShowDetail> getTvShowDetail(int tvShowId);
   Future<Credits> getTvShowCredits(int tvShowId);
-  Future<TvFullCredits> getTvShowFullCredits(int tvShowId);
+  Future<TvCredits> getTvShowFullCredits(int tvShowId);
 }

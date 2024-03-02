@@ -2,7 +2,7 @@ import 'package:screen_pal/core/entities/credits/credit_person.dart';
 
 final class Crew extends CreditPerson {
   @override
-  String get mainRole => job;
+  String get mainRole => job.isEmpty ? '?' : job;
 
   final String job;
 

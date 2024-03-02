@@ -1,10 +1,10 @@
 import 'credits.dart';
-import 'tv_full_cast.dart';
-import 'tv_full_crew.dart';
+import 'tv_cast.dart';
+import 'tv_crew.dart';
 
 /// Include every episode of a TV show in the credits.
-final class TvFullCredits extends CreditsBase {
-  const TvFullCredits({
+final class TvCredits extends CreditsBase {
+  const TvCredits({
     required this.productId,
     required this.casts,
     required this.crews,
@@ -15,10 +15,10 @@ final class TvFullCredits extends CreditsBase {
   final int productId;
 
   @override
-  final List<TvFullCast> casts;
+  final List<TvCast> casts;
 
   @override
-  final List<TvFullCrew> crews;
+  final List<TvCrew> crews;
 
   @override
   List<Object?> get props => [productId];

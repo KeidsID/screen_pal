@@ -2,7 +2,7 @@ import 'package:screen_pal/core/entities/credits/credit_person.dart';
 
 final class Cast extends CreditPerson {
   @override
-  String get mainRole => character;
+  String get mainRole => character.isEmpty ? '?' : character;
 
   final String character;
 
