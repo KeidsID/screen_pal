@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_collection_detail_provider.dart';
+import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class MovieCollectionDetailView extends StatelessWidget {

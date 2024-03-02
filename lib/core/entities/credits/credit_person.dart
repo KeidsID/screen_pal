@@ -19,7 +19,7 @@ abstract base class CreditPerson extends Person {
 
   /// Get the main role of the person.
   ///
-  /// Same as [Cast.character] or [Crew.job]. But will return the first
-  /// character/job for [TvFullCast]/[TvFullCrew] type.
+  /// Same as [Cast.character] or [Crew.job]. But will return the first role for
+  /// [TvFullCast.roles]/[TvFullCrew.jobs].
   String? get mainRole;
 }

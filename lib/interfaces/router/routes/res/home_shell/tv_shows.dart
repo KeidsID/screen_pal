@@ -1,10 +1,10 @@
 part of '../../routes.dart';
 
-/// {@template interfaces.router.routes.tv_shows_route}
+/// {@template lib.interfaces.router.routes.TvShowsRoute}
 /// `/tv-shows` route.
 /// {@endtemplate}
 final class TvShowsRoute extends GoRouteData {
-  /// {@macro interfaces.router.routes.tv_shows_route}
+  /// {@macro lib.interfaces.router.routes.TvShowsRoute}
   const TvShowsRoute();
 
   @override
@@ -13,11 +13,11 @@ final class TvShowsRoute extends GoRouteData {
   }
 }
 
-/// {@template interfaces.router.routes.tv_show_detail_route}
+/// {@template lib.interfaces.router.routes.TvShowDetailRoute}
 /// `tv-shows/:tvShowId` route.
 /// {@endtemplate}
 final class TvShowDetailRoute extends GoRouteData {
-  /// {@macro interfaces.router.routes.tv_show_detail_route}
+  /// {@macro lib.interfaces.router.routes.TvShowDetailRoute}
   const TvShowDetailRoute({required this.tvShowId});
 
   /// Provide [TvShow.id].
@@ -28,21 +28,35 @@ final class TvShowDetailRoute extends GoRouteData {
     final id = int.tryParse(tvShowId);
 
     if (id == null) {
-      return Scaffold(
-        body: SizedExceptionWidget(
-          BasicHttpException(
-            statusCode: 400,
-            message: 'Invalid tv show id. Only accepts numbers.',
-          ),
-          action: ElevatedButton.icon(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_back),
-            label: const Text('Go Back'),
-          ),
-        ),
+      return const InvalidRouteExceptionView(
+        message: 'Invalid tv show id. Only accepts numbers.',
       );
     }
 
     return TvShowDetailView(id);
+  }
+}
+
+/// {@template lib.interfaces.router.routes.TvShowCreditsRoute}
+/// `tv-shows/:tvShowId/credits` route.
+/// {@endtemplate}
+final class TvShowCreditsRoute extends GoRouteData {
+  /// {@macro lib.interfaces.router.routes.TvShowCreditsRoute}
+  const TvShowCreditsRoute({required this.tvShowId});
+
+  /// Provide [TvShowDetail.id].
+  final String tvShowId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final id = int.tryParse(tvShowId);
+
+    if (id == null) {
+      return const InvalidRouteExceptionView(
+        message: 'Invalid tv show id. Only accepts numbers.',
+      );
+    }
+
+    return TvShowCreditsView(id);
   }
 }

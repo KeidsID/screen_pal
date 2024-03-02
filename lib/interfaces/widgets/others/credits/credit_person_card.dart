@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/core/entities.dart';
+import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class CreditPersonCard extends StatelessWidget {

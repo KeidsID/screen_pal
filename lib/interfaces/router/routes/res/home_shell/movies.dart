@@ -1,10 +1,10 @@
 part of '../../routes.dart';
 
-/// {@template interfaces.router.routes.movies_route}
+/// {@template lib.interfaces.router.routes.MoviesRoute}
 /// `/movies` route.
 /// {@endtemplate}
 final class MoviesRoute extends GoRouteData {
-  /// {@macro interfaces.router.routes.movies_route}
+  /// {@macro lib.interfaces.router.routes.MoviesRoute}
   const MoviesRoute();
 
   @override
@@ -13,11 +13,11 @@ final class MoviesRoute extends GoRouteData {
   }
 }
 
-/// {@template interfaces.router.routes.movie_detail_route}
+/// {@template lib.interfaces.router.routes.MovieDetailRoute}
 /// `movies/:movieId` route.
 /// {@endtemplate}
 final class MovieDetailRoute extends GoRouteData {
-  /// {@macro interfaces.router.routes.movie_detail_route}
+  /// {@macro lib.interfaces.router.routes.MovieDetailRoute}
   const MovieDetailRoute({required this.movieId});
 
   /// Provide [Movie.id].
@@ -28,18 +28,8 @@ final class MovieDetailRoute extends GoRouteData {
     final id = int.tryParse(movieId);
 
     if (id == null) {
-      return Scaffold(
-        body: SizedExceptionWidget.expand(
-          BasicHttpException(
-            statusCode: 400,
-            message: 'Invalid movid id. Only accepts numbers.',
-          ),
-          action: ElevatedButton.icon(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_back),
-            label: const Text('Go Back'),
-          ),
-        ),
+      return const InvalidRouteExceptionView(
+        message: 'Invalid movid id. Only accepts numbers.',
       );
     }
 
@@ -47,11 +37,35 @@ final class MovieDetailRoute extends GoRouteData {
   }
 }
 
-/// {@template interfaces.router.routes.movie_collection_detail_route}
+/// {@template lib.interfaces.router.routes.MovieCreditsRoute}
+/// `movies/:movieId/credits` route.
+/// {@endtemplate}
+final class MovieCreditsRoute extends GoRouteData {
+  /// {@macro lib.interfaces.router.routes.MovieCreditsRoute}
+  const MovieCreditsRoute({required this.movieId});
+
+  /// Provide [MovieDetail.id].
+  final String movieId;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    final id = int.tryParse(movieId);
+
+    if (id == null) {
+      return const InvalidRouteExceptionView(
+        message: 'Invalid movid id. Only accepts numbers.',
+      );
+    }
+
+    return MovieCreditsView(id);
+  }
+}
+
+/// {@template lib.interfaces.router.routes.MovieCollectionRoute}
 /// `movies/collections/:collectionId` route.
 /// {@endtemplate}
 final class MovieCollectionRoute extends GoRouteData {
-  /// {@macro interfaces.router.routes.movie_collection_detail_route}
+  /// {@macro lib.interfaces.router.routes.MovieCollectionRoute}
   const MovieCollectionRoute({required this.collectionId});
 
   /// Provide [MovieCollection.id].
@@ -62,18 +76,8 @@ final class MovieCollectionRoute extends GoRouteData {
     final id = int.tryParse(collectionId);
 
     if (id == null) {
-      return Scaffold(
-        body: SizedExceptionWidget.expand(
-          BasicHttpException(
-            statusCode: 400,
-            message: 'Invalid collection id. Only accepts numbers.',
-          ),
-          action: ElevatedButton.icon(
-            onPressed: () => context.pop(),
-            icon: const Icon(Icons.arrow_back),
-            label: const Text('Go Back'),
-          ),
-        ),
+      return const InvalidRouteExceptionView(
+        message: 'Invalid collection id. Only accepts numbers.',
       );
     }
 

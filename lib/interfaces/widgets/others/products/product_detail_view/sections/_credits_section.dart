@@ -52,7 +52,7 @@ class _CreditsSection extends StatelessWidget {
                   height: maxH,
                   child: Center(
                     child: Text(
-                      'No special cast',
+                      'No cast credits',
                       style: M3TextStyles.titleMedium.toStyle(context),
                     ),
                   ),
@@ -73,7 +73,7 @@ class _CreditsSection extends StatelessWidget {
                           child: const Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('View more casts'),
+                              Text('View more'),
                               SizedBox(width: 8.0),
                               Icon(Icons.arrow_right_alt)
                             ],
@@ -100,11 +100,11 @@ class _CreditsSection extends StatelessWidget {
 
   void _navToProductCredits(BuildContext context) {
     if (product is MovieDetail) {
-      // navigate to movie credits.
+      MovieCreditsRoute(movieId: '${product.id}').go(context);
 
       return;
     }
 
-    // navigate to tv show full credits.
+    TvShowCreditsRoute(tvShowId: '${product.id}').go(context);
   }
 }

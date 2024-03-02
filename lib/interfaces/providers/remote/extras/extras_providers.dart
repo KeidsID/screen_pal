@@ -54,5 +54,5 @@ AsyncValue<void> extrasDependenciesState(ExtrasDependenciesStateRef ref) {
 
   if (error != null) return AsyncError<void>(error, error.stackTrace);
 
-  return const AsyncData(null);
+  return const AsyncData<void>(null);
 }

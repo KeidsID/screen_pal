@@ -14,7 +14,7 @@ const kTmdbApiVersion = '3';
 
 /// Use this to debug instead [debugPrint].
 final kLogger = Logger();
-final bool kIsMobile = () {
+bool get kIsMobile {
   if (kIsWeb) {
     final platform = defaultTargetPlatform;
 
@@ -22,7 +22,7 @@ final bool kIsMobile = () {
   }
 
   return Platform.isAndroid;
-}();
+}
 
 const kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
