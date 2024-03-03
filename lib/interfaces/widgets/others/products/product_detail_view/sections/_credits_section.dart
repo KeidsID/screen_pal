@@ -52,7 +52,7 @@ class _CreditsSection extends StatelessWidget {
                   height: maxH,
                   child: Center(
                     child: Text(
-                      'No cast credits',
+                      'No cast data for now',
                       style: M3TextStyles.titleMedium.toStyle(context),
                     ),
                   ),

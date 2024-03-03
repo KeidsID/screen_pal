@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/core/entities.dart';
-
-import 'credit_person_card.dart';
+import 'package:screen_pal/interfaces/widgets.dart';
 
 class CreditPersonsHorizListView extends StatelessWidget {
   /// [Cast] or [Crew] list.

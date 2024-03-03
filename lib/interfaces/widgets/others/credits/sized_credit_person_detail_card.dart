@@ -7,7 +7,7 @@ import 'package:screen_pal/interfaces/widgets.dart';
 
 /// {@template lib.interfaces.widgets.others.credits.CreditPersonDetailCard}
 /// Detailed version of [CreditPersonCard]
-/// (Will display all roles for [TvFullCast]/[TvFullCrew]).
+/// (Will display all roles for [TvCast]/[TvCrew]).
 ///
 /// Please size it as horizontal widget ([width] is higher than [height]) for
 /// better content view.
@@ -82,7 +82,9 @@ class SizedCreditPersonDetailCard extends SizedBox {
                         person.name,
                         style: M3TextStyles.titleLarge.toStyle(context),
                       ),
-                      Text(person.mainRole ?? '?'),
+                      (person is TvCreditPerson)
+                          ? TvCreditPersonText(person)
+                          : Text(person.mainRole),
                     ],
                   ),
                 ),
