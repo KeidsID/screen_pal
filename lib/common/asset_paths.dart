@@ -13,4 +13,6 @@ abstract final class AssetPaths {
 
   static const privacyPolicy = 'policies/privacy-policy.md';
   static const termsOfUse = 'policies/terms-of-use.md';
+
+  static const rubikFontLicense = 'assets/fonts/Rubik/OFL.txt';
 }

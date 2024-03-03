@@ -1,7 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:screen_pal/common/asset_paths.dart';
 
 import 'common/constants.dart';
 import 'common/envs/env.dart';
@@ -15,6 +18,12 @@ import 'interfaces/themes/app_themes.dart';
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString(AssetPaths.rubikFontLicense);
+
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
 
   await container.init();
 

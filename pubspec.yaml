@@ -39,7 +39,7 @@ dependencies:
   # styles
   cupertino_icons: ^1.0.2
   flex_color_scheme: ^7.2.0
-  google_fonts: ^6.1.0
+  # google_fonts: ^6.1.0
 
   # widgets
   cached_network_image: ^3.2.3
@@ -88,8 +88,52 @@ flutter:
     - assets/images/tmdb/
     - policies/
 
+    # fonts license
+    - assets/fonts/Rubik/OFL.txt
+
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+
+  fonts:
+    - family: Rubik
+      fonts:
+        - asset: assets/fonts/Rubik/static/Rubik-Light.ttf
+          weight: 300
+        - asset: assets/fonts/Rubik/static/Rubik-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Rubik/static/Rubik-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Rubik/static/Rubik-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/Rubik/static/Rubik-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Rubik/static/Rubik-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/Rubik/static/Rubik-Black.ttf
+          weight: 900
+
+        #
+        - asset: assets/fonts/Rubik/static/Rubik-LightItalic.ttf
+          weight: 300
+          style: italic
+        - asset: assets/fonts/Rubik/static/Rubik-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/Rubik/static/Rubik-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/Rubik/static/Rubik-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/Rubik/static/Rubik-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/Rubik/static/Rubik-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/Rubik/static/Rubik-BlackItalic.ttf
+          weight: 900
+          style: italic
