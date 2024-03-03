@@ -1,7 +1,7 @@
 // coverage:ignore-file
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 
 /// Generated from https://rydmike.com/flexcolorscheme/themesplayground-v6
 abstract final class AppThemes {
@@ -14,7 +14,8 @@ abstract final class AppThemes {
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
     swapLegacyOnMaterial3: true,
-    fontFamily: GoogleFonts.rubik().fontFamily,
+    fontFamily: 'Rubik',
+    // fontFamily: GoogleFonts.rubik().fontFamily,
   );
 
   static final dark = FlexThemeData.dark(
@@ -26,6 +27,7 @@ abstract final class AppThemes {
     visualDensity: FlexColorScheme.comfortablePlatformDensity,
     useMaterial3: true,
     swapLegacyOnMaterial3: true,
-    fontFamily: GoogleFonts.rubik().fontFamily,
+    fontFamily: 'Rubik',
+    // fontFamily: GoogleFonts.rubik().fontFamily,
   );
 }

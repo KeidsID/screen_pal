@@ -1,3 +1,11 @@
+## unreleased
+
+### Patch
+
+- remove `google_fonts` package due to an issue:
+  [Error: Type 'FontFeature' not found](https://github.com/material-foundation/flutter-packages/issues/568). Replaced
+  with local fonts.
+
 ## v1.1.1
 
 ### Added
