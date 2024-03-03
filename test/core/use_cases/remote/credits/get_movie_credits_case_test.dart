@@ -19,6 +19,8 @@ void main() {
     'GetMovieCredits use case '
     'should orchestrating get credits action correctly',
     () async {
+      provideDummy(dummyMovieCredits); // mockito helper
+
       when(mockMoviesRepo.getMovieCredits(123))
           .thenAnswer((_) async => dummyMovieCredits);
 
