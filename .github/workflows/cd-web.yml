@@ -3,8 +3,6 @@ name: CD - Web Release
 # https://igorsteblii.medium.com/deploy-flutter-web-app-with-github-actions-or-gitlab-ci-cd-on-pages-in-5-min-6a473ac79101
 on:
   push:
-    # branches:
-    #   - main
     tags:
       - "v*.*.*"
 
@@ -51,7 +49,6 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
 
