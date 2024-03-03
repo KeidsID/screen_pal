@@ -4,9 +4,8 @@
 *.freezed.dart
 *.mocks.dart
 
-coverage/
-
 # Miscellaneous
+coverage/
 *.class
 *.log
 *.pyc
