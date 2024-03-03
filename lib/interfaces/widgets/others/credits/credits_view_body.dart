@@ -38,10 +38,23 @@ class _ThinLayoutView extends StatelessWidget {
 
   final CreditsBase credits;
 
+  bool get hasCasts => credits.casts.isNotEmpty;
+  int get castsLen => credits.casts.length;
+
+  bool get hasCrews => credits.crews.isNotEmpty;
+
+  int _computeItemLen(int itemCount) {
+    return itemCount +
+        (!hasCasts
+            ? 1
+            : hasCrews
+                ? 2
+                : 1);
+  }
+
   @override
   Widget build(BuildContext context) {
     final persons = [...credits.casts, ...credits.crews];
-    final castsLen = credits.casts.length;
 
     return Stack(
       fit: StackFit.expand,
@@ -50,47 +63,55 @@ class _ThinLayoutView extends StatelessWidget {
         const SizedScrollableArea(primary: true),
 
         // contents
-        Center(
-          child: SizedBox(
-            width: _kCardW,
-            height: double.infinity,
-            child: ListView.builder(
-              primary: true,
-              padding: const EdgeInsets.all(16.0),
-              itemCount: persons.length + 2,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      'Casts',
-                      style: kSectionTitleStyle.toStyle(context),
-                    ),
-                  );
-                }
+        persons.isEmpty
+            ? const SizedExceptionWidget(BasicException())
+            : Center(
+                child: SizedBox(
+                  width: _kCardW,
+                  height: double.infinity,
+                  child: ListView.builder(
+                    primary: true,
+                    padding: const EdgeInsets.all(16.0),
+                    itemCount: _computeItemLen(persons.length),
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        final String text = switch (hasCasts) {
+                          true => 'Casts',
+                          false => 'Crews',
+                        };
 
-                if (index > castsLen) {
-                  if (index == castsLen + 1) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        'Crews',
-                        style: kSectionTitleStyle.toStyle(context),
-                      ),
-                    );
-                  }
-                  final crew = persons[index - 2];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 8.0),
+                          child: Text(
+                            text,
+                            style: kSectionTitleStyle.toStyle(context),
+                          ),
+                        );
+                      }
 
-                  return _itemCard(crew);
-                }
+                      if (index > castsLen && hasCasts && hasCrews) {
+                        if (index == castsLen + 1) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              'Crews',
+                              style: kSectionTitleStyle.toStyle(context),
+                            ),
+                          );
+                        }
+                        final crew = persons[index - 2];
 
-                final cast = persons[index - 1];
+                        return _itemCard(crew);
+                      }
 
-                return _itemCard(cast);
-              },
-            ),
-          ),
-        ),
+                      // can be crew if casts is empty
+                      final person = persons[index - 1];
+
+                      return _itemCard(person);
+                    },
+                  ),
+                ),
+              ),
       ],
     );
   }
@@ -140,56 +161,76 @@ class _WideLayoutViewState extends State<_WideLayoutView> {
         ),
 
         // contents
-        Center(
-          child: SizedBox(
-            width: _kCardW * 2,
-            height: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0).copyWith(bottom: 0.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <List<Widget>>[
-                  // casts
-                  [
-                    Text('Casts', style: kSectionTitleStyle.toStyle(context)),
-                    const SizedBox(height: 8.0),
-                    Expanded(
-                      child: ListView.builder(
-                        primary: true,
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        itemCount: casts.length,
-                        itemBuilder: (_, index) => _itemCard(casts[index]),
-                      ),
-                    ),
-                  ],
-
-                  // crews
-                  [
-                    Text('Crews', style: kSectionTitleStyle.toStyle(context)),
-                    const SizedBox(height: 8.0),
-                    Expanded(
-                      child: ListView.builder(
-                        controller: _crewsScrollCtrler,
-                        padding: const EdgeInsets.only(bottom: 16.0),
-                        itemCount: crews.length,
-                        itemBuilder: (_, index) => _itemCard(crews[index]),
-                      ),
-                    )
-                  ],
-                ].map<Widget>((e) {
-                  return Expanded(
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        casts.isEmpty && crews.isEmpty
+            ? const SizedExceptionWidget(BasicException())
+            : Center(
+                child: SizedBox(
+                  width: _kCardW * 2,
+                  height: double.infinity,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0).copyWith(bottom: 0.0),
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: e,
+                      children: <List<Widget>>[
+                        // casts
+                        [
+                          Text(
+                            'Casts',
+                            style: kSectionTitleStyle.toStyle(context),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Expanded(
+                            child: casts.isEmpty
+                                ? const Center(
+                                    child: Text('No cast data for now'),
+                                  )
+                                : ListView.builder(
+                                    primary: true,
+                                    padding:
+                                        const EdgeInsets.only(bottom: 16.0),
+                                    itemCount: casts.length,
+                                    itemBuilder: (_, index) =>
+                                        _itemCard(casts[index]),
+                                  ),
+                          ),
+                        ],
+
+                        // crews
+                        [
+                          Text(
+                            'Crews',
+                            style: kSectionTitleStyle.toStyle(context),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Expanded(
+                            child: crews.isEmpty
+                                ? const Center(
+                                    child: Text('No crew data for now'),
+                                  )
+                                : ListView.builder(
+                                    controller: _crewsScrollCtrler,
+                                    padding:
+                                        const EdgeInsets.only(bottom: 16.0),
+                                    itemCount: crews.length,
+                                    itemBuilder: (_, index) =>
+                                        _itemCard(crews[index]),
+                                  ),
+                          )
+                        ],
+                      ].map<Widget>((e) {
+                        return Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: e,
+                          ),
+                        );
+                      }).toList()
+                        // list seperator
+                        ..insert(1, const SizedBox(width: 16.0)),
                     ),
-                  );
-                }).toList()
-                  ..insert(1, const SizedBox(width: 16.0)),
+                  ),
+                ),
               ),
-            ),
-          ),
-        ),
       ],
     );
   }

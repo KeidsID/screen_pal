@@ -108,14 +108,15 @@ extension M3TextStylesX on M3TextStyles {
   /// - [isBold], apply [FontWeight.bold] if true.
   TextStyle? toStyle(
     BuildContext context, {
+    Color? color,
     double opacity = 1.0,
     bool isBold = false,
   }) {
     final style = _textStylesMap(context)[this];
-    final color = style?.color;
+    final fixedColor = color ?? style?.color;
 
     return style?.copyWith(
-      color: color?.withOpacity(opacity),
+      color: fixedColor?.withOpacity(opacity),
       fontWeight: (isBold) ? FontWeight.bold : null,
     );
   }
