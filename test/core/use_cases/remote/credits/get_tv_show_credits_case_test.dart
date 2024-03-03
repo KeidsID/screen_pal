@@ -19,6 +19,8 @@ void main() {
     'GetTvShowCredits use case '
     'should orchestrating get credits action correctly',
     () async {
+      provideDummy(dummyTvShowCredits); // mockito helper
+
       when(mockTvShowsRepo.getTvShowCredits(123))
           .thenAnswer((_) async => dummyTvShowCredits);
 
