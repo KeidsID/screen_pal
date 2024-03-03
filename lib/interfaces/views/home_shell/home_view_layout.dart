@@ -148,46 +148,38 @@ class _DynamicNavRailState extends State<_DynamicNavRail> {
 
   @override
   Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => _setIsExtended(value: true),
-      onExit: (_) => _setIsExtended(value: false),
-      child: NavigationRail(
-        key: widget.key,
-        extended: isExtended,
-        onDestinationSelected: (navIndex) {
-          if (kIsMobile) _setIsExtended(value: false);
+    return NavigationRail(
+      key: widget.key,
+      extended: isExtended,
+      onDestinationSelected: (navIndex) {
+        _setIsExtended(value: false);
 
-          _onNavBarItemTap(context)(navIndex);
-        },
-        selectedIndex: _currentNavIndex(context),
-        destinations: _navs
-            .map((e) => NavigationRailDestination(
-                  icon: e.icon,
-                  label: Text(e.label),
-                  selectedIcon: e.activeIcon,
-                ))
-            .toList(),
-        trailing: kIsMobile
-            ? Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      IconButton(
-                        tooltip: (isExtended) ? 'Shrink' : 'Extend',
-                        onPressed: () => _setIsExtended(),
-                        icon: Icon(
-                          (isExtended)
-                              ? Icons.chevron_left
-                              : Icons.chevron_right,
-                        ),
-                      ),
-                    ],
-                  ),
+        _onNavBarItemTap(context)(navIndex);
+      },
+      selectedIndex: _currentNavIndex(context),
+      destinations: _navs
+          .map((e) => NavigationRailDestination(
+                icon: e.icon,
+                label: Text(e.label),
+                selectedIcon: e.activeIcon,
+              ))
+          .toList(),
+      trailing: Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              IconButton(
+                tooltip: (isExtended) ? 'Shrink' : 'Extend',
+                onPressed: () => _setIsExtended(),
+                icon: Icon(
+                  (isExtended) ? Icons.chevron_left : Icons.chevron_right,
                 ),
-              )
-            : null,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
