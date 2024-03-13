@@ -3,9 +3,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:screen_pal/core/entities/credits/cast.dart';
-import 'package:screen_pal/core/entities/person/person.dart';
 import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 part 'raw_cast.freezed.dart';
 part 'raw_cast.g.dart';

@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class ProductsCarouselSection extends StatelessWidget {
   /// Carousel section on home view.

@@ -2,9 +2,7 @@ name: CI/CD - Test and Preview
 
 on:
   pull_request_review:
-    types:
-      - submitted
-      - edited
+    types: [submitted, edited]
 
 jobs:
   test:

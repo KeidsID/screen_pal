@@ -2,8 +2,8 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:screen_pal/core/entities/tv_shows/episode.dart';
 import 'package:screen_pal/infrastructures/tmdb/utils/tmdb_images_config.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 part 'raw_episode.freezed.dart';
 part 'raw_episode.g.dart';

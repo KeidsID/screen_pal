@@ -2,8 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:screen_pal/core/entities.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 import 'raw_cast.dart';
 import 'raw_crew.dart';

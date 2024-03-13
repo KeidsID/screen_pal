@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import 'package:screen_pal/core/entities.dart';
-import 'package:screen_pal/core/services/remote/tv_shows_repo.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_credits.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_tv_credits.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/raw_tv_show_detail.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/tv_shows/tv_show_list_res_body.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class TvShowsRepoImpl implements TvShowsRepo {
   const TvShowsRepoImpl(Dio dio) : _dio = dio;
