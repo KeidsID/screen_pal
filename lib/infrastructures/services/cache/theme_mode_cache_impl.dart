@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'package:screen_pal/core/services/cache/theme_mode_cache.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class ThemeModeCacheImpl implements ThemeModeCache {
   final SharedPreferences _pref;

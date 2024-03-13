@@ -3,8 +3,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class TvCreditPersonText extends StatelessWidget {
   const TvCreditPersonText(this.person, {super.key});

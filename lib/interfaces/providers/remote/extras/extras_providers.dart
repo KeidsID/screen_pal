@@ -2,9 +2,9 @@
 
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import 'package:screen_pal/core/entities/extras/extras.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/genres_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/languages_provider.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 part 'extras_providers.g.dart';
 

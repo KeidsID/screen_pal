@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class RestartAppView extends StatelessWidget {
   const RestartAppView({super.key});

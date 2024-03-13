@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/core/entities/errors/basic_exception.dart';
-import 'package:screen_pal/core/entities/errors/basic_http_exception.dart';
 import 'package:screen_pal/infrastructures/tmdb/errors/common_response_exception.dart';
 import 'package:screen_pal/interfaces/widgets/errors/sized_exception_widget.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 /// {@template interfaces.widgets.errors.SizedDioExceptionWidget}
 /// [SizedExceptionWidget] for [DioException].

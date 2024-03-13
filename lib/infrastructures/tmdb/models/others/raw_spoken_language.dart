@@ -2,8 +2,7 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:screen_pal/core/entities/extras/spoken_language.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 part 'raw_spoken_language.freezed.dart';
 part 'raw_spoken_language.g.dart';

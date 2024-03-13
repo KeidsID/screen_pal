@@ -3,8 +3,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'package:screen_pal/infrastructures/container/container.dart' as service;
-import 'package:screen_pal/core/entities/tv_shows/tv_show_detail.dart';
-import 'package:screen_pal/core/use_cases/remote/tv_shows/get_tv_show_detail_case.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 part 'tv_show_detail_provider.g.dart';
 

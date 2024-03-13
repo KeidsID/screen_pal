@@ -4,12 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/core/entities/movies/movie.dart';
-import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/routes.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
 import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 // Tests Utils:
 

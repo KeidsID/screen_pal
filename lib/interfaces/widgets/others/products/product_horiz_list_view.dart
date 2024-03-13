@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/widgets/others/products/product_card.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class ProductHorizListView extends StatelessWidget {
   const ProductHorizListView(

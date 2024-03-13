@@ -2,11 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/providers/remote/credits/products_credits.dart';
 import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_detail_provider.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
-
+import 'package:screen_pal_core/screen_pal_core.dart';
 class TvShowCreditsView extends ConsumerWidget {
   const TvShowCreditsView(this.tvShowId, {super.key});
 

@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/providers/remote/credits/products_credits.dart';
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_detail_provider.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class MovieCreditsView extends ConsumerWidget {
   const MovieCreditsView(this.movieId, {super.key});

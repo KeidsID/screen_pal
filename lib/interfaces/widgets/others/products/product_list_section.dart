@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 /// {@template screen_pal.interfaces.widgets.products.ProductListSection}
 /// Common product list view section on the app.

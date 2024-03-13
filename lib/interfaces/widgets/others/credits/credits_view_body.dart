@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:screen_pal/common/constants.dart';
 
-import 'package:screen_pal/core/entities.dart';
+import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 // 7:2 ratio
 const _kCardW = 450.0;

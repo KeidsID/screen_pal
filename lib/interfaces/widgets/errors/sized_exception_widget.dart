@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal/interfaces/widgets/errors/sized_dio_exception_widget.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 /// {@template interfaces.widgets.errors.SizedExceptionWidget}
 /// A widget to display brief info about the error that occurred.

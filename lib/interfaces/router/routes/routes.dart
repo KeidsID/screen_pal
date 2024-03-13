@@ -3,10 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:screen_pal/core/entities.dart';
 import 'package:screen_pal/interfaces/router/routes/utils/dialog_page.dart';
 import 'package:screen_pal/interfaces/router/routes/utils/invalid_route_exception_view.dart';
 import 'package:screen_pal/interfaces/views.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 part 'res/home_shell/movies.dart';
 part 'res/home_shell/settings.dart';

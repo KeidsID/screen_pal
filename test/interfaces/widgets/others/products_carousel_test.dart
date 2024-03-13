@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:network_image_mock/network_image_mock.dart';
-import 'package:screen_pal/core/entities/extras/extras.dart';
 
-import 'package:screen_pal/core/entities/products/product.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
 import 'package:screen_pal/interfaces/widgets/others/products/products_carousel.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 import '../../../helpers/dummy/dummy_genres.dart';
 import '../../../helpers/dummy/dummy_languages.dart';

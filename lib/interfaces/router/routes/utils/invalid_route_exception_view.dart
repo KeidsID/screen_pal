@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:screen_pal/core/entities/errors/basic_http_exception.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 class InvalidRouteExceptionView extends StatelessWidget {

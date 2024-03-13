@@ -2,15 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-import 'package:screen_pal/core/entities/credits/credits.dart';
-import 'package:screen_pal/core/entities/movies/movie.dart';
-import 'package:screen_pal/core/entities/movies/movie_collection_detail.dart';
-import 'package:screen_pal/core/entities/movies/movie_detail.dart';
-import 'package:screen_pal/core/services/remote/movies_repo.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/credits/raw_credits.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/movies/movie_list_res_body.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/movies/raw_movie_collection_detail.dart';
 import 'package:screen_pal/infrastructures/tmdb/models/movies/raw_movie_detail.dart';
+import 'package:screen_pal_core/screen_pal_core.dart';
 
 class MoviesRepoImpl implements MoviesRepo {
   const MoviesRepoImpl(Dio dio) : _dio = dio;
