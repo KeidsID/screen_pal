@@ -15,8 +15,7 @@ void main() {
   });
 
   test(
-    'GetTvShowRecommendations use case '
-    'should orchestrating get tv show recommendations action correctly',
+    'GetTvShowRecommendationsCase - should orchestrating get tv show recommendations action correctly',
     () async {
       when(mockTvShowsRepo.getTvShowRecommendations(123))
           .thenAnswer((_) async => [dummyTvShow]);

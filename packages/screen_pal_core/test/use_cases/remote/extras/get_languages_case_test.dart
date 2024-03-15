@@ -15,7 +15,7 @@ void main() {
   });
 
   test(
-    'GetLanguages use case should orchestrating get languages action correctly',
+    'GetLanguagesCase - should orchestrating get languages action correctly',
     () async {
       when(mockExtrasRepo.getLanguages())
           .thenAnswer((_) async => dummyLanguages);

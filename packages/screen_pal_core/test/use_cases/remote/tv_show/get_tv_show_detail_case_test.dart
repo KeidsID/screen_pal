@@ -15,8 +15,7 @@ void main() {
   });
 
   test(
-    'GetTvShowDetail use case '
-    'should orchestrating get tv show detail action correctly',
+    'GetTvShowDetailCase - should orchestrating get tv show detail action correctly',
     () async {
       provideDummy(dummyTvShowDetail); // mockito helper
 

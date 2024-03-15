@@ -14,5 +14,5 @@ class MovieCollection extends Equatable {
   });
 
   @override
-  List<Object?> get props => [id, name, posterImageUrl, backdropImageUrl];
+  List<Object?> get props => [id];
 }

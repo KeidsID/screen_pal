@@ -15,7 +15,7 @@ void main() {
   });
 
   test(
-    'SetThemeMode use case should orchestrating set theme mode action correctly',
+    'SetThemeModeCase - should orchestrating set theme mode action correctly',
     () async {
       when(mockThemeModeCache.getThemeMode())
           .thenAnswer((_) async => ThemeMode.system);

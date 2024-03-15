@@ -15,8 +15,7 @@ void main() {
   });
 
   test(
-    'GetAiringTodayTvShows use case '
-    'should orchestrating get airing today tv shows action correctly',
+    'GetAiringTodayTvShowsCase - should orchestrating get airing today tv shows action correctly',
     () async {
       when(mockTvShowsRepo.getAiringTodayTvShows())
           .thenAnswer((_) async => [dummyTvShow]);

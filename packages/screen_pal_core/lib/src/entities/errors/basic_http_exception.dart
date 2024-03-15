@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'basic_exception.dart';
 
 /// {@template screen_pal_core.entities.errors.BasicHttpException}
@@ -6,25 +8,30 @@ import 'basic_exception.dart';
 class BasicHttpException extends BasicException {
   /// {@macro screen_pal_core.entities.errors.BasicHttpException}
   BasicHttpException({
-    this.statusCode,
+    int? statusCode,
     super.message,
-  }) : super(
+  })  : statusCode =
+            _httpErrorResponses.containsKey(statusCode) ? statusCode : null,
+        super(
           name: statusCode == null
               ? 'Internal App Error'
-              : {
-                    ..._clientErrorResponses,
-                    ..._serverErrorResponses,
-                  }[statusCode] ??
-                  'Internal App Error',
+              : _httpErrorResponses[statusCode] ?? 'Internal App Error',
         );
 
   /// HTTP response status code.
+  /// 
+  /// Will be `null` if not an HTTP error.
   final int? statusCode;
+
+  static Map<int, String> get _httpErrorResponses =>
+      {...clientErrorResponses, ...serverErrorResponses};
 
   /// HTTP
   /// [Client Error Responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses)
   /// names map.
-  static const _clientErrorResponses = {
+  @protected
+  @visibleForTesting
+  static const clientErrorResponses = {
     400: 'Bad Request',
     401: 'Unauthorized',
     403: 'Forbidden',
@@ -57,7 +64,9 @@ class BasicHttpException extends BasicException {
   /// HTTP
   /// [Server Error Responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#server_error_responses)
   /// names map.
-  static const _serverErrorResponses = {
+  @protected
+  @visibleForTesting
+  static const serverErrorResponses = {
     500: 'Internal Server Error',
     501: 'Not Implemented',
     502: 'Bad Gateway',

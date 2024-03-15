@@ -1,7 +1,7 @@
 import 'package:screen_pal_core/src/entities.dart';
 
-final class TvShow extends Product {
-  const TvShow({
+final class Movie extends Product {
+  const Movie({
     required super.id,
     required super.title,
     required super.overview,
@@ -14,22 +14,8 @@ final class TvShow extends Product {
     required super.popularity,
     required super.voteAverage,
     required super.voteCount,
+    required this.isAdult,
   });
 
-  @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      overview,
-      backdropImageUrl,
-      posterImageUrl,
-      language,
-      genreIds,
-      originalTitle,
-      popularity,
-      voteAverage,
-      voteCount,
-    ];
-  }
+  final bool isAdult;
 }

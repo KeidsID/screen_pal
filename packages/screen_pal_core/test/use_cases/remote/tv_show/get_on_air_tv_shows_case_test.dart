@@ -15,8 +15,7 @@ void main() {
   });
 
   test(
-    'GetOnAirTvShows use case '
-    'should orchestrating get on air tv shows action correctly',
+    'GetOnAirTvShowsCase - should orchestrating get on air tv shows action correctly',
     () async {
       when(mockTvShowsRepo.getOnAirTvShows())
           .thenAnswer((_) async => [dummyTvShow]);

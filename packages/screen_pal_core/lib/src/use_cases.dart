@@ -1,4 +1,4 @@
-/// Every bussiness logic for the app.
+/// Core logic on the app.
 library core_use_cases;
 
 export 'use_cases/cache/get_theme_mode_case.dart';

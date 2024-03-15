@@ -35,4 +35,7 @@ abstract base class Product extends Equatable {
   final double popularity;
   final double voteAverage;
   final int voteCount;
+
+  @override
+  List<Object?> get props => [id];
 }

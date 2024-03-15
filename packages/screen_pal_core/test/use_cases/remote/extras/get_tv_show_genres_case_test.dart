@@ -15,7 +15,7 @@ void main() {
   });
 
   test(
-    'GetTvShowGenres use case should orchestrating get genres action correctly',
+    'GetTvShowGenresCase - should orchestrating get genres action correctly',
     () async {
       when(mockExtrasRepo.getTvShowGenres())
           .thenAnswer((_) async => dummyGenres);

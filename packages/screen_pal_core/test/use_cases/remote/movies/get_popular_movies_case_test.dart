@@ -13,7 +13,7 @@ void main() {
   });
 
   test(
-    'GetPopularMovie use case should orchestrating get now playing movies action correctly',
+    'GetPopularMovieCase - should orchestrating get now playing movies action correctly',
     () async {
       when(mockMoviesRepo.getPopularMovies()).thenAnswer((_) async => []);
 
