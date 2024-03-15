@@ -7,7 +7,7 @@ export 'entities/extras/extras.dart';
 export 'entities/extras/genre.dart';
 export 'entities/extras/spoken_language.dart';
 export 'entities/person/credits/credit_person.dart'
-   show CreditPerson, Cast, Crew;
+    show CreditPerson, Cast, Crew;
 export 'entities/person/credits/credits.dart'
     show CreditsBase, Credits, TvCredits;
 export 'entities/person/credits/tv_credit_person.dart'

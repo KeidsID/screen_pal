@@ -19,7 +19,7 @@ class BasicHttpException extends BasicException {
         );
 
   /// HTTP response status code.
-  /// 
+  ///
   /// Will be `null` if not an HTTP error.
   final int? statusCode;
 

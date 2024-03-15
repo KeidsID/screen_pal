@@ -5,7 +5,7 @@ final class SpokenLanguage extends Equatable {
   final String iso6391;
 
   /// Name of the language in native language.
-  /// 
+  ///
   /// For example: `Bahasa Indonesia`
   final String name;
 
