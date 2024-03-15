@@ -6,6 +6,7 @@ import 'package:screen_pal/interfaces/providers/remote/credits/products_credits.
 import 'package:screen_pal/interfaces/providers/remote/tv_shows/tv_show_detail_provider.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
+
 class TvShowCreditsView extends ConsumerWidget {
   const TvShowCreditsView(this.tvShowId, {super.key});
 
