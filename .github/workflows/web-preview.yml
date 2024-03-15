@@ -1,0 +1,73 @@
+name: Web Preview
+
+on:
+  pull_request:
+    branches: [main]
+    types: [review_requested]
+    paths-ignore:
+      - "**/*.md"
+      - policies/*
+      - repo-assets/*
+      - configs/*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git Checkout
+        uses: actions/checkout@v3
+
+      - name: 🐦 Setup Flutter SDK v3.10.x
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.10.x
+          channel: stable
+
+      - name: 📦 Get dependencies
+        run: flutter pub get
+
+      - name: ⚙️ Setup environment
+        run: |
+          echo "${{secrets.DEV_ENV_FILE}}" > .env
+          dart run build_runner build -d
+          echo '${{secrets.NETLIFY_404}}' > 404.html
+
+      - name: 🏗️ Build web
+        run: flutter build web --profile --web-renderer canvaskit
+
+      - name: 📝 Upload build-web-preview
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-web-preview
+          path: ./build/web
+
+  deploy-preview:
+    needs: build
+    permissions:
+      pull-requests: read
+      contents: write
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📚 Git Checkout "preview" branch
+        uses: actions/checkout@v3
+        with:
+          ref: preview
+
+      - name: 📝 Download build-web-preview
+        uses: actions/download-artifact@v2
+        with:
+          name: build-web-preview
+          path: ./
+
+      - name: 📚 Push build to preview branch
+        env:
+          PR_REF: https://github.com/KeidsID/screen_pal/pull/${{github.event.pull_request.number}}
+        run: |
+          git config --global user.email "keidscode@gmail.com"
+          git config --global user.name "KeidsID"
+          git add .
+          git commit -m "web-preview build from PR ${{env.PR_REF}}"
+          git push origin preview
