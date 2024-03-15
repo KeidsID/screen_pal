@@ -10,7 +10,7 @@ on:
       - configs/*
 
   pull_request:
-    types: [review_requested, edited]
+    types: [review_requested]
     paths-ignore:
       - "**/*.md"
       - policies/*
@@ -20,6 +20,7 @@ on:
 jobs:
   test:
     strategy:
+      fail-fast: false
       matrix:
         dir:
           - packages/screen_pal_core
@@ -56,7 +57,14 @@ jobs:
         run: dart format lib --line-length 80 --set-exit-if-changed
 
       - name: 🕵️ Analyze code
-        run: flutter analyze lib test
+        run: |
+          flutter analyze lib test
+          if [ $? -ne 0 ]; then
+            echo "Bad dependencies. Retrying..."
+            flutter clean
+            flutter pub get
+            flutter analyze lib test
+          fi
 
       - name: 🧪 Run tests
         id: test
