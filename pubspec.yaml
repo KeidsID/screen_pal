@@ -10,8 +10,8 @@ publish_to: "none"
 version: 1.1.2+1
 
 environment:
-  sdk: ^3.0.0
-  flutter: ^3.10.0
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
 
 dependencies:
   # sdk
@@ -19,6 +19,10 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
+
+  # internal packages
+  screen_pal_core:
+    path: "packages/screen_pal_core"
 
   # dart
   dio: ^5.3.2
@@ -29,8 +33,6 @@ dependencies:
   logger: ^2.0.2
 
   # flutter
-  screen_pal_core: 
-    path: "packages/screen_pal_core"
   fl_utilities: ^2.0.0
   flutter_markdown: ^0.6.18+2
   flutter_riverpod: ^2.3.6
@@ -71,7 +73,7 @@ dev_dependencies:
   icons_launcher: ^2.1.3
 
   # lints
-  custom_lint: ^0.5.6
+  custom_lint: ^0.5.11
   flutter_lints: ^3.0.1
   riverpod_lint: ^2.1.1
 
