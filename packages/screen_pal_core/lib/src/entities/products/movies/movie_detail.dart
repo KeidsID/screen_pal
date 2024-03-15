@@ -34,32 +34,4 @@ final class MovieDetail extends ProductDetail {
   final int budget;
   final int revenue;
   final bool video;
-
-  @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      originalTitle,
-      backdropImageUrl,
-      posterImageUrl,
-      releaseDate,
-      overview,
-      language,
-      languages,
-      genres,
-      adult,
-      status,
-      tagline,
-      homepage,
-      popularity,
-      voteAverage,
-      voteCount,
-      runtime,
-      movieCollection,
-      budget,
-      revenue,
-      video,
-    ];
-  }
 }

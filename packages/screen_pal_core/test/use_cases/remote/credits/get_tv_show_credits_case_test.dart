@@ -15,17 +15,16 @@ void main() {
   });
 
   test(
-    'GetTvShowCredits use case '
-    'should orchestrating get credits action correctly',
+    'GetTvShowCreditsCase - should orchestrating get credits action correctly',
     () async {
       provideDummy(dummyCredits); // mockito helper
 
       when(mockTvShowsRepo.getTvShowCredits(123))
           .thenAnswer((_) async => dummyCredits);
 
-      final genres = await subject.execute(123);
+      final credits = await subject.execute(123);
 
-      expect(genres, dummyCredits);
+      expect(credits, dummyCredits);
       verify(mockTvShowsRepo.getTvShowCredits(123)).called(1);
     },
   );

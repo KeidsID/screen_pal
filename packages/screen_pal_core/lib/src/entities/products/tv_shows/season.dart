@@ -22,16 +22,5 @@ final class Season extends Equatable {
   final double voteAverage;
 
   @override
-  List<Object?> get props {
-    return [
-      id,
-      seasonNumber,
-      name,
-      airDate,
-      posterImageUrl,
-      overview,
-      episodeCount,
-      voteAverage,
-    ];
-  }
+  List<Object?> get props => [id];
 }

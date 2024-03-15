@@ -15,17 +15,16 @@ void main() {
   });
 
   test(
-    'GetMovieDetail use case '
-    'should orchestrating get movie detail action correctly',
+    'GetMovieDetailCase - should orchestrating get movie detail action correctly',
     () async {
       provideDummy(dummyMovieDetail); // mockito helper
 
       when(mockMoviesRepo.getMovieDetail(123))
           .thenAnswer((_) async => dummyMovieDetail);
 
-      final movie = await subject.execute(123);
+      final movieDetail = await subject.execute(123);
 
-      expect(movie, dummyMovieDetail);
+      expect(movieDetail, dummyMovieDetail);
       verify(mockMoviesRepo.getMovieDetail(123)).called(1);
     },
   );

@@ -3,6 +3,26 @@ import 'package:screen_pal_core/src/entities.dart';
 
 /// Base class for [MovieDetail] and [TvShowDetail].
 abstract base class ProductDetail extends Equatable {
+  const ProductDetail({
+    required this.id,
+    required this.title,
+    required this.originalTitle,
+    this.backdropImageUrl,
+    this.posterImageUrl,
+    this.releaseDate,
+    required this.overview,
+    required this.language,
+    required this.languages,
+    required this.genres,
+    required this.adult,
+    required this.status,
+    required this.tagline,
+    this.homepage,
+    required this.popularity,
+    required this.voteAverage,
+    required this.voteCount,
+  });
+
   final int id;
   final String title;
   final String originalTitle;
@@ -25,23 +45,6 @@ abstract base class ProductDetail extends Equatable {
   final double voteAverage;
   final int voteCount;
 
-  const ProductDetail({
-    required this.id,
-    required this.title,
-    required this.originalTitle,
-    this.backdropImageUrl,
-    this.posterImageUrl,
-    this.releaseDate,
-    required this.overview,
-    required this.language,
-    required this.languages,
-    required this.genres,
-    required this.adult,
-    required this.status,
-    required this.tagline,
-    this.homepage,
-    required this.popularity,
-    required this.voteAverage,
-    required this.voteCount,
-  });
+  @override
+  List<Object?> get props => [id];
 }

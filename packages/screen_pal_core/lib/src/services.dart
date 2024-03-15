@@ -1,3 +1,4 @@
+/// Contain abstract classes to implement and be used by use_cases
 library core_services;
 
 export 'services/cache/theme_mode_cache.dart';

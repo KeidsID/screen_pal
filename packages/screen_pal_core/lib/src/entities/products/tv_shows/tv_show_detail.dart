@@ -40,34 +40,4 @@ final class TvShowDetail extends ProductDetail {
 
   /// Number of seasons.
   final int seasonCount;
-
-  @override
-  List<Object?> get props {
-    return [
-      id,
-      title,
-      originalTitle,
-      backdropImageUrl,
-      posterImageUrl,
-      releaseDate,
-      overview,
-      language,
-      languages,
-      genres,
-      adult,
-      status,
-      tagline,
-      homepage,
-      popularity,
-      voteAverage,
-      voteCount,
-      type,
-      lastAirDate,
-      lastEpisodeToAir,
-      nextEpisodeToAir,
-      seasons,
-      episodeCount,
-      seasonCount,
-    ];
-  }
 }

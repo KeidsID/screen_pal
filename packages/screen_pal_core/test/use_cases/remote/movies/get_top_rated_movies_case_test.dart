@@ -14,7 +14,7 @@ void main() {
   });
 
   test(
-    'GetTopRatedMovie use case should orchestrating get now playing movies action correctly',
+    'GetTopRatedMovieCase - should orchestrating get now playing movies action correctly',
     () async {
       when(mockMoviesRepo.getTopRatedMovies()).thenAnswer((_) async => []);
 

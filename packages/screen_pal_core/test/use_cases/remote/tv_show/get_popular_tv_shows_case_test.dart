@@ -15,8 +15,7 @@ void main() {
   });
 
   test(
-    'GetPopularTvShows use case '
-    'should orchestrating get popular tv shows action correctly',
+    'GetPopularTvShowsCase - should orchestrating get popular tv shows action correctly',
     () async {
       when(mockTvShowsRepo.getPopularTvShows())
           .thenAnswer((_) async => [dummyTvShow]);

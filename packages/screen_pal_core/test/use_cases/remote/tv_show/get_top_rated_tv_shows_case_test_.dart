@@ -15,8 +15,7 @@ void main() {
   });
 
   test(
-    'GetTopRatedTvShows use case '
-    'should orchestrating get top rated tv shows action correctly',
+    'GetTopRatedTvShowsCase - should orchestrating get top rated tv shows action correctly',
     () async {
       when(mockTvShowsRepo.getTopRatedTvShows())
           .thenAnswer((_) async => [dummyTvShow]);

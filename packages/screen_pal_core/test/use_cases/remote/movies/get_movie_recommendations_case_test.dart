@@ -15,8 +15,7 @@ void main() {
   });
 
   test(
-    'GetMovieRecommendations use case '
-    'should orchestrating get movie recommendations action correctly',
+    'GetMovieRecommendationsCase - should orchestrating get movie recommendations action correctly',
     () async {
       when(mockMoviesRepo.getRecommendations(123))
           .thenAnswer((_) async => [dummyMovie]);

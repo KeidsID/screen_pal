@@ -2,18 +2,15 @@ import 'package:equatable/equatable.dart';
 import 'package:screen_pal_core/src/entities.dart';
 
 abstract base class CreditsBase extends Equatable {
-  const CreditsBase();
+  const CreditsBase({required this.productId});
 
   /// [Movie]/[TvShow] id.
-  int get productId;
+  final int productId;
   List<CreditPerson> get casts;
   List<CreditPerson> get crews;
 }
 
 final class Credits extends CreditsBase {
-  @override
-  final int productId;
-
   @override
   final List<Cast> casts;
 
@@ -21,11 +18,29 @@ final class Credits extends CreditsBase {
   final List<Crew> crews;
 
   const Credits({
-    required this.productId,
+    required super.productId,
     required this.casts,
     required this.crews,
   });
 
   @override
   List<Object> get props => [productId];
+}
+
+/// Include every episode of a TV show in the credits.
+final class TvCredits extends CreditsBase {
+  const TvCredits({
+    required super.productId,
+    required this.casts,
+    required this.crews,
+  });
+
+  @override
+  final List<TvCast> casts;
+
+  @override
+  final List<TvCrew> crews;
+
+  @override
+  List<Object?> get props => [productId];
 }

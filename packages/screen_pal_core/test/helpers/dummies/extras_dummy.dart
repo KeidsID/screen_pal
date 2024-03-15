@@ -15,7 +15,7 @@ const dummyLanguages = [
   ),
 ];
 
-const extrasDummy = Extras(
+const dummyExtras = Extras(
   genres: dummyGenres,
   languages: dummyLanguages,
 );
