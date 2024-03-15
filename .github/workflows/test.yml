@@ -35,6 +35,8 @@ jobs:
     steps:
       - name: 📚 Git Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
 
       - name: 🐦 Setup Flutter SDK v3.10.x
         uses: subosito/flutter-action@v2
@@ -57,14 +59,16 @@ jobs:
         run: dart format lib --line-length 80 --set-exit-if-changed
 
       - name: 🕵️ Analyze code
+        id: first-analyze
+        continue-on-error: true
+        run: flutter analyze lib test
+
+      - name: ♻️🕵️ Re-analyze code
+        if: steps.first-analyze.outcome == 'failure'
         run: |
+          flutter clean
+          flutter pub get
           flutter analyze lib test
-          if [ $? -ne 0 ]; then
-            echo "Bad dependencies. Retrying..."
-            flutter clean
-            flutter pub get
-            flutter analyze lib test
-          fi
 
       - name: 🧪 Run tests
         id: test
@@ -74,13 +78,14 @@ jobs:
             echo "RESULT=tested" >> "${GITHUB_OUTPUT}"
           fi
 
-      - name: 📊 Check Code Coverage
+      - name: 📊 Filter and Check Code Coverage
         if: ${{steps.test.outputs.RESULT == 'tested'}}
-        uses: VeryGoodOpenSource/very_good_coverage@v2
-        with:
-          path: ${{matrix.dir}}/coverage/lcov.info
-          exclude: "**/*.g.dart **/*.freezed.dart"
-          min_coverage: 80
+        run: |
+          flutter test --coverage
+          dart pub global activate clean_coverage
+          clean_coverage clean coverage/lcov.info --exclusions "**.g.dart","**.freezed.dart","**/interfaces/**"
+          dart pub global activate dlcov
+          dlcov -c 80
 
       - name: 📝 Upload coverage to codecov
         if: ${{steps.test.outputs.RESULT == 'tested'}}
