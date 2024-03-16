@@ -4,7 +4,6 @@ library widgets;
 export 'widgets/common/common_detail_view_layout.dart';
 export 'widgets/common/common_network_image.dart';
 export 'widgets/common/sized_circular_progress_indicator.dart';
-export 'widgets/common/sized_scrollable_area.dart';
 export 'widgets/errors/sized_dio_exception_widget.dart';
 export 'widgets/errors/sized_exception_widget.dart';
 export 'widgets/others/credits/credit_person_card.dart';
