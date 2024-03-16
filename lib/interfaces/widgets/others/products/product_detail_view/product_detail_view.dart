@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/providers/remote/credits/products_credits.dart';

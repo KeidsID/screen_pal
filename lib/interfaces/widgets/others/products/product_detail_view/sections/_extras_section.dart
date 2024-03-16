@@ -36,9 +36,8 @@ class _ExtrasSection extends ConsumerWidget {
             ? 'Undefined'
             : product.genres.map((e) => e.name).join(', ')
       ].join(' • '),
-      style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-    );
+    ).applyOpacity(opacity: 0.5);
   }
 }

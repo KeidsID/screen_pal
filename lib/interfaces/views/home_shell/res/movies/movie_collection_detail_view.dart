@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/providers/remote/movies/movie_collection_detail_provider.dart';
-import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
@@ -93,7 +93,7 @@ class _CollectionGenresText extends ConsumerWidget {
 
     return Text(
       genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
-      style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
+      style: context.textTheme.bodyMedium?.applyOpacity(0.5),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );

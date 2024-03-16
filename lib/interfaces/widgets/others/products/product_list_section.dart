@@ -2,9 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
@@ -89,7 +89,7 @@ class ProductListSection extends StatelessWidget {
             return Center(
               child: Text(
                 alt ?? 'No data',
-                style: M3TextStyles.titleMedium.toStyle(context),
+                style: context.textTheme.titleMedium,
               ),
             );
           }
@@ -107,7 +107,7 @@ class ProductListSection extends StatelessWidget {
         Padding(
           padding: padding,
           child: Builder(builder: (context) {
-            return Text(title, style: kSectionTitleStyle.toStyle(context));
+            return Text(title, style: kSectionTitleStyle(context));
           }),
         ),
         SizedBox(height: 240.0, child: child),

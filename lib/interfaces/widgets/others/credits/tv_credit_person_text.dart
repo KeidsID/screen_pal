@@ -2,8 +2,8 @@ import 'dart:math' as math;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:fl_utilities/fl_utilities.dart';
 
-import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
 class TvCreditPersonText extends StatelessWidget {
@@ -20,11 +20,11 @@ class TvCreditPersonText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const enumStyle = M3TextStyles.bodyMedium;
+    final style = context.textTheme.bodyMedium;
 
     return RichText(
       text: TextSpan(
-        style: enumStyle.toStyle(context),
+        style: style,
         children: List.generate(
           _computeActualChildCount(roles.length),
           (index) {
@@ -45,7 +45,7 @@ class TvCreditPersonText extends StatelessWidget {
                       other: '$episodeCount Episodes',
                       one: '$episodeCount Episode',
                     )})',
-                    style: enumStyle.toStyle(context, opacity: 0.6),
+                    style: style?.applyOpacity(0.6),
                   ),
                 ],
               );

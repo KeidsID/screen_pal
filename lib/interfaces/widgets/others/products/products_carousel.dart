@@ -2,12 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/routes.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
-import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
 // Tests Utils:
@@ -183,10 +183,9 @@ class _ExtrasText extends ConsumerWidget {
         genreNames.isEmpty ? 'Undefined' : genreNames.join(', '),
       ].join(' • '),
       key: _productExtrasKey,
-      style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
-    );
+    ).applyOpacity(opacity: 0.5);
   }
 }
 
@@ -223,7 +222,7 @@ class _ThinDeviceLayout extends StatelessWidget {
                 Text(
                   product.title,
                   key: _productTitleKey,
-                  style: M3TextStyles.headlineLarge.toStyle(context),
+                  style: context.textTheme.headlineLarge,
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -282,7 +281,7 @@ class _WideDeviceLayout extends StatelessWidget {
                     Text(
                       product.title,
                       key: _productTitleKey,
-                      style: M3TextStyles.headlineLarge.toStyle(context),
+                      style: context.textTheme.headlineLarge,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

@@ -1,0 +1,10 @@
+coverage:
+  status:
+    project:
+      default:
+        threshold: 80
+
+ignore:
+  - "*.g.dart"
+  - "*.freezed.dart"
+  - "**/interfaces/**"

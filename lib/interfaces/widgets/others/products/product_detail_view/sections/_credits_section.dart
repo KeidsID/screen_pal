@@ -7,6 +7,8 @@ class _CreditsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+
     late final AutoDisposeFutureProvider<Credits> creditsProvider;
 
     if (product is MovieDetail) {
@@ -20,10 +22,7 @@ class _CreditsSection extends StatelessWidget {
       children: [
         Padding(
           padding: kHorizPadding,
-          child: Text(
-            'Casts',
-            style: M3TextStyles.headlineMedium.toStyle(context),
-          ),
+          child: Text('Casts', style: textTheme.headlineMedium),
         ),
         Consumer(builder: (context, ref, child) {
           final creditsAsync = ref.watch(creditsProvider);
@@ -53,7 +52,7 @@ class _CreditsSection extends StatelessWidget {
                   child: Center(
                     child: Text(
                       'No cast data for now',
-                      style: M3TextStyles.titleMedium.toStyle(context),
+                      style: textTheme.titleMedium,
                     ),
                   ),
                 );

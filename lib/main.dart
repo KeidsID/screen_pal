@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:screen_pal/common/asset_paths.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
+import 'common/asset_paths.dart';
 import 'common/constants.dart';
 import 'common/envs/env.dart';
 import 'infrastructures/container/container.dart' as container;
 import 'interfaces/providers/cache/app_theme_mode_provider.dart';
 import 'interfaces/providers/remote/extras/extras_providers.dart';
 import 'interfaces/router/router.dart';
-import 'interfaces/router/url_strategy/url_strategy.dart';
 import 'interfaces/themes/app_themes.dart';
 
 void main() async {
@@ -20,9 +20,10 @@ void main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   LicenseRegistry.addLicense(() async* {
-    final license = await rootBundle.loadString(AssetPaths.rubikFontLicense);
+    final rubikLicense =
+        await rootBundle.loadString(AssetPaths.rubikFontLicense);
 
-    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+    yield LicenseEntryWithLineBreaks(['google_fonts_rubik'], rubikLicense);
   });
 
   await container.init();
@@ -60,7 +61,7 @@ class _MainAppState extends ConsumerState<MainApp> {
       themeAnimationCurve: Curves.easeOut,
       themeAnimationDuration: const Duration(milliseconds: 500),
       themeMode: ref.watch(appThemeModeProvider),
-      scrollBehavior: ScrollConfiguration.of(context).copyWith(
+      scrollBehavior: context.scrollBehavior.copyWith(
         dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse},
       ),
     );

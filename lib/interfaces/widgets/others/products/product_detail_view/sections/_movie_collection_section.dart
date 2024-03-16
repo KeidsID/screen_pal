@@ -74,7 +74,7 @@ class _MovieCollectionCard extends StatelessWidget {
                   children: [
                     Text(
                       'Part of ${movieCollection.name}',
-                      style: M3TextStyles.headlineSmall.toStyle(context),
+                      style: context.textTheme.headlineSmall,
                     )
                   ],
                 ),
