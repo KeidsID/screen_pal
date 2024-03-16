@@ -2,11 +2,10 @@
 
 import 'dart:io';
 
+import 'package:fl_utilities/fl_utilities.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-
-import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 
 const kAppName = 'Screen Pal';
 const kAppLegalese = 'MIT License\n\nCopyright © 2023 KeidsID (Kemal Idris)';
@@ -26,7 +25,8 @@ bool get kIsMobile {
 
 const kHorizPadding = EdgeInsets.symmetric(horizontal: 16.0);
 
-const kSectionTitleStyle = M3TextStyles.headlineSmall;
+TextStyle? kSectionTitleStyle(BuildContext context) =>
+    context.textTheme.headlineSmall;
 
 double kAspectRatio({bool isPotrait = true}) => (isPotrait) ? 2 / 3 : 3 / 2;
 

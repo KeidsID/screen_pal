@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
-import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
@@ -42,9 +42,8 @@ class CreditPersonCard extends StatelessWidget {
                     children: [
                       Text(
                         creditPerson.name,
-                        style: M3TextStyles.titleMedium.toStyle(
-                          context,
-                          isBold: true,
+                        style: context.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(creditPerson.mainRole),

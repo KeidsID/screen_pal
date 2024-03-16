@@ -24,7 +24,7 @@ class _TvShowSeasonSection extends StatelessWidget {
         children: [
           Text(
             'Last Season',
-            style: kSectionTitleStyle.toStyle(context),
+            style: kSectionTitleStyle(context),
           ),
           Align(
             alignment: Alignment.center,
@@ -133,30 +133,30 @@ class _LastSeasonCard extends StatelessWidget {
 
     return Builder(
       builder: (context) {
+        final textTheme = context.textTheme;
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               season.name,
-              style: M3TextStyles.titleLarge.toStyle(context),
+              style: textTheme.titleLarge,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
-            Text(
-              '# $seasonOrder Season',
-              style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
-            ),
+            Text('# $seasonOrder Season').applyOpacity(opacity: 0.5),
             const Divider(),
+
+            //
             Expanded(
               child: SingleChildScrollView(
                 child: Text(overview),
               ),
             ),
             const Divider(),
-            Text(
-              'Last Episode',
-              style: M3TextStyles.titleMedium.toStyle(context),
-            ),
+
+            //
+            Text('Last Episode', style: textTheme.titleMedium),
             const SizedBox(height: 8.0),
             Wrap(
               spacing: 8.0,
@@ -169,13 +169,7 @@ class _LastSeasonCard extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    Text(
-                      '# $episodeOrder Episode',
-                      style: M3TextStyles.bodyMedium.toStyle(
-                        context,
-                        opacity: 0.5,
-                      ),
-                    ),
+                    Text('# $episodeOrder Episode').applyOpacity(opacity: 0.5),
                   ],
                 ),
                 (episodeType != 'finale')
@@ -186,7 +180,7 @@ class _LastSeasonCard extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             'Season Finale',
-                            style: M3TextStyles.labelMedium.toStyle(context),
+                            style: textTheme.labelMedium,
                           ),
                         ),
                       ),

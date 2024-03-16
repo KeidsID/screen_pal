@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/interfaces/providers/remote/extras/extras_providers.dart';
 import 'package:screen_pal/interfaces/router/routes.dart';
-import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal/interfaces/widgets/common/common_network_image.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
@@ -115,7 +115,7 @@ class _DetailOnHover extends StatelessWidget {
           Expanded(
             child: Text(
               product.title,
-              style: M3TextStyles.titleMedium.toStyle(context),
+              style: context.textTheme.titleMedium,
               textAlign: TextAlign.center,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,

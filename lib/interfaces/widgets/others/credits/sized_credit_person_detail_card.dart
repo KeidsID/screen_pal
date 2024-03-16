@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
@@ -80,7 +80,7 @@ class SizedCreditPersonDetailCard extends SizedBox {
                     children: [
                       Text(
                         person.name,
-                        style: M3TextStyles.titleLarge.toStyle(context),
+                        style: context.textTheme.titleLarge,
                       ),
                       (person is TvCreditPerson)
                           ? TvCreditPersonText(person)

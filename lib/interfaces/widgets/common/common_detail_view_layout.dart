@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 
 /// {@template interfaces.widgets.common.common_detail_view_layout}
@@ -247,6 +247,8 @@ class _DetailSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = context.textTheme;
+
     final tagline = delegate.tagline ?? '';
 
     return Padding(
@@ -254,14 +256,11 @@ class _DetailSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            delegate.title,
-            style: M3TextStyles.headlineLarge.toStyle(context),
-          ),
+          Text(delegate.title, style: textTheme.headlineLarge),
 
           //
           DefaultTextStyle.merge(
-            style: M3TextStyles.bodyMedium.toStyle(context, opacity: 0.5),
+            style: textTheme.bodyMedium?.applyOpacity(0.5),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -282,12 +281,7 @@ class _DetailSection extends StatelessWidget {
           //
           const Divider(),
           ...delegate.extras.map((text) {
-            return Builder(builder: (context) {
-              return Text(
-                text,
-                style: M3TextStyles.titleSmall.toStyle(context, opacity: 0.75),
-              );
-            });
+            return Text(text, style: textTheme.titleSmall?.applyOpacity(0.75));
           }),
         ],
       ),

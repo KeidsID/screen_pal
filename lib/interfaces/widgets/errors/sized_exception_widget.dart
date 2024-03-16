@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/interfaces/utils/m3_text_styles.dart';
 import 'package:screen_pal/interfaces/widgets/errors/sized_dio_exception_widget.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
@@ -81,8 +81,10 @@ final class SizedExceptionWidget extends SizedExceptionWidgetUIBase {
     String? message,
   }) {
     return Builder(builder: (context) {
+      final textTheme = context.textTheme;
+
       return DefaultTextStyle.merge(
-        style: M3TextStyles.bodyMedium.toStyle(context),
+        style: textTheme.bodyMedium,
         textAlign: TextAlign.center,
         child: SizedBox(
           width: width,
@@ -94,13 +96,10 @@ final class SizedExceptionWidget extends SizedExceptionWidgetUIBase {
               children: [
                 statusCode == null
                     ? const SizedBox.shrink()
-                    : Text(
-                        '$statusCode',
-                        style: M3TextStyles.displayMedium.toStyle(context),
-                      ),
+                    : Text('$statusCode', style: textTheme.displayMedium),
                 Text(
                   title ?? 'Internal App Error',
-                  style: M3TextStyles.headlineSmall.toStyle(context),
+                  style: textTheme.headlineSmall,
                 ),
                 const Divider(),
                 Text(message ?? 'Sorry for the inconvenience'),

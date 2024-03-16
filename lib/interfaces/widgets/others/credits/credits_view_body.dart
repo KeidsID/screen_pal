@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:screen_pal/common/constants.dart';
-import 'package:screen_pal/interfaces/utils.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
 import 'package:screen_pal_core/screen_pal_core.dart';
 
@@ -84,7 +83,7 @@ class _ThinLayoutView extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: 8.0),
                           child: Text(
                             text,
-                            style: kSectionTitleStyle.toStyle(context),
+                            style: kSectionTitleStyle(context),
                           ),
                         );
                       }
@@ -95,7 +94,7 @@ class _ThinLayoutView extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
                             child: Text(
                               'Crews',
-                              style: kSectionTitleStyle.toStyle(context),
+                              style: kSectionTitleStyle(context),
                             ),
                           );
                         }
@@ -176,7 +175,7 @@ class _WideLayoutViewState extends State<_WideLayoutView> {
                         [
                           Text(
                             'Casts',
-                            style: kSectionTitleStyle.toStyle(context),
+                            style: kSectionTitleStyle(context),
                           ),
                           const SizedBox(height: 8.0),
                           Expanded(
@@ -199,7 +198,7 @@ class _WideLayoutViewState extends State<_WideLayoutView> {
                         [
                           Text(
                             'Crews',
-                            style: kSectionTitleStyle.toStyle(context),
+                            style: kSectionTitleStyle(context),
                           ),
                           const SizedBox(height: 8.0),
                           Expanded(
