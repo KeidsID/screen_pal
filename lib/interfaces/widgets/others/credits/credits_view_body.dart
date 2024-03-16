@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fl_utilities/fl_utilities.dart';
 
 import 'package:screen_pal/common/constants.dart';
 import 'package:screen_pal/interfaces/widgets.dart';
@@ -42,7 +43,7 @@ class _ThinLayoutView extends StatelessWidget {
 
   bool get hasCrews => credits.crews.isNotEmpty;
 
-  int _computeItemLen(int itemCount) {
+  int _computeItemLength(int itemCount) {
     return itemCount +
         (!hasCasts
             ? 1
@@ -55,182 +56,143 @@ class _ThinLayoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     final persons = [...credits.casts, ...credits.crews];
 
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        // scrollable area
-        const SizedScrollableArea(primary: true),
+    return CustomListView.builder(
+      padding: const EdgeInsets.all(16.0),
+      itemCount: _computeItemLength(persons.length),
+      itemBuilder: (context, index) {
+        if (index == 0) {
+          final String text = switch (hasCasts) {
+            true => 'Casts',
+            false => 'Crews',
+          };
 
-        // contents
-        persons.isEmpty
-            ? const SizedExceptionWidget(BasicException())
-            : Center(
-                child: SizedBox(
-                  width: _kCardW,
-                  height: double.infinity,
-                  child: ListView.builder(
-                    primary: true,
-                    padding: const EdgeInsets.all(16.0),
-                    itemCount: _computeItemLen(persons.length),
-                    itemBuilder: (context, index) {
-                      if (index == 0) {
-                        final String text = switch (hasCasts) {
-                          true => 'Casts',
-                          false => 'Crews',
-                        };
+          return CustomListViewItemDelegate(
+            crossAxisLength: _kCardW,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: Text(
+                text,
+                style: kSectionTitleStyle(context),
+              ),
+            ),
+          );
+        }
 
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Text(
-                            text,
-                            style: kSectionTitleStyle(context),
-                          ),
-                        );
-                      }
-
-                      if (index > castsLen && hasCasts && hasCrews) {
-                        if (index == castsLen + 1) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8.0),
-                            child: Text(
-                              'Crews',
-                              style: kSectionTitleStyle(context),
-                            ),
-                          );
-                        }
-                        final crew = persons[index - 2];
-
-                        return _itemCard(crew);
-                      }
-
-                      // can be crew if casts is empty
-                      final person = persons[index - 1];
-
-                      return _itemCard(person);
-                    },
-                  ),
+        if (index > castsLen && hasCasts && hasCrews) {
+          if (index == castsLen + 1) {
+            return CustomListViewItemDelegate(
+              crossAxisLength: _kCardW,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  'Crews',
+                  style: kSectionTitleStyle(context),
                 ),
               ),
-      ],
+            );
+          }
+          final crew = persons[index - 2];
+
+          return CustomListViewItemDelegate(
+            mainAxisLength: _kCardH,
+            crossAxisLength: _kCardW,
+            child: _itemCard(crew),
+          );
+        }
+
+        // can be crew if casts is empty
+        final person = persons[index - 1];
+
+        return CustomListViewItemDelegate(
+          mainAxisLength: _kCardH,
+          crossAxisLength: _kCardW,
+          child: _itemCard(person),
+        );
+      },
     );
   }
 }
 
-final class _WideLayoutView extends StatefulWidget {
+class _WideLayoutView extends StatelessWidget {
   const _WideLayoutView(this.credits);
 
   final CreditsBase credits;
 
-  @override
-  State<_WideLayoutView> createState() => _WideLayoutViewState();
-}
-
-class _WideLayoutViewState extends State<_WideLayoutView> {
-  late final ScrollController _crewsScrollCtrler;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _crewsScrollCtrler = ScrollController();
-  }
-
-  @override
-  void dispose() {
-    _crewsScrollCtrler.dispose();
-
-    super.dispose();
-  }
-
-  List<CreditPerson> get casts => widget.credits.casts;
-  List<CreditPerson> get crews => widget.credits.crews;
+  List<CreditPerson> get casts => credits.casts;
+  List<CreditPerson> get crews => credits.crews;
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        //scrollable area
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedScrollableArea(primary: true),
-            SizedScrollableArea(controller: _crewsScrollCtrler),
-          ].map((e) => Expanded(child: e)).toList(),
-        ),
-
-        // contents
-        casts.isEmpty && crews.isEmpty
-            ? const SizedExceptionWidget(BasicException())
-            : Center(
-                child: SizedBox(
-                  width: _kCardW * 2,
-                  height: double.infinity,
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0).copyWith(bottom: 0.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <List<Widget>>[
-                        // casts
-                        [
-                          Text(
-                            'Casts',
-                            style: kSectionTitleStyle(context),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Expanded(
-                            child: casts.isEmpty
-                                ? const Center(
-                                    child: Text('No cast data for now'),
-                                  )
-                                : ListView.builder(
-                                    primary: true,
-                                    padding:
-                                        const EdgeInsets.only(bottom: 16.0),
-                                    itemCount: casts.length,
-                                    itemBuilder: (_, index) =>
-                                        _itemCard(casts[index]),
-                                  ),
-                          ),
-                        ],
-
-                        // crews
-                        [
-                          Text(
-                            'Crews',
-                            style: kSectionTitleStyle(context),
-                          ),
-                          const SizedBox(height: 8.0),
-                          Expanded(
-                            child: crews.isEmpty
-                                ? const Center(
-                                    child: Text('No crew data for now'),
-                                  )
-                                : ListView.builder(
-                                    controller: _crewsScrollCtrler,
-                                    padding:
-                                        const EdgeInsets.only(bottom: 16.0),
-                                    itemCount: crews.length,
-                                    itemBuilder: (_, index) =>
-                                        _itemCard(crews[index]),
-                                  ),
-                          )
-                        ],
-                      ].map<Widget>((e) {
-                        return Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: e,
-                          ),
-                        );
-                      }).toList()
-                        // list seperator
-                        ..insert(1, const SizedBox(width: 16.0)),
+    return casts.isEmpty && crews.isEmpty
+        ? const SizedExceptionWidget(BasicException())
+        : Padding(
+            padding: const EdgeInsets.all(16.0).copyWith(bottom: 0.0),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <List<Widget>>[
+                // casts
+                [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: SizedBox(
+                      width: _kCardW,
+                      child: Text('Casts', style: kSectionTitleStyle(context)),
                     ),
                   ),
-                ),
-              ),
-      ],
-    );
+                  const SizedBox(height: 8.0),
+                  Expanded(
+                    child: casts.isEmpty
+                        ? const Center(child: Text('No cast data for now'))
+                        : CustomListView.builder(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            crossAxisAlignment: CustomListViewItemAlignment.end,
+                            itemCount: casts.length,
+                            itemBuilder: (_, index) {
+                              return CustomListViewItemDelegate(
+                                mainAxisLength: _kCardH,
+                                crossAxisLength: _kCardW,
+                                child: _itemCard(casts[index]),
+                              );
+                            },
+                          ),
+                  ),
+                ],
+
+                // crews
+                [
+                  Text('Crews', style: kSectionTitleStyle(context)),
+                  const SizedBox(height: 8.0),
+                  Expanded(
+                    child: crews.isEmpty
+                        ? const Center(
+                            child: Text('No crew data for now'),
+                          )
+                        : CustomListView.builder(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            crossAxisAlignment:
+                                CustomListViewItemAlignment.start,
+                            itemCount: crews.length,
+                            itemBuilder: (_, index) {
+                              return CustomListViewItemDelegate(
+                                mainAxisLength: _kCardH,
+                                crossAxisLength: _kCardW,
+                                child: _itemCard(crews[index]),
+                              );
+                            },
+                          ),
+                  )
+                ],
+              ].map<Widget>((e) {
+                return Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: e,
+                  ),
+                );
+              }).toList()
+                // list divider
+                ..insert(1, const SizedBox(width: 16.0)),
+            ),
+          );
   }
 }
