@@ -1,3 +1,13 @@
+## v1.1.3
+
+### Fix
+
+- Invalid scrolling on mobile device (credits page).
+
+### Changed
+
+- Refactor codebase.
+
 ## v1.1.2
 
 ### Patch
