@@ -20,7 +20,7 @@ class ProductListSection extends StatelessWidget {
   final List<Product> products;
 
   /// Alternative widget to display if [products] is empty.
-  /// 
+  ///
   /// Default widget is centered "No data" text.
   final Widget? alt;
 
@@ -29,9 +29,11 @@ class ProductListSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (products.isEmpty) {
-      return _layout(child: alt ?? Center(
-        child: Text('No data', style: context.textTheme.titleMedium),
-      ));
+      return _layout(
+          child: alt ??
+              Center(
+                child: Text('No data', style: context.textTheme.titleMedium),
+              ));
     }
 
     return _layout(child: ProductHorizListView(products, padding: padding));
