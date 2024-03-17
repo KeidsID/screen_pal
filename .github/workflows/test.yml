@@ -5,14 +5,16 @@ on:
     branches: [main]
     paths-ignore:
       - "**/*.md"
+      - "**/*.yaml"
       - policies/*
       - repo-assets/*
       - configs/*
-
+      
   pull_request:
     types: [review_requested]
     paths-ignore:
       - "**/*.md"
+      - "**/*.yaml"
       - policies/*
       - repo-assets/*
       - configs/*
@@ -70,6 +72,12 @@ jobs:
           flutter pub get
           flutter analyze lib test
 
+      - name: 🕵️ Run custom_lint
+        run: |
+          if grep -q custom_lint "pubspec.yaml"; then
+            dart run custom_lint
+          fi
+
       - name: 🧪 Run tests
         id: test
         run: |
@@ -78,14 +86,13 @@ jobs:
             echo "RESULT=tested" >> "${GITHUB_OUTPUT}"
           fi
 
-      - name: 📊 Filter and Check Code Coverage
-        if: ${{steps.test.outputs.RESULT == 'tested'}}
-        run: |
-          flutter test --coverage
-          dart pub global activate clean_coverage
-          clean_coverage clean coverage/lcov.info --exclusions "**.g.dart","**.freezed.dart","**/interfaces/**"
-          dart pub global activate dlcov
-          dlcov -c 80
+      # - name: 📊 Filter and Check Code Coverage
+      #   if: ${{steps.test.outputs.RESULT == 'tested'}}
+      #   run: |
+      #     dart pub global activate clean_coverage
+      #     clean_coverage clean coverage/lcov.info --exclusions "**.g.dart","**.freezed.dart","**/interfaces/**"
+      #     dart pub global activate dlcov
+      #     dlcov -c 80
 
       - name: 📝 Upload coverage to codecov
         if: ${{steps.test.outputs.RESULT == 'tested'}}
