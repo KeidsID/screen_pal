@@ -1,10 +1,12 @@
 coverage:
+  round: down
+  range: "80...90"
   status:
     project:
       default:
         threshold: 80
 
 ignore:
-  - "*.g.dart"
-  - "*.freezed.dart"
+  - "**/*.g.dart"
+  - "**/*.freezed.dart"
   - "**/interfaces/**"

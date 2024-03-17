@@ -1,0 +1,1 @@
+Contain repo only assets (not for the app) such as app screenshots, icons, etc.
