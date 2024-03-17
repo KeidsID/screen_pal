@@ -29,7 +29,11 @@ jobs:
         run: |
           echo "${{secrets.PROD_ENV_FILE}}" > .env
           dart run build_runner build -d
-          echo '${{secrets.GH_PAGES_404}}' > 404.html
+
+      - name: ⚙️ Setup web build
+        working-directory: web
+        run: |
+          cp ../configs/github-pages/404.html 404.html
 
       - name: 🏗️ Build web release
         run: |

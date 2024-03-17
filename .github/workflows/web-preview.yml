@@ -34,7 +34,11 @@ jobs:
         run: |
           echo "${{secrets.DEV_ENV_FILE}}" > .env
           dart run build_runner build -d
-          echo '${{secrets.NETLIFY_404}}' > 404.html
+
+      - name: ⚙️ Setup web build
+        working-directory: web
+        run: |
+          cp ../configs/netlify/404.html 404.html
 
       - name: 🏗️ Build web
         run: flutter build web --profile --web-renderer canvaskit
